@@ -1,5 +1,7 @@
 #include "TXLib.h"
 
+// 123
+
 struct BaseType
     {
     double x;
@@ -1310,7 +1312,7 @@ void LoadGameImage (ImageType* Image, const char* Picture, int xNumber, int yNum
 
     if (Image->Picture == 0)
         {
-        printf ("FileName = \"%s\" \n", Image->FileName);
+        // printf ("FileName = \"%s\" \n", Image->FileName);
         };
 
     // printf ("LoadGameImage(): FileName = \"%s\", HDC = \"%p\" \n", Image->FileName, Image->Picture);
