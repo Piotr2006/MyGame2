@@ -1,0 +1,342 @@
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe, файл: C:\Users\007\Downloads\TX\TXLib.h, строка: 13122, функция: bool {anonymous}::TX::txTransparentBlt(HDC, double, double, double, double, HDC, double, double, COLORREF),
+
+Сообщение: Параметр "sourceImage" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 168, Date: 2020-08-13 00:46:05 +0400], Instance: 0x005142FC (32-bit), Flags: CMdRe0, Thread: 0x1C68 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x004228EE in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: txTransparentBlt() at C:/Users/007/Downloads/TX/TXLib.h (13122)
+
+# 1 0x00437610 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: DrawTransparentImage() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1323):
+
+   1321:     int ySize = txGetExtentY (Image.Picture)/Image.yNumber;
+   1322: 
+=> 1323:     txTransparentBlt (txDC (), x, y, xSize, ySize, Image.Picture, *xAnimationNumber*xSize, *yAnimationNumber*ySize, Image.color);
+   1324: 
+   1325:     if (*xAnimationNumber >= Image.xMaxAnimationNumber)
+
+# 2 0x0042C9E3 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: DrawBlock() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (361):
+
+    359:         Block.Number != 4     &&
+    360:         Block.Number != 21)
+=>  361:         DrawTransparentImage (Block.Picture, Block.Base.x, Block.Base.y, &null, &null);
+    362: 
+    363:     if (Block.Base.Health > 0 &&
+
+# 3 0x00437711 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: DrawLevelBlocks() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1352):
+
+   1350:     while (ManyBlocks[i].Base.x != -1 && ManyBlocks[i].Base.y != -1)
+   1351:         {
+=> 1352:         DrawBlock (ManyBlocks [i], AnimationNumber, AllImage);
+   1353: 
+   1354:         i = i + 1;
+
+# 4 0x004371FF in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: DrawManyBlocks() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1240):
+
+   1238:                      BlockType* Start, BlockType* Finish)
+   1239:     {
+=> 1240:     DrawLevelBlocks (ManyBlocks, AllImage, AnimationNumber);
+   1241: 
+   1242:     DrawFinish (Finish);
+
+# 5 0x0042E2B4 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (690):
+
+    688:         DrawTransparentImage (AllImage.Coin, 20, 70, &null, &null);
+    689: 
+=>  690:         DrawManyBlocks (ManyBlocks, Coins, AnimationNumber, AllImage, Start, Finish);
+    691: 
+    692:         DrawMan (Man, AllImage, ManAnimationNumber, AnimationNumber, StarsNumber);
+
+# 6 0x00433168 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Level1() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (983):
+
+    981:     BlockType Finish = {1450, 580, 0, 50, AllImage.Finish};
+    982: 
+=>  983:     MoveGame (ManyBlocks, Coins, &Start, &Finish, AllImage, LevelNumber, Man, &AllTemperature);
+    984:     };
+    985: 
+
+# 7 0x0042C30D in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (295):
+
+    293:         if (LevelNumber == 1)
+    294:             {
+=>  295:             Level1 (&LevelNumber, &Man, AllImage);
+    296:             };
+    297: 
+
+# 8 0x0042B9ED in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (215):
+
+    213:     int Number = 1;
+    214: 
+=>  215:     Cycle ();
+    216: 
+    217:     return 0;
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool {anonymous}::TX::txTransparentBlt(HDC, double, double, double, double, HDC, double, double, COLORREF) at C:\Users\007\Downloads\TX\TXLib.h (13122):
+
+  13120:     {
+  13121: $1  if (_TX_HDC_FAILED (destImage))   return false;
+=>13122: $   if (_TX_HDC_FAILED (sourceImage)) return false;
+  13123: 
+  13124: $   POINT size = txGetExtent (sourceImage);
+
+# 1 in void DrawTransparentImage(ImageType, int, int, int*, int*) at C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.cpp (1323):
+
+   1321:     int ySize = txGetExtentY (Image.Picture)/Image.yNumber;
+   1322: 
+=> 1323:     txTransparentBlt (txDC (), x, y, xSize, ySize, Image.Picture, *xAnimationNumber*xSize, *yAnimationNumber*ySize, Image.color);
+   1324: 
+   1325:     if (*xAnimationNumber >= Image.xMaxAnimationNumber)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 168, Date: 2020-08-13 00:46:05 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Downloads\TX\TXLib.h
+Compiled:	Dec  5 2020 09:51:17, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Dec 05 2020 09:51:22
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe, файл: C:\Users\007\Downloads\TX\TXLib.h, строка: 13122, функция: bool {anonymous}::TX::txTransparentBlt(HDC, double, double, double, double, HDC, double, double, COLORREF),
+
+Сообщение: Параметр "sourceImage" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 168, Date: 2020-08-13 00:46:05 +0400], Instance: 0x005142FC (32-bit), Flags: CMdRe0, Thread: 0x38C8 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x004228EE in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: txTransparentBlt() at C:/Users/007/Downloads/TX/TXLib.h (13122)
+
+# 1 0x00437610 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: DrawTransparentImage() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1323):
+
+   1321:     int ySize = txGetExtentY (Image.Picture)/Image.yNumber;
+   1322: 
+=> 1323:     txTransparentBlt (txDC (), x, y, xSize, ySize, Image.Picture, *xAnimationNumber*xSize, *yAnimationNumber*ySize, Image.color);
+   1324: 
+   1325:     if (*xAnimationNumber >= Image.xMaxAnimationNumber)
+
+# 2 0x0042C9E3 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: DrawBlock() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (361):
+
+    359:         Block.Number != 4     &&
+    360:         Block.Number != 21)
+=>  361:         DrawTransparentImage (Block.Picture, Block.Base.x, Block.Base.y, &null, &null);
+    362: 
+    363:     if (Block.Base.Health > 0 &&
+
+# 3 0x00437711 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: DrawLevelBlocks() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1352):
+
+   1350:     while (ManyBlocks[i].Base.x != -1 && ManyBlocks[i].Base.y != -1)
+   1351:         {
+=> 1352:         DrawBlock (ManyBlocks [i], AnimationNumber, AllImage);
+   1353: 
+   1354:         i = i + 1;
+
+# 4 0x004371FF in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: DrawManyBlocks() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1240):
+
+   1238:                      BlockType* Start, BlockType* Finish)
+   1239:     {
+=> 1240:     DrawLevelBlocks (ManyBlocks, AllImage, AnimationNumber);
+   1241: 
+   1242:     DrawFinish (Finish);
+
+# 5 0x0042E2B4 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (690):
+
+    688:         DrawTransparentImage (AllImage.Coin, 20, 70, &null, &null);
+    689: 
+=>  690:         DrawManyBlocks (ManyBlocks, Coins, AnimationNumber, AllImage, Start, Finish);
+    691: 
+    692:         DrawMan (Man, AllImage, ManAnimationNumber, AnimationNumber, StarsNumber);
+
+# 6 0x00433168 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Level1() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (983):
+
+    981:     BlockType Finish = {1450, 580, 0, 50, AllImage.Finish};
+    982: 
+=>  983:     MoveGame (ManyBlocks, Coins, &Start, &Finish, AllImage, LevelNumber, Man, &AllTemperature);
+    984:     };
+    985: 
+
+# 7 0x0042C30D in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (295):
+
+    293:         if (LevelNumber == 1)
+    294:             {
+=>  295:             Level1 (&LevelNumber, &Man, AllImage);
+    296:             };
+    297: 
+
+# 8 0x0042B9ED in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (215):
+
+    213:     int Number = 1;
+    214: 
+=>  215:     Cycle ();
+    216: 
+    217:     return 0;
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool {anonymous}::TX::txTransparentBlt(HDC, double, double, double, double, HDC, double, double, COLORREF) at C:\Users\007\Downloads\TX\TXLib.h (13122):
+
+  13120:     {
+  13121: $1  if (_TX_HDC_FAILED (destImage))   return false;
+=>13122: $   if (_TX_HDC_FAILED (sourceImage)) return false;
+  13123: 
+  13124: $   POINT size = txGetExtent (sourceImage);
+
+# 1 in void DrawTransparentImage(ImageType, int, int, int*, int*) at C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.cpp (1323):
+
+   1321:     int ySize = txGetExtentY (Image.Picture)/Image.yNumber;
+   1322: 
+=> 1323:     txTransparentBlt (txDC (), x, y, xSize, ySize, Image.Picture, *xAnimationNumber*xSize, *yAnimationNumber*ySize, Image.color);
+   1324: 
+   1325:     if (*xAnimationNumber >= Image.xMaxAnimationNumber)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 168, Date: 2020-08-13 00:46:05 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Downloads\TX\TXLib.h
+Compiled:	Dec  5 2020 09:52:30, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Dec 05 2020 09:52:34
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe, файл: C:\Users\007\Downloads\TX\TXLib.h, строка: 13122, функция: bool {anonymous}::TX::txTransparentBlt(HDC, double, double, double, double, HDC, double, double, COLORREF),
+
+Сообщение: Параметр "sourceImage" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 168, Date: 2020-08-13 00:46:05 +0400], Instance: 0x005142FC (32-bit), Flags: CMdRe0, Thread: 0x4E54 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x004228EE in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: txTransparentBlt() at C:/Users/007/Downloads/TX/TXLib.h (13122)
+
+# 1 0x0043762F in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: DrawTransparentImage() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1328):
+
+   1326:     int ySize = txGetExtentY (Image.Picture)/Image.yNumber;
+   1327: 
+=> 1328:     txTransparentBlt (txDC (), x, y, xSize, ySize, Image.Picture, *xAnimationNumber*xSize, *yAnimationNumber*ySize, Image.color);
+   1329: 
+   1330:     if (*xAnimationNumber >= Image.xMaxAnimationNumber)
+
+# 2 0x0042C9E3 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: DrawBlock() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (361):
+
+    359:         Block.Number != 4     &&
+    360:         Block.Number != 21)
+=>  361:         DrawTransparentImage (Block.Picture, Block.Base.x, Block.Base.y, &null, &null);
+    362: 
+    363:     if (Block.Base.Health > 0 &&
+
+# 3 0x00437730 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: DrawLevelBlocks() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1357):
+
+   1355:     while (ManyBlocks[i].Base.x != -1 && ManyBlocks[i].Base.y != -1)
+   1356:         {
+=> 1357:         DrawBlock (ManyBlocks [i], AnimationNumber, AllImage);
+   1358: 
+   1359:         i = i + 1;
+
+# 4 0x004371FF in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: DrawManyBlocks() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1240):
+
+   1238:                      BlockType* Start, BlockType* Finish)
+   1239:     {
+=> 1240:     DrawLevelBlocks (ManyBlocks, AllImage, AnimationNumber);
+   1241: 
+   1242:     DrawFinish (Finish);
+
+# 5 0x0042E2B4 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (690):
+
+    688:         DrawTransparentImage (AllImage.Coin, 20, 70, &null, &null);
+    689: 
+=>  690:         DrawManyBlocks (ManyBlocks, Coins, AnimationNumber, AllImage, Start, Finish);
+    691: 
+    692:         DrawMan (Man, AllImage, ManAnimationNumber, AnimationNumber, StarsNumber);
+
+# 6 0x00433168 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Level1() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (983):
+
+    981:     BlockType Finish = {1450, 580, 0, 50, AllImage.Finish};
+    982: 
+=>  983:     MoveGame (ManyBlocks, Coins, &Start, &Finish, AllImage, LevelNumber, Man, &AllTemperature);
+    984:     };
+    985: 
+
+# 7 0x0042C30D in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (295):
+
+    293:         if (LevelNumber == 1)
+    294:             {
+=>  295:             Level1 (&LevelNumber, &Man, AllImage);
+    296:             };
+    297: 
+
+# 8 0x0042B9ED in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (215):
+
+    213:     int Number = 1;
+    214: 
+=>  215:     Cycle ();
+    216: 
+    217:     return 0;
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool {anonymous}::TX::txTransparentBlt(HDC, double, double, double, double, HDC, double, double, COLORREF) at C:\Users\007\Downloads\TX\TXLib.h (13122):
+
+  13120:     {
+  13121: $1  if (_TX_HDC_FAILED (destImage))   return false;
+=>13122: $   if (_TX_HDC_FAILED (sourceImage)) return false;
+  13123: 
+  13124: $   POINT size = txGetExtent (sourceImage);
+
+# 1 in void DrawTransparentImage(ImageType, int, int, int*, int*) at C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.cpp (1328):
+
+   1326:     int ySize = txGetExtentY (Image.Picture)/Image.yNumber;
+   1327: 
+=> 1328:     txTransparentBlt (txDC (), x, y, xSize, ySize, Image.Picture, *xAnimationNumber*xSize, *yAnimationNumber*ySize, Image.color);
+   1329: 
+   1330:     if (*xAnimationNumber >= Image.xMaxAnimationNumber)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 168, Date: 2020-08-13 00:46:05 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Downloads\TX\TXLib.h
+Compiled:	Dec  5 2020 09:54:22, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Dec 05 2020 09:54:27
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
