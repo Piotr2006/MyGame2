@@ -126,7 +126,7 @@ void MoveGame (BlockType ManyBlocks [], CoinType Coins [], BlockType* Start, Blo
 
 void DeleteImage (AllImageType AllImage);
 
-void DrawLevelBlocks (BlockType ManyBlocks[], AllImageType AllImage, int AnimationNumber);
+void DrawLevelBlocks (BlockType ManyBlocks[], ManType* Man, AllImageType AllImage, int AnimationNumber);
 
 void DrawLevelCoins (CoinType Coins[], AllImageType AllImage, int AnimationNumber);
 
@@ -138,7 +138,7 @@ void Level1 (int* LevelNumber, ManType* Man, AllImageType AllImage);
 
 void Level2 (int* LevelNumber, ManType* Man, AllImageType AllImage);
 
-void DrawManyBlocks (BlockType ManyBlocks [], CoinType Coins [], int AnimationNumber,
+void DrawManyBlocks (BlockType ManyBlocks [], CoinType Coins [], ManType* Man, int AnimationNumber,
                      AllImageType AllImage, BlockType* Start, BlockType* Finish);
 
 void InteractManWithBlocks (BlockType ManyBlocks [], CoinType Coins [], ManType* Man,
@@ -155,7 +155,7 @@ void DrawEnemy (EnemyType Enemy, AllImageType AllImage, int Number);
 
 void DrawButton (ButtonType Button, AllImageType AllImage);
 
-void DrawBlock (BlockType Block, int AnimationNumber, AllImageType AllImage);
+void DrawBlock (BlockType Block, ManType* Man, int AnimationNumber, AllImageType AllImage);
 
 void ControlMan (ManType* Man, MouseType Mouse, int* t);
 
@@ -340,7 +340,7 @@ void DrawInventory (ManType* Man)
             };
     };
 
-void DrawBlock (BlockType Block, int AnimationNumber, AllImageType AllImage)
+void DrawBlock (BlockType Block, ManType* Man, int AnimationNumber, AllImageType AllImage)
     {
     int xNumber = 0;
 
@@ -360,25 +360,25 @@ void DrawBlock (BlockType Block, int AnimationNumber, AllImageType AllImage)
     if (Block.Base.Health > 0 &&
         Block.Number != 4     &&
         Block.Number != 21)
-        DrawTransparentImage (Block.Picture, Block.Base.x, Block.Base.y, &null, &null);
+        DrawTransparentImage (Block.Picture, Block.Base.x - Man->Base.x, Block.Base.y - Man->Base.y, &null, &null);
 
     if (Block.Base.Health > 0 &&
         Block.Number == 4)
-        DrawTransparentImage (Block.Picture, Block.Base.x, Block.Base.y, &AnimationNumber, &null);
+        DrawTransparentImage (Block.Picture, Block.Base.x - Man->Base.x, Block.Base.y - Man->Base.y, &AnimationNumber, &null);
 
     if (Block.Base.Health > 0 &&
         Block.Number == 21)
             {
             if (Block.Base.Health < 500 &&
                 Block.Base.Health > 0)
-                DrawTransparentImage (Block.Picture, Block.Base.x, Block.Base.y, &three, &null);
+                DrawTransparentImage (Block.Picture, Block.Base.x - Man->Base.x, Block.Base.y - Man->Base.y, &three, &null);
 
             if (Block.Base.Health >= 500 &&
                 Block.Base.Health < 1000)
-                DrawTransparentImage (Block.Picture, Block.Base.x, Block.Base.y, &four, &null);
+                DrawTransparentImage (Block.Picture, Block.Base.x - Man->Base.x, Block.Base.y - Man->Base.y, &four, &null);
 
             if (Block.Base.Health == 1000)
-                DrawTransparentImage (Block.Picture, Block.Base.x, Block.Base.y, &null, &null);
+                DrawTransparentImage (Block.Picture, Block.Base.x - Man->Base.x, Block.Base.y - Man->Base.y, &null, &null);
             };
 
     if (Block.Number == 2)
@@ -394,9 +394,7 @@ void DrawCoin (CoinType Coin, int AnimationNumber, AllImageType AllImage)
     DrawTransparentImage (AllImage.CoinAnimation, Coin.Base.x, Coin.Base.y, &AnimationNumber, &null);
 
     /*char str [50] = "";
-
     sprintf (str, "%d", Coin.Base.Health);
-
     txSetTextAlign ();
     txSetColor (TX_WHITE);
     txSelectFont ("Comic Sans MS", 40);
@@ -460,15 +458,15 @@ void DrawMan (ManType* Man, AllImageType AllImage, int Number, int AnimationNumb
     int yNumber = Man->Side-1;
 
     if (Man->Base.Health > 0)
-        DrawTransparentImage (AllImage.Man, Man->Base.x, Man->Base.y - 48, &Number, &yNumber);
+        DrawTransparentImage (AllImage.Man, 0, -48, &Number, &yNumber);
 
     if (Man->Position == 1)
         {
         Man->Base.Health -= 0.05;
         Man->Temperature += 1;
-        DrawBlock (Fire1, AnimationNumber, AllImage);
-        DrawBlock (Fire2, AnimationNumber, AllImage);
-        DrawBlock (Fire3, AnimationNumber, AllImage);
+        /* DrawBlock (Fire1, Man, AnimationNumber, AllImage);
+        DrawBlock (Fire2, Man, AnimationNumber, AllImage);
+        DrawBlock (Fire3, Man, AnimationNumber, AllImage); */
         };
 
     /* if (Man->Position == 2)
@@ -689,7 +687,7 @@ void MoveGame (BlockType ManyBlocks [], CoinType Coins [], BlockType* Start, Blo
 
         DrawTransparentImage (AllImage.Coin, 20, 70, &null, &null);
 
-        DrawManyBlocks (ManyBlocks, Coins, AnimationNumber, AllImage, Start, Finish);
+        DrawManyBlocks (ManyBlocks, Coins, Man, AnimationNumber, AllImage, Start, Finish);
 
         DrawMan (Man, AllImage, ManAnimationNumber, AnimationNumber, StarsNumber);
 
@@ -757,7 +755,6 @@ void MoveGame (BlockType ManyBlocks [], CoinType Coins [], BlockType* Start, Blo
             {
             Man->Temperature += 1;
             };
-
         if (GetAsyncKeyState (VK_DOWN))
             {
             Man->Temperature -= 1;
@@ -978,9 +975,9 @@ void Level1 (int* LevelNumber, ManType* Man, AllImageType AllImage)
                          {{1360, 215, 1}},
                          {{-1,   -1}}};
 
-    BlockType Start  = {-100, 580, 0, 50, AllImage.Start};
+    BlockType Start  = {-100, -1000000, 0, 50, AllImage.Start};
 
-    BlockType Finish = {1450, 580, 0, 50, AllImage.Finish};
+    BlockType Finish = {1450, -1000000, 0, 50, AllImage.Finish};
 
     MoveGame (ManyBlocks, Coins, &Start, &Finish, AllImage, LevelNumber, Man, &AllTemperature);
     };
@@ -1236,10 +1233,10 @@ void Level2 (int* LevelNumber, ManType* Man, AllImageType AllImage)
     MoveGame (ManyBlocks, Coins, &Start, &Finish, AllImage, LevelNumber, Man, &AllTemperature);
     };
 
-void DrawManyBlocks (BlockType ManyBlocks [], CoinType Coins [], int AnimationNumber, AllImageType AllImage,
+void DrawManyBlocks (BlockType ManyBlocks [], CoinType Coins [], ManType* Man, int AnimationNumber, AllImageType AllImage,
                      BlockType* Start, BlockType* Finish)
     {
-    DrawLevelBlocks (ManyBlocks, AllImage, AnimationNumber);
+    DrawLevelBlocks (ManyBlocks, Man, AllImage, AnimationNumber);
 
     DrawFinish (Finish);
     DrawFinish (Start);
@@ -1350,13 +1347,13 @@ void PrintfBlocks (BlockType Blocks [], int NumberBlock)
         };
     };
 
-void DrawLevelBlocks (BlockType ManyBlocks[], AllImageType AllImage,  int AnimationNumber)
+void DrawLevelBlocks (BlockType ManyBlocks[], ManType* Man, AllImageType AllImage,  int AnimationNumber)
     {
     int i = 0;
 
     while (ManyBlocks[i].Base.x != -1 && ManyBlocks[i].Base.y != -1)
         {
-        DrawBlock (ManyBlocks [i], AnimationNumber, AllImage);
+        DrawBlock (ManyBlocks [i], Man, AnimationNumber, AllImage);
 
         i = i + 1;
         };
@@ -1567,11 +1564,11 @@ void Physic (ManType* Man)
 
     Man->aY = 5;
 
-    if (Man->Base.x >= 1500)
+    /* if (Man->Base.x >= 1500)
         Man->Base.x = 1500;
 
     if (Man->Base.x <= 0)
-        Man->Base.x = 0;
+        Man->Base.x = 0; */
     };
 
 void BlockPhysic (BlockType* Block)
