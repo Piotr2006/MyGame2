@@ -207,6 +207,8 @@ void DrawTransparentImage (ImageType Image, int x, int y, int* xAnimationNumber,
 
 void LoadImages (AllImageType* AllImages);
 
+void HelpSystem ();
+
 int main ()
     {
     txCreateWindow (1550, 850);
@@ -683,6 +685,11 @@ void MoveGame (BlockType ManyBlocks [], CoinType Coins [], BlockType* Start, Blo
 
         int null = 0;
 
+        if (GetAsyncKeyState (VK_F1))
+            {
+            HelpSystem ();
+            };
+
         DrawTransparentImage (AllImage.BackGround, 0, 0, &null, &null);
 
         DrawTransparentImage (AllImage.Coin, 20, 70, &null, &null);
@@ -772,6 +779,11 @@ void MoveGame (BlockType ManyBlocks [], CoinType Coins [], BlockType* Start, Blo
     txEnd ();
 
     DeleteAllImage (AllImage);
+    };
+
+void HelpSystem ()
+    {
+    txMessageBox ("Система помощи");
     };
 
 void Text (int x, int y, int Size, int Number, char Name [])
