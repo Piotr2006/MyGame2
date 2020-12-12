@@ -753,6 +753,11 @@ void MoveGame (BlockType ManyBlocks [], CoinType Coins [], BlockType* Start, Blo
         DrawTransparentImage (AllImage.Termometer, 10, 160, &null, &null);
         txRectangle (29, 265 - Man->Temperature, 32, 265);
 
+        if (GetAsyncKeyState (VK_SPACE))
+            {
+            HelpSystem ();
+            };
+
         /* if (GetAsyncKeyState (VK_UP))
             {
             Man->Temperature += 1;
@@ -761,11 +766,6 @@ void MoveGame (BlockType ManyBlocks [], CoinType Coins [], BlockType* Start, Blo
             {
             Man->Temperature -= 1;
             }; */
-
-        if (GetAsyncKeyState (VK_SPACE))
-            {
-            HelpSystem ();
-            };
 
         DrawCursor (Mouse);
 
@@ -783,14 +783,9 @@ void MoveGame (BlockType ManyBlocks [], CoinType Coins [], BlockType* Start, Blo
 
 void HelpSystem ()
     {
-    // txMessageBox ("Система помощи");
-
-    // Text (800, 100, 40, 0, "Чтобы передвигаться, нажмите на клавиши влево и вправо.");
-
     txSetColor (TX_WHITE);
     txSelectFont ("Comic Sans MS", 40);
-    txTextOut (800, 100, "Чтобы передвигаться, нажмите на клавиши влево и вправо.");
-    txTextOut (800, 150, "Чтобы ускориться, нажмите на Shift");
+    txTextOut (800, 100, "Для передвижения нажмите клавиши вправо и влево, для ускорения нажмите Shift");
     };
 
 void Text (int x, int y, int Size, int Number, char Name [])
