@@ -786,6 +786,10 @@ void HelpSystem ()
     txSetColor (TX_WHITE);
     txSelectFont ("Comic Sans MS", 40);
     txTextOut (800, 100, "Для передвижения нажмите клавиши вправо и влево, для ускорения нажмите Shift");
+
+    txSetColor (TX_WHITE);
+    txSelectFont ("Comic Sans MS", 80);
+    txTextOut (800, 200, "Удачной игры!");
     };
 
 void Text (int x, int y, int Size, int Number, char Name [])
