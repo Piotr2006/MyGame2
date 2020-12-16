@@ -346,8 +346,6 @@ void DrawBlock (BlockType Block, ManType* Man, int AnimationNumber, AllImageType
     {
     int xNumber = 0;
 
-    int null = 0;
-
     int three = 3;
 
     int four = 4;
@@ -359,28 +357,40 @@ void DrawBlock (BlockType Block, ManType* Man, int AnimationNumber, AllImageType
     if (Block.Base.Health <= 2)
         xNumber = 2;
 
+    int NumberOfAnimationX = 0;
+    int NumberOfAnimationY = 0;
+
     if (Block.Base.Health > 0 &&
         Block.Number != 4     &&
         Block.Number != 21)
-        DrawTransparentImage (Block.Picture, Block.Base.x - Man->Base.x, Block.Base.y - Man->Base.y, &null, &null);
+        DrawTransparentImage (Block.Picture, Block.Base.x - Man->Base.x, Block.Base.y - Man->Base.y, &NumberOfAnimationX, &NumberOfAnimationY);
 
     if (Block.Base.Health > 0 &&
         Block.Number == 4)
-        DrawTransparentImage (Block.Picture, Block.Base.x - Man->Base.x, Block.Base.y - Man->Base.y, &AnimationNumber, &null);
+        DrawTransparentImage (Block.Picture, Block.Base.x - Man->Base.x, Block.Base.y - Man->Base.y, &AnimationNumber, &NumberOfAnimationY);
 
     if (Block.Base.Health > 0 &&
         Block.Number == 21)
             {
             if (Block.Base.Health < 500 &&
                 Block.Base.Health > 0)
-                DrawTransparentImage (Block.Picture, Block.Base.x - Man->Base.x, Block.Base.y - Man->Base.y, &three, &null);
+                {
+                NumberOfAnimationX = 3;
+                DrawTransparentImage (Block.Picture, Block.Base.x - Man->Base.x, Block.Base.y - Man->Base.y, &NumberOfAnimationX, &NumberOfAnimationY);
+                };
 
             if (Block.Base.Health >= 500 &&
                 Block.Base.Health < 1000)
-                DrawTransparentImage (Block.Picture, Block.Base.x - Man->Base.x, Block.Base.y - Man->Base.y, &four, &null);
+                {
+                NumberOfAnimationX = 4;
+                DrawTransparentImage (Block.Picture, Block.Base.x - Man->Base.x, Block.Base.y - Man->Base.y, &NumberOfAnimationX, &NumberOfAnimationY);
+                };
 
             if (Block.Base.Health == 1000)
-                DrawTransparentImage (Block.Picture, Block.Base.x - Man->Base.x, Block.Base.y - Man->Base.y, &null, &null);
+                {
+                NumberOfAnimationX = 0;
+                DrawTransparentImage (Block.Picture, Block.Base.x - Man->Base.x, Block.Base.y - Man->Base.y, &NumberOfAnimationX, &NumberOfAnimationY);
+                };
             };
 
     if (Block.Number == 2)
