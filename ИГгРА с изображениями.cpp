@@ -232,7 +232,7 @@ void LoadAllImages (AllImageType* AllImages)
 
     LoadGameImage (&AllImages->Cursor,        "Images/GameCursor.bmp",             1, 1, 1, 1, TX_WHITE, &Procent, Number);
 
-    LoadGameImage (&AllImages->Dirt,          "Images/DirtAnimation.bmp",          3, 1, 1, 1, TX_WHITE, &Procent, Number);
+    LoadGameImage (&AllImages->Dirt,          "Images/DirtAnimation.bmp",          1, 1, 1, 1, TX_WHITE, &Procent, Number);
 
     LoadGameImage (&AllImages->Health,        "Images/GameHeart.bmp",              1, 1, 1, 1, TX_BLACK, &Procent, Number);
 
@@ -246,33 +246,33 @@ void LoadAllImages (AllImageType* AllImages)
 
     LoadGameImage (&AllImages->CoinAnimation, "Images/CoinAnimation.bmp",          4, 1, 4, 1, TX_BLACK, &Procent, Number);
 
-    LoadGameImage (&AllImages->Box,           "Images/WoodBoxAnimation.bmp",       3, 1, 1, 1, TX_BLACK, &Procent, Number);
+    LoadGameImage (&AllImages->Box,           "Images/WoodBoxAnimation.bmp",       1, 3, 1, 1, TX_BLACK, &Procent, Number);
 
     LoadGameImage (&AllImages->Man,           "Images/AllAnimationGamePeople.bmp", 9, 2, 9, 1, TX_WHITE, &Procent, Number);
 
-    LoadGameImage (&AllImages->Stairs,        "Images/Stairs.bmp",                 3, 1, 1, 1, TX_BLACK, &Procent, Number);
+    LoadGameImage (&AllImages->Stairs,        "Images/Stairs.bmp",                 1, 3, 1, 1, TX_BLACK, &Procent, Number);
 
-    LoadGameImage (&AllImages->Fire,          "Images/FireAnimation.bmp",          5, 1, 5, 1, TX_BLACK, &Procent, Number);
+    LoadGameImage (&AllImages->Fire,          "Images/FireAnimation.bmp",          5, 5, 5, 1, TX_BLACK, &Procent, Number);
 
-    LoadGameImage (&AllImages->GreenFire,     "Images/GreenFire.bmp",              5, 1, 5, 1, TX_BLACK, &Procent, Number);
+    LoadGameImage (&AllImages->GreenFire,     "Images/GreenFire.bmp",              1, 5, 5, 1, TX_BLACK, &Procent, Number);
 
-    LoadGameImage (&AllImages->Water,         "Images/Water.bmp",                  3, 1, 1, 1, TX_BLACK, &Procent, Number);
+    LoadGameImage (&AllImages->Water,         "Images/Water.bmp",                  1, 3, 1, 1, TX_BLACK, &Procent, Number);
 
     LoadGameImage (&AllImages->Bat,           "Images/Bat.bmp",                    4, 2, 4, 1, TX_BLACK, &Procent, Number);
 
-    LoadGameImage (&AllImages->Stalactite,    "Images/Stalactite.bmp",             3, 1, 1, 1, TX_BLACK, &Procent, Number);
+    LoadGameImage (&AllImages->Stalactite,    "Images/Stalactite.bmp",             1, 1, 1, 1, TX_BLACK, &Procent, Number);
 
     LoadGameImage (&AllImages->GameOver,      "Images/GameOver.bmp",               1, 1, 1, 1, TX_WHITE, &Procent, Number);
 
-    LoadGameImage (&AllImages->Pickaxe,       "Images/Pickaxe.bmp",                3, 1, 1, 1, TX_BLACK, &Procent, Number);
+    LoadGameImage (&AllImages->Pickaxe,       "Images/Pickaxe.bmp",                1, 3, 1, 1, TX_BLACK, &Procent, Number);
 
     LoadGameImage (&AllImages->Termometer,    "Images/termometer.bmp",             1, 1, 1, 1, TX_BLACK, &Procent, Number);
 
-    LoadGameImage (&AllImages->Berries,       "Images/Berries.bmp",                5, 1, 1, 1, TX_WHITE, &Procent, Number);
+    LoadGameImage (&AllImages->Berries,       "Images/Berries.bmp",                1, 5, 1, 1, TX_WHITE, &Procent, Number);
 
-    LoadGameImage (&AllImages->Chest,         "Images/Chest.bmp",                  3, 1, 1, 1, TX_WHITE, &Procent, Number);
+    LoadGameImage (&AllImages->Chest,         "Images/Chest.bmp",                  1, 1, 1, 1, TX_WHITE, &Procent, Number);
 
-    LoadGameImage (&AllImages->IronOre,       "Images/IronOre.bmp",                3, 1, 1, 1, TX_WHITE, &Procent, Number);
+    LoadGameImage (&AllImages->IronOre,       "Images/IronOre.bmp",                1, 1, 1, 1, TX_WHITE, &Procent, Number);
     };
 
 void Cycle ()
@@ -363,11 +363,17 @@ void DrawBlock (BlockType Block, ManType* Man, int AnimationNumber, AllImageType
     if (Block.Base.Health > 0 &&
         Block.Number != 4     &&
         Block.Number != 21)
+        {
+        NumberOfAnimationY = 0;
         DrawTransparentImage (Block.Picture, Block.Base.x - Man->Base.x, Block.Base.y - Man->Base.y, &NumberOfAnimationX, &NumberOfAnimationY);
+        };
 
     if (Block.Base.Health > 0 &&
         Block.Number == 4)
+        {
+        NumberOfAnimationY = 0;
         DrawTransparentImage (Block.Picture, Block.Base.x - Man->Base.x, Block.Base.y - Man->Base.y, &AnimationNumber, &NumberOfAnimationY);
+        };
 
     if (Block.Base.Health > 0 &&
         Block.Number == 21)
@@ -375,14 +381,14 @@ void DrawBlock (BlockType Block, ManType* Man, int AnimationNumber, AllImageType
             if (Block.Base.Health < 500 &&
                 Block.Base.Health > 0)
                 {
-                NumberOfAnimationX = 3;
+                NumberOfAnimationY = 3;
                 DrawTransparentImage (Block.Picture, Block.Base.x - Man->Base.x, Block.Base.y - Man->Base.y, &NumberOfAnimationX, &NumberOfAnimationY);
                 };
 
             if (Block.Base.Health >= 500 &&
                 Block.Base.Health < 1000)
                 {
-                NumberOfAnimationX = 4;
+                NumberOfAnimationY = 4;
                 DrawTransparentImage (Block.Picture, Block.Base.x - Man->Base.x, Block.Base.y - Man->Base.y, &NumberOfAnimationX, &NumberOfAnimationY);
                 };
 
