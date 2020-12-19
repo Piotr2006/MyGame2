@@ -106,14 +106,12 @@ struct MouseType
     ImageType Picture;
     };
 
-struct CoinType
-    {
-    BaseType Base;
-    };
-
 struct BlockType
     {
     BaseType Base;
+
+    int xNumber;
+    int yNumber;
 
     int Number;
 
@@ -122,26 +120,22 @@ struct BlockType
 
 void Cycle ();
 
-void MoveGame (BlockType ManyBlocks [], CoinType Coins [], BlockType* Start, BlockType* Finish, AllImageType AllImage, int* LevelNumber, ManType* Man, double* AllTemperature);
+void MoveGame (BlockType ManyBlocks [], BlockType* Start, BlockType* Finish, AllImageType AllImage, int* LevelNumber, ManType* Man, double* AllTemperature);
 
 void DeleteImage (AllImageType AllImage);
 
 void DrawLevelBlocks (BlockType ManyBlocks[], ManType* Man, AllImageType AllImage, int AnimationNumber);
 
-void DrawLevelCoins (CoinType Coins[], AllImageType AllImage, int AnimationNumber);
-
-void CallLevelPhysic (BlockType ManyBlocks[], ManType* Man);
-
-void CallCoinPhysic (CoinType Coins[], ManType* Man, int* NumberCoin);
+void CallLevelPhysic (BlockType ManyBlocks[], ManType* Man, int* NumberCoin);
 
 void Level1 (int* LevelNumber, ManType* Man, AllImageType AllImage);
 
 void Level2 (int* LevelNumber, ManType* Man, AllImageType AllImage);
 
-void DrawManyBlocks (BlockType ManyBlocks [], CoinType Coins [], ManType* Man, int AnimationNumber,
+void DrawManyBlocks (BlockType ManyBlocks [], ManType* Man, int AnimationNumber,
                      AllImageType AllImage, BlockType* Start, BlockType* Finish);
 
-void InteractManWithBlocks (BlockType ManyBlocks [], CoinType Coins [], ManType* Man,
+void InteractManWithBlocks (BlockType ManyBlocks [], ManType* Man,
                             int* NumberCoin, int* LevelNumber, BlockType* Start, BlockType* Finish);
 
 void LoadGameImage (ImageType* Image, const char* Picture, int xNumber, int yNumber, int xMaxNumber, int yMaxNumber, COLORREF color,
@@ -155,7 +149,9 @@ void DrawEnemy (EnemyType Enemy, AllImageType AllImage, int Number);
 
 void DrawButton (ButtonType Button, AllImageType AllImage);
 
-void DrawBlock (BlockType Block, ManType* Man, int AnimationNumber, AllImageType AllImage);
+void DrawBlock (BlockType* Block, ManType* Man, int AnimationNumber, AllImageType AllImage);
+
+void ChangeAnimationNumber (BlockType* Block, ManType* Man, int AnimationNumber, AllImageType AllImage);
 
 void ControlMan (ManType* Man, MouseType Mouse, int* t);
 
@@ -167,7 +163,7 @@ int ButtonCheckClick (int x1, int y1, int x2, int y2, int DstX, int DstY);
 
 void DrawButton (ButtonType Button);
 
-void DrawCursor (MouseType Mouse);
+void DrawCursor (MouseType* Mouse);
 
 void Menu (MouseType Mouse);
 
@@ -177,7 +173,7 @@ void BlockPhysic (BlockType* Block);
 
 void BlockCollision (ManType* Man, BlockType* Block);
 
-void CoinCollision (ManType* Man, CoinType* Coin, int* NumberCoin);
+void CoinCollision (ManType* Man, BlockType* Coin, int* NumberCoin);
 
 int ModuleDistance (int x1, int y1, int x2, int y2, int Distance);
 
@@ -188,8 +184,6 @@ void DrawHealth (int Health, AllImageType AllImage);
 void Run (ManType* Man, HDC LeftLeg, HDC RightLeg);
 
 void EnemyMind (ManType* Man, EnemyType* Enemy);
-
-void DrawCoin (CoinType Coin, int AnimationNumber, AllImageType AllImage);
 
 void DrawFinish (BlockType* Block);
 
@@ -203,7 +197,7 @@ void LoadImage (AllImageType* AllImage);
 
 void Text (int x, int y, int Size, int Number, char Name []);
 
-void DrawTransparentImage (ImageType Image, int x, int y, int* xAnimationNumber, int* yAnimationNumber);
+void DrawTransparentImage (ImageType* Image, int x, int y, int* xAnimationNumber, int* yAnimationNumber);
 
 void LoadImages (AllImageType* AllImages);
 
@@ -342,81 +336,48 @@ void DrawInventory (ManType* Man)
             };
     };
 
-void DrawBlock (BlockType Block, ManType* Man, int AnimationNumber, AllImageType AllImage)
+void DrawBlock (BlockType* Block, ManType* Man, int AnimationNumber, AllImageType AllImage)
     {
-    int xNumber = 0;
+    DrawTransparentImage (Block->Picture, Block->Base.x - Man->Base.x, Block->Base.y - Man->Base.y, Block->xNumber, Block->yNumber);
 
-    int three = 3;
+    ChangeAnimationNumber (Block, Man, AnimationNumber, AllImage);
+    };
 
-    int four = 4;
-
-    if (Block.Base.Health <= 4 &&
-        Block.Base.Health > 2)
-        xNumber = 1;
-
-    if (Block.Base.Health <= 2)
-        xNumber = 2;
-
-    int NumberOfAnimationX = 0;
-    int NumberOfAnimationY = 0;
-
-    if (Block.Base.Health > 0 &&
-        Block.Number != 4     &&
-        Block.Number != 21)
+void ChangeAnimationNumber (BlockType* Block, ManType* Man, int AnimationNumber, AllImageType AllImage)
+    {
+    if (Block->Base.Health > 0 &&
+        Block->Number == 4)
         {
-        NumberOfAnimationY = 0;
-        DrawTransparentImage (Block.Picture, Block.Base.x - Man->Base.x, Block.Base.y - Man->Base.y, &NumberOfAnimationX, &NumberOfAnimationY);
+        Block->xNumber = AnimationNumber;
         };
 
-    if (Block.Base.Health > 0 &&
-        Block.Number == 4)
-        {
-        NumberOfAnimationY = 0;
-        DrawTransparentImage (Block.Picture, Block.Base.x - Man->Base.x, Block.Base.y - Man->Base.y, &AnimationNumber, &NumberOfAnimationY);
-        };
-
-    if (Block.Base.Health > 0 &&
-        Block.Number == 21)
+    if (Block->Base.Health > 0 &&
+        Block->Number == 21)
             {
-            if (Block.Base.Health < 500 &&
-                Block.Base.Health > 0)
+            if (Block->Base.Health < 500 &&
+                Block->Base.Health > 0)
                 {
-                NumberOfAnimationY = 3;
-                DrawTransparentImage (Block.Picture, Block.Base.x - Man->Base.x, Block.Base.y - Man->Base.y, &NumberOfAnimationX, &NumberOfAnimationY);
+                Block->yNumber = 3;
                 };
 
-            if (Block.Base.Health >= 500 &&
-                Block.Base.Health < 1000)
+            if (Block->Base.Health >= 500 &&
+                Block->Base.Health < 1000)
                 {
-                NumberOfAnimationY = 4;
-                DrawTransparentImage (Block.Picture, Block.Base.x - Man->Base.x, Block.Base.y - Man->Base.y, &NumberOfAnimationX, &NumberOfAnimationY);
+                Block->yNumber = 4;
+
                 };
 
-            if (Block.Base.Health == 1000)
+            if (Block->Base.Health == 1000)
                 {
-                NumberOfAnimationX = 0;
-                DrawTransparentImage (Block.Picture, Block.Base.x - Man->Base.x, Block.Base.y - Man->Base.y, &NumberOfAnimationX, &NumberOfAnimationY);
+                Block->yNumber = 0;
                 };
             };
 
-    if (Block.Number == 2)
-    {
-    };
-    };
-
-void DrawCoin (CoinType Coin, int AnimationNumber, AllImageType AllImage)
-    {
-    int null = 0;
-
-    if (Coin.Base.Health > 0)
-    DrawTransparentImage (AllImage.CoinAnimation, Coin.Base.x, Coin.Base.y, &AnimationNumber, &null);
-
-    /*char str [50] = "";
-    sprintf (str, "%d", Coin.Base.Health);
-    txSetTextAlign ();
-    txSetColor (TX_WHITE);
-    txSelectFont ("Comic Sans MS", 40);
-    txTextOut (Coin.Base.x, Coin.Base.y - 20, str);*/
+    if (Block->Base.Health > 0 &&
+        Block->Number == 100)
+            {
+            Block->xNumber = AnimationNumber;
+            };
     };
 
 void DrawMan (ManType* Man, AllImageType AllImage, int Number, int AnimationNumber, double StarsNumber)
@@ -476,7 +437,7 @@ void DrawMan (ManType* Man, AllImageType AllImage, int Number, int AnimationNumb
     int yNumber = Man->Side-1;
 
     if (Man->Base.Health > 0)
-        DrawTransparentImage (AllImage.Man, 0, -48, &Number, &yNumber);
+        DrawTransparentImage (AllImage->Man, 0, -48, &Number, &yNumber);
 
     if (Man->Position == 1)
         {
@@ -582,7 +543,7 @@ void DrawButton (ButtonType Button, AllImageType AllImage)
     DrawTransparentImage (AllImage.Pause, Button.x, Button.y, &Button.Number, &null);
     };
 
-void DrawCursor (MouseType Mouse)
+void DrawCursor (MouseType* Mouse)
     {
     Mouse.x = txMouseX ();
 
@@ -590,7 +551,7 @@ void DrawCursor (MouseType Mouse)
 
     int null = 0;
 
-    DrawTransparentImage (Mouse.Picture, Mouse.x, Mouse.y, &null, &null);
+    DrawTransparentImage (Mouse->Picture, Mouse.x, Mouse.y, &null, &null);
     };
 
 void DrawFinish (BlockType* Block)
@@ -623,7 +584,7 @@ void DeleteAllImage (AllImageType AllImages)
     txDeleteDC (AllImages.Pickaxe.Picture);
     };
 
-void MoveGame (BlockType ManyBlocks [], CoinType Coins [], BlockType* Start, BlockType* Finish, AllImageType AllImage, int* LevelNumber, ManType* Man, double* AllTemperature)
+void MoveGame (BlockType ManyBlocks [], BlockType* Start, BlockType* Finish, AllImageType AllImage, int* LevelNumber, ManType* Man, double* AllTemperature)
     {
     int StartLevelNumber = *LevelNumber;
 
@@ -639,13 +600,13 @@ void MoveGame (BlockType ManyBlocks [], CoinType Coins [], BlockType* Start, Blo
 
     int ChooseMan = 2;
 
-    CoinType Coin = {200, 100, 1};
+    BlockType Coin = {200, 100, 1};
 
     ButtonType Pause = {20, 10, 0};
 
     MouseType Mouse = {100, 100, AllImage.Cursor};
 
-    // CoinType Coin1 = {400, 630, 1};
+    // BlockType Coin1 = {400, 630, 1};
 
     EnemyType Bat = {1000, 300, 0, 0, 2, 6, AllImage.Bat};
 
@@ -705,13 +666,13 @@ void MoveGame (BlockType ManyBlocks [], CoinType Coins [], BlockType* Start, Blo
 
         DrawTransparentImage (AllImage.Coin, 20, 70, &null, &null);
 
-        DrawManyBlocks (ManyBlocks, Coins, Man, AnimationNumber, AllImage, Start, Finish);
+        DrawManyBlocks (ManyBlocks, Man, AnimationNumber, AllImage, Start, Finish);
 
         DrawMan (Man, AllImage, ManAnimationNumber, AnimationNumber, StarsNumber);
 
         DrawInventory (Man);
 
-        InteractManWithBlocks (ManyBlocks, Coins, Man, &NumberCoin, LevelNumber, Start, Finish);
+        InteractManWithBlocks (ManyBlocks, Man, &NumberCoin, LevelNumber, Start, Finish);
 
         // DrawEnemy (Bat, AllImage, EnemyNumber);
 
@@ -783,7 +744,7 @@ void MoveGame (BlockType ManyBlocks [], CoinType Coins [], BlockType* Start, Blo
             Man->Temperature -= 1;
             }; */
 
-        DrawCursor (Mouse);
+        DrawCursor (&Mouse);
 
         if (StartLevelNumber != *LevelNumber)
             {
@@ -845,445 +806,364 @@ void Level1 (int* LevelNumber, ManType* Man, AllImageType AllImage)
     double AllTemperature = 10;
 
     BlockType ManyBlocks [] = {// Ground
-                               {{ -75,  675, 6}, 1, AllImage.Dirt},
-                               {{ -25,  675, 6}, 1, AllImage.Dirt},
-                               {{ 25,   675, 6}, 1, AllImage.Dirt},
-                               {{ 75,   675, 6}, 1, AllImage.Dirt},
-                               {{ 125,  675, 6}, 1, AllImage.Dirt},
-                               {{ 175,  675, 6}, 1, AllImage.Dirt},
-                               {{ 225,  675, 6}, 1, AllImage.Dirt},
-                               {{ 275,  675, 6}, 5, AllImage.Water},
-                               {{ 325,  675, 6}, 5, AllImage.Water},
-                               {{ 375,  675, 6}, 5, AllImage.Water},
-                               {{ 425,  675, 6}, 1, AllImage.Dirt},
-                               {{ 475,  675, 6}, 1, AllImage.IronOre},
-                               {{ 525,  675, 6}, 1, AllImage.Dirt},
-                               {{ 575,  675, 6}, 1, AllImage.Dirt},
-                               {{ 625,  675, 6}, 1, AllImage.Dirt},
-                               {{ 675,  675, 6}, 1, AllImage.Dirt},
-                               {{ 725,  675, 6}, 1, AllImage.Dirt},
-                               {{ 775,  675, 6}, 1, AllImage.Dirt},
-                               {{ 825,  675, 6}, 1, AllImage.Dirt},
-                               {{ 875,  675, 6}, 1, AllImage.Dirt},
-                               {{ 925,  675, 6}, 1, AllImage.Dirt},
-                               {{ 975,  675, 6}, 1, AllImage.Dirt},
-                               {{1025,  675, 6}, 1, AllImage.Dirt},
-                               {{1075,  675, 6}, 1, AllImage.Dirt},
-                               {{1125,  675, 6}, 1, AllImage.Dirt},
-                               {{1175,  675, 6}, 1, AllImage.Dirt},
-                               {{1225,  675, 6}, 1, AllImage.Dirt},
-                               {{1275,  675, 6}, 1, AllImage.Dirt},
-                               {{1325,  675, 6}, 1, AllImage.Dirt},
-                               {{1375,  675, 6}, 1, AllImage.Dirt},
-                               {{1425,  675, 6}, 1, AllImage.Dirt},
-                               {{1475,  675, 6}, 1, AllImage.Dirt},
-                               {{1525,  675, 6}, 1, AllImage.Dirt},
+                               {{ -75,  675, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ -25,  675, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 25,   675, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 75,   675, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 125,  675, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 175,  675, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 225,  675, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 275,  675, 6}, 0, 0, 5, AllImage.Water},
+                               {{ 325,  675, 6}, 0, 0, 5, AllImage.Water},
+                               {{ 375,  675, 6}, 0, 0, 5, AllImage.Water},
+                               {{ 425,  675, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 475,  675, 6}, 0, 0, 1, AllImage.IronOre},
+                               {{ 525,  675, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 575,  675, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 625,  675, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 675,  675, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 725,  675, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 775,  675, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 825,  675, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 875,  675, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 925,  675, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 975,  675, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1025,  675, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1075,  675, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1125,  675, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1175,  675, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1225,  675, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1275,  675, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1325,  675, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1375,  675, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1425,  675, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1475,  675, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1525,  675, 6}, 0, 0, 1, AllImage.Dirt},
 
-                               {{ -75,  725, 6}, 1, AllImage.Dirt},
-                               {{ -25,  725, 6}, 1, AllImage.Dirt},
-                               {{  25,  725, 6}, 1, AllImage.Dirt},
-                               {{  75,  725, 6}, 1, AllImage.Dirt},
-                               {{ 125,  725, 6}, 1, AllImage.Dirt},
-                               {{ 175,  725, 6}, 1, AllImage.Dirt},
-                               {{ 225,  725, 6}, 1, AllImage.Dirt},
-                               {{ 275,  725, 6}, 1, AllImage.Dirt},
-                               {{ 325,  725, 6}, 1, AllImage.Dirt},
-                               {{ 375,  725, 6}, 1, AllImage.Dirt},
-                               {{ 425,  725, 6}, 1, AllImage.Dirt},
-                               {{ 475,  725, 6}, 1, AllImage.IronOre},
-                               {{ 525,  725, 6}, 1, AllImage.IronOre},
-                               {{ 575,  725, 6}, 1, AllImage.Dirt},
-                               {{ 625,  725, 6}, 1, AllImage.Dirt},
-                               {{ 725,  725, 6}, 1, AllImage.Dirt},
-                               {{ 725,  725, 6}, 1, AllImage.Dirt},
-                               {{ 775,  725, 6}, 1, AllImage.Dirt},
-                               {{ 825,  725, 6}, 1, AllImage.Dirt},
-                               {{ 875,  725, 6}, 1, AllImage.Dirt},
-                               {{ 925,  725, 6}, 1, AllImage.Dirt},
-                               {{ 975,  725, 6}, 1, AllImage.Dirt},
-                               {{1025,  725, 6}, 1, AllImage.Dirt},
-                               {{1075,  725, 6}, 1, AllImage.Dirt},
-                               {{1125,  725, 6}, 1, AllImage.Dirt},
-                               {{1175,  725, 6}, 1, AllImage.Dirt},
-                               {{1225,  725, 6}, 1, AllImage.Dirt},
-                               {{1275,  725, 6}, 1, AllImage.Dirt},
-                               {{1325,  725, 6}, 1, AllImage.Dirt},
-                               {{1375,  725, 6}, 1, AllImage.Dirt},
-                               {{1425,  725, 6}, 1, AllImage.Dirt},
-                               {{1475,  725, 6}, 1, AllImage.Dirt},
-                               {{1525,  725, 6}, 1, AllImage.Dirt},
+                               {{ -75,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ -25,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{  25,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{  75,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 125,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 175,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 225,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 275,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 325,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 375,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 425,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 475,  725, 6}, 0, 0, 1, AllImage.IronOre},
+                               {{ 525,  725, 6}, 0, 0, 1, AllImage.IronOre},
+                               {{ 575,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 625,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 725,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 725,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 775,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 825,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 875,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 925,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 975,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1025,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1075,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1125,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1175,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1225,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1275,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1325,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1375,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1425,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1475,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1525,  725, 6}, 0, 0, 1, AllImage.Dirt},
                                // Platforms
-                               {{ 100,  200, 6}, 1, AllImage.Dirt},
-                               {{ 150,  200, 6}, 1, AllImage.Dirt},
-                               {{ 200,  200, 6}, 1, AllImage.Dirt},
-                               {{ 250,  200, 6}, 1, AllImage.Dirt},
-                               {{ 300,  200, 6}, 1, AllImage.Dirt},
-                               {{ 350,  200, 6}, 1, AllImage.Dirt},
-                               {{ 200,  500, 6}, 1, AllImage.Dirt},
-                               {{ 250,  500, 6}, 1, AllImage.Dirt},
-                               {{ 300,  500, 6}, 1, AllImage.Dirt},
-                               {{ 350,  500, 6}, 1, AllImage.Dirt},
-                               {{ 450,  400, 6}, 1, AllImage.Dirt},
-                               {{ 500,  400, 6}, 1, AllImage.Dirt},
-                               {{ 550,  400, 6}, 1, AllImage.Dirt},
-                               {{ 550,  100, 6}, 1, AllImage.Dirt},
-                               {{ 600,  100, 6}, 1, AllImage.Dirt},
-                               {{ 650,  100, 6}, 1, AllImage.Dirt},
-                               {{ 700,  100, 6}, 1, AllImage.Dirt},
-                               {{ 850,  300, 6}, 1, AllImage.Dirt},
-                               {{ 900,  300, 6}, 1, AllImage.Dirt},
-                               {{ 950,  300, 6}, 1, AllImage.Dirt},
-                               {{1050,  150, 6}, 1, AllImage.Dirt},
-                               {{1100,  150, 6}, 1, AllImage.Dirt},
-                               {{1150,  150, 6}, 1, AllImage.Dirt},
-                               {{1300,  250, 6}, 1, AllImage.Dirt},
-                               {{1350,  250, 6}, 1, AllImage.Dirt},
-                               {{1400,  250, 6}, 1, AllImage.Dirt},
-                               {{1450,  250, 6}, 1, AllImage.Dirt},
-                               {{1500,  250, 6}, 1, AllImage.Dirt},
-                               {{1550,  250, 6}, 1, AllImage.Dirt},
+                               {{ 100,  200, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 150,  200, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 200,  200, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 250,  200, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 300,  200, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 350,  200, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 200,  500, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 250,  500, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 300,  500, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 350,  500, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 450,  400, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 500,  400, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 550,  400, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 550,  100, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 600,  100, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 650,  100, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 700,  100, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 850,  300, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 900,  300, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 950,  300, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1050,  150, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1100,  150, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1150,  150, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1300,  250, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1350,  250, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1400,  250, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1450,  250, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1500,  250, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1550,  250, 6}, 0, 0, 1, AllImage.Dirt},
                                // Boxes
-                               {{ 100,  625, 2},  2, AllImage.Box},
-                               {{  50,  625, 2},  2, AllImage.Box},
-                               {{ 100,  575, 2},  2, AllImage.Box},
+                               {{ 100,  625, 2}, 0, 0,  2, AllImage.Box},
+                               {{  50,  625, 2}, 0, 0,  2, AllImage.Box},
+                               {{ 100,  575, 2}, 0, 0,  2, AllImage.Box},
                                // Fire
-                               {{ 900,  615, 4},  4, AllImage.Fire},
-                               {{ 800,  615, 4},  4, AllImage.Fire},
+                               {{ 900,  615, 4}, 0, 0,  4, AllImage.Fire},
+                               {{ 800,  615, 4}, 0, 0,  4, AllImage.Fire},
                                // Stalactites
-                               {{ 100,  250, 7},  7, AllImage.Stalactite},
-                               {{ 150,  250, 7},  7, AllImage.Stalactite},
-                               {{ 200,  250, 7},  7, AllImage.Stalactite},
-                               {{ 250,  250, 7},  7, AllImage.Stalactite},
-                               {{ 300,  250, 7},  7, AllImage.Stalactite},
-                               {{ 350,  250, 7},  7, AllImage.Stalactite},
-                               {{ 200,  550, 7},  7, AllImage.Stalactite},
-                               {{ 250,  550, 7},  7, AllImage.Stalactite},
-                               {{ 300,  550, 7},  7, AllImage.Stalactite},
-                               {{ 350,  550, 7},  7, AllImage.Stalactite},
-                               {{ 450,  450, 7},  7, AllImage.Stalactite},
-                               {{ 500,  450, 7},  7, AllImage.Stalactite},
-                               {{ 550,  450, 7},  7, AllImage.Stalactite},
-                               {{ 550,  150, 7},  7, AllImage.Stalactite},
-                               {{ 600,  150, 7},  7, AllImage.Stalactite},
-                               {{ 650,  150, 7},  7, AllImage.Stalactite},
-                               {{ 700,  150, 7},  7, AllImage.Stalactite},
-                               {{ 850,  350, 7},  7, AllImage.Stalactite},
-                               {{ 900,  350, 7},  7, AllImage.Stalactite},
-                               {{ 950,  350, 7},  7, AllImage.Stalactite},
-                               {{1050,  200, 7},  7, AllImage.Stalactite},
-                               {{1100,  200, 7},  7, AllImage.Stalactite},
-                               {{1150,  200, 7},  7, AllImage.Stalactite},
-                               {{1300,  300, 7},  7, AllImage.Stalactite},
-                               {{1350,  300, 7},  7, AllImage.Stalactite},
-                               {{1400,  300, 7},  7, AllImage.Stalactite},
-                               {{1450,  300, 7},  7, AllImage.Stalactite},
-                               {{1500,  300, 7},  7, AllImage.Stalactite},
-                               {{1550,  300, 7},  7, AllImage.Stalactite},
+                               {{ 100,  250, 7}, 0, 0,  7, AllImage.Stalactite},
+                               {{ 150,  250, 7}, 0, 0,  7, AllImage.Stalactite},
+                               {{ 200,  250, 7}, 0, 0,  7, AllImage.Stalactite},
+                               {{ 250,  250, 7}, 0, 0,  7, AllImage.Stalactite},
+                               {{ 300,  250, 7}, 0, 0,  7, AllImage.Stalactite},
+                               {{ 350,  250, 7}, 0, 0,  7, AllImage.Stalactite},
+                               {{ 200,  550, 7}, 0, 0,  7, AllImage.Stalactite},
+                               {{ 250,  550, 7}, 0, 0,  7, AllImage.Stalactite},
+                               {{ 300,  550, 7}, 0, 0,  7, AllImage.Stalactite},
+                               {{ 350,  550, 7}, 0, 0,  7, AllImage.Stalactite},
+                               {{ 450,  450, 7}, 0, 0,  7, AllImage.Stalactite},
+                               {{ 500,  450, 7}, 0, 0,  7, AllImage.Stalactite},
+                               {{ 550,  450, 7}, 0, 0,  7, AllImage.Stalactite},
+                               {{ 550,  150, 7}, 0, 0,  7, AllImage.Stalactite},
+                               {{ 600,  150, 7}, 0, 0,  7, AllImage.Stalactite},
+                               {{ 650,  150, 7}, 0, 0,  7, AllImage.Stalactite},
+                               {{ 700,  150, 7}, 0, 0,  7, AllImage.Stalactite},
+                               {{ 850,  350, 7}, 0, 0,  7, AllImage.Stalactite},
+                               {{ 900,  350, 7}, 0, 0,  7, AllImage.Stalactite},
+                               {{ 950,  350, 7}, 0, 0,  7, AllImage.Stalactite},
+                               {{1050,  200, 7}, 0, 0,  7, AllImage.Stalactite},
+                               {{1100,  200, 7}, 0, 0,  7, AllImage.Stalactite},
+                               {{1150,  200, 7}, 0, 0,  7, AllImage.Stalactite},
+                               {{1300,  300, 7}, 0, 0,  7, AllImage.Stalactite},
+                               {{1350,  300, 7}, 0, 0,  7, AllImage.Stalactite},
+                               {{1400,  300, 7}, 0, 0,  7, AllImage.Stalactite},
+                               {{1450,  300, 7}, 0, 0,  7, AllImage.Stalactite},
+                               {{1500,  300, 7}, 0, 0,  7, AllImage.Stalactite},
+                               {{1550,  300, 7}, 0, 0,  7, AllImage.Stalactite},
                                // Stairs
-                               {{ 700,  592, 3},  3, AllImage.Stairs},
-                               {{ 700,  509, 3},  3, AllImage.Stairs},
-                               {{ 700,  426, 3},  3, AllImage.Stairs},
-                               {{ 700,  343, 3},  3, AllImage.Stairs},
-                               {{ 700,  260, 3},  3, AllImage.Stairs},
-                               {{ 700,  177, 3},  3, AllImage.Stairs},
-                               {{ 700,   94, 3},  3, AllImage.Stairs},
+                               {{ 700,  592, 3}, 0, 0,  3, AllImage.Stairs},
+                               {{ 700,  509, 3}, 0, 0,  3, AllImage.Stairs},
+                               {{ 700,  426, 3}, 0, 0,  3, AllImage.Stairs},
+                               {{ 700,  343, 3}, 0, 0,  3, AllImage.Stairs},
+                               {{ 700,  260, 3}, 0, 0,  3, AllImage.Stairs},
+                               {{ 700,  177, 3}, 0, 0,  3, AllImage.Stairs},
+                               {{ 700,   94, 3}, 0, 0,  3, AllImage.Stairs},
                                // Berries
-                               {{1100,  625, 1000}, 21, AllImage.Berries},
+                               {{1100,  625, 1000}, 0, 0, 21, AllImage.Berries},
                                // Chests
-                               {{1300,  625, 6},  8, AllImage.Chest},
+                               {{1300,  625, 6}, 0, 0,  8, AllImage.Chest},
                                // Things
-                               {{1175,  625, 16}, 11, AllImage.Pickaxe},
-                               {{ 250,  450, 16}, 11, AllImage.Pickaxe},
+                               {{1175,  625, 16}, 0, 0, 11, AllImage.Pickaxe},
+                               {{ 250,  450, 16}, 0, 0, 11, AllImage.Pickaxe},
+                               // Coins
+                               {{160,  165, 1}, 0, 0, 100, AllImage.CoinAnimation},
+                               {{310,  165, 1}, 0, 0, 100, AllImage.CoinAnimation},
+                               {{260,  465, 1}, 0, 0, 100, AllImage.CoinAnimation},
+                               {{310,  465, 1}, 0, 0, 100, AllImage.CoinAnimation},
+                               {{510,  365, 1}, 0, 0, 100, AllImage.CoinAnimation},
+                               {{560,  65,  1}, 0, 0, 100, AllImage.CoinAnimation},
+                               {{710,  65,  1}, 0, 0, 100, AllImage.CoinAnimation},
+                               {{910,  265, 1}, 0, 0, 100, AllImage.CoinAnimation},
+                               {{1110, 115, 1}, 0, 0, 100, AllImage.CoinAnimation},
+                               {{1360, 215, 1}, 0, 0, 100, AllImage.CoinAnimation},
                                // End
                                {{  -1,   -6}}};
-
-    CoinType Coins [] = {{{160,  165, 1}},
-                         {{310,  165, 1}},
-                         {{260,  465, 1}},
-                         {{310,  465, 1}},
-                         {{510,  365, 1}},
-                         {{560,  65,  1}},
-                         {{710,  65,  1}},
-                         {{910,  265, 1}},
-                         {{1110, 115, 1}},
-                         {{1360, 215, 1}},
-                         {{-1,   -1}}};
 
     BlockType Start  = {-100, -1000000, 0, 50, AllImage.Start};
 
     BlockType Finish = {1450, -1000000, 0, 50, AllImage.Finish};
 
-    MoveGame (ManyBlocks, Coins, &Start, &Finish, AllImage, LevelNumber, Man, &AllTemperature);
+    MoveGame (ManyBlocks, &Start, &Finish, AllImage, LevelNumber, Man, &AllTemperature);
     };
 
 void Level2 (int* LevelNumber, ManType* Man, AllImageType AllImage)
     {
     double AllTemperature = 10;
 
-    /*BlockType ManyBlocks [] = {// Ground
-                               {-75,  675, 1, 6, AllImage.Dirt},
-                               {-25,  675, 1, 6, AllImage.Dirt},
-                               {25,   675, 1, 6, AllImage.Dirt},
-                               {75,   675, 1, 6, AllImage.Dirt},
-                               {125,  675, 1, 6, AllImage.Dirt},
-                               {175,  675, 1, 6, AllImage.Dirt},
-                               {225,  675, 1, 6, AllImage.Dirt},
-                               {275,  675, 1, 6, AllImage.Dirt},
-                               {325,  675, 1, 6, AllImage.Dirt},
-                               {375,  675, 1, 6, AllImage.Dirt},
-                               {425,  675, 1, 6, AllImage.Dirt},
-                               {475,  675, 1, 6, AllImage.Dirt},
-                               {525,  675, 1, 6, AllImage.Dirt},
-                               {575,  675, 1, 6, AllImage.Dirt},
-                               {625,  675, 1, 6, AllImage.Dirt},
-                               {675,  675, 1, 6, AllImage.Dirt},
-                               {725,  675, 1, 6, AllImage.Dirt},
-                               {775,  675, 1, 6, AllImage.Dirt},
-                               {825,  675, 1, 6, AllImage.Dirt},
-                               {875,  675, 1, 6, AllImage.Dirt},
-                               {925,  675, 1, 6, AllImage.Dirt},
-                               {975,  675, 1, 6, AllImage.Dirt},
-                               {1025,  675, 1, 6, AllImage.Dirt},
-                               {1075,  675, 1, 6, AllImage.Dirt},
-                               {1125,  675, 1, 6, AllImage.Dirt},
-                               {1175,  675, 1, 6, AllImage.Dirt},
-                               {1225,  675, 1, 6, AllImage.Dirt},
-                               {1275,  675, 1, 6, AllImage.Dirt},
-                               {1325,  675, 1, 6, AllImage.Dirt},
-                               {1375,  675, 1, 6, AllImage.Dirt},
-                               {1425,  675, 1, 6, AllImage.Dirt},
-                               {1475,  675, 1, 6, AllImage.Dirt},
-                               {1525,  675, 1, 6, AllImage.Dirt},
-                               // Platforms
-                               /* {100,  200, 1, 6, AllImage.Dirt},
-                               {150,  200, 1, 6, AllImage.Dirt},
-                               {200,  200, 1, 6, AllImage.Dirt},
-                               {250,  200, 1, 6, AllImage.Dirt},
-                               {300,  200, 1, 6, AllImage.Dirt},
-                               {350,  200, 1, 6, AllImage.Dirt},
-                               {200,  500, 1, 6, AllImage.Dirt},
-                               {250,  500, 1, 6, AllImage.Dirt},
-                               {300,  500, 1, 6, AllImage.Dirt},
-                               {350,  500, 1, 6, AllImage.Dirt},
-                               {450,  400, 1, 6, AllImage.Dirt},
-                               {500,  400, 1, 6, AllImage.Dirt},
-                               {550,  400, 1, 6, AllImage.Dirt},
-                               {550,  100, 1, 6, AllImage.Dirt},
-                               {600,  100, 1, 6, AllImage.Dirt},
-                               {650,  100, 1, 6, AllImage.Dirt},
-                               {700,  100, 1, 6, AllImage.Dirt},
-                               {850,  300, 1, 6, AllImage.Dirt},
-                               {900,  300, 1, 6, AllImage.Dirt},
-                               {950,  300, 1, 6, AllImage.Dirt},
-                               {1050, 150, 1, 6, AllImage.Dirt},
-                               {1100, 150, 1, 6, AllImage.Dirt},
-                               {1150, 150, 1, 6, AllImage.Dirt},
-                               {1300, 250, 1, 6, AllImage.Dirt},
-                               {1350, 250, 1, 6, AllImage.Dirt},
-                               {1400, 250, 1, 6, AllImage.Dirt},
-                               {1450, 250, 1, 6, AllImage.Dirt},
-                               {1500, 250, 1, 6, AllImage.Dirt},
-                               {1550, 250, 1, 6, AllImage.Dirt}, */
-                               // Boxes
-                               /*{500,  625, 2, 6, AllImage.Box},
-                               // Stairs
-                               {700,  592, 3, 6, AllImage.Stairs},
-                               {700,  509, 3, 6, AllImage.Stairs},
-                               {700,  426, 3, 6, AllImage.Stairs},
-                               {700,  343, 3, 6, AllImage.Stairs},
-                               {700,  260, 3, 6, AllImage.Stairs},
-                               {700,  177, 3, 6, AllImage.Stairs},
-                               // Fire
-                               {900, 615, 4, 6, AllImage.Fire},
-                               {800, 615, 4, 6, AllImage.Fire},
-                               // End
-                               {-1,   -1}};*/
-
     BlockType ManyBlocks [] = {// Ground
-                               {{ -75,  675, 6}, 1, AllImage.Dirt},
-                               {{ -25,  675, 6}, 1, AllImage.Dirt},
-                               {{ 25,   675, 6}, 1, AllImage.Dirt},
-                               {{ 75,   675, 6}, 1, AllImage.Dirt},
-                               {{ 125,  675, 6}, 1, AllImage.Dirt},
-                               {{ 175,  675, 6}, 1, AllImage.Dirt},
-                               {{ 225,  675, 6}, 1, AllImage.Dirt},
-                               {{ 275,  675, 6}, 5, AllImage.Water},
-                               {{ 325,  675, 6}, 5, AllImage.Water},
-                               {{ 375,  675, 6}, 5, AllImage.Water},
-                               {{ 425,  675, 1}, 1, AllImage.Dirt},
-                               {{ 475,  675, 1}, 1, AllImage.Dirt},
-                               {{ 525,  675, 1}, 1, AllImage.Dirt},
-                               {{ 575,  675, 1}, 1, AllImage.Dirt},
-                               {{ 625,  675, 1}, 1, AllImage.Dirt},
-                               {{ 675,  675, 1}, 1, AllImage.Dirt},
-                               {{ 725,  675, 1}, 1, AllImage.Dirt},
-                               {{ 775,  675, 1}, 1, AllImage.Dirt},
-                               {{ 825,  675, 1}, 1, AllImage.Dirt},
-                               {{ 875,  675, 1}, 1, AllImage.Dirt},
-                               {{ 925,  675, 1}, 1, AllImage.Dirt},
-                               {{ 975,  675, 1}, 1, AllImage.Dirt},
-                               {{1025,  675, 1}, 1, AllImage.Dirt},
-                               {{1075,  675, 1}, 1, AllImage.Dirt},
-                               {{1125,  675, 1}, 1, AllImage.Dirt},
-                               {{1175,  675, 1}, 1, AllImage.Dirt},
-                               {{1225,  675, 1}, 1, AllImage.Dirt},
-                               {{1275,  675, 1}, 1, AllImage.Dirt},
-                               {{1325,  675, 1}, 1, AllImage.Dirt},
-                               {{1375,  675, 1}, 1, AllImage.Dirt},
-                               {{1425,  675, 1}, 1, AllImage.Dirt},
-                               {{1475,  675, 1}, 1, AllImage.Dirt},
-                               {{1525,  675, 1}, 1, AllImage.Dirt},
+                               {{ -75,  675, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ -25,  675, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 25,   675, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 75,   675, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 125,  675, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 175,  675, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 225,  675, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 275,  675, 6}, 0, 0, 5, AllImage.Water},
+                               {{ 325,  675, 6}, 0, 0, 5, AllImage.Water},
+                               {{ 375,  675, 6}, 0, 0, 5, AllImage.Water},
+                               {{ 425,  675, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 475,  675, 6}, 0, 0, 1, AllImage.IronOre},
+                               {{ 525,  675, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 575,  675, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 625,  675, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 675,  675, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 725,  675, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 775,  675, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 825,  675, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 875,  675, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 925,  675, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 975,  675, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1025,  675, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1075,  675, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1125,  675, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1175,  675, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1225,  675, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1275,  675, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1325,  675, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1375,  675, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1425,  675, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1475,  675, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1525,  675, 6}, 0, 0, 1, AllImage.Dirt},
 
-                               {{ -75,  725, 1}, 1, AllImage.Dirt},
-                               {{ -25,  725, 1}, 1, AllImage.Dirt},
-                               {{  25,  725, 1}, 1, AllImage.Dirt},
-                               {{  75,  725, 1}, 1, AllImage.Dirt},
-                               {{ 125,  725, 1}, 1, AllImage.Dirt},
-                               {{ 175,  725, 1}, 1, AllImage.Dirt},
-                               {{ 225,  725, 1}, 1, AllImage.Dirt},
-                               {{ 275,  725, 1}, 1, AllImage.Dirt},
-                               {{ 325,  725, 1}, 1, AllImage.Dirt},
-                               {{ 375,  725, 1}, 1, AllImage.Dirt},
-                               {{ 425,  725, 1}, 1, AllImage.Dirt},
-                               {{ 475,  725, 1}, 1, AllImage.Dirt},
-                               {{ 525,  725, 1}, 1, AllImage.Dirt},
-                               {{ 575,  725, 1}, 1, AllImage.Dirt},
-                               {{ 625,  725, 1}, 1, AllImage.Dirt},
-                               {{ 725,  725, 1}, 1, AllImage.Dirt},
-                               {{ 725,  725, 1}, 1, AllImage.Dirt},
-                               {{ 775,  725, 1}, 1, AllImage.Dirt},
-                               {{ 825,  725, 1}, 1, AllImage.Dirt},
-                               {{ 875,  725, 1}, 1, AllImage.Dirt},
-                               {{ 925,  725, 1}, 1, AllImage.Dirt},
-                               {{ 975,  725, 1}, 1, AllImage.Dirt},
-                               {{1025,  725, 1}, 1, AllImage.Dirt},
-                               {{1075,  725, 1}, 1, AllImage.Dirt},
-                               {{1125,  725, 1}, 1, AllImage.Dirt},
-                               {{1175,  725, 1}, 1, AllImage.Dirt},
-                               {{1225,  725, 1}, 1, AllImage.Dirt},
-                               {{1275,  725, 1}, 1, AllImage.Dirt},
-                               {{1325,  725, 1}, 1, AllImage.Dirt},
-                               {{1375,  725, 1}, 1, AllImage.Dirt},
-                               {{1425,  725, 1}, 1, AllImage.Dirt},
-                               {{1475,  725, 1}, 1, AllImage.Dirt},
-                               {{1525,  725, 1}, 1, AllImage.Dirt},
+                               {{ -75,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ -25,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{  25,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{  75,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 125,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 175,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 225,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 275,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 325,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 375,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 425,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 475,  725, 6}, 0, 0, 1, AllImage.IronOre},
+                               {{ 525,  725, 6}, 0, 0, 1, AllImage.IronOre},
+                               {{ 575,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 625,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 725,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 725,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 775,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 825,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 875,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 925,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 975,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1025,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1075,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1125,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1175,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1225,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1275,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1325,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1375,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1425,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1475,  725, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1525,  725, 6}, 0, 0, 1, AllImage.Dirt},
                                // Platforms
-                               {{ 100,  200, 1}, 1, AllImage.Dirt},
-                               {{ 150,  200, 1}, 1, AllImage.Dirt},
-                               {{ 200,  200, 1}, 1, AllImage.Dirt},
-                               {{ 250,  200, 1}, 1, AllImage.Dirt},
-                               {{ 300,  200, 1}, 1, AllImage.Dirt},
-                               {{ 350,  200, 1}, 1, AllImage.Dirt},
-                               {{ 200,  500, 1}, 1, AllImage.Dirt},
-                               {{ 250,  500, 1}, 1, AllImage.Dirt},
-                               {{ 300,  500, 1}, 1, AllImage.Dirt},
-                               {{ 350,  500, 1}, 1, AllImage.Dirt},
-                               {{ 450,  400, 1}, 1, AllImage.Dirt},
-                               {{ 500,  400, 1}, 1, AllImage.Dirt},
-                               {{ 550,  400, 1}, 1, AllImage.Dirt},
-                               {{ 550,  100, 1}, 1, AllImage.Dirt},
-                               {{ 600,  100, 1}, 1, AllImage.Dirt},
-                               {{ 650,  100, 1}, 1, AllImage.Dirt},
-                               {{ 700,  100, 1}, 1, AllImage.Dirt},
-                               {{ 850,  300, 1}, 1, AllImage.Dirt},
-                               {{ 900,  300, 1}, 1, AllImage.Dirt},
-                               {{ 950,  300, 1}, 1, AllImage.Dirt},
-                               {{1050,  150, 1}, 1, AllImage.Dirt},
-                               {{1100,  150, 1}, 1, AllImage.Dirt},
-                               {{1150,  150, 1}, 1, AllImage.Dirt},
-                               {{1300,  250, 1}, 1, AllImage.Dirt},
-                               {{1350,  250, 1}, 1, AllImage.Dirt},
-                               {{1400,  250, 1}, 1, AllImage.Dirt},
-                               {{1450,  250, 1}, 1, AllImage.Dirt},
-                               {{1500,  250, 1}, 1, AllImage.Dirt},
-                               {{1550,  250, 1}, 1, AllImage.Dirt},
+                               {{ 100,  200, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 150,  200, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 200,  200, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 250,  200, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 300,  200, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 350,  200, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 200,  500, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 250,  500, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 300,  500, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 350,  500, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 450,  400, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 500,  400, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 550,  400, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 550,  100, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 600,  100, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 650,  100, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 700,  100, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 850,  300, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 900,  300, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{ 950,  300, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1050,  150, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1100,  150, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1150,  150, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1300,  250, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1350,  250, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1400,  250, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1450,  250, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1500,  250, 6}, 0, 0, 1, AllImage.Dirt},
+                               {{1550,  250, 6}, 0, 0, 1, AllImage.Dirt},
                                // Boxes
-                               {{ 100,  625, 2},  2, AllImage.Box},
-                               {{  50,  625, 2},  2, AllImage.Box},
-                               {{ 100,  575, 2},  2, AllImage.Box},
+                               {{ 100,  625, 2}, 0, 0,  2, AllImage.Box},
+                               {{  50,  625, 2}, 0, 0,  2, AllImage.Box},
+                               {{ 100,  575, 2}, 0, 0,  2, AllImage.Box},
                                // Fire
-                               {{ 900,  615, 4},  4, AllImage.Fire},
-                               {{ 800,  615, 4},  4, AllImage.Fire},
+                               {{ 900,  615, 4}, 0, 0,  4, AllImage.Fire},
+                               {{ 800,  615, 4}, 0, 0,  4, AllImage.Fire},
                                // Stalactites
-                               {{ 100,  250, 7},  7, AllImage.Stalactite},
-                               {{ 150,  250, 7},  7, AllImage.Stalactite},
-                               {{ 200,  250, 7},  7, AllImage.Stalactite},
-                               {{ 250,  250, 7},  7, AllImage.Stalactite},
-                               {{ 300,  250, 7},  7, AllImage.Stalactite},
-                               {{ 350,  250, 7},  7, AllImage.Stalactite},
-                               {{ 200,  550, 7},  7, AllImage.Stalactite},
-                               {{ 250,  550, 7},  7, AllImage.Stalactite},
-                               {{ 300,  550, 7},  7, AllImage.Stalactite},
-                               {{ 350,  550, 7},  7, AllImage.Stalactite},
-                               {{ 450,  450, 7},  7, AllImage.Stalactite},
-                               {{ 500,  450, 7},  7, AllImage.Stalactite},
-                               {{ 550,  450, 7},  7, AllImage.Stalactite},
-                               {{ 550,  150, 7},  7, AllImage.Stalactite},
-                               {{ 600,  150, 7},  7, AllImage.Stalactite},
-                               {{ 650,  150, 7},  7, AllImage.Stalactite},
-                               {{ 700,  150, 7},  7, AllImage.Stalactite},
-                               {{ 850,  350, 7},  7, AllImage.Stalactite},
-                               {{ 900,  350, 7},  7, AllImage.Stalactite},
-                               {{ 950,  350, 7},  7, AllImage.Stalactite},
-                               {{1050,  200, 7},  7, AllImage.Stalactite},
-                               {{1100,  200, 7},  7, AllImage.Stalactite},
-                               {{1150,  200, 7},  7, AllImage.Stalactite},
-                               {{1300,  300, 7},  7, AllImage.Stalactite},
-                               {{1350,  300, 7},  7, AllImage.Stalactite},
-                               {{1400,  300, 7},  7, AllImage.Stalactite},
-                               {{1450,  300, 7},  7, AllImage.Stalactite},
-                               {{1500,  300, 7},  7, AllImage.Stalactite},
-                               {{1550,  300, 7},  7, AllImage.Stalactite},
+                               {{ 100,  250, 7}, 0, 0,  7, AllImage.Stalactite},
+                               {{ 150,  250, 7}, 0, 0,  7, AllImage.Stalactite},
+                               {{ 200,  250, 7}, 0, 0,  7, AllImage.Stalactite},
+                               {{ 250,  250, 7}, 0, 0,  7, AllImage.Stalactite},
+                               {{ 300,  250, 7}, 0, 0,  7, AllImage.Stalactite},
+                               {{ 350,  250, 7}, 0, 0,  7, AllImage.Stalactite},
+                               {{ 200,  550, 7}, 0, 0,  7, AllImage.Stalactite},
+                               {{ 250,  550, 7}, 0, 0,  7, AllImage.Stalactite},
+                               {{ 300,  550, 7}, 0, 0,  7, AllImage.Stalactite},
+                               {{ 350,  550, 7}, 0, 0,  7, AllImage.Stalactite},
+                               {{ 450,  450, 7}, 0, 0,  7, AllImage.Stalactite},
+                               {{ 500,  450, 7}, 0, 0,  7, AllImage.Stalactite},
+                               {{ 550,  450, 7}, 0, 0,  7, AllImage.Stalactite},
+                               {{ 550,  150, 7}, 0, 0,  7, AllImage.Stalactite},
+                               {{ 600,  150, 7}, 0, 0,  7, AllImage.Stalactite},
+                               {{ 650,  150, 7}, 0, 0,  7, AllImage.Stalactite},
+                               {{ 700,  150, 7}, 0, 0,  7, AllImage.Stalactite},
+                               {{ 850,  350, 7}, 0, 0,  7, AllImage.Stalactite},
+                               {{ 900,  350, 7}, 0, 0,  7, AllImage.Stalactite},
+                               {{ 950,  350, 7}, 0, 0,  7, AllImage.Stalactite},
+                               {{1050,  200, 7}, 0, 0,  7, AllImage.Stalactite},
+                               {{1100,  200, 7}, 0, 0,  7, AllImage.Stalactite},
+                               {{1150,  200, 7}, 0, 0,  7, AllImage.Stalactite},
+                               {{1300,  300, 7}, 0, 0,  7, AllImage.Stalactite},
+                               {{1350,  300, 7}, 0, 0,  7, AllImage.Stalactite},
+                               {{1400,  300, 7}, 0, 0,  7, AllImage.Stalactite},
+                               {{1450,  300, 7}, 0, 0,  7, AllImage.Stalactite},
+                               {{1500,  300, 7}, 0, 0,  7, AllImage.Stalactite},
+                               {{1550,  300, 7}, 0, 0,  7, AllImage.Stalactite},
                                // Stairs
-                               {{ 700,  592, 3},  3, AllImage.Stairs},
-                               {{ 700,  509, 3},  3, AllImage.Stairs},
-                               {{ 700,  426, 3},  3, AllImage.Stairs},
-                               {{ 700,  343, 3},  3, AllImage.Stairs},
-                               {{ 700,  260, 3},  3, AllImage.Stairs},
-                               {{ 700,  177, 3},  3, AllImage.Stairs},
-                               {{ 700,   94, 3},  3, AllImage.Stairs},
+                               {{ 700,  592, 3}, 0, 0,  3, AllImage.Stairs},
+                               {{ 700,  509, 3}, 0, 0,  3, AllImage.Stairs},
+                               {{ 700,  426, 3}, 0, 0,  3, AllImage.Stairs},
+                               {{ 700,  343, 3}, 0, 0,  3, AllImage.Stairs},
+                               {{ 700,  260, 3}, 0, 0,  3, AllImage.Stairs},
+                               {{ 700,  177, 3}, 0, 0,  3, AllImage.Stairs},
+                               {{ 700,   94, 3}, 0, 0,  3, AllImage.Stairs},
+                               // Berries
+                               {{1100,  625, 1000}, 0, 0, 21, AllImage.Berries},
+                               // Chests
+                               {{1300,  625, 6}, 0, 0,  8, AllImage.Chest},
                                // Things
-                               {{1175,  625, 11}, 11, AllImage.Pickaxe},
-                               {{ 250,  450, 11}, 11, AllImage.Pickaxe},
+                               {{1175,  625, 16}, 0, 0, 11, AllImage.Pickaxe},
+                               {{ 250,  450, 16}, 0, 0, 11, AllImage.Pickaxe},
+                               // Coins
+                               {{160,  165, 1}, 0, 0, 100, AllImage.CoinAnimation},
+                               {{310,  165, 1}, 0, 0, 100, AllImage.CoinAnimation},
+                               {{260,  465, 1}, 0, 0, 100, AllImage.CoinAnimation},
+                               {{310,  465, 1}, 0, 0, 100, AllImage.CoinAnimation},
+                               {{510,  365, 1}, 0, 0, 100, AllImage.CoinAnimation},
+                               {{560,  65,  1}, 0, 0, 100, AllImage.CoinAnimation},
+                               {{710,  65,  1}, 0, 0, 100, AllImage.CoinAnimation},
+                               {{910,  265, 1}, 0, 0, 100, AllImage.CoinAnimation},
+                               {{1110, 115, 1}, 0, 0, 100, AllImage.CoinAnimation},
+                               {{1360, 215, 1}, 0, 0, 100, AllImage.CoinAnimation},
                                // End
-                               {{  -1,   -1}}};
-
-    CoinType Coins [] = {{{160,  165, 1}},
-                         {{310,  165, 1}},
-                         {{260,  465, 1}},
-                         {{310,  465, 1}},
-                         {{510,  365, 1}},
-                         {{560,  65,  1}},
-                         {{710,  65,  1}},
-                         {{910,  265, 1}},
-                         {{1110, 115, 1}},
-                         {{1360, 215, 1}},
-                         {{-1,   -1}}};
+                               {{  -1,   -6}}};
 
     BlockType Start  = {50, 580, 0, 50, AllImage.Start};
 
     BlockType Finish = {1650, 580, 0, 50, AllImage.Finish};
 
-    MoveGame (ManyBlocks, Coins, &Start, &Finish, AllImage, LevelNumber, Man, &AllTemperature);
+    MoveGame (ManyBlocks, &Start, &Finish, AllImage, LevelNumber, Man, &AllTemperature);
     };
 
-void DrawManyBlocks (BlockType ManyBlocks [], CoinType Coins [], ManType* Man, int AnimationNumber, AllImageType AllImage,
+void DrawManyBlocks (BlockType ManyBlocks [], ManType* Man, int AnimationNumber, AllImageType AllImage,
                      BlockType* Start, BlockType* Finish)
     {
     DrawLevelBlocks (ManyBlocks, Man, AllImage, AnimationNumber);
 
     DrawFinish (Finish);
     DrawFinish (Start);
-
-    DrawLevelCoins (Coins, AllImage, AnimationNumber);
     };
 
-void InteractManWithBlocks (BlockType ManyBlocks [], CoinType Coins [], ManType* Man, int* NumberCoin,
+void InteractManWithBlocks (BlockType ManyBlocks [], ManType* Man, int* NumberCoin,
                             int* LevelNumber, BlockType* Start, BlockType* Finish)
     {
-    CallCoinPhysic (Coins, Man, NumberCoin);
-
-    CallLevelPhysic (ManyBlocks, Man);
+    CallLevelPhysic (ManyBlocks, Man, NumberCoin);
 
     FinishCollision (Man, Finish, LevelNumber, 1);
     FinishCollision (Man, Start,  LevelNumber, -1);
@@ -1301,9 +1181,10 @@ void FinishCollision (ManType* Man, BlockType* Block, int* Level, int Number)
         };
     };
 
-void CoinCollision (ManType* Man, CoinType* Coin, int* NumberCoin)
+void CoinCollision (ManType* Man, BlockType* Coin, int* NumberCoin)
     {
-    if (Coin->Base.Health > 0)
+    if (Coin->Base.Health > 0 &&
+        Coin->Number == 100)
     {
     if ((Coin->Base.x - (Man->Base.x+35)) < 10 &&
         (Coin->Base.x - (Man->Base.x+35)) > -10)
@@ -1351,21 +1232,21 @@ void LoadGameImage (ImageType* Image, const char* Picture, int xNumber, int yNum
     txSleep (10);
     };
 
-void DrawTransparentImage (ImageType Image, int x, int y, int* xAnimationNumber, int* yAnimationNumber)
+void DrawTransparentImage (ImageType* Image, int x, int y, int* xAnimationNumber, int* yAnimationNumber)
     {
     // printf ("DrawTransparentImage(): FileName = \"%s\", HDC = \"%p\" \n", Image.FileName, Image.Picture);
 
-    int xSize = txGetExtentX (Image.Picture)/Image.xNumber;
-    int ySize = txGetExtentY (Image.Picture)/Image.yNumber;
+    int xSize = txGetExtentX (Image->Picture)/Image->xNumber;
+    int ySize = txGetExtentY (Image->Picture)/Image->yNumber;
 
-    txTransparentBlt (txDC (), x, y, xSize, ySize, Image.Picture, *xAnimationNumber*xSize, *yAnimationNumber*ySize, Image.color);
+    txTransparentBlt (txDC (), x, y, xSize, ySize, Image->Picture, *xAnimationNumber*xSize, *yAnimationNumber*ySize, Image->color);
 
-    if (*xAnimationNumber >= Image.xMaxAnimationNumber)
+    if (*xAnimationNumber >= Image->xMaxAnimationNumber)
         {
         *xAnimationNumber = 1;
         };
 
-    if (*yAnimationNumber >= Image.yMaxAnimationNumber)
+    if (*yAnimationNumber >= Image->yMaxAnimationNumber)
         {
         *yAnimationNumber = 1;
         };
@@ -1393,19 +1274,7 @@ void DrawLevelBlocks (BlockType ManyBlocks[], ManType* Man, AllImageType AllImag
         };
     };
 
-void DrawLevelCoins (CoinType Coins[], AllImageType AllImage, int AnimationNumber)
-    {
-    int i = 0;
-
-    while (Coins[i].Base.x != -1 && Coins[i].Base.y != -1)
-        {
-        DrawCoin (Coins [i], AnimationNumber, AllImage);
-
-        i = i + 1;
-        };
-    };
-
-void CallLevelPhysic (BlockType ManyBlocks[], ManType* Man)
+void CallLevelPhysic (BlockType ManyBlocks[], ManType* Man, int* NumberCoin)
     {
     int i = 0;
 
@@ -1413,11 +1282,13 @@ void CallLevelPhysic (BlockType ManyBlocks[], ManType* Man)
         {
         BlockCollision (Man, &ManyBlocks [i]);
 
+        CoinCollision (Man, &ManyBlocks [i], NumberCoin);
+
         i = i + 1;
         };
     };
 
-void CallCoinPhysic (CoinType Coins[], ManType* Man, int* NumberCoin)
+/* void CallCoinPhysic (BlockType Coins[], ManType* Man, int* NumberCoin)
     {
     int i = 0;
 
@@ -1428,7 +1299,7 @@ void CallCoinPhysic (CoinType Coins[], ManType* Man, int* NumberCoin)
 
         i = i + 1;
         };
-    };
+    }; */
 
 void EnemyMind (ManType* Man, EnemyType* Enemy)
     {

@@ -1980,3 +1980,201 @@ Run file:	C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.ex
 Directory:	C:\Users\007\Desktop\программирование\MyGame2
 
 --------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe, файл: C:\Users\007\Downloads\TX\TXLib.h, строка: 13135, функция: bool {anonymous}::TX::txTransparentBlt(HDC, double, double, double, double, HDC, double, double, COLORREF),
+
+Сообщение: Прямоугольник копируемой области {50, 0, 100, 16} не полностью лежит внутри изображения-источника {0, 0, 50, 50}, функция txTransparentBlt() работать не будет.
+
+#1: TXLib [Ver: 00173a, Rev: 168, Date: 2020-08-13 00:46:05 +0400], Instance: 0x005142FC (32-bit), Flags: CMdRe0, Thread: 0x3BDC (Main), GetLastError(): 13 (Недопустимые данные). 
+From: C:\Users\007\Downloads\TX\TXLib.h (13134) bool {anonymous}::TX::txTransparentBlt(HDC, double, double, double, double, HDC, double, double, COLORREF).
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00422AEA in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: txTransparentBlt() at C:/Users/007/Downloads/TX/TXLib.h (13135)
+
+# 1 0x0043763C in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: DrawTransparentImage() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1361):
+
+   1359:     int ySize = txGetExtentY (Image.Picture)/Image.yNumber;
+   1360: 
+=> 1361:     txTransparentBlt (txDC (), x, y, xSize, ySize, Image.Picture, *xAnimationNumber*xSize, *yAnimationNumber*ySize, Image.color);
+   1362: 
+   1363:     if (*xAnimationNumber >= Image.xMaxAnimationNumber)
+
+# 2 0x0042C5D5 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: DrawInventory() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (328):
+
+    326:     int y = 0;
+    327: 
+=>  328:     DrawTransparentImage (Man->LeftArmPicture, 1375, 50, &x1, &y);
+    329: 
+    330:     DrawTransparentImage (Man->RightArmPicture, 1450, 50, &x2, &y);
+
+# 3 0x0042E15C in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (712):
+
+    710:         DrawMan (Man, AllImage, ManAnimationNumber, AnimationNumber, StarsNumber);
+    711: 
+=>  712:         DrawInventory (Man);
+    713: 
+    714:         InteractManWithBlocks (ManyBlocks, Coins, Man, &NumberCoin, LevelNumber, Start, Finish);
+
+# 4 0x0043318D in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Level1() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1016):
+
+   1014:     BlockType Finish = {1450, -1000000, 0, 50, AllImage.Finish};
+   1015: 
+=> 1016:     MoveGame (ManyBlocks, Coins, &Start, &Finish, AllImage, LevelNumber, Man, &AllTemperature);
+   1017:     };
+   1018: 
+
+# 5 0x0042C30D in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (299):
+
+    297:         if (LevelNumber == 1)
+    298:             {
+=>  299:             Level1 (&LevelNumber, &Man, AllImage);
+    300:             };
+    301: 
+
+# 6 0x0042B9ED in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (219):
+
+    217:     int Number = 1;
+    218: 
+=>  219:     Cycle ();
+    220: 
+    221:     return 0;
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool {anonymous}::TX::txTransparentBlt(HDC, double, double, double, double, HDC, double, double, COLORREF) at C:\Users\007\Downloads\TX\TXLib.h (13134):
+
+  13132:         {
+  13133: $       SetLastError (ERROR_INVALID_DATA);
+=>13134: $       TX_ERROR ("Прямоугольник копируемой области {%lg, %lg, %lg, %lg} не полностью лежит внутри изображения-источника {%d, %d, %d, %d}, "
+  13135:                   "функция txTransparentBlt() работать не будет.", xSource, ySource, xSource + width, ySource + height, 0, 0, (int) size.x, (int) size.y);
+  13136:         }
+
+# 1 in void DrawTransparentImage(ImageType, int, int, int*, int*) at C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.cpp (1361):
+
+   1359:     int ySize = txGetExtentY (Image.Picture)/Image.yNumber;
+   1360: 
+=> 1361:     txTransparentBlt (txDC (), x, y, xSize, ySize, Image.Picture, *xAnimationNumber*xSize, *yAnimationNumber*ySize, Image.color);
+   1362: 
+   1363:     if (*xAnimationNumber >= Image.xMaxAnimationNumber)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 168, Date: 2020-08-13 00:46:05 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Downloads\TX\TXLib.h
+Compiled:	Dec 19 2020 08:53:40, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Dec 19 2020 08:53:48
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe, файл: C:\Users\007\Downloads\TX\TXLib.h, строка: 13135, функция: bool {anonymous}::TX::txTransparentBlt(HDC, double, double, double, double, HDC, double, double, COLORREF),
+
+Сообщение: Прямоугольник копируемой области {50, 0, 100, 16} не полностью лежит внутри изображения-источника {0, 0, 50, 50}, функция txTransparentBlt() работать не будет.
+
+#1: TXLib [Ver: 00173a, Rev: 168, Date: 2020-08-13 00:46:05 +0400], Instance: 0x005142FC (32-bit), Flags: CMdRe0, Thread: 0xA40 (Main), GetLastError(): 13 (Недопустимые данные). 
+From: C:\Users\007\Downloads\TX\TXLib.h (13134) bool {anonymous}::TX::txTransparentBlt(HDC, double, double, double, double, HDC, double, double, COLORREF).
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00422AEA in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: txTransparentBlt() at C:/Users/007/Downloads/TX/TXLib.h (13135)
+
+# 1 0x00437D23 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: DrawTransparentImage() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1345):
+
+   1343:     int ySize = txGetExtentY (Image.Picture)/Image.yNumber;
+   1344: 
+=> 1345:     txTransparentBlt (txDC (), x, y, xSize, ySize, Image.Picture, *xAnimationNumber*xSize, *yAnimationNumber*ySize, Image.color);
+   1346: 
+   1347:     if (*xAnimationNumber >= Image.xMaxAnimationNumber)
+
+# 2 0x0042C5D5 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: DrawInventory() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (317):
+
+    315:     int y = 0;
+    316: 
+=>  317:     DrawTransparentImage (Man->LeftArmPicture, 1375, 50, &x1, &y);
+    318: 
+    319:     DrawTransparentImage (Man->RightArmPicture, 1450, 50, &x2, &y);
+
+# 3 0x0042E18C in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (701):
+
+    699:         DrawMan (Man, AllImage, ManAnimationNumber, AnimationNumber, StarsNumber);
+    700: 
+=>  701:         DrawInventory (Man);
+    702: 
+    703:         InteractManWithBlocks (ManyBlocks, Man, &NumberCoin, LevelNumber, Start, Finish);
+
+# 4 0x0043351F in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Level1() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1004):
+
+   1002:     BlockType Finish = {1450, -1000000, 0, 50, AllImage.Finish};
+   1003: 
+=> 1004:     MoveGame (ManyBlocks, &Start, &Finish, AllImage, LevelNumber, Man, &AllTemperature);
+   1005:     };
+   1006: 
+
+# 5 0x0042C30D in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (288):
+
+    286:         if (LevelNumber == 1)
+    287:             {
+=>  288:             Level1 (&LevelNumber, &Man, AllImage);
+    289:             };
+    290: 
+
+# 6 0x0042B9ED in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (208):
+
+    206:     int Number = 1;
+    207: 
+=>  208:     Cycle ();
+    209: 
+    210:     return 0;
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool {anonymous}::TX::txTransparentBlt(HDC, double, double, double, double, HDC, double, double, COLORREF) at C:\Users\007\Downloads\TX\TXLib.h (13134):
+
+  13132:         {
+  13133: $       SetLastError (ERROR_INVALID_DATA);
+=>13134: $       TX_ERROR ("Прямоугольник копируемой области {%lg, %lg, %lg, %lg} не полностью лежит внутри изображения-источника {%d, %d, %d, %d}, "
+  13135:                   "функция txTransparentBlt() работать не будет.", xSource, ySource, xSource + width, ySource + height, 0, 0, (int) size.x, (int) size.y);
+  13136:         }
+
+# 1 in void DrawTransparentImage(ImageType, int, int, int*, int*) at C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.cpp (1345):
+
+   1343:     int ySize = txGetExtentY (Image.Picture)/Image.yNumber;
+   1344: 
+=> 1345:     txTransparentBlt (txDC (), x, y, xSize, ySize, Image.Picture, *xAnimationNumber*xSize, *yAnimationNumber*ySize, Image.color);
+   1346: 
+   1347:     if (*xAnimationNumber >= Image.xMaxAnimationNumber)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 168, Date: 2020-08-13 00:46:05 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Downloads\TX\TXLib.h
+Compiled:	Dec 19 2020 09:24:11, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Dec 19 2020 09:24:17
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
