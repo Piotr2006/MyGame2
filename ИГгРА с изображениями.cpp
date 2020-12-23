@@ -143,7 +143,7 @@ void LoadGameImage (ImageType* Image, const char* Picture, int xNumber, int yNum
 
 void DrawMan (ManType* Man, AllImageType AllImage, int Number, int AnimationNumber, double StarsNumber);
 
-void DrawInventory (ManType Man);
+void DrawInventory (ManType* Man);
 
 void DrawEnemy (EnemyType Enemy, AllImageType AllImage, int Number);
 
@@ -386,13 +386,13 @@ void DrawMan (ManType* Man, AllImageType AllImage, int Number, int AnimationNumb
 
     int null = 0;
 
-    BlockType Fire1 = {Man->Base.x, Man->Base.y + 10, 4, 6, AllImage.Fire};
+    /* BlockType Fire1 = {Man->Base.x, Man->Base.y + 10, 4, 6, AllImage.Fire};
     BlockType Fire2 = {Man->Base.x + 50, Man->Base.y + 10, 4, 6, AllImage.Fire};
     BlockType Fire3 = {Man->Base.x + 25, Man->Base.y + 60, 4, 6, AllImage.Fire};
 
     BlockType GreenFire1 = {Man->Base.x, Man->Base.y + 10, 4, 6, AllImage.GreenFire};
     BlockType GreenFire2 = {Man->Base.x + 50, Man->Base.y + 10, 4, 6, AllImage.GreenFire};
-    BlockType GreenFire3 = {Man->Base.x + 25, Man->Base.y + 60, 4, 6, AllImage.GreenFire};
+    BlockType GreenFire3 = {Man->Base.x + 25, Man->Base.y + 60, 4, 6, AllImage.GreenFire}; */
 
     if (Man->vX > 0)
         {
@@ -437,7 +437,7 @@ void DrawMan (ManType* Man, AllImageType AllImage, int Number, int AnimationNumb
     int yNumber = Man->Side-1;
 
     if (Man->Base.Health > 0)
-        DrawTransparentImage (AllImage->Man, 0, -48, &Number, &yNumber);
+        DrawTransparentImage (AllImage.Man, 0, -48, &Number, &yNumber);
 
     if (Man->Position == 1)
         {
@@ -545,13 +545,13 @@ void DrawButton (ButtonType Button, AllImageType AllImage)
 
 void DrawCursor (MouseType* Mouse)
     {
-    Mouse.x = txMouseX ();
+    Mouse->x = txMouseX ();
 
-    Mouse.y = txMouseY ();
+    Mouse->y = txMouseY ();
 
     int null = 0;
 
-    DrawTransparentImage (Mouse->Picture, Mouse.x, Mouse.y, &null, &null);
+    DrawTransparentImage (Mouse->Picture, Mouse->x, Mouse->y, &null, &null);
     };
 
 void DrawFinish (BlockType* Block)
