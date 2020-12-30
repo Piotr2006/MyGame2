@@ -69,8 +69,8 @@ struct ManType
     int LeftArm;
     int RightArm;
 
-    ImageType LeftArmPicture;
-    ImageType RightArmPicture;
+    ImageType* LeftArmPicture;
+    ImageType* RightArmPicture;
 
     double Temperature;
     };
@@ -115,7 +115,7 @@ struct BlockType
 
     int Number;
 
-    ImageType Picture;
+    ImageType* Picture;
     };
 
 void Cycle ();
@@ -281,7 +281,7 @@ void Cycle ()
 
     BaseType Base = {0, 0, 20};
 
-    ManType Man = {Base, 0, 0, 0, 5, 2, 0, 0, 0, 0, AllImage.Water, AllImage.Water, 36.6};
+    ManType Man = {Base, 0, 0, 0, 5, 2, 0, 0, 0, 0, &AllImage.Water, &AllImage.Water, 36.6};
 
     while (true)
         {
@@ -338,7 +338,10 @@ void DrawInventory (ManType* Man)
 
 void DrawBlock (BlockType* Block, ManType* Man, int AnimationNumber, AllImageType AllImage)
     {
-    DrawTransparentImage (Block->Picture, Block->Base.x - Man->Base.x, Block->Base.y - Man->Base.y, Block->xNumber, Block->yNumber);
+    int x = Block->xNumber;
+    int y = Block->yNumber;
+
+    DrawTransparentImage (Block->Picture, Block->Base.x - Man->Base.x, Block->Base.y - Man->Base.y, &x, &y);
 
     ChangeAnimationNumber (Block, Man, AnimationNumber, AllImage);
     };
@@ -662,9 +665,9 @@ void MoveGame (BlockType ManyBlocks [], BlockType* Start, BlockType* Finish, All
 
         int null = 0;
 
-        DrawTransparentImage (AllImage.BackGround, 0, 0, &null, &null);
+        DrawTransparentImage (AllImage->BackGround, 0, 0, &null, &null);
 
-        DrawTransparentImage (AllImage.Coin, 20, 70, &null, &null);
+        DrawTransparentImage (AllImage->Coin, 20, 70, &null, &null);
 
         DrawManyBlocks (ManyBlocks, Man, AnimationNumber, AllImage, Start, Finish);
 
