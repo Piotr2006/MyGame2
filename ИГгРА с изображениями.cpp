@@ -2,8 +2,9 @@
 
 // 123
 
-enum
+enum BlockNumbers
     {
+    BT_BlackSpace = 0,
     BT_Dirt       = 1,
     BT_Box        = 2,
     BT_Stairs     = 3,
@@ -14,6 +15,19 @@ enum
     BT_Pickaxe    = 11,
     BT_Berries    = 21,
     BT_Coin       = 100
+    };
+
+enum
+    {
+    Number_of_Images = 24
+    };
+
+enum Man
+    {
+    Man_x = 0,
+    Man_y = 0,
+    Man_Health = 20,
+    Man_Temperature = 36
     };
 
 struct BaseType
@@ -55,7 +69,7 @@ struct AllImageType
     ImageType Stairs;
     ImageType Fire;
     ImageType GreenFire;
-    ImageType Water;
+    ImageType BlackSpace;
     ImageType Bat;
     ImageType Stalactite;
     ImageType GameOver;
@@ -64,6 +78,7 @@ struct AllImageType
     ImageType Berries;
     ImageType Chest;
     ImageType IronOre;
+    ImageType Water;
     };
 
 struct ManType
@@ -233,56 +248,57 @@ int main ()
 
 void LoadAllImages (AllImageType* AllImages)
     {
-    int Number = 19;
     int Procent = 1;
 
-    LoadGameImage (&AllImages->BackGround,    "Images/Dungeon.bmp",                1, 1, 1, 1, TX_BLACK, &Procent, Number);
+    LoadGameImage (&AllImages->BackGround,    "Images/Dungeon.bmp",                1, 1, 1, 1, TX_BLACK, &Procent, Number_of_Images);
 
     // printf ("1:LoadAllImages(): File = %s , HDC = %d \n", AllImages->BackGround.FileName, AllImages->BackGround.Picture);
 
-    LoadGameImage (&AllImages->Cursor,        "Images/GameCursor.bmp",             1, 1, 1, 1, TX_WHITE, &Procent, Number);
+    LoadGameImage (&AllImages->Cursor,        "Images/GameCursor.bmp",             1, 1, 1, 1, TX_WHITE, &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->Dirt,          "Images/DirtAnimation.bmp",          4, 3, 1, 1, TX_WHITE, &Procent, Number);
+    LoadGameImage (&AllImages->Dirt,          "Images/DirtAnimation.bmp",          4, 3, 1, 1, TX_WHITE, &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->Health,        "Images/GameHeart.bmp",              1, 1, 1, 1, TX_BLACK, &Procent, Number);
+    LoadGameImage (&AllImages->Health,        "Images/GameHeart.bmp",              1, 1, 1, 1, TX_BLACK, &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->Finish,        "Images/Finish.bmp",                 1, 1, 1, 1, TX_BLACK, &Procent, Number);
+    LoadGameImage (&AllImages->Finish,        "Images/Finish.bmp",                 1, 1, 1, 1, TX_BLACK, &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->Start,         "Images/Start.bmp",                  1, 1, 1, 1, TX_BLACK, &Procent, Number);
+    LoadGameImage (&AllImages->Start,         "Images/Start.bmp",                  1, 1, 1, 1, TX_BLACK, &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->Pause,         "Images/GamePause.bmp",              2, 1, 1, 1, TX_WHITE, &Procent, Number);
+    LoadGameImage (&AllImages->Pause,         "Images/GamePause.bmp",              2, 1, 1, 1, TX_WHITE, &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->Coin,          "Images/GameCoin.bmp",               1, 1, 1, 1, TX_WHITE, &Procent, Number);
+    LoadGameImage (&AllImages->Coin,          "Images/GameCoin.bmp",               1, 1, 1, 1, TX_WHITE, &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->CoinAnimation, "Images/CoinAnimation.bmp",          4, 1, 4, 1, TX_BLACK, &Procent, Number);
+    LoadGameImage (&AllImages->CoinAnimation, "Images/CoinAnimation.bmp",          4, 1, 4, 1, TX_BLACK, &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->Box,           "Images/WoodBoxAnimation.bmp",       4, 3, 1, 1, TX_BLACK, &Procent, Number);
+    LoadGameImage (&AllImages->Box,           "Images/WoodBoxAnimation.bmp",       4, 3, 1, 1, TX_BLACK, &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->Man,           "Images/AllAnimationGamePeople.bmp", 9, 2, 9, 1, TX_WHITE, &Procent, Number);
+    LoadGameImage (&AllImages->Man,           "Images/AllAnimationGamePeople.bmp", 9, 2, 9, 1, TX_WHITE, &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->Stairs,        "Images/Stairs.bmp",                 4, 3, 1, 1, TX_BLACK, &Procent, Number);
+    LoadGameImage (&AllImages->Stairs,        "Images/Stairs.bmp",                 4, 3, 1, 1, TX_BLACK, &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->Fire,          "Images/FireAnimation с номерами кадров.bmp",          8, 1, 5, 1, TX_BLACK, &Procent, Number);
+    LoadGameImage (&AllImages->Fire,          "Images/FireAnimation.bmp",          8, 1, 5, 1, TX_BLACK, &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->GreenFire,     "Images/GreenFire.bmp",              4, 1, 5, 1, TX_BLACK, &Procent, Number);
+    LoadGameImage (&AllImages->GreenFire,     "Images/GreenFire.bmp",              4, 1, 5, 1, TX_BLACK, &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->Water,         "Images/Water.bmp",                  4, 3, 1, 1, TX_BLACK, &Procent, Number);
+    LoadGameImage (&AllImages->BlackSpace,    "Images/Black.bmp",                  4, 3, 1, 1, TX_BLACK, &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->Bat,           "Images/Bat.bmp",                    4, 2, 4, 1, TX_BLACK, &Procent, Number);
+    LoadGameImage (&AllImages->Bat,           "Images/Bat.bmp",                    4, 2, 4, 1, TX_BLACK, &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->Stalactite,    "Images/Stalactite.bmp",             4, 3, 1, 1, TX_BLACK, &Procent, Number);
+    LoadGameImage (&AllImages->Stalactite,    "Images/Stalactite.bmp",             4, 3, 1, 1, TX_BLACK, &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->GameOver,      "Images/GameOver.bmp",               1, 1, 1, 1, TX_WHITE, &Procent, Number);
+    LoadGameImage (&AllImages->GameOver,      "Images/GameOver.bmp",               1, 1, 1, 1, TX_WHITE, &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->Pickaxe,       "Images/Pickaxe.bmp",                4, 3, 1, 1, TX_BLACK, &Procent, Number);
+    LoadGameImage (&AllImages->Pickaxe,       "Images/Pickaxe.bmp",                4, 3, 1, 1, TX_BLACK, &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->Termometer,    "Images/termometer.bmp",             1, 1, 1, 1, TX_BLACK, &Procent, Number);
+    LoadGameImage (&AllImages->Termometer,    "Images/termometer.bmp",             1, 1, 1, 1, TX_BLACK, &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->Berries,       "Images/Berries.bmp",                4, 5, 1, 1, TX_WHITE, &Procent, Number);
+    LoadGameImage (&AllImages->Berries,       "Images/Berries.bmp",                4, 5, 1, 1, TX_WHITE, &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->Chest,         "Images/Chest.bmp",                  4, 3, 1, 1, TX_WHITE, &Procent, Number);
+    LoadGameImage (&AllImages->Chest,         "Images/Chest.bmp",                  4, 3, 1, 1, TX_WHITE, &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->IronOre,       "Images/IronOre.bmp",                4, 3, 1, 1, TX_WHITE, &Procent, Number);
+    LoadGameImage (&AllImages->IronOre,       "Images/IronOre.bmp",                4, 3, 1, 1, TX_WHITE, &Procent, Number_of_Images);
+
+    LoadGameImage (&AllImages->Water,         "Images/Water2.bmp",                 4, 1, 1, 1, TX_BLACK, &Procent, Number_of_Images);
     };
 
 void Cycle ()
@@ -295,9 +311,7 @@ void Cycle ()
 
     // double AllTemperature = 10;
 
-    BaseType Base = {0, 0, 20};
-
-    ManType Man = {Base, 0, 0, 0, 5, 2, 0, 0, 0, 0, &AllImage.Water, &AllImage.Water, 36.6, 0};
+    ManType Man = {{Man_x, Man_y, Man_Health}, 0, 0, 0, 5, 2, 0, 0, 0, 0, &AllImage.BlackSpace, &AllImage.BlackSpace, Man_Temperature, 0};
 
     while (true)
         {
@@ -359,6 +373,7 @@ void DrawBlock (BlockType* Block, ManType* Man, int AnimationNumber, AllImageTyp
     if (Block->xNumber >= Block->Picture->xMaxAnimationNumber)
         Block->xNumber = 0;
 
+    if (Block->Base.Health > 0)
     DrawTransparentImage (Block->Picture, Block->Base.x - Man->Base.x, Block->Base.y - Man->Base.y, &Block->xNumber, &Block->yNumber);
 
     // ChangeAnimationNumber (Block, Man, AnimationNumber, AllImage);
@@ -366,42 +381,6 @@ void DrawBlock (BlockType* Block, ManType* Man, int AnimationNumber, AllImageTyp
     // txSleep (100);
     };
 
-void ChangeAnimationNumber (BlockType* Block, ManType* Man, int AnimationNumber, AllImageType AllImage)
-    {
-    if (Block->Base.Health > 0 &&
-        Block->Number == 4)
-        {
-        Block->xNumber = AnimationNumber;
-        };
-
-    if (Block->Base.Health > 0 &&
-        Block->Number == 21)
-            {
-            if (Block->Base.Health < 500 &&
-                Block->Base.Health > 0)
-                {
-                Block->yNumber = 3;
-                };
-
-            if (Block->Base.Health >= 500 &&
-                Block->Base.Health < 1000)
-                {
-                Block->yNumber = 4;
-
-                };
-
-            if (Block->Base.Health == 1000)
-                {
-                Block->yNumber = 0;
-                };
-            };
-
-    if (Block->Base.Health > 0 &&
-        Block->Number == 100)
-            {
-            Block->xNumber = AnimationNumber;
-            };
-    };
 
 void DrawMan (ManType* Man, AllImageType AllImage, int Number, int AnimationNumber, double StarsNumber)
     {
@@ -833,10 +812,10 @@ void Level1 (int* LevelNumber, ManType* Man, AllImageType AllImage)
                                {{ 75,   675, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
                                {{ 125,  675, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
                                {{ 175,  675, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
-                               {{ 225,  675, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
-                               {{ 275,  675, 6}, 0, 0, BT_Water, &AllImage.Water},
-                               {{ 325,  675, 6}, 0, 0, BT_Water, &AllImage.Water},
-                               {{ 375,  675, 6}, 0, 0, BT_Water, &AllImage.Water},
+                               {{ 225,  675, 6}, rand() % 4, 0, BT_Water, &AllImage.Water},
+                               {{ 275,  675, 6}, rand() % 4, 0, BT_Water, &AllImage.Water},
+                               {{ 325,  675, 6}, rand() % 4, 0, BT_Water, &AllImage.Water},
+                               {{ 375,  675, 6}, rand() % 4, 0, BT_Water, &AllImage.Water},
                                {{ 425,  675, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
                                {{ 475,  675, 6}, 0, 0, BT_Dirt, &AllImage.IronOre},
                                {{ 525,  675, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
@@ -1213,7 +1192,7 @@ void CoinCollision (ManType* Man, BlockType* Coin, int* NumberCoin)
            (Coin->Base.y - (Man->Base.y+60)) > 0)
                     {
                     *NumberCoin += 1;
-                    Coin->Base.Health -= 1;
+                    Coin->Base.Health = 0;
                     };
     };
     };
@@ -1250,7 +1229,7 @@ void LoadGameImage (ImageType* Image, const char* Picture, int xNumber, int yNum
 
     // printf ("LoadGameImage(): FileName = \"%s\", HDC = \"%p\" \n", Image->FileName, Image->Picture);
 
-    txSleep (10);
+    txSleep (20);
     };
 
 void DrawTransparentImage (ImageType* Image, int x, int y, int* xAnimationNumber, int* yAnimationNumber)
@@ -1514,7 +1493,7 @@ void BlockCollision (ManType* Man, BlockType* Block)
         Block->Number != BT_Fire &&
         Block->Number != BT_Water &&
         Block->Number != BT_Stalactite &&
-        Block->Number <= BT_Pickaxe)
+        Block->Number < BT_Pickaxe)
     {
     if ((Block->Base.x - Man->Base.x) <= 74 &&
         (Block->Base.x - Man->Base.x) > 0)
