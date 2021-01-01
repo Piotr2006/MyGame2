@@ -17,9 +17,33 @@ enum BlockNumbers
     BT_Coin       = 100
     };
 
-enum
+enum Images
     {
     Number_of_Images = 24
+    };
+
+enum TextSize
+    {
+    Inventory_Text = 40
+    };
+
+enum InventoryDrawing
+    {
+    // LeftArm
+    Inv_LeftArm_TextX = 1402,
+    Inv_LeftArm_TextY = 45,
+    Inv_LeftArm_RectLeftX = 1375,
+    Inv_LeftArm_RectLeftY = 50,
+    Inv_LeftArm_RectRightX = 1425,
+    Inv_LeftArm_RectRightY = 100,
+
+    // RightArm
+    Inv_RightArm_TextX = 1477,
+    Inv_RightArm_TextY = 45,
+    Inv_RightArm_RectLeftX = 1450,
+    Inv_RightArm_RectLeftY = 50,
+    Inv_RightArm_RectRightX = 1500,
+    Inv_RightArm_RectRightY = 100
     };
 
 enum Man
@@ -104,21 +128,8 @@ struct ManType
     double Temperature;
 
     int NumberCoin;
-    };
 
-struct EnemyType
-    {
-    int x;
-    int y;
-
-    int vX;
-    int vY;
-
-    int Side;
-    double Health;
-
-    ImageType LPicture;
-    ImageType RPicture;
+    ImageType* Picture;
     };
 
 struct ButtonType
@@ -176,11 +187,11 @@ void DrawMan (ManType* Man, AllImageType AllImage, int Number, int AnimationNumb
 
 void DrawInventory (ManType* Man);
 
-void DrawEnemy (EnemyType Enemy, AllImageType AllImage, int Number);
-
 void DrawButton (ButtonType Button, AllImageType AllImage);
 
 void DrawBlock (BlockType* Block, ManType* Man, int AnimationNumber, AllImageType AllImage);
+
+int Collision (BlockType Block, ManType Man);
 
 void ChangeAnimationNumber (BlockType* Block, ManType* Man, int AnimationNumber, AllImageType AllImage);
 
@@ -213,8 +224,6 @@ int Distance (int a, int b, int Distance);
 void DrawHealth (int Health, AllImageType AllImage);
 
 void Run (ManType* Man, HDC LeftLeg, HDC RightLeg);
-
-void EnemyMind (ManType* Man, EnemyType* Enemy);
 
 void DrawFinish (BlockType* Block);
 
@@ -311,7 +320,7 @@ void Cycle ()
 
     // double AllTemperature = 10;
 
-    ManType Man = {{Man_x, Man_y, Man_Health}, 0, 0, 0, 5, 2, 0, 0, 0, 0, &AllImage.BlackSpace, &AllImage.BlackSpace, Man_Temperature, 0};
+    ManType Man = {{Man_x, Man_y, Man_Health}, 0, 0, 0, 5, 2, 0, 0, BT_BlackSpace, BT_BlackSpace, &AllImage.BlackSpace, &AllImage.BlackSpace, Man_Temperature, 0, &AllImage.Man};
 
     while (true)
         {
@@ -337,32 +346,33 @@ void DrawInventory (ManType* Man)
     txSetColor (TX_DARKGREY, 5);
     txSetFillColor (TX_TRANSPARENT);
 
-    txSelectFont ("Comic Sans MS", 40);
-    txTextOut (1402, 45, "Left");
-    txTextOut (1477, 45, "Right");
+    txSelectFont ("Comic Sans MS", Inventory_Text);
+    txTextOut (Inv_LeftArm_TextX, Inv_LeftArm_TextY, "Left");
+    txTextOut (Inv_RightArm_TextX, Inv_RightArm_TextY, "Right");
 
-    txRectangle  (1375, 50, 1425, 100);
-    txRectangle  (1450, 50, 1500, 100);
+    txRectangle  (Inv_LeftArm_RectLeftX, Inv_LeftArm_RectLeftY, Inv_LeftArm_RectRightX, Inv_LeftArm_RectRightY);
+    txRectangle  (Inv_RightArm_RectLeftX, Inv_RightArm_RectLeftY, Inv_RightArm_RectRightX, Inv_RightArm_RectRightY);
 
-    int x1 = 1;
-    int x2 = 2;
+    if (Man->LeftArm != BT_BlackSpace)
+        DrawTransparentImage (Man->LeftArmPicture, Inv_LeftArm_RectLeftX, Inv_LeftArm_RectLeftY, &null, &null);
 
-    int y = 0;
-
-    DrawTransparentImage (Man->LeftArmPicture, 1375, 50, &y, &y);
-
-    DrawTransparentImage (Man->RightArmPicture, 1450, 50, &y, &y);
+    if (Man->RightArm != BT_BlackSpace)
+        DrawTransparentImage (Man->RightArmPicture, Inv_RightArm_RectLeftX, Inv_RightArm_RectLeftY, &null, &null);
 
     if (Man->Side == 1)
             {
-            DrawTransparentImage (Man->LeftArmPicture, Man->Base.x + 40, Man->Base.y + 35, &y, &y);
-            DrawTransparentImage (Man->RightArmPicture, Man->Base.x - 40, Man->Base.y + 25, &y, &y);
+            if (Man->LeftArm != BT_BlackSpace)
+                DrawTransparentImage (Man->LeftArmPicture, Man->Base.x + 40, Man->Base.y + 35, &null, &null);
+            if (Man->RightArm != BT_BlackSpace)
+                DrawTransparentImage (Man->RightArmPicture, Man->Base.x - 40, Man->Base.y + 25, &null, &null);
             };
 
     if (Man->Side == 2)
             {
-            DrawTransparentImage (Man->LeftArmPicture, Man->Base.x + 80, Man->Base.y + 25, &y, &y);
-            DrawTransparentImage (Man->RightArmPicture, Man->Base.x + 5, Man->Base.y + 35, &y, &y);
+            if (Man->LeftArm != BT_BlackSpace)
+                DrawTransparentImage (Man->LeftArmPicture, Man->Base.x + 80, Man->Base.y + 25, &null, &null);
+            if (Man->RightArm != BT_BlackSpace)
+                DrawTransparentImage (Man->RightArmPicture, Man->Base.x + 5, Man->Base.y + 35, &null, &null);
             };
     };
 
@@ -375,12 +385,18 @@ void DrawBlock (BlockType* Block, ManType* Man, int AnimationNumber, AllImageTyp
 
     if (Block->Base.Health > 0)
     DrawTransparentImage (Block->Picture, Block->Base.x - Man->Base.x, Block->Base.y - Man->Base.y, &Block->xNumber, &Block->yNumber);
-
-    // ChangeAnimationNumber (Block, Man, AnimationNumber, AllImage);
-
-    // txSleep (100);
     };
 
+int Collision (BlockType Block, ManType Man)
+    {
+    if (fabs (Man.Base.x - Block.Base.x) <= (txGetExtentX (Man.Picture->Picture)/2 + txGetExtentX (Block.Picture->Picture)/2))
+        return 1;
+
+    if (fabs (Man.Base.y - Block.Base.y) <= (txGetExtentY (Man.Picture->Picture)/2 + txGetExtentY (Block.Picture->Picture)/2))
+        return 1;
+
+    return 0;
+    };
 
 void DrawMan (ManType* Man, AllImageType AllImage, int Number, int AnimationNumber, double StarsNumber)
     {
@@ -439,7 +455,7 @@ void DrawMan (ManType* Man, AllImageType AllImage, int Number, int AnimationNumb
     int yNumber = Man->Side-1;
 
     if (Man->Base.Health > 0)
-        DrawTransparentImage (&AllImage.Man, 0, -48, &Number, &yNumber);
+        DrawTransparentImage (Man->Picture, 0 - txGetExtentX (Man->Picture->Picture)/2, -48 - txGetExtentY (Man->Picture->Picture)/2, &Number, &yNumber);
 
     if (Man->Position == 1)
         {
@@ -513,30 +529,6 @@ void DrawMan (ManType* Man, AllImageType AllImage, int Number, int AnimationNumb
         Man->RightArmPicture = &AllImage.Water;
     };
 
-void DrawEnemy (EnemyType Enemy, AllImageType AllImage, int Number)
-    {
-    if (Enemy.vX > 0)
-        {
-        Enemy.Side = 2;
-        };
-
-    if (Enemy.vX < 0)
-        {
-        Enemy.Side = 1;
-        };
-
-    int null = 0;
-
-    if (Enemy.Side == 1)
-        {
-        DrawTransparentImage (&Enemy.LPicture, Enemy.x, Enemy.y, &Number, &null);
-        };
-
-    if (Enemy.Side == 2)
-        {
-        DrawTransparentImage (&Enemy.RPicture, Enemy.x, Enemy.y, &Number, &null);
-        };
-    };
 
 void DrawButton (ButtonType Button, AllImageType AllImage)
     {
@@ -607,8 +599,6 @@ void MoveGame (BlockType ManyBlocks [], BlockType* Start, BlockType* Finish, All
     MouseType Mouse = {100, 100, AllImage.Cursor};
 
     // BlockType Coin1 = {400, 630, 1};
-
-    EnemyType Bat = {1000, 300, 0, 0, 2, 6, AllImage.Bat};
 
     int t = 0;
 
@@ -1300,131 +1290,6 @@ void CallLevelPhysic (BlockType ManyBlocks[], ManType* Man, int* NumberCoin)
         i = i + 1;
         };
     }; */
-
-void EnemyMind (ManType* Man, EnemyType* Enemy)
-    {
-    Enemy->x = Enemy->x + Enemy->vX;
-    Enemy->y = Enemy->y + Enemy->vY;
-
-    if ((Man->Base.x - Enemy->x) <= 1000 &&
-        (Man->Base.x - Enemy->x) >= 10)
-        {
-        if ((Man->Base.x - Enemy->x) > 100)
-            {
-            Enemy->vX = 5;
-            };
-        };
-
-    if ((Man->Base.x - Enemy->x) < 10 &&
-        (Man->Base.x - Enemy->x) > 0)
-        {
-        Enemy->vX = 0;
-        };
-
-    if ((Enemy->x - Man->Base.x) < 10 &&
-        (Enemy->x - Man->Base.x) > 0)
-        {
-        Enemy->vX = 0;
-        };
-
-    if ((Enemy->x - Man->Base.x) <= 1000 &&
-        (Enemy->x - Man->Base.x) >= 10)
-        {
-        if ((Enemy->x - Man->Base.x) > 100)
-            {
-            Enemy->vX = -5;
-            };
-        };
-
-   //vY
-   if ((Man->Base.y - Enemy->y) <= 1000 &&
-        (Man->Base.y - Enemy->y) >= 10)
-        {
-        if ((Man->Base.y - Enemy->y) > 100)
-            {
-            Enemy->vY = 5;
-            };
-        };
-
-    if ((Man->Base.y - Enemy->y) < 10 &&
-        (Man->Base.y - Enemy->y) > 0)
-        {
-        Enemy->vY = 0;
-        };
-
-    if ((Enemy->y - Man->Base.y) < 10 &&
-        (Enemy->y - Man->Base.y) > 0)
-        {
-        Enemy->vY = 0;
-        };
-
-    if ((Enemy->y - Man->Base.y) <= 1000 &&
-        (Enemy->y - Man->Base.y) >= 10)
-        {
-        if ((Enemy->y - Man->Base.y) > 100)
-            {
-            Enemy->vY = -5;
-            };
-        };
-
-   //Destroying
-
-   if (fabs (Man->Base.x - Enemy->x) <= 100)
-        {
-        if (fabs (Man->Base.y - Enemy->y) <= 100)
-            if (Enemy->Health > 0)
-                {
-                txSetColor (TX_RED, 5);
-                if (Enemy->Side == 1)
-                    {
-                    // txLine (Enemy->x + 48, Enemy->y + 45, Man->Base.x + 10, Man->Base.y + 60);
-                    // txLine (Enemy->x + 66, Enemy->y + 45, Man->Base.x + 28, Man->Base.y + 60);
-                    };
-
-                if (Enemy->Side == 2)
-                    {
-                    // txLine (Enemy->x + 94, Enemy->y + 45, Man->Base.x + 28, Man->Base.y + 60);
-                    // txLine (Enemy->x + 76, Enemy->y + 45, Man->Base.x + 10, Man->Base.y + 60);
-                    };
-
-                // Man->Position = 2;
-
-                Man->Base.Health -= 0.1;
-                };
-        };
-
-   if (Enemy->Health <= 0)
-        {
-        Enemy->vY = 25;
-        Enemy->vX = 0;
-        if (Man->Position == 2)
-            {
-            Man->Position = 0;
-            };
-        };
-
-   if (Enemy->y >= 592)
-        {
-        Enemy->y = 592;
-        Enemy->vY = 0;
-        };
-
-   if (fabs ((Enemy->x+80) - txMouseX ()) <= 80)
-        {
-        if (fabs ((Enemy->y+120) - txMouseY ()) <= 120)
-            if (GetAsyncKeyState (VK_LBUTTON))
-                if (Enemy->Health > 0)
-                    {
-                    Enemy->Health = Enemy->Health - 0.5;
-                    txSetColor (TX_RED);
-                    txSetFillColor (TX_RED);
-                    txRectangle (Enemy->x - 2, Enemy->y - 50, Enemy->x + 26*Enemy->Health, Enemy->y - 30);
-                    txSetColor (TX_BLACK, 5);
-                    txSetFillColor (TX_TRANSPARENT);
-                    txRectangle (Enemy->x, Enemy->y - 50, Enemy->x + 158, Enemy->y - 30);
-                    };
-        };
-   };
 
 void BlockCalling (BlockType* Block, ManType* Man)
     {
