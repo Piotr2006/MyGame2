@@ -2,6 +2,11 @@
 
 // 123
 
+enum
+    {
+    Block_MaxHealth = 1000
+    };
+
 enum BlockNumbers
     {
     BT_Start      = -1,
@@ -19,34 +24,34 @@ enum BlockNumbers
     BT_Coin       = 100
     };
 
-enum Images
+enum
     {
     Number_of_Images = 24
     };
 
-enum TextSize
+enum
     {
-    Inventory_Text = 40,
-    Coin_Text      = 40,
-    Level_Text     = 70,
-    Loading_Text   = 80
+    Inventory_TextSize = 40,
+    Coin_TextSize      = 40,
+    Level_TextSize     = 70,
+    Loading_TextSize   = 80
     };
 
-enum InventoryDrawing
+enum Inv
     {
     // LeftArm
-    Inv_LeftArm_TextX = 1402,
-    Inv_LeftArm_TextY = 45,
-    Inv_LeftArm_RectLeftX = 1375,
-    Inv_LeftArm_RectLeftY = 50,
-    Inv_LeftArm_RectRightX = 1425,
-    Inv_LeftArm_RectRightY = 100,
+    Inv_LeftArm_TextX       = 1402,
+    Inv_LeftArm_TextY       = 45,
+    Inv_LeftArm_RectLeftX   = 1375,
+    Inv_LeftArm_RectLeftY   = 50,
+    Inv_LeftArm_RectRightX  = 1425,
+    Inv_LeftArm_RectRightY  = 100,
 
     // RightArm
-    Inv_RightArm_TextX = 1477,
-    Inv_RightArm_TextY = 45,
-    Inv_RightArm_RectLeftX = 1450,
-    Inv_RightArm_RectLeftY = 50,
+    Inv_RightArm_TextX      = 1477,
+    Inv_RightArm_TextY      = 45,
+    Inv_RightArm_RectLeftX  = 1450,
+    Inv_RightArm_RectLeftY  = 50,
     Inv_RightArm_RectRightX = 1500,
     Inv_RightArm_RectRightY = 100
     };
@@ -67,6 +72,7 @@ enum Man
     Man_RightSide = 2,
     Man_aY = 5,
     Man_JumpSpeed = 30,
+    Man_FallingSpeed = 60,
 
     // Fire
 
@@ -91,7 +97,7 @@ enum Man
     Man_TempDamage3 = 4
     };
 
-enum Temperature
+enum
     {
     Man_ColdTemp1 = 20,
     Man_ColdTemp2 = 10,
@@ -102,7 +108,7 @@ enum Temperature
     Man_HotTemp3 = 80
     };
 
-enum Signs
+enum
     {
     Sign_PauseX = 45,
     Sign_PauseY = 35,
@@ -124,10 +130,13 @@ enum Signs
     Sign_Term_RectRightX = 22,
     Sign_Term_RectDownY = 105,
 
+    Sign_HealthX = 10,
+    Sign_HealthY = 113,
+
     Main_Sleep = 30
     };
 
-enum HelpSystem
+enum
     {
     Text1_X = 800,
     Text1_Y = 100,
@@ -138,7 +147,7 @@ enum HelpSystem
     Text2_Size = 80,
     };
 
-enum Loading
+enum
     {
     Load_BigRect_X1 = 200,
     Load_BigRect_Y1 = 500,
@@ -153,12 +162,6 @@ enum Loading
     Loading_TextY = 400,
 
     Loading_Sleep = 20
-    };
-
-enum True_and_False
-    {
-    True = 1,
-    False = 0
     };
 
 struct BaseType
@@ -227,7 +230,6 @@ struct ManType
 
     int Side;
     int Position;
-    int Speed;
 
     int LeftArm;
     int RightArm;
@@ -270,34 +272,46 @@ struct BlockType
     ImageType* Picture;
     };
 
+struct CamType
+    {
+    int x;
+    int y;
+    };
+
 void Cycle ();
 
-void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber, ManType* Man, double* AllTemperature);
+void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber, ManType* Man, double* AllTemperature, CamType* Camera);
 
 void DeleteImage (AllImageType AllImage);
 
-void DrawLevelBlocks (BlockType ManyBlocks[], ManType* Man, AllImageType AllImage);
+void DrawLevelBlocks (BlockType ManyBlocks[], CamType* Camera, AllImageType AllImage);
 
 void CallLevelPhysic (BlockType ManyBlocks[], ManType* Man, int* NumberCoin);
 
-void Level1 (int* LevelNumber, ManType* Man, AllImageType AllImage);
+void Level1 (int* LevelNumber, ManType* Man, AllImageType AllImage, CamType* Camera);
 
-void Level2 (int* LevelNumber, ManType* Man, AllImageType AllImage);
+void Level2 (int* LevelNumber, ManType* Man, AllImageType AllImage, CamType* Camera);
 
-void DrawManyBlocks (BlockType ManyBlocks [], ManType* Man, AllImageType AllImage);
+void DrawManyBlocks (BlockType ManyBlocks [], CamType* Camera, AllImageType AllImage);
 
 void InteractManWithBlocks (BlockType ManyBlocks [], ManType* Man, int* NumberCoin, int* LevelNumber);
 
 void LoadGameImage (ImageType* Image, const char* Picture, int xNumber, int yNumber, int xMaxNumber, int yMaxNumber, COLORREF color,
                     int* Procent, double Number);
 
-void DrawMan (ManType* Man, AllImageType AllImage);
+void DrawMan (ManType* Man, CamType* Camera, AllImageType AllImage);
 
-void DrawInventory (ManType* Man);
+void ManFire (ManType* Man, CamType* Camera, AllImageType AllImage);
+
+void ManHealth (ManType* Man, AllImageType AllImage);
+
+void ManTemperature (ManType* Man);
+
+void DrawInventory (ManType* Man, AllImageType AllImage);
 
 void DrawButton (ButtonType Button, AllImageType AllImage);
 
-void DrawBlock (BlockType* Block, ManType* Man, AllImageType AllImage);
+void DrawBlock (BlockType* Block, CamType* Camera, AllImageType AllImage);
 
 int Collision (BlockType* Block, ManType* Man);
 
@@ -336,6 +350,8 @@ void DrawTransparentImage (ImageType* Image, int x, int y, int* xAnimationNumber
 void LoadImages (AllImageType* AllImages);
 
 void HelpSystem ();
+
+void MoveCamera (CamType* Camera);
 
 int main ()
     {
@@ -414,7 +430,9 @@ void Cycle ()
 
     // double AllTemperature = 10;
 
-    ManType Man = {{Man_x, Man_y, Man_Health}, 0, 0, 0, 0, 0, 5, 2, 0, 0, BT_BlackSpace, BT_BlackSpace, &AllImage.BlackSpace, &AllImage.BlackSpace, Man_Temperature, 0, &AllImage.Man};
+    CamType Camera = {Man_x, Man_y};
+
+    ManType Man = {{Man_x, Man_y, Man_Health}, 0, 0, 0, 0, 5, 2, 0, 0, BT_BlackSpace, BT_BlackSpace, &AllImage.BlackSpace, &AllImage.BlackSpace, Man_Temperature, 0, &AllImage.Man};
 
     while (true)
         {
@@ -423,24 +441,24 @@ void Cycle ()
 
         if (LevelNumber == 1)
             {
-            Level1 (&LevelNumber, &Man, AllImage);
+            Level1 (&LevelNumber, &Man, AllImage, &Camera);
             };
 
         if (LevelNumber == 2)
             {
-            Level2 (&LevelNumber, &Man, AllImage);
+            Level2 (&LevelNumber, &Man, AllImage, &Camera);
             };
         };
     };
 
-void DrawInventory (ManType* Man)
+void DrawInventory (ManType* Man, AllImageType AllImage)
     {
     int null = 0;
 
     txSetColor (TX_DARKGREY, 5);
     txSetFillColor (TX_TRANSPARENT);
 
-    txSelectFont ("Comic Sans MS", Inventory_Text);
+    txSelectFont ("Comic Sans MS", Inventory_TextSize);
     txTextOut (Inv_LeftArm_TextX, Inv_LeftArm_TextY, "Left");
     txTextOut (Inv_RightArm_TextX, Inv_RightArm_TextY, "Right");
 
@@ -468,9 +486,15 @@ void DrawInventory (ManType* Man)
             if (Man->RightArm != BT_BlackSpace)
                 DrawTransparentImage (Man->RightArmPicture, Man->Base.x + 5, Man->Base.y + 35, &null, &null);
             };
+
+    if (Man->LeftArm == 0)
+        Man->LeftArmPicture = &AllImage.BlackSpace;
+
+    if (Man->RightArm == 0)
+        Man->RightArmPicture = &AllImage.BlackSpace;
     };
 
-void DrawBlock (BlockType* Block, ManType* Man, AllImageType AllImage)
+void DrawBlock (BlockType* Block, CamType* Camera, AllImageType AllImage)
     {
     Block->xNumber += 1;
 
@@ -478,7 +502,7 @@ void DrawBlock (BlockType* Block, ManType* Man, AllImageType AllImage)
         Block->xNumber = 0;
 
     if (Block->Base.Health > 0)
-        DrawTransparentImage (Block->Picture, Block->Base.x - Man->Base.x, Block->Base.y - Man->Base.y, &Block->xNumber, &Block->yNumber);
+        DrawTransparentImage (Block->Picture, Block->Base.x - Camera->x, Block->Base.y - Camera->y, &Block->xNumber, &Block->yNumber);
     };
 
 int Collision (BlockType* Block, ManType* Man)
@@ -490,7 +514,7 @@ int Collision (BlockType* Block, ManType* Man)
     return 0;
     };
 
-void DrawMan (ManType* Man, AllImageType AllImage)
+void DrawMan (ManType* Man, CamType* Camera, AllImageType AllImage)
     {
     Man->xNumber += 1;
 
@@ -499,44 +523,31 @@ void DrawMan (ManType* Man, AllImageType AllImage)
 
     int null = 0;
 
+    if (Man->Base.Health > 0)
+        DrawTransparentImage (Man->Picture, Man->Base.x - txGetExtentX (Man->Picture->Picture)/2 + Camera->x, Man->Base.y - txGetExtentY (Man->Picture->Picture)/2 + Camera->y, &Man->xNumber, &Man->yNumber);
+
+    printf ("Man->x = %lf, Man->y = %lf, Camera->x = %d, Camera->y = %d \n", Man->Base.x, Man->Base.y, Camera->x, Camera->y);
+    };
+
+void ManFire (ManType* Man, CamType* Camera, AllImageType AllImage)
+    {
     BlockType Fire1 = {{0 - txGetExtentX (Man->Picture->Picture)/2 + Man_Fire1X, 0 - txGetExtentY (Man->Picture->Picture)/2 + Man_Fire1Y, 4}, rand() % 4, 0, 0, &AllImage.Fire};
     BlockType Fire2 = {{0 - txGetExtentX (Man->Picture->Picture)/2 + Man_Fire2X, 0 - txGetExtentY (Man->Picture->Picture)/2 + Man_Fire2Y, 4}, rand() % 4, 0, 0, &AllImage.Fire};
     BlockType Fire3 = {{0 - txGetExtentX (Man->Picture->Picture)/2 + Man_Fire3X, 0 - txGetExtentY (Man->Picture->Picture)/2 + Man_Fire3Y, 4}, rand() % 4, 0, 0, &AllImage.Fire};
-
-    if (Man->vX > 0)
-        {
-        Man->Speed = 2;
-        if (GetAsyncKeyState (VK_SHIFT))
-            {
-            Man->vX = Man_FastSpeed;
-            };
-        };
-
-    if (Man->vX < 0)
-        {
-        Man->Speed = 1;
-        if (GetAsyncKeyState (VK_SHIFT))
-            {
-            Man->vX = -Man_FastSpeed;
-            };
-        };
-
-    if (Man->vX == 0)
-        {
-        Man->Speed = 0;
-        }
-
-    if (Man->Base.Health > 0)
-        DrawTransparentImage (Man->Picture, Man_DrawingX - txGetExtentX (Man->Picture->Picture)/2, Man_DrawingY - txGetExtentY (Man->Picture->Picture)/2, &Man->xNumber, &Man->yNumber);
 
     if (Man->Position == Fire_Position)
         {
         Man->Base.Health -= Man_FireDamage/100;
         Man->Temperature += 1;
-        DrawBlock (&Fire1, Man, AllImage);
-        DrawBlock (&Fire2, Man, AllImage);
-        DrawBlock (&Fire3, Man, AllImage);
+        DrawBlock (&Fire1, Camera, AllImage);
+        DrawBlock (&Fire2, Camera, AllImage);
+        DrawBlock (&Fire3, Camera, AllImage);
         };
+    };
+
+void ManHealth (ManType* Man, AllImageType AllImage)
+    {
+    int null = 0;
 
     if (Man->Base.Health < 0)
         {
@@ -557,7 +568,10 @@ void DrawMan (ManType* Man, AllImageType AllImage)
 
     if (Man->Base.Health > Man_MaxHealth)
         Man->Base.Health = Man_MaxHealth;
+    };
 
+void ManTemperature (ManType* Man)
+    {
     if (Man->Temperature < 0)
         {
         Man->Temperature = 0;
@@ -585,12 +599,6 @@ void DrawMan (ManType* Man, AllImageType AllImage)
 
     if (Man->Temperature >= Man_HotTemp3)
         Man->Base.Health -= Man_HotTempDamage/1000*Man_TempDamage3;
-
-    if (Man->LeftArm == 0)
-        Man->LeftArmPicture = &AllImage.BlackSpace;
-
-    if (Man->RightArm == 0)
-        Man->RightArmPicture = &AllImage.BlackSpace;
     };
 
 int Distance (int a, int b, int Dst)
@@ -642,7 +650,7 @@ void DeleteAllImage (AllImageType AllImages)
     txDeleteDC (AllImages.Pickaxe.Picture);
     };
 
-void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber, ManType* Man, double* AllTemperature)
+void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber, ManType* Man, double* AllTemperature, CamType* Camera)
     {
     int StartLevelNumber = *LevelNumber;
 
@@ -673,15 +681,21 @@ void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber,
 
         int null = 0;
 
+        MoveCamera (Camera);
+
         DrawTransparentImage (&AllImage.BackGround, 0, 0, &null, &null);
 
         DrawTransparentImage (&AllImage.Coin, Sign_CoinX, Sign_CoinY, &null, &null);
 
-        DrawManyBlocks (ManyBlocks, Man, AllImage);
+        DrawManyBlocks (ManyBlocks, Camera, AllImage);
 
-        DrawMan (Man, AllImage);
+        DrawMan (Man, Camera, AllImage);
 
-        DrawInventory (Man);
+        ManFire (Man, Camera, AllImage);
+        ManHealth (Man, AllImage);
+        ManTemperature (Man);
+
+        DrawInventory (Man, AllImage);
 
         InteractManWithBlocks (ManyBlocks, Man, &Man->NumberCoin, LevelNumber);
 
@@ -689,14 +703,14 @@ void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber,
 
         ControlMan (Man, Mouse, &t);
 
-        if (ButtonCheckClick (Sign_PauseX, Sign_PauseY, txMouseX(), txMouseY(), Sign_Pause_Radius, Sign_Pause_Radius) == True)
+        if (ButtonCheckClick (Sign_PauseX, Sign_PauseY, txMouseX(), txMouseY(), Sign_Pause_Radius, Sign_Pause_Radius) == true)
             {
             PauseNumber = Pause_Stopped;
             };
 
-        Text (Sign_CoinTextX, Sign_CoinTextY, Coin_Text, Man->NumberCoin, "");
+        Text (Sign_CoinTextX, Sign_CoinTextY, Coin_TextSize, Man->NumberCoin, "");
 
-        Text (Sign_LevelTextX, Sign_LevelTextY, Level_Text, NumberLevel, "Level");
+        Text (Sign_LevelTextX, Sign_LevelTextY, Level_TextSize, NumberLevel, "Level");
 
         DrawButton (Pause, AllImage);
 
@@ -751,6 +765,21 @@ void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber,
     DeleteAllImage (AllImage);
     };
 
+void MoveCamera (CamType* Camera)
+    {
+    if (GetAsyncKeyState (VK_CONTROL) &&
+        GetAsyncKeyState (VK_RIGHT))
+            {
+            Camera->x += 5;
+            };
+
+    if (GetAsyncKeyState (VK_CONTROL) &&
+        GetAsyncKeyState (VK_LEFT))
+            {
+            Camera->x -= 5;
+            };
+    };
+
 void HelpSystem ()
     {
     txSetColor (TX_WHITE);
@@ -790,11 +819,11 @@ void DrawLoading (int Procents)
 
     txSetTextAlign ();
     txSetColor (TX_BLACK);
-    txSelectFont ("Comic Sans MS", Loading_Text);
+    txSelectFont ("Comic Sans MS", Loading_TextSize);
     txTextOut (Loading_TextX, Loading_TextY, str);
     };
 
-void Level1 (int* LevelNumber, ManType* Man, AllImageType AllImage)
+void Level1 (int* LevelNumber, ManType* Man, AllImageType AllImage, CamType* Camera)
     {
     double AllTemperature = 10;
 
@@ -966,10 +995,10 @@ void Level1 (int* LevelNumber, ManType* Man, AllImageType AllImage)
                                // End
                                {{  -1,   -6}}};
 
-    MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature);
+    MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera);
     };
 
-void Level2 (int* LevelNumber, ManType* Man, AllImageType AllImage)
+void Level2 (int* LevelNumber, ManType* Man, AllImageType AllImage, CamType* Camera)
     {
     double AllTemperature = 10;
 
@@ -1146,12 +1175,12 @@ void Level2 (int* LevelNumber, ManType* Man, AllImageType AllImage)
 
     BlockType Finish = {{1450, -1000000, 1}, 0, 0, 50, &AllImage.Finish};
 
-    MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature);
+    MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera);
     };
 
-void DrawManyBlocks (BlockType ManyBlocks [], ManType* Man, AllImageType AllImage)
+void DrawManyBlocks (BlockType ManyBlocks [], CamType* Camera, AllImageType AllImage)
     {
-    DrawLevelBlocks (ManyBlocks, Man, AllImage);
+    DrawLevelBlocks (ManyBlocks, Camera, AllImage);
     };
 
 void InteractManWithBlocks (BlockType ManyBlocks [], ManType* Man, int* NumberCoin,
@@ -1165,7 +1194,7 @@ void CoinCollision (ManType* Man, BlockType* Coin, int* NumberCoin)
     if (Coin->Base.Health > 0 &&
         Coin->Number == BT_Coin)
     {
-    if (Collision (Coin, Man) == True)
+    if (Collision (Coin, Man) == true)
         {
         *NumberCoin += 1;
         Coin->Base.Health = 0;
@@ -1228,13 +1257,13 @@ void DrawTransparentImage (ImageType* Image, int x, int y, int* xAnimationNumber
         };
     };
 
-void DrawLevelBlocks (BlockType ManyBlocks[], ManType* Man, AllImageType AllImage)
+void DrawLevelBlocks (BlockType ManyBlocks[], CamType* Camera, AllImageType AllImage)
     {
     int i = 0;
 
     while (ManyBlocks[i].Base.x != -1 && ManyBlocks[i].Base.y != -1)
         {
-        DrawBlock (&ManyBlocks [i], Man, AllImage);
+        DrawBlock (&ManyBlocks [i], Camera, AllImage);
 
         i = i + 1;
         };
@@ -1274,6 +1303,22 @@ void ControlMan (ManType* Man, MouseType Mouse, int* t)
         Man->vX = -Man_SlowSpeed;
         Man->Side = Man_LeftSide;
         };
+
+    if (Man->vX > 0)
+        {
+        if (GetAsyncKeyState (VK_SHIFT))
+            {
+            Man->vX = Man_FastSpeed;
+            };
+        };
+
+    if (Man->vX < 0)
+        {
+        if (GetAsyncKeyState (VK_SHIFT))
+            {
+            Man->vX = -Man_FastSpeed;
+            };
+        };
     };
 
 void Physic (ManType* Man)
@@ -1298,7 +1343,7 @@ void BlockCollision (ManType* Man, BlockType* Block)
     int BlockY = Block->Base.y + txGetExtentY (Block->Picture->Picture)/2;
 
     int Wide = txGetExtentX (Block->Picture->Picture)/2;
-    int Heigh = txGetExtentY (Block->Picture->Picture)/2;
+    int High = txGetExtentY (Block->Picture->Picture)/2;
 
     if (Block->Number != BT_Coin)
     {
@@ -1358,70 +1403,24 @@ void BlockCollision (ManType* Man, BlockType* Block)
         Block->Number != BT_Berries &&
         Block->Number != BT_Chest)
     {
-    if (ModuleDistance (Block->Base.x+Wide, Block->Base.y+High, txMouseX(), txMouseY(), 50) == 1)
+    if (ModuleDistance (Block->Base.x + Wide + Man->Base.x, Block->Base.y + High + Man->Base.x, txMouseX(), txMouseY(), Wide) == true)
         if (GetAsyncKeyState (VK_LBUTTON) &&
             Man->LeftArm == BT_Pickaxe &&
             Block->Base.Health > 1)
                Block->Base.Health -= 1;
 
-    if (ModuleDistance (Block->Base.x+Wide, Block->Base.y+High, txMouseX(), txMouseY(), 50) == 1)
-        if (GetAsyncKeyState (VK_LBUTTON) &&
-            Man->RightArm == Pickaxe &&
+    if (ModuleDistance (Block->Base.x + Wide + Man->Base.x, Block->Base.y + High + Man->Base.x, txMouseX(), txMouseY(), Wide) == true)
+        if (GetAsyncKeyState (VK_RBUTTON) &&
+            Man->RightArm == BT_Pickaxe &&
             Block->Base.Health > 1)
                Block->Base.Health -= 1;
 
-    if (Block->Base.Health == 1)
-        {
-        if (Man->LeftArm == 0)
-            {
-            Man->LeftArm = Block->Number;
-            Man->LeftArmPicture = Block->Picture;
-            Block->Base.Health = 0;
-            }
-        else
-        if (Man->RightArm == 0)
-            {
-            Man->RightArm = Block->Number;
-            Man->RightArmPicture = Block->Picture;
-            Block->Base.Health = 0;
-            }
-        else
-        {
-        Block->Base.Health == 1;
-        };
-        };
     };
-
-    // Building
-    if (Man->LeftArm == BT_Dirt &&
-        GetAsyncKeyState (VK_RBUTTON) &&
-        GetAsyncKeyState (VK_NUMPAD1) &&
-        Block->Base.Health == 0)
-            {
-            Block->Base.Health = Man->LeftArm;
-            Block->Picture = Man->LeftArmPicture;
-            Man->LeftArm = 0;
-            };
-
-    if (Man->RightArm == BT_Dirt &&
-        GetAsyncKeyState (VK_RBUTTON) &&
-        GetAsyncKeyState (VK_NUMPAD2) &&
-        Block->Base.Health == 0)
-            {
-            Block->Base.Health = Man->RightArm;
-            Block->Picture = Man->RightArmPicture;
-            Man->RightArm = 0;
-            };
 
     // Boxes
     if (Block->Number == BT_Box)
         {
-        if (// Man->High == 1 &&
-            (Block->Base.x - Man->Base.x) <= 74 &&
-            (Block->Base.x - Man->Base.x) > -50 &&
-            (Block->Base.y - Man->Base.y) <= 140 &&
-            (Block->Base.y - Man->Base.y) > 0 &&
-            Man->vY > 0)
+        if (Collision (Block, Man) == true)
             {
             Block->Base.Health = Block->Base.Health - Man->vY*0.0005;
             };
@@ -1430,19 +1429,9 @@ void BlockCollision (ManType* Man, BlockType* Block)
     // Fire
     if (Block->Number == BT_Fire)
         {
-        if ((Block->Base.x - Man->Base.x) <= 25 &&
-            (Block->Base.x - Man->Base.x) > -50 &&
-            (Block->Base.y - Man->Base.y) <= 140 &&
-            (Block->Base.y - Man->Base.y) > 0)
+        if (Collision (Block, Man) == true)
             {
-            Man->Position = 1;
-            };
-
-        if ((Block->Base.x - Man->Base.x) <= 50 &&
-            (Block->Base.x - Man->Base.x) > -100 &&
-            (Block->Base.y - Man->Base.y) <= 140 &&
-            (Block->Base.y - Man->Base.y) > 0)
-            {
+            Man->Position = Fire_Position;
             Man->Temperature += 0.5;
             };
         };
@@ -1450,21 +1439,18 @@ void BlockCollision (ManType* Man, BlockType* Block)
     // Water
     if (Block->Number == BT_Water)
         {
-        if ((Block->Base.x - Man->Base.x) <= 25 &&
-            (Block->Base.x - Man->Base.x) > -50 &&
-            (Block->Base.y - Man->Base.y) <= 140 &&
-            (Block->Base.y - Man->Base.y) > 0)
+        if (Collision (Block, Man) == true)
             {
-            Man->Position = 0;
+            Man->Position = Normal_Position;
             };
         };
 
     // High
-    if (Block->Base.x - Man->Base.x >= -50 &&
-        Block->Base.x - Man->Base.x <= 0   &&
-        Block->Base.y - Man->Base.y <= 150 &&
-        Block->Base.y - Man->Base.y > 0    &&
-        Man->vY >= 60)
+    if (BlockX - Man->Base.x >= xDst &&
+        BlockX - Man->Base.x <= 0   &&
+        BlockY - Man->Base.y <= yDst &&
+        BlockY - Man->Base.y > 0    &&
+        Man->vY >= Man_FallingSpeed)
             {
             Man->Base.Health -= 3;
             };
@@ -1474,17 +1460,17 @@ void BlockCollision (ManType* Man, BlockType* Block)
         Block->Number <= BT_Berries &&
         Block->Base.Health > 0)
             {
-            if (ModuleDistance (Block->Base.x+25, Block->Base.y+25, txMouseX(), txMouseY(), 50) == 1 &&
+            if (ModuleDistance (Block->Base.x+Wide, Block->Base.y+High, txMouseX(), txMouseY(), Wide) == true &&
                 GetAsyncKeyState (VK_MBUTTON))
                     {
-                    if (Man->LeftArm == 0)
+                    if (Man->LeftArm == BT_BlackSpace)
                         {
                         Man->LeftArm = Block->Number;
                         Man->LeftArmPicture = Block->Picture;
                         Block->Base.Health = 0;
                         }
                 else
-                if (Man->RightArm == 0)
+                if (Man->RightArm == BT_BlackSpace)
                     {
                     Man->RightArm = Block->Number;
                     Man->RightArmPicture = Block->Picture;
@@ -1494,25 +1480,23 @@ void BlockCollision (ManType* Man, BlockType* Block)
             };
 
     // Food
-    if (Man->LeftArm > 20 &&
-        Man->LeftArm < 30 &&
+    if (Man->LeftArm >= BT_Berries &&
         GetAsyncKeyState (VK_NUMPAD1))
             {
-            Man->LeftArm = 0;
+            Man->LeftArm = BT_BlackSpace;
             Man->Base.Health += 4;
             };
 
-    if (Man->RightArm > 20 &&
-        Man->RightArm < 30 &&
+    if (Man->RightArm >= BT_Berries &&
         GetAsyncKeyState (VK_NUMPAD2))
             {
-            Man->RightArm = 0;
+            Man->RightArm = BT_BlackSpace;
             Man->Base.Health += 4;
             };
 
-    if (ModuleDistance (Block->Base.x+25, Block->Base.y+25, txMouseX(), txMouseY(), 50) == 1 &&
+    if (ModuleDistance (Block->Base.x+Wide, Block->Base.y+High, txMouseX(), txMouseY(), Wide) == true &&
         Block->Number > BT_Berries &&
-        Block->Base.Health == 1000 &&
+        Block->Base.Health == Block_MaxHealth &&
         GetAsyncKeyState (VK_RETURN))
         {
         if (Man->LeftArm == 0)
@@ -1533,22 +1517,10 @@ void BlockCollision (ManType* Man, BlockType* Block)
     // Berries
 
     if (Block->Number > BT_Berries &&
-        Block->Base.Health < 1000)
+        Block->Base.Health < Block_MaxHealth)
             {
             Block->Base.Health += 1;
             };
-
-    // Chest
-    if (ModuleDistance (Block->Base.x+25, Block->Base.y+25, txMouseX(), txMouseY(), 50) == 1 &&
-        Block->Number == BT_Chest)
-        if (GetAsyncKeyState (VK_RETURN))
-            {
-            txSetColor (TX_DARKGREY, 5);
-            txSetFillColor (TX_TRANSPARENT);
-
-            txRectangle  (Block->Base.x, Block->Base.y-100, Block->Base.x+50, Block->Base.y-50);
-            };
-
     };
     };
 
@@ -1580,7 +1552,7 @@ void DrawHealth (int Health, AllImageType AllImage)
     {
     int null = 0;
 
-    DrawTransparentImage (&AllImage.Health, 10, 113, &null, &null);
+    DrawTransparentImage (&AllImage.Health, Sign_HealthX, Sign_HealthY, &null, &null);
 
     txSetColor (TX_BLACK, 2);
     txSetFillColor (TX_TRANSPARENT);
