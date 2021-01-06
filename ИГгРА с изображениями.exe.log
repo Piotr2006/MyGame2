@@ -3017,3 +3017,521 @@ Run file:	C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.ex
 Directory:	C:\Users\007\Desktop\программирование\MyGame2
 
 --------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x0042DBDC в функции MoveCamera() в файле C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp на строке 808. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-05 23:00:55 +0400], Instance: 0x0050D2FC (32-bit), Flags: CMdRe0, Thread: 0x41A0 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042DBDC in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: MoveCamera() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (808):
+
+    806: 
+    807:     Camera->x += Camera->x - Man->Base.x;
+=>  808:     Camera->y += Camera->y - Man->Base.y;
+    809:     };
+    810: 
+
+# 1 0x0042D525 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (699):
+
+    697:         int null = 0;
+    698: 
+=>  699:         MoveCamera (Camera, Man);
+    700: 
+    701:         DrawTransparentImage (&AllImage.BackGround, 0, 0, &null, &null);
+
+# 2 0x00430681 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Level1() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1026):
+
+   1024:                                {{  -1,   -6}}};
+   1025: 
+=> 1026:     MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera);
+   1027:     };
+   1028: 
+
+# 3 0x0042C2D5 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (449):
+
+    447:         if (LevelNumber == 1)
+    448:             {
+=>  449:             Level1 (&LevelNumber, &Man, AllImage, &Camera);
+    450:             };
+    451: 
+
+# 4 0x0042B9C9 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (368):
+
+    366:     int Number = 1;
+    367: 
+=>  368:     Cycle ();
+    369: 
+    370:     return 0;
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in void MoveGame(BlockType*, AllImageType, int*, ManType*, double*, CamType*) at C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.cpp (691):
+
+    689:         {
+    690:         txSetFillColor (RGB (72, 72, 72));
+=>  691:         txClear ();
+    692: 
+    693:         NumberLevel = *LevelNumber;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-05 23:00:55 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Downloads\TX\TXLib.h
+Compiled:	Jan  6 2021 18:17:40, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jan 06 2021 18:17:47
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe,
+
+ВНЕЗАПНО: signal (8, 0x00): SIGFPE: Грубая ошибка в вычислениях. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x0042DBDC в функции MoveCamera() в файле C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp на строке 808. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-05 23:00:55 +0400], Instance: 0x0050D2FC (32-bit), Flags: CMdRe0, Thread: 0x41A0 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042DBDC in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: MoveCamera() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (808):
+
+    806: 
+    807:     Camera->x += Camera->x - Man->Base.x;
+=>  808:     Camera->y += Camera->y - Man->Base.y;
+    809:     };
+    810: 
+
+# 1 0x0042D525 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (699):
+
+    697:         int null = 0;
+    698: 
+=>  699:         MoveCamera (Camera, Man);
+    700: 
+    701:         DrawTransparentImage (&AllImage.BackGround, 0, 0, &null, &null);
+
+# 2 0x00430681 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Level1() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1026):
+
+   1024:                                {{  -1,   -6}}};
+   1025: 
+=> 1026:     MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera);
+   1027:     };
+   1028: 
+
+# 3 0x0042C2D5 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (449):
+
+    447:         if (LevelNumber == 1)
+    448:             {
+=>  449:             Level1 (&LevelNumber, &Man, AllImage, &Camera);
+    450:             };
+    451: 
+
+# 4 0x0042B9C9 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (368):
+
+    366:     int Number = 1;
+    367: 
+=>  368:     Cycle ();
+    369: 
+    370:     return 0;
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in void MoveGame(BlockType*, AllImageType, int*, ManType*, double*, CamType*) at C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.cpp (691):
+
+    689:         {
+    690:         txSetFillColor (RGB (72, 72, 72));
+=>  691:         txClear ();
+    692: 
+    693:         NumberLevel = *LevelNumber;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-05 23:00:55 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Downloads\TX\TXLib.h
+Compiled:	Jan  6 2021 18:17:40, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jan 06 2021 18:17:47
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x0042DC10 в функции MoveCamera() в файле C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp на строке 810. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-05 23:00:55 +0400], Instance: 0x0050D2FC (32-bit), Flags: CMdRe0, Thread: 0x3EC4 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042DC10 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: MoveCamera() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (810):
+
+    808: 
+    809:     Camera->x += Camera->x - Man->Base.x;
+=>  810:     Camera->y += Camera->y - Man->Base.y;
+    811:     };
+    812: 
+
+# 1 0x0042D525 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (699):
+
+    697:         int null = 0;
+    698: 
+=>  699:         MoveCamera (Camera, Man);
+    700: 
+    701:         DrawTransparentImage (&AllImage.BackGround, 0, 0, &null, &null);
+
+# 2 0x004306B5 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Level1() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1028):
+
+   1026:                                {{  -1,   -6}}};
+   1027: 
+=> 1028:     MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera);
+   1029:     };
+   1030: 
+
+# 3 0x0042C2D5 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (449):
+
+    447:         if (LevelNumber == 1)
+    448:             {
+=>  449:             Level1 (&LevelNumber, &Man, AllImage, &Camera);
+    450:             };
+    451: 
+
+# 4 0x0042B9C9 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (368):
+
+    366:     int Number = 1;
+    367: 
+=>  368:     Cycle ();
+    369: 
+    370:     return 0;
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in void MoveGame(BlockType*, AllImageType, int*, ManType*, double*, CamType*) at C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.cpp (691):
+
+    689:         {
+    690:         txSetFillColor (RGB (72, 72, 72));
+=>  691:         txClear ();
+    692: 
+    693:         NumberLevel = *LevelNumber;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-05 23:00:55 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Downloads\TX\TXLib.h
+Compiled:	Jan  6 2021 18:19:51, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jan 06 2021 18:19:59
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe,
+
+ВНЕЗАПНО: signal (8, 0x00): SIGFPE: Грубая ошибка в вычислениях. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x0042DC10 в функции MoveCamera() в файле C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp на строке 810. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-05 23:00:55 +0400], Instance: 0x0050D2FC (32-bit), Flags: CMdRe0, Thread: 0x3EC4 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042DC10 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: MoveCamera() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (810):
+
+    808: 
+    809:     Camera->x += Camera->x - Man->Base.x;
+=>  810:     Camera->y += Camera->y - Man->Base.y;
+    811:     };
+    812: 
+
+# 1 0x0042D525 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (699):
+
+    697:         int null = 0;
+    698: 
+=>  699:         MoveCamera (Camera, Man);
+    700: 
+    701:         DrawTransparentImage (&AllImage.BackGround, 0, 0, &null, &null);
+
+# 2 0x004306B5 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Level1() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1028):
+
+   1026:                                {{  -1,   -6}}};
+   1027: 
+=> 1028:     MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera);
+   1029:     };
+   1030: 
+
+# 3 0x0042C2D5 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (449):
+
+    447:         if (LevelNumber == 1)
+    448:             {
+=>  449:             Level1 (&LevelNumber, &Man, AllImage, &Camera);
+    450:             };
+    451: 
+
+# 4 0x0042B9C9 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (368):
+
+    366:     int Number = 1;
+    367: 
+=>  368:     Cycle ();
+    369: 
+    370:     return 0;
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in void MoveGame(BlockType*, AllImageType, int*, ManType*, double*, CamType*) at C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.cpp (691):
+
+    689:         {
+    690:         txSetFillColor (RGB (72, 72, 72));
+=>  691:         txClear ();
+    692: 
+    693:         NumberLevel = *LevelNumber;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-05 23:00:55 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Downloads\TX\TXLib.h
+Compiled:	Jan  6 2021 18:19:51, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jan 06 2021 18:19:59
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe, файл: C:\Users\007\Downloads\TX\TXLib.h, строка: 12636, функция: POINT {anonymous}::TX::txGetExtent(HDC),
+
+Сообщение: Обнаружен нулевой или ложный результат.
+
+#1: TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-05 23:00:55 +0400], Instance: 0x0050D2FC (32-bit), Flags: CMdRe0, Thread: 0x4718 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0041BB9D in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: txGetExtent() at C:/Users/007/Downloads/TX/TXLib.h (12636)
+# 1 0x0041B8F4 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: txGetExtentX() at C:/Users/007/Downloads/TX/TXLib.h (12613)
+
+# 2 0x00432D07 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: DrawTransparentImage() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1280):
+
+   1278:     // printf ("DrawTransparentImage(): FileName = \"%s\", HDC = \"%p\" \n", Image.FileName, Image.Picture);
+   1279: 
+=> 1280:     int xSize = txGetExtentX (Image->Picture)/Image->xNumber;
+   1281:     int ySize = txGetExtentY (Image->Picture)/Image->yNumber;
+   1282: 
+
+# 3 0x0042D532 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (701):
+
+    699:         MoveCamera (Camera, Man);
+    700: 
+=>  701:         DrawTransparentImage (&AllImage.BackGround, 0, 0, &null, &null);
+    702: 
+    703:         DrawTransparentImage (&AllImage.Coin, Sign_CoinX, Sign_CoinY, &null, &null);
+
+# 4 0x004306B5 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Level1() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1034):
+
+   1032:                                {{  -1,   -6}}};
+   1033: 
+=> 1034:     MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera);
+   1035:     };
+   1036: 
+
+# 5 0x0042C2D1 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (449):
+
+    447:         if (LevelNumber == 1)
+    448:             {
+=>  449:             Level1 (&LevelNumber, &Man, AllImage, &Camera);
+    450:             };
+    451: 
+
+# 6 0x0042B9C9 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (368):
+
+    366:     int Number = 1;
+    367: 
+=>  368:     Cycle ();
+    369: 
+    370:     return 0;
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in POINT {anonymous}::TX::txGetExtent(HDC) at C:\Users\007\Downloads\TX\TXLib.h (12636):
+
+  12634: 
+  12635: $   BITMAP bmap = {};
+=>12636: $   txGDI (Win32::GetObject (Win32::GetCurrentObject (dc, OBJ_BITMAP), sizeof (bmap), &bmap), dc) asserted;
+  12637: 
+  12638: $   POINT  size = { bmap.bmWidth, bmap.bmHeight };
+
+# 1 in void DrawTransparentImage(ImageType*, int, int, int*, int*) at C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.cpp (1280):
+
+   1278:     // printf ("DrawTransparentImage(): FileName = \"%s\", HDC = \"%p\" \n", Image.FileName, Image.Picture);
+   1279: 
+=> 1280:     int xSize = txGetExtentX (Image->Picture)/Image->xNumber;
+   1281:     int ySize = txGetExtentY (Image->Picture)/Image->yNumber;
+   1282: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-05 23:00:55 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Downloads\TX\TXLib.h
+Compiled:	Jan  6 2021 18:40:13, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jan 06 2021 18:40:20
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe, файл: C:\Users\007\Downloads\TX\TXLib.h, строка: 12636, функция: POINT {anonymous}::TX::txGetExtent(HDC),
+
+Сообщение: Обнаружен нулевой или ложный результат.
+
+#1: TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-05 23:00:55 +0400], Instance: 0x0050D2FC (32-bit), Flags: CMdRe0, Thread: 0x43E0 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0041BB9D in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: txGetExtent() at C:/Users/007/Downloads/TX/TXLib.h (12636)
+# 1 0x0041B8F4 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: txGetExtentX() at C:/Users/007/Downloads/TX/TXLib.h (12613)
+
+# 2 0x00432D07 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: DrawTransparentImage() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1280):
+
+   1278:     // printf ("DrawTransparentImage(): FileName = \"%s\", HDC = \"%p\" \n", Image.FileName, Image.Picture);
+   1279: 
+=> 1280:     int xSize = txGetExtentX (Image->Picture)/Image->xNumber;
+   1281:     int ySize = txGetExtentY (Image->Picture)/Image->yNumber;
+   1282: 
+
+# 3 0x0042D532 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (701):
+
+    699:         MoveCamera (Camera, Man);
+    700: 
+=>  701:         DrawTransparentImage (&AllImage.BackGround, 0, 0, &null, &null);
+    702: 
+    703:         DrawTransparentImage (&AllImage.Coin, Sign_CoinX, Sign_CoinY, &null, &null);
+
+# 4 0x004306B5 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Level1() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1034):
+
+   1032:                                {{  -1,   -6}}};
+   1033: 
+=> 1034:     MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera);
+   1035:     };
+   1036: 
+
+# 5 0x0042C2D1 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (449):
+
+    447:         if (LevelNumber == 1)
+    448:             {
+=>  449:             Level1 (&LevelNumber, &Man, AllImage, &Camera);
+    450:             };
+    451: 
+
+# 6 0x0042B9C9 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (368):
+
+    366:     int Number = 1;
+    367: 
+=>  368:     Cycle ();
+    369: 
+    370:     return 0;
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in POINT {anonymous}::TX::txGetExtent(HDC) at C:\Users\007\Downloads\TX\TXLib.h (12636):
+
+  12634: 
+  12635: $   BITMAP bmap = {};
+=>12636: $   txGDI (Win32::GetObject (Win32::GetCurrentObject (dc, OBJ_BITMAP), sizeof (bmap), &bmap), dc) asserted;
+  12637: 
+  12638: $   POINT  size = { bmap.bmWidth, bmap.bmHeight };
+
+# 1 in void DrawTransparentImage(ImageType*, int, int, int*, int*) at C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.cpp (1280):
+
+   1278:     // printf ("DrawTransparentImage(): FileName = \"%s\", HDC = \"%p\" \n", Image.FileName, Image.Picture);
+   1279: 
+=> 1280:     int xSize = txGetExtentX (Image->Picture)/Image->xNumber;
+   1281:     int ySize = txGetExtentY (Image->Picture)/Image->yNumber;
+   1282: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-05 23:00:55 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Downloads\TX\TXLib.h
+Compiled:	Jan  6 2021 18:40:32, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jan 06 2021 18:40:39
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------

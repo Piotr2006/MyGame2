@@ -4,7 +4,9 @@
 
 enum
     {
-    Block_MaxHealth = 1000
+    Block_MaxHealth = 1000,
+    Block_BaseWide = 25,
+    Block_BaseHigh = 25,
     };
 
 enum BlockNumbers
@@ -70,9 +72,12 @@ enum Man
     Man_MaxTemperature = 90,
     Man_LeftSide = 1,
     Man_RightSide = 2,
+    Man_aX = 0,
     Man_aY = 5,
     Man_JumpSpeed = 30,
     Man_FallingSpeed = 60,
+    Man_Wide = 47,
+    Man_High = 168,
 
     // Fire
 
@@ -274,8 +279,8 @@ struct BlockType
 
 struct CamType
     {
-    int x;
-    int y;
+    double x;
+    double y;
     };
 
 void Cycle ();
@@ -351,14 +356,11 @@ void LoadImages (AllImageType* AllImages);
 
 void HelpSystem ();
 
-void MoveCamera (CamType* Camera);
+void MoveCamera (CamType* Camera, ManType* Man);
 
 int main ()
     {
     txCreateWindow (1550, 850);
-
-    int Procent = 1;
-    int Number = 1;
 
     Cycle ();
 
@@ -432,7 +434,7 @@ void Cycle ()
 
     CamType Camera = {Man_x, Man_y};
 
-    ManType Man = {{Man_x, Man_y, Man_Health}, 0, 0, 0, 0, 5, 2, 0, 0, BT_BlackSpace, BT_BlackSpace, &AllImage.BlackSpace, &AllImage.BlackSpace, Man_Temperature, 0, &AllImage.Man};
+    ManType Man = {{Man_x, Man_y, Man_Health}, 0, 0, 0, 0, Man_aX, 2, 0, 0, BT_BlackSpace, BT_BlackSpace, &AllImage.BlackSpace, &AllImage.BlackSpace, Man_Temperature, 0, &AllImage.Man};
 
     while (true)
         {
@@ -448,6 +450,9 @@ void Cycle ()
             {
             Level2 (&LevelNumber, &Man, AllImage, &Camera);
             };
+
+        if (GetAsyncKeyState (VK_ESCAPE))
+            break;
         };
     };
 
@@ -502,14 +507,14 @@ void DrawBlock (BlockType* Block, CamType* Camera, AllImageType AllImage)
         Block->xNumber = 0;
 
     if (Block->Base.Health > 0)
-        DrawTransparentImage (Block->Picture, Block->Base.x - Camera->x, Block->Base.y - Camera->y, &Block->xNumber, &Block->yNumber);
+        DrawTransparentImage (Block->Picture, Block->Base.x - Camera->x + Block_BaseWide*2, Block->Base.y - Camera->y, &Block->xNumber, &Block->yNumber);
     };
 
 int Collision (BlockType* Block, ManType* Man)
     {
-    if (fabs (Man->Base.x - (Block->Base.x + txGetExtentX (Block->Picture->Picture)/2)) <= (txGetExtentX (Man->Picture->Picture)/2 + txGetExtentX (Block->Picture->Picture)/2) &&
-        fabs (Man->Base.y - (Block->Base.y + txGetExtentY (Block->Picture->Picture)/2)) <= (txGetExtentY (Man->Picture->Picture)/2 + txGetExtentY (Block->Picture->Picture)/2))
-        return 1;
+    if (fabs (Man->Base.x - (Block->Base.x + Block_BaseWide)) <= Block_BaseWide + Man_Wide &&
+        fabs (Man->Base.y - (Block->Base.y + Block_BaseHigh)) <= Block_BaseHigh + Man_High)
+    return 1;
 
     return 0;
     };
@@ -521,12 +526,22 @@ void DrawMan (ManType* Man, CamType* Camera, AllImageType AllImage)
     if (Man->xNumber >= Man->Picture->xMaxAnimationNumber)
         Man->xNumber = 0;
 
+    if (Man->vX > 0)
+        {
+        Man->yNumber = 1;
+        };
+
+    if (Man->vX < 0)
+        {
+        Man->yNumber = 0;
+        };
+
     int null = 0;
 
     if (Man->Base.Health > 0)
-        DrawTransparentImage (Man->Picture, Man->Base.x - txGetExtentX (Man->Picture->Picture)/2 + Camera->x, Man->Base.y - txGetExtentY (Man->Picture->Picture)/2 + Camera->y, &Man->xNumber, &Man->yNumber);
+        DrawTransparentImage (Man->Picture, Man->Base.x - Camera->x + 875, Man->Base.y - Camera->y + 775, &Man->xNumber, &Man->yNumber);
 
-    printf ("Man->x = %lf, Man->y = %lf, Camera->x = %d, Camera->y = %d \n", Man->Base.x, Man->Base.y, Camera->x, Camera->y);
+    // printf ("Man->x = %lf, Man->y = %lf, Camera->x = %d, Camera->y = %d \n", Man->Base.x, Man->Base.y, Camera->x, Camera->y);
     };
 
 void ManFire (ManType* Man, CamType* Camera, AllImageType AllImage)
@@ -681,7 +696,7 @@ void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber,
 
         int null = 0;
 
-        MoveCamera (Camera);
+        MoveCamera (Camera, Man);
 
         DrawTransparentImage (&AllImage.BackGround, 0, 0, &null, &null);
 
@@ -758,6 +773,9 @@ void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber,
             break;
             };
 
+        if (GetAsyncKeyState (VK_ESCAPE))
+            break;
+
         txSleep (Main_Sleep);
         };
     txEnd ();
@@ -765,19 +783,39 @@ void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber,
     DeleteAllImage (AllImage);
     };
 
-void MoveCamera (CamType* Camera)
+void MoveCamera (CamType* Camera, ManType* Man)
     {
-    if (GetAsyncKeyState (VK_CONTROL) &&
-        GetAsyncKeyState (VK_RIGHT))
+    /* if (GetAsyncKeyState (VK_RIGHT))
             {
             Camera->x += 5;
             };
 
-    if (GetAsyncKeyState (VK_CONTROL) &&
-        GetAsyncKeyState (VK_LEFT))
+    if (GetAsyncKeyState (VK_LEFT))
             {
             Camera->x -= 5;
             };
+
+    if (GetAsyncKeyState (VK_CONTROL) &&
+        GetAsyncKeyState (VK_UP))
+            {
+            Camera->y -= 10;
+            };
+
+    if (GetAsyncKeyState (VK_CONTROL) &&
+        GetAsyncKeyState (VK_DOWN))
+            {
+            Camera->y += 10;
+            }; */
+
+    if (GetKeyState (VK_CAPITAL))
+        printf ("Camera->x = %lf, Camera->y = %lf, Man->x = %lf, Man->y = %lf \n", Camera->x, Camera->y, Man->Base.x, Man->Base.y);
+    else
+        txClearConsole ();
+
+    double CameraTime = 0.3;
+
+    Camera->x -= (Camera->x - Man->Base.x) * CameraTime;
+    Camera->y -= (Camera->y - Man->Base.y) * CameraTime;
     };
 
 void HelpSystem ()
@@ -1336,15 +1374,6 @@ void Physic (ManType* Man)
 
 void BlockCollision (ManType* Man, BlockType* Block)
     {
-    int xDst = txGetExtentX (Man->Picture->Picture)/2 + txGetExtentX (Block->Picture->Picture)/2;
-    int yDst = txGetExtentY (Man->Picture->Picture)/2 + txGetExtentY (Block->Picture->Picture)/2;
-
-    int BlockX = Block->Base.x + txGetExtentX (Block->Picture->Picture)/2;
-    int BlockY = Block->Base.y + txGetExtentY (Block->Picture->Picture)/2;
-
-    int Wide = txGetExtentX (Block->Picture->Picture)/2;
-    int High = txGetExtentY (Block->Picture->Picture)/2;
-
     if (Block->Number != BT_Coin)
     {
 
@@ -1355,12 +1384,9 @@ void BlockCollision (ManType* Man, BlockType* Block)
         Block->Number != BT_Stalactite &&
         Block->Number < BT_Pickaxe)
     {
-    // Block more right than man
-    if ((BlockX - Man->Base.x) <= xDst &&
-        (BlockX - Man->Base.x) > 0)
-        {
-        if ((BlockY - Man->Base.y) <= yDst &&
-            (BlockY - Man->Base.y) > 0)
+    if (fabs (Block->Base.x + Block_BaseWide - Man->Base.x) <= Block_BaseWide + Man_Wide &&
+        Block->Base.y + Block_BaseHigh - Man->Base.y <= Block_BaseHigh + Man_High &&
+        Block->Base.y + Block_BaseHigh - Man->Base.y  >=  0)
             {
             if (GetAsyncKeyState (VK_UP))
                 {
@@ -1370,31 +1396,10 @@ void BlockCollision (ManType* Man, BlockType* Block)
             if (Man->vY > 0)
                 {
                 Man->vY = 0;
-                Man->Base.y = BlockY - yDst;
+                Man->Base.y = Block->Base.y - Man_High;
                 };
             };
         };
-
-    // Block more left than man
-    if ((Man->Base.x - BlockX) <= xDst &&
-        (Man->Base.x - BlockX) > 0)
-        {
-        if ((BlockY - Man->Base.y) <= yDst &&
-            (BlockY - Man->Base.y) > 0)
-            {
-            if (GetAsyncKeyState (VK_UP))
-                {
-                Man->vY = -Man_JumpSpeed;
-                };
-
-            if (Man->vY > 0)
-                {
-                Man->vY = 0;
-                Man->Base.y = BlockY - yDst;
-                };
-            };
-        };
-    };
 
     // Destroying
     if (Block->Base.Health > 0 &&
@@ -1403,13 +1408,13 @@ void BlockCollision (ManType* Man, BlockType* Block)
         Block->Number != BT_Berries &&
         Block->Number != BT_Chest)
     {
-    if (ModuleDistance (Block->Base.x + Wide + Man->Base.x, Block->Base.y + High + Man->Base.x, txMouseX(), txMouseY(), Wide) == true)
+    if (ModuleDistance (Block->Base.x + Block_BaseWide + Man->Base.x, Block->Base.y + Block_BaseHigh + Man->Base.x, txMouseX(), txMouseY(), Block_BaseWide) == true)
         if (GetAsyncKeyState (VK_LBUTTON) &&
             Man->LeftArm == BT_Pickaxe &&
             Block->Base.Health > 1)
                Block->Base.Health -= 1;
 
-    if (ModuleDistance (Block->Base.x + Wide + Man->Base.x, Block->Base.y + High + Man->Base.x, txMouseX(), txMouseY(), Wide) == true)
+    if (ModuleDistance (Block->Base.x + Block_BaseWide + Man->Base.x, Block->Base.y + Block_BaseHigh + Man->Base.x, txMouseX(), txMouseY(), Block_BaseWide) == true)
         if (GetAsyncKeyState (VK_RBUTTON) &&
             Man->RightArm == BT_Pickaxe &&
             Block->Base.Health > 1)
@@ -1446,10 +1451,10 @@ void BlockCollision (ManType* Man, BlockType* Block)
         };
 
     // High
-    if (BlockX - Man->Base.x >= xDst &&
-        BlockX - Man->Base.x <= 0   &&
-        BlockY - Man->Base.y <= yDst &&
-        BlockY - Man->Base.y > 0    &&
+    if (Block->Base.x + Block_BaseWide - Man->Base.x >= Block_BaseWide + Man_Wide &&
+        Block->Base.x + Block_BaseWide - Man->Base.x <= 0   &&
+        Block->Base.y + Block_BaseHigh - Man->Base.y <= Block_BaseHigh + Man_High &&
+        Block->Base.y + Block_BaseHigh - Man->Base.y > 0    &&
         Man->vY >= Man_FallingSpeed)
             {
             Man->Base.Health -= 3;
@@ -1460,7 +1465,7 @@ void BlockCollision (ManType* Man, BlockType* Block)
         Block->Number <= BT_Berries &&
         Block->Base.Health > 0)
             {
-            if (ModuleDistance (Block->Base.x+Wide, Block->Base.y+High, txMouseX(), txMouseY(), Wide) == true &&
+            if (ModuleDistance (Block->Base.x+Block_BaseWide, Block->Base.y+Block_BaseHigh, txMouseX(), txMouseY(), Block_BaseWide) == true &&
                 GetAsyncKeyState (VK_MBUTTON))
                     {
                     if (Man->LeftArm == BT_BlackSpace)
@@ -1494,7 +1499,7 @@ void BlockCollision (ManType* Man, BlockType* Block)
             Man->Base.Health += 4;
             };
 
-    if (ModuleDistance (Block->Base.x+Wide, Block->Base.y+High, txMouseX(), txMouseY(), Wide) == true &&
+    if (ModuleDistance (Block->Base.x+Block_BaseWide, Block->Base.y+Block_BaseHigh, txMouseX(), txMouseY(), Block_BaseWide) == true &&
         Block->Number > BT_Berries &&
         Block->Base.Health == Block_MaxHealth &&
         GetAsyncKeyState (VK_RETURN))
@@ -1521,6 +1526,7 @@ void BlockCollision (ManType* Man, BlockType* Block)
             {
             Block->Base.Health += 1;
             };
+
     };
     };
 
