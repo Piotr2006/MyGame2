@@ -169,6 +169,12 @@ enum
     Loading_Sleep = 20
     };
 
+enum Screen
+    {
+    Screen_xCenter = 725,
+    Screen_yCenter = 425
+    };
+
 struct BaseType
     {
     double x;
@@ -285,7 +291,7 @@ struct CamType
 
 void Cycle ();
 
-void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber, ManType* Man, double* AllTemperature, CamType* Camera);
+void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber, ManType* Man, double* AllTemperature, CamType* Camera, CamType* FixedCamera);
 
 void DeleteImage (AllImageType AllImage);
 
@@ -293,9 +299,9 @@ void DrawLevelBlocks (BlockType ManyBlocks[], CamType* Camera, AllImageType AllI
 
 void CallLevelPhysic (BlockType ManyBlocks[], ManType* Man, int* NumberCoin);
 
-void Level1 (int* LevelNumber, ManType* Man, AllImageType AllImage, CamType* Camera);
+void Level1 (int* LevelNumber, ManType* Man, AllImageType AllImage, CamType* Camera, CamType* FixedCamera);
 
-void Level2 (int* LevelNumber, ManType* Man, AllImageType AllImage, CamType* Camera);
+void Level2 (int* LevelNumber, ManType* Man, AllImageType AllImage, CamType* Camera, CamType* FixedCamera);
 
 void DrawManyBlocks (BlockType ManyBlocks [], CamType* Camera, AllImageType AllImage);
 
@@ -308,13 +314,13 @@ void DrawMan (ManType* Man, CamType* Camera, AllImageType AllImage);
 
 void ManFire (ManType* Man, CamType* Camera, AllImageType AllImage);
 
-void ManHealth (ManType* Man, AllImageType AllImage);
+void ManHealth (ManType* Man, CamType* Camera, AllImageType AllImage);
 
 void ManTemperature (ManType* Man);
 
-void DrawInventory (ManType* Man, AllImageType AllImage);
+void DrawInventory (ManType* Man, CamType* Camera, CamType* FixedCamera, AllImageType AllImage);
 
-void DrawButton (ButtonType Button, AllImageType AllImage);
+void DrawButton (ButtonType Button, CamType* Camera, AllImageType AllImage);
 
 void DrawBlock (BlockType* Block, CamType* Camera, AllImageType AllImage);
 
@@ -326,9 +332,9 @@ void ControlMan (ManType* Man, MouseType Mouse, int* t);
 
 int ButtonCheckClick (int x1, int y1, int x2, int y2, int DstX, int DstY);
 
-void DrawButton (ButtonType Button);
+void DrawButton (ButtonType Button, CamType* Camera);
 
-void DrawCursor (MouseType* Mouse);
+void DrawCursor (MouseType* Mouse, CamType* Camera);
 
 void Physic (ManType* Man);
 
@@ -340,7 +346,7 @@ int ModuleDistance (int x1, int y1, int x2, int y2, int Distance);
 
 int Distance (int a, int b, int Distance);
 
-void DrawHealth (int Health, AllImageType AllImage);
+void DrawHealth (int Health, CamType* Camera, AllImageType AllImage);
 
 void BlockCalling (BlockType* Block, ManType* Man);
 
@@ -350,7 +356,7 @@ void LoadImage (AllImageType* AllImage);
 
 void Text (int x, int y, int Size, int Number, char Name []);
 
-void DrawTransparentImage (ImageType* Image, int x, int y, int* xAnimationNumber, int* yAnimationNumber);
+void DrawTransparentImage (ImageType* Image, CamType* Camera, int x, int y, int* xAnimationNumber, int* yAnimationNumber);
 
 void LoadImages (AllImageType* AllImages);
 
@@ -432,7 +438,9 @@ void Cycle ()
 
     // double AllTemperature = 10;
 
-    CamType Camera = {Man_x, Man_y};
+    CamType Camera = {Man_x - Screen_xCenter, Man_y - Screen_yCenter};
+
+    CamType FixedCamera = {Man_x, Man_y};
 
     ManType Man = {{Man_x, Man_y, Man_Health}, 0, 0, 0, 0, Man_aX, 2, 0, 0, BT_BlackSpace, BT_BlackSpace, &AllImage.BlackSpace, &AllImage.BlackSpace, Man_Temperature, 0, &AllImage.Man};
 
@@ -443,12 +451,12 @@ void Cycle ()
 
         if (LevelNumber == 1)
             {
-            Level1 (&LevelNumber, &Man, AllImage, &Camera);
+            Level1 (&LevelNumber, &Man, AllImage, &Camera, &FixedCamera);
             };
 
         if (LevelNumber == 2)
             {
-            Level2 (&LevelNumber, &Man, AllImage, &Camera);
+            Level2 (&LevelNumber, &Man, AllImage, &Camera, &FixedCamera);
             };
 
         if (GetAsyncKeyState (VK_ESCAPE))
@@ -456,7 +464,7 @@ void Cycle ()
         };
     };
 
-void DrawInventory (ManType* Man, AllImageType AllImage)
+void DrawInventory (ManType* Man, CamType* Camera, CamType* FixedCamera, AllImageType AllImage)
     {
     int null = 0;
 
@@ -471,25 +479,25 @@ void DrawInventory (ManType* Man, AllImageType AllImage)
     txRectangle  (Inv_RightArm_RectLeftX, Inv_RightArm_RectLeftY, Inv_RightArm_RectRightX, Inv_RightArm_RectRightY);
 
     if (Man->LeftArm != BT_BlackSpace)
-        DrawTransparentImage (Man->LeftArmPicture, Inv_LeftArm_RectLeftX, Inv_LeftArm_RectLeftY, &null, &null);
+        DrawTransparentImage (Man->LeftArmPicture, FixedCamera, Inv_LeftArm_RectLeftX, Inv_LeftArm_RectLeftY, &null, &null);
 
     if (Man->RightArm != BT_BlackSpace)
-        DrawTransparentImage (Man->RightArmPicture, Inv_RightArm_RectLeftX, Inv_RightArm_RectLeftY, &null, &null);
+        DrawTransparentImage (Man->RightArmPicture, FixedCamera, Inv_RightArm_RectLeftX, Inv_RightArm_RectLeftY, &null, &null);
 
     if (Man->Side == 1)
             {
             if (Man->LeftArm != BT_BlackSpace)
-                DrawTransparentImage (Man->LeftArmPicture, Man->Base.x + 40, Man->Base.y + 35, &null, &null);
+                DrawTransparentImage (Man->LeftArmPicture, Camera, Man->Base.x + 40, Man->Base.y + 35, &null, &null);
             if (Man->RightArm != BT_BlackSpace)
-                DrawTransparentImage (Man->RightArmPicture, Man->Base.x - 40, Man->Base.y + 25, &null, &null);
+                DrawTransparentImage (Man->RightArmPicture, Camera, Man->Base.x - 40, Man->Base.y + 25, &null, &null);
             };
 
     if (Man->Side == 2)
             {
             if (Man->LeftArm != BT_BlackSpace)
-                DrawTransparentImage (Man->LeftArmPicture, Man->Base.x + 80, Man->Base.y + 25, &null, &null);
+                DrawTransparentImage (Man->LeftArmPicture, Camera, Man->Base.x + 80, Man->Base.y + 25, &null, &null);
             if (Man->RightArm != BT_BlackSpace)
-                DrawTransparentImage (Man->RightArmPicture, Man->Base.x + 5, Man->Base.y + 35, &null, &null);
+                DrawTransparentImage (Man->RightArmPicture, Camera, Man->Base.x + 5, Man->Base.y + 35, &null, &null);
             };
 
     if (Man->LeftArm == 0)
@@ -507,7 +515,7 @@ void DrawBlock (BlockType* Block, CamType* Camera, AllImageType AllImage)
         Block->xNumber = 0;
 
     if (Block->Base.Health > 0)
-        DrawTransparentImage (Block->Picture, Block->Base.x - Camera->x + Block_BaseWide*2, Block->Base.y - Camera->y, &Block->xNumber, &Block->yNumber);
+        DrawTransparentImage (Block->Picture, Camera, Block->Base.x + Block_BaseWide*2, Block->Base.y, &Block->xNumber, &Block->yNumber);
     };
 
 int Collision (BlockType* Block, ManType* Man)
@@ -539,7 +547,7 @@ void DrawMan (ManType* Man, CamType* Camera, AllImageType AllImage)
     int null = 0;
 
     if (Man->Base.Health > 0)
-        DrawTransparentImage (Man->Picture, Man->Base.x - Camera->x + 875, Man->Base.y - Camera->y + 775, &Man->xNumber, &Man->yNumber);
+        DrawTransparentImage (Man->Picture, Camera, Man->Base.x, Man->Base.y, &Man->xNumber, &Man->yNumber);
 
     // printf ("Man->x = %lf, Man->y = %lf, Camera->x = %d, Camera->y = %d \n", Man->Base.x, Man->Base.y, Camera->x, Camera->y);
     };
@@ -560,7 +568,7 @@ void ManFire (ManType* Man, CamType* Camera, AllImageType AllImage)
         };
     };
 
-void ManHealth (ManType* Man, AllImageType AllImage)
+void ManHealth (ManType* Man, CamType* Camera, AllImageType AllImage)
     {
     int null = 0;
 
@@ -571,7 +579,7 @@ void ManHealth (ManType* Man, AllImageType AllImage)
 
     if (Man->Base.Health == 0)
         {
-        DrawTransparentImage (&AllImage.GameOver, Man->Base.x, Man->Base.y, &null, &null);
+        DrawTransparentImage (&AllImage.GameOver, Camera, Man->Base.x, Man->Base.y, &null, &null);
         Man->vX = 0;
         Man->vY = 0;
         Man->Position = 0;
@@ -624,14 +632,14 @@ int Distance (int a, int b, int Dst)
     return 0;
     };
 
-void DrawButton (ButtonType Button, AllImageType AllImage)
+void DrawButton (ButtonType Button, CamType* Camera, AllImageType AllImage)
     {
     int null = 0;
 
-    DrawTransparentImage (&AllImage.Pause, Button.x, Button.y, &Button.Number, &null);
+    DrawTransparentImage (&AllImage.Pause, Camera, Button.x, Button.y, &Button.Number, &null);
     };
 
-void DrawCursor (MouseType* Mouse)
+void DrawCursor (MouseType* Mouse, CamType* Camera)
     {
     Mouse->x = txMouseX ();
 
@@ -639,7 +647,7 @@ void DrawCursor (MouseType* Mouse)
 
     int null = 0;
 
-    DrawTransparentImage (&Mouse->Picture, Mouse->x, Mouse->y, &null, &null);
+    DrawTransparentImage (&Mouse->Picture, Camera, Mouse->x, Mouse->y, &null, &null);
     };
 
 void DeleteAllImage (AllImageType AllImages)
@@ -665,7 +673,7 @@ void DeleteAllImage (AllImageType AllImages)
     txDeleteDC (AllImages.Pickaxe.Picture);
     };
 
-void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber, ManType* Man, double* AllTemperature, CamType* Camera)
+void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber, ManType* Man, double* AllTemperature, CamType* Camera, CamType* FixedCamera)
     {
     int StartLevelNumber = *LevelNumber;
 
@@ -698,19 +706,19 @@ void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber,
 
         MoveCamera (Camera, Man);
 
-        DrawTransparentImage (&AllImage.BackGround, 0, 0, &null, &null);
-
-        DrawTransparentImage (&AllImage.Coin, Sign_CoinX, Sign_CoinY, &null, &null);
+        DrawTransparentImage (&AllImage.BackGround, FixedCamera, 0, 0, &null, &null);
 
         DrawManyBlocks (ManyBlocks, Camera, AllImage);
 
         DrawMan (Man, Camera, AllImage);
 
+        DrawTransparentImage (&AllImage.Coin, FixedCamera, Sign_CoinX, Sign_CoinY, &null, &null);
+
         ManFire (Man, Camera, AllImage);
-        ManHealth (Man, AllImage);
+        ManHealth (Man, Camera, AllImage);
         ManTemperature (Man);
 
-        DrawInventory (Man, AllImage);
+        DrawInventory (Man, Camera, FixedCamera, AllImage);
 
         InteractManWithBlocks (ManyBlocks, Man, &Man->NumberCoin, LevelNumber);
 
@@ -727,9 +735,9 @@ void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber,
 
         Text (Sign_LevelTextX, Sign_LevelTextY, Level_TextSize, NumberLevel, "Level");
 
-        DrawButton (Pause, AllImage);
+        DrawButton (Pause, FixedCamera, AllImage);
 
-        DrawHealth (Man->Base.Health, AllImage);
+        DrawHealth (Man->Base.Health, FixedCamera, AllImage);
 
         if (PauseNumber == Pause_Stopped)
             {
@@ -757,7 +765,7 @@ void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber,
         txSetColor (TX_RED);
         txSetFillColor (TX_RED);
 
-        DrawTransparentImage (&AllImage.Termometer, Sign_TermometerX, Sign_TermometerY, &null, &null);
+        DrawTransparentImage (&AllImage.Termometer, FixedCamera, Sign_TermometerX, Sign_TermometerY, &null, &null);
         txRectangle (Sign_TermometerX + Sign_Term_RectLeftX, Sign_TermometerY + Sign_Term_RectDownY - Man->Temperature,
                      Sign_TermometerX + Sign_Term_RectRightX, Sign_TermometerY + Sign_Term_RectDownY);
 
@@ -766,7 +774,7 @@ void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber,
             HelpSystem ();
             };
 
-        DrawCursor (&Mouse);
+        DrawCursor (&Mouse, FixedCamera);
 
         if (StartLevelNumber != *LevelNumber)
             {
@@ -814,8 +822,8 @@ void MoveCamera (CamType* Camera, ManType* Man)
 
     double CameraTime = 0.3;
 
-    Camera->x -= (Camera->x - Man->Base.x) * CameraTime;
-    Camera->y -= (Camera->y - Man->Base.y) * CameraTime;
+    Camera->x -= (Camera->x + Screen_xCenter - Man->Base.x) * CameraTime;
+    Camera->y -= (Camera->y + Screen_yCenter - Man->Base.y) * CameraTime;
     };
 
 void HelpSystem ()
@@ -861,7 +869,7 @@ void DrawLoading (int Procents)
     txTextOut (Loading_TextX, Loading_TextY, str);
     };
 
-void Level1 (int* LevelNumber, ManType* Man, AllImageType AllImage, CamType* Camera)
+void Level1 (int* LevelNumber, ManType* Man, AllImageType AllImage, CamType* Camera, CamType* FixedCamera)
     {
     double AllTemperature = 10;
 
@@ -1033,10 +1041,10 @@ void Level1 (int* LevelNumber, ManType* Man, AllImageType AllImage, CamType* Cam
                                // End
                                {{  -1,   -6}}};
 
-    MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera);
+    MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera, FixedCamera);
     };
 
-void Level2 (int* LevelNumber, ManType* Man, AllImageType AllImage, CamType* Camera)
+void Level2 (int* LevelNumber, ManType* Man, AllImageType AllImage, CamType* Camera, CamType* FixedCamera)
     {
     double AllTemperature = 10;
 
@@ -1209,11 +1217,7 @@ void Level2 (int* LevelNumber, ManType* Man, AllImageType AllImage, CamType* Cam
                                // End
                                {{  -1,   -6}}};
 
-    BlockType Start  = {{-100, -1000000, 1}, 0, 0, 50, &AllImage.Start};
-
-    BlockType Finish = {{1450, -1000000, 1}, 0, 0, 50, &AllImage.Finish};
-
-    MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera);
+    MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera, FixedCamera);
     };
 
 void DrawManyBlocks (BlockType ManyBlocks [], CamType* Camera, AllImageType AllImage)
@@ -1275,14 +1279,14 @@ void LoadGameImage (ImageType* Image, const char* Picture, int xNumber, int yNum
     txSleep (Loading_Sleep);
     };
 
-void DrawTransparentImage (ImageType* Image, int x, int y, int* xAnimationNumber, int* yAnimationNumber)
+void DrawTransparentImage (ImageType* Image, CamType* Camera, int x, int y, int* xAnimationNumber, int* yAnimationNumber)
     {
     // printf ("DrawTransparentImage(): FileName = \"%s\", HDC = \"%p\" \n", Image.FileName, Image.Picture);
 
     int xSize = txGetExtentX (Image->Picture)/Image->xNumber;
     int ySize = txGetExtentY (Image->Picture)/Image->yNumber;
 
-    txTransparentBlt (txDC (), x, y, xSize, ySize, Image->Picture, *xAnimationNumber*xSize, *yAnimationNumber*ySize, Image->color);
+    txTransparentBlt (txDC (), x - Camera->x, y - Camera->y, xSize, ySize, Image->Picture, *xAnimationNumber*xSize, *yAnimationNumber*ySize, Image->color);
 
     if (*xAnimationNumber >= Image->xMaxAnimationNumber)
         {
@@ -1554,11 +1558,11 @@ int ButtonCheckClick (int x1, int y1, int x2, int y2, int DstX, int DstY)
     return 0;
     };
 
-void DrawHealth (int Health, AllImageType AllImage)
+void DrawHealth (int Health, CamType* Camera, AllImageType AllImage)
     {
     int null = 0;
 
-    DrawTransparentImage (&AllImage.Health, Sign_HealthX, Sign_HealthY, &null, &null);
+    DrawTransparentImage (&AllImage.Health, Camera, Sign_HealthX, Sign_HealthY, &null, &null);
 
     txSetColor (TX_BLACK, 2);
     txSetFillColor (TX_TRANSPARENT);
