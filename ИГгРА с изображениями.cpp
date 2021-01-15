@@ -288,7 +288,8 @@ struct CamType
     double x;
     double y;
 
-    double CameraTime;
+    double vX;
+    double vY;
 
     int Timer;
     };
@@ -442,9 +443,9 @@ void Cycle ()
 
     // double AllTemperature = 10;
 
-    CamType Camera = {Man_x - Screen_xCenter, Man_y - Screen_yCenter, 0.3, 0};
+    CamType Camera = {Man_x - Screen_xCenter, Man_y - Screen_yCenter, 0, 0, 0};
 
-    CamType FixedCamera = {0, 0, 0, 0};
+    CamType FixedCamera = {0, 0, 0, 0, 0};
 
     ManType Man = {{Man_x, Man_y, Man_Health}, 0, 0, 0, 0, Man_aX, 2, 0, 0, BT_BlackSpace, BT_BlackSpace, &AllImage.BlackSpace, &AllImage.BlackSpace, Man_Temperature, 0, &AllImage.Man};
 
@@ -824,15 +825,23 @@ void MoveCamera (CamType* Camera, ManType* Man)
     else
         txClearConsole ();
 
-    if (Camera->Timer > GetTickCount())
-        Camera->CameraTime = 0.005;
+    int xDst = fabs (fabs (Camera->x - Man->Base.x) - Screen_xCenter);
+    int yDst = fabs (fabs (Camera->y - Man->Base.y) - Screen_yCenter);
+
+    if (xDst >= 500)
+        Camera->vX = 0.02;
     else
-        Camera->CameraTime = 0.5;
+        Camera->vX = 0;
 
-    Camera->x -= (Camera->x + Screen_xCenter - Man->Base.x) * Camera->CameraTime;
-    Camera->y -= (Camera->y + Screen_yCenter - Man->Base.y) * Camera->CameraTime;
+    if (yDst >= 100)
+        Camera->vY = 0.05;
+    else
+        Camera->vY = 0;
 
-    printf ("CameraTime = %lf \n", Camera->CameraTime);
+    // $i printf ("Man->x = %lf, Man->y = %lf, Cam->x = %lf, Cam->y = %lf, xDst = %d, yDst = %d, vX = %lf, vY = %lf \n", Man->Base.x, Man->Base.y, Camera->x, Camera->y, xDst, yDst, Camera->vX, Camera->vY); $d
+
+    Camera->x -= (Camera->x + Screen_xCenter - Man->Base.x) * Camera->vX;
+    Camera->y -= (Camera->y + Screen_yCenter - Man->Base.y) * Camera->vY;
     };
 
 void HelpSystem ()
@@ -951,8 +960,8 @@ void Level1 (int* LevelNumber, ManType* Man, AllImageType AllImage, CamType* Cam
                                {{1475,  725, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
                                {{1525,  725, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
                                // Platforms
-                               {{ 100,  200, 6}, 0, 0, BT_Fire, &AllImage.Fire},
-                               {{ 150,  200, 6}, 0, 0, BT_Fire, &AllImage.Fire},
+                               {{ 100,  200, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{ 150,  200, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
                                {{ 200,  200, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
                                {{ 250,  200, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
                                {{ 300,  200, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
@@ -1383,6 +1392,18 @@ void Physic (ManType* Man)
     Man->vX = Man->vX*0.5;
 
     Man->aY = Man_aY;
+
+    if (Man->vY > 50)
+        Man->vY = 50;
+
+    if (Man->vY < -50)
+        Man->vY = -50;
+
+    if (Man->vX > 50)
+        Man->vX = 50;
+
+    if (Man->vX < -50)
+        Man->vX = -50;
     };
 
 void BlockCollision (ManType* Man, BlockType* Block, CamType* Camera)
