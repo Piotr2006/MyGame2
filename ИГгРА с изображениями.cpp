@@ -224,6 +224,8 @@ struct AllImageType
     ImageType Chest;
     ImageType IronOre;
     ImageType Water;
+    ImageType Villager;
+    ImageType SaySign;
     };
 
 struct ManType
@@ -253,6 +255,8 @@ struct ManType
     int NumberCoin;
 
     ImageType* Picture;
+
+    char Name [50];
     };
 
 struct ButtonType
@@ -296,11 +300,13 @@ struct CamType
 
 void Cycle ();
 
-void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber, ManType* Man, double* AllTemperature, CamType* Camera, CamType* FixedCamera);
+void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber, ManType* Man, double* AllTemperature, CamType* Camera, CamType* FixedCamera, ManType* Villager);
 
 void DeleteImage (AllImageType AllImage);
 
 void DrawLevelBlocks (BlockType ManyBlocks[], CamType* Camera, AllImageType AllImage);
+
+void DrawLevelPeople (ManType Villagers[], CamType* Camera, AllImageType AllImage);
 
 void CallLevelPhysic (BlockType ManyBlocks[], ManType* Man, CamType* Camera, int* NumberCoin);
 
@@ -369,6 +375,8 @@ void HelpSystem ();
 
 void MoveCamera (CamType* Camera, ManType* Man);
 
+void VillagerMind (ManType* Villager, ManType* Man, CamType* Camera, AllImageType AllImage);
+
 int main ()
     {
     txCreateWindow (1550, 850);
@@ -431,6 +439,10 @@ void LoadAllImages (AllImageType* AllImages)
     LoadGameImage (&AllImages->IronOre,       "Images/IronOre.bmp",                4, 3, 1, 1, TX_WHITE, &Procent, Number_of_Images);
 
     LoadGameImage (&AllImages->Water,         "Images/Water2.bmp",                 4, 1, 1, 1, TX_BLACK, &Procent, Number_of_Images);
+
+    LoadGameImage (&AllImages->Villager,      "Images/Villager.bmp",               4, 2, 1, 1, TX_WHITE, &Procent, Number_of_Images);
+
+    LoadGameImage (&AllImages->SaySign,       "Images/SaySign.bmp",                1, 4, 1, 1, TX_BLACK, &Procent, Number_of_Images);
     };
 
 void Cycle ()
@@ -443,11 +455,11 @@ void Cycle ()
 
     // double AllTemperature = 10;
 
-    CamType Camera = {Man_x - Screen_xCenter, Man_y - Screen_yCenter, 0, 0, 0};
+    CamType Camera = {2125 - Screen_xCenter, Man_y - Screen_yCenter, 0.3, 0.3, 0};
 
     CamType FixedCamera = {0, 0, 0, 0, 0};
 
-    ManType Man = {{Man_x, Man_y, Man_Health}, 0, 0, 0, 0, Man_aX, 2, 0, 0, BT_BlackSpace, BT_BlackSpace, &AllImage.BlackSpace, &AllImage.BlackSpace, Man_Temperature, 0, &AllImage.Man};
+    ManType Man = {{2125, Man_y, Man_Health}, 0, 0, 0, 0, Man_aX, 2, 0, 0, BT_BlackSpace, BT_BlackSpace, &AllImage.BlackSpace, &AllImage.BlackSpace, Man_Temperature, 0, &AllImage.Man, "Я"};
 
     while (true)
         {
@@ -473,6 +485,8 @@ void DrawInventory (ManType* Man, CamType* Camera, CamType* FixedCamera, AllImag
     {
     int null = 0;
 
+    int one = 1;
+
     txSetColor (TX_DARKGREY, 5);
     txSetFillColor (TX_TRANSPARENT);
 
@@ -484,25 +498,25 @@ void DrawInventory (ManType* Man, CamType* Camera, CamType* FixedCamera, AllImag
     txRectangle  (Inv_RightArm_RectLeftX, Inv_RightArm_RectLeftY, Inv_RightArm_RectRightX, Inv_RightArm_RectRightY);
 
     if (Man->LeftArm != BT_BlackSpace)
-        DrawTransparentImage (Man->LeftArmPicture, Inv_LeftArm_RectLeftX, Inv_LeftArm_RectLeftY, &null, &null, FixedCamera);
+        DrawTransparentImage (Man->LeftArmPicture, Inv_LeftArm_RectLeftX, Inv_LeftArm_RectLeftY, &null, &one, FixedCamera);
 
     if (Man->RightArm != BT_BlackSpace)
-        DrawTransparentImage (Man->RightArmPicture, Inv_RightArm_RectLeftX, Inv_RightArm_RectLeftY, &null, &null, FixedCamera);
+        DrawTransparentImage (Man->RightArmPicture, Inv_RightArm_RectLeftX, Inv_RightArm_RectLeftY, &null, &one, FixedCamera);
 
     if (Man->Side == 1)
             {
             if (Man->LeftArm != BT_BlackSpace)
-                DrawTransparentImage (Man->LeftArmPicture, Man->Base.x + 40, Man->Base.y + 35, &null, &null, Camera);
+                DrawTransparentImage (Man->LeftArmPicture, Man->Base.x + 40, Man->Base.y + 35, &null, &one, Camera);
             if (Man->RightArm != BT_BlackSpace)
-                DrawTransparentImage (Man->RightArmPicture, Man->Base.x - 40, Man->Base.y + 25, &null, &null, Camera);
+                DrawTransparentImage (Man->RightArmPicture, Man->Base.x - 40, Man->Base.y + 25, &null, &one, Camera);
             };
 
     if (Man->Side == 2)
             {
             if (Man->LeftArm != BT_BlackSpace)
-                DrawTransparentImage (Man->LeftArmPicture, Man->Base.x + 80, Man->Base.y + 25, &null, &null, Camera);
+                DrawTransparentImage (Man->LeftArmPicture, Man->Base.x + 80, Man->Base.y + 25, &null, &one, Camera);
             if (Man->RightArm != BT_BlackSpace)
-                DrawTransparentImage (Man->RightArmPicture, Man->Base.x + 5, Man->Base.y + 35, &null, &null, Camera);
+                DrawTransparentImage (Man->RightArmPicture, Man->Base.x + 5, Man->Base.y + 35, &null, &one, Camera);
             };
 
     if (Man->LeftArm == 0)
@@ -554,6 +568,10 @@ void DrawMan (ManType* Man, CamType* Camera, AllImageType AllImage)
     if (Man->Base.Health > 0)
         DrawTransparentImage (Man->Picture, Man->Base.x, Man->Base.y, &Man->xNumber, &Man->yNumber, Camera);
 
+    txSetColor (TX_WHITE);
+    txSelectFont ("Comic Sans MS", 30);
+    txTextOut (Man->Base.x - Camera->x + 50, Man->Base.y - Camera->y, Man->Name);
+
     // printf ("Man->x = %lf, Man->y = %lf, Camera->x = %d, Camera->y = %d \n", Man->Base.x, Man->Base.y, Camera->x, Camera->y);
     };
 
@@ -596,6 +614,72 @@ void ManHealth (ManType* Man, CamType* Camera, AllImageType AllImage)
 
     if (Man->Base.Health > Man_MaxHealth)
         Man->Base.Health = Man_MaxHealth;
+    };
+
+void VillagerMind (ManType* Villager, ManType* Man, CamType* Camera, AllImageType AllImage)
+    {
+    int null = 0;
+    int a = 0;
+
+    if (Man->Base.x - Villager->Base.x > 100 &&
+            Man->Base.x - Villager->Base.x < 500)
+            Villager->vX = 10;
+
+    if (Man->Base.x - Villager->Base.x < 100 &&
+            Man->Base.x - Villager->Base.x > 0)
+            {
+            Villager->vX = 0;
+            };
+
+    if (Villager->Base.x - Man->Base.x > 100 &&
+            Villager->Base.x - Man->Base.x < 500)
+            Villager->vX = -10;
+
+    if (Villager->Base.x - Man->Base.x < 100 &&
+            Villager->Base.x - Man->Base.x > 0)
+            {
+            Villager->vX = 0;
+            };
+
+    if (fabs (Man->Base.x - Villager->Base.x) <= 100)
+        {
+        int two = 2;
+        int one = 1;
+
+        if (Villager->LeftArm == 0)
+            {
+            DrawTransparentImage (&AllImage.SaySign, Villager->Base.x + 20, Villager->Base.y, &null, &null, Camera);
+            if (ModuleDistance (Villager->Base.x + 20 - Camera->x, Villager->Base.y - Camera->y, txMouseX(), txMouseY(), 50) == true &&
+                GetAsyncKeyState (VK_LBUTTON))
+            Villager->LeftArm = 1;
+            };
+
+        if (Villager->LeftArm == 1)
+            {
+            DrawTransparentImage (&AllImage.SaySign, Villager->Base.x + 120, Villager->Base.y, &null, &one, Camera);
+            if (ModuleDistance (Villager->Base.x + 120 - Camera->x, Villager->Base.y - Camera->y, txMouseX(), txMouseY(), 50) == true &&
+                GetAsyncKeyState (VK_LBUTTON))
+            Villager->LeftArm = 2;
+            a = 1;
+            };
+
+        if (Villager->LeftArm == 2)
+            {
+            if (a == 1)
+            {
+            Man->NumberCoin -= 5;
+            Man->LeftArm = BT_Berries;
+            Man->LeftArmPicture = &AllImage.Berries;
+            };
+            a = 0;
+            DrawTransparentImage (&AllImage.SaySign, Villager->Base.x + 50, Villager->Base.y - 70, &null, &two, Camera);
+            if (ModuleDistance (Villager->Base.x + 50 - Camera->x, Villager->Base.y - Camera->y - 70, txMouseX(), txMouseY(), 50) == true &&
+                GetAsyncKeyState (VK_LBUTTON))
+            Villager->LeftArm = 0;
+            };
+
+        $i printf ("number = %d \n", Villager->LeftArm); $d
+        };
     };
 
 void ManTemperature (ManType* Man)
@@ -676,9 +760,11 @@ void DeleteAllImage (AllImageType AllImages)
     txDeleteDC (AllImages.Stalactite.Picture);
     txDeleteDC (AllImages.GameOver.Picture);
     txDeleteDC (AllImages.Pickaxe.Picture);
+    txDeleteDC (AllImages.Villager.Picture);
+    txDeleteDC (AllImages.SaySign.Picture);
     };
 
-void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber, ManType* Man, double* AllTemperature, CamType* Camera, CamType* FixedCamera)
+void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber, ManType* Man, double* AllTemperature, CamType* Camera, CamType* FixedCamera, ManType* Villager)
     {
     int StartLevelNumber = *LevelNumber;
 
@@ -716,6 +802,12 @@ void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber,
         DrawManyBlocks (ManyBlocks, Camera, AllImage);
 
         DrawMan (Man, Camera, AllImage);
+
+        // Villager
+        Physic (Villager);
+        InteractManWithBlocks (ManyBlocks, Villager, Camera, &Man->NumberCoin, LevelNumber);
+        DrawMan (Villager, Camera, AllImage);
+        VillagerMind (Villager, Man, Camera, AllImage);
 
         DrawTransparentImage (&AllImage.Coin, Sign_CoinX, Sign_CoinY, &null, &null, FixedCamera);
 
@@ -828,7 +920,7 @@ void MoveCamera (CamType* Camera, ManType* Man)
     int xDst = fabs (fabs (Camera->x - Man->Base.x) - Screen_xCenter);
     int yDst = fabs (fabs (Camera->y - Man->Base.y) - Screen_yCenter);
 
-    if (xDst >= 500)
+    /* if (xDst >= 500)
         Camera->vX = 0.02;
     else
         Camera->vX = 0;
@@ -836,7 +928,7 @@ void MoveCamera (CamType* Camera, ManType* Man)
     if (yDst >= 100)
         Camera->vY = 0.05;
     else
-        Camera->vY = 0;
+        Camera->vY = 0; */
 
     // $i printf ("Man->x = %lf, Man->y = %lf, Cam->x = %lf, Cam->y = %lf, xDst = %d, yDst = %d, vX = %lf, vY = %lf \n", Man->Base.x, Man->Base.y, Camera->x, Camera->y, xDst, yDst, Camera->vX, Camera->vY); $d
 
@@ -925,6 +1017,39 @@ void Level1 (int* LevelNumber, ManType* Man, AllImageType AllImage, CamType* Cam
                                {{1425,  675, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
                                {{1475,  675, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
                                {{1525,  675, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{1575,  675, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{1625,  675, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{1675,  675, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{1725,  675, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{1775,  675, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{1825,  675, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{1875,  675, 6}, rand() % 4, 0, BT_Water, &AllImage.Water},
+                               {{1925,  675, 6}, rand() % 4, 0, BT_Water, &AllImage.Water},
+                               {{1975,  675, 6}, rand() % 4, 0, BT_Water, &AllImage.Water},
+                               {{2025,  675, 6}, rand() % 4, 0, BT_Water, &AllImage.Water},
+                               {{2075,  675, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{2125,  675, 6}, 0, 0, BT_Dirt, &AllImage.IronOre},
+                               {{2175,  675, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{2225,  675, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{2275,  675, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{2325,  675, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{2375,  675, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{2425,  675, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{2475,  675, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{2525,  675, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{2575,  675, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{2625,  675, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{2675,  675, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{2725,  675, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{2775,  675, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{2825,  675, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{2875,  675, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{2925,  675, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{2975,  675, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{3025,  675, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{3075,  675, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{3125,  675, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{3175,  675, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
 
                                {{ -75,  725, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
                                {{ -25,  725, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
@@ -959,6 +1084,39 @@ void Level1 (int* LevelNumber, ManType* Man, AllImageType AllImage, CamType* Cam
                                {{1425,  725, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
                                {{1475,  725, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
                                {{1525,  725, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{1575,  725, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{1625,  725, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{1675,  725, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{1725,  725, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{1775,  725, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{1825,  725, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{1875,  725, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{1925,  725, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{1975,  725, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{2025,  725, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{2075,  725, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{2125,  725, 6}, 0, 0, BT_Dirt, &AllImage.IronOre},
+                               {{2175,  725, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{2225,  725, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{2275,  725, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{2325,  725, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{2375,  725, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{2425,  725, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{2475,  725, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{2525,  725, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{2575,  725, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{2625,  725, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{2675,  725, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{2725,  725, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{2775,  725, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{2825,  725, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{2875,  725, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{2925,  725, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{2975,  725, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{3025,  725, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{3075,  725, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{3125,  725, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
+                               {{3175,  725, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
                                // Platforms
                                {{ 100,  200, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
                                {{ 150,  200, 6}, 0, 0, BT_Dirt, &AllImage.Dirt},
@@ -1059,7 +1217,9 @@ void Level1 (int* LevelNumber, ManType* Man, AllImageType AllImage, CamType* Cam
                                // End
                                {{  -1,   -6}}};
 
-    MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera, FixedCamera);
+    ManType Villager = {{2125, 0, 20}, 0, 0, 0, 0, Man_aX, 2, 0, 0, BT_BlackSpace, BT_BlackSpace, &AllImage.BlackSpace, &AllImage.BlackSpace, Man_Temperature, 0, &AllImage.Villager, "Барыга"};
+
+    MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera, FixedCamera, &Villager);
     };
 
 void Level2 (int* LevelNumber, ManType* Man, AllImageType AllImage, CamType* Camera, CamType* FixedCamera)
@@ -1235,12 +1395,16 @@ void Level2 (int* LevelNumber, ManType* Man, AllImageType AllImage, CamType* Cam
                                // End
                                {{  -1,   -6}}};
 
-    MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera, FixedCamera);
+    ManType Villager = {{2125, 525, 20}, 0, 0, 0, 0, Man_aX, 2, 0, 0, BT_BlackSpace, BT_BlackSpace, &AllImage.BlackSpace, &AllImage.BlackSpace, Man_Temperature, 0, &AllImage.Villager, "Торговец"};
+
+    MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera, FixedCamera, &Villager);
     };
 
 void DrawManyBlocks (BlockType ManyBlocks [], CamType* Camera, AllImageType AllImage)
     {
     DrawLevelBlocks (ManyBlocks, Camera, AllImage);
+
+    // DrawLevelPeople (Villagers, Camera, AllImage);
     };
 
 void InteractManWithBlocks (BlockType ManyBlocks [], ManType* Man, CamType* Camera, int* NumberCoin,
@@ -1260,6 +1424,18 @@ void CoinCollision (ManType* Man, BlockType* Coin, int* NumberCoin)
         Coin->Base.Health = 0;
         };
     };
+    };
+
+void DrawLevelPeople (ManType Villagers[], CamType* Camera, AllImageType AllImage)
+    {
+    int i = 0;
+
+    while (Villagers[i].Base.x != -1 && Villagers[i].Base.y != -1)
+        {
+        DrawMan (&Villagers [i], Camera, AllImage);
+
+        i = i + 1;
+        };
     };
 
 void LoadGameImage (ImageType* Image, const char* Picture, int xNumber, int yNumber, int xMaxNumber, int yMaxNumber, COLORREF color,
@@ -1329,6 +1505,7 @@ void DrawLevelBlocks (BlockType ManyBlocks[], CamType* Camera, AllImageType AllI
         };
     };
 
+
 void CallLevelPhysic (BlockType ManyBlocks[], ManType* Man, CamType* Camera, int* NumberCoin)
     {
     int i = 0;
@@ -1354,13 +1531,13 @@ void ControlMan (ManType* Man, MouseType Mouse, int* t)
     {
     if (GetAsyncKeyState (VK_RIGHT))
         {
-        Man->vX = Man_SlowSpeed;
+        Man->vX = Man_FastSpeed;
         Man->Side = Man_RightSide;
         };
 
     if (GetAsyncKeyState (VK_LEFT))
         {
-        Man->vX = -Man_SlowSpeed;
+        Man->vX = -Man_FastSpeed;
         Man->Side = Man_LeftSide;
         };
 
@@ -1368,7 +1545,7 @@ void ControlMan (ManType* Man, MouseType Mouse, int* t)
         {
         if (GetAsyncKeyState (VK_SHIFT))
             {
-            Man->vX = Man_FastSpeed;
+            Man->vX = Man_SlowSpeed;
             };
         };
 
@@ -1376,7 +1553,7 @@ void ControlMan (ManType* Man, MouseType Mouse, int* t)
         {
         if (GetAsyncKeyState (VK_SHIFT))
             {
-            Man->vX = -Man_FastSpeed;
+            Man->vX = -Man_SlowSpeed;
             };
         };
     };
@@ -1450,7 +1627,7 @@ void BlockCollision (ManType* Man, BlockType* Block, CamType* Camera)
         Block->Number != BT_Berries &&
         Block->Number != BT_Chest)
     {
-    if (ModuleDistance (Block->Base.x + Block_BaseWide + Man->Base.x, Block->Base.y + Block_BaseHigh + Man->Base.x, txMouseX(), txMouseY(), Block_BaseWide) == true)
+    /* if (ModuleDistance (Block->Base.x + Block_BaseWide + Man->Base.x, Block->Base.y + Block_BaseHigh + Man->Base.x, txMouseX(), txMouseY(), Block_BaseWide) == true)
         if (GetAsyncKeyState (VK_LBUTTON) &&
             Man->LeftArm == BT_Pickaxe &&
             Block->Base.Health > 1)
@@ -1460,7 +1637,7 @@ void BlockCollision (ManType* Man, BlockType* Block, CamType* Camera)
         if (GetAsyncKeyState (VK_RBUTTON) &&
             Man->RightArm == BT_Pickaxe &&
             Block->Base.Health > 1)
-               Block->Base.Health -= 1;
+               Block->Base.Health -= 1; */
 
     };
 
@@ -1469,7 +1646,7 @@ void BlockCollision (ManType* Man, BlockType* Block, CamType* Camera)
         {
         if (Collision (Block, Man) == true)
             {
-            Block->Base.Health = Block->Base.Health - Man->vY*0.0005;
+            Block->Base.Health = Block->Base.Health - 0.005;
             };
         };
 
@@ -1507,7 +1684,7 @@ void BlockCollision (ManType* Man, BlockType* Block, CamType* Camera)
         Block->Number <= BT_Berries &&
         Block->Base.Health > 0)
             {
-            if (ModuleDistance (Block->Base.x+Block_BaseWide, Block->Base.y+Block_BaseHigh, txMouseX(), txMouseY(), Block_BaseWide) == true &&
+            if (ModuleDistance (Block->Base.x+Block_BaseWide-Camera->x, Block->Base.y+Block_BaseHigh-Camera->y, txMouseX(), txMouseY(), Block_BaseWide) == true &&
                 GetAsyncKeyState (VK_MBUTTON))
                     {
                     if (Man->LeftArm == BT_BlackSpace)
@@ -1541,7 +1718,7 @@ void BlockCollision (ManType* Man, BlockType* Block, CamType* Camera)
             Man->Base.Health += 4;
             };
 
-    if (ModuleDistance (Block->Base.x+Block_BaseWide, Block->Base.y+Block_BaseHigh, txMouseX(), txMouseY(), Block_BaseWide) == true &&
+    if (ModuleDistance (Block->Base.x+Block_BaseWide-Camera->x, Block->Base.y+Block_BaseHigh-Camera->x, txMouseX(), txMouseY(), Block_BaseWide) == true &&
         Block->Number > BT_Berries &&
         Block->Base.Health == Block_MaxHealth &&
         GetAsyncKeyState (VK_RETURN))
@@ -1567,6 +1744,24 @@ void BlockCollision (ManType* Man, BlockType* Block, CamType* Camera)
         Block->Base.Health < Block_MaxHealth)
             {
             Block->Base.Health += 1;
+            };
+
+    // 111
+    int null = 0;
+    int three = 3;
+    int four = 4;
+
+    if (Block->Base.Health > 0 &&
+        Block->Number == 21)
+            {
+            if (Block->Base.Health < 500 &&
+                Block->Base.Health > 0)
+                DrawTransparentImage (Block->Picture, Block->Base.x, Block->Base.y, &null, &three, Camera);
+            if (Block->Base.Health >= 500 &&
+                Block->Base.Health < 1000)
+                DrawTransparentImage (Block->Picture, Block->Base.x, Block->Base.y, &null, &four, Camera);
+            if (Block->Base.Health == 1000)
+                DrawTransparentImage (Block->Picture, Block->Base.x, Block->Base.y, &null, &null, Camera);
             };
 
     };

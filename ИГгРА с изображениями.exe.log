@@ -4479,3 +4479,2577 @@ Run file:	C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.ex
 Directory:	C:\Users\007\Desktop\программирование\MyGame2
 
 --------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CA1B в функции DrawMan() в файле C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp на строке 544. Попытка прочесть данные по адресу 0x4018000C. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-07 01:57:24 +0400], Instance: 0x0050E2FC (32-bit), Flags: CMdRe0, Thread: 0x4CE8 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CA1B in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: DrawMan() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (544):
+
+    542:     Man->xNumber += 1;
+    543: 
+=>  544:     if (Man->xNumber >= Man->Picture->xMaxAnimationNumber)
+    545:         Man->xNumber = 0;
+    546: 
+
+# 1 0x00434136 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: DrawLevelBlocks() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1411):
+
+   1409:         DrawBlock (&ManyBlocks [i], Camera, AllImage);
+   1410: 
+=> 1411:         DrawMan (&Villagers [i], Camera, AllImage);
+   1412: 
+   1413:         i = i + 1;
+
+# 2 0x00433DA1 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: DrawManyBlocks() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1326):
+
+   1324: void DrawManyBlocks (BlockType ManyBlocks [], ManType Villagers [], CamType* Camera, AllImageType AllImage)
+   1325:     {
+=> 1326:     DrawLevelBlocks (ManyBlocks, Villagers, Camera, AllImage);
+   1327:     };
+   1328: 
+
+# 3 0x0042D6E9 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (729):
+
+    727:         DrawTransparentImage (&AllImage.BackGround, 0, 0, &null, &null, FixedCamera);
+    728: 
+=>  729:         DrawManyBlocks (ManyBlocks, Villagers, Camera, AllImage);
+    730: 
+    731:         DrawMan (Man, Camera, AllImage);
+
+# 4 0x00431905 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Level1() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1143):
+
+   1141:     ManType Villagers [] = {{{2125, 525, 20}, 0, 0, 0, 0, Man_aX, 2, 0, 0, BT_BlackSpace, BT_BlackSpace, &AllImage.BlackSpace, &AllImage.BlackSpace, Man_Temperature, 0, &AllImage.Villager}};
+   1142: 
+=> 1143:     MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera, FixedCamera, Villagers);
+   1144:     };
+   1145: 
+
+# 5 0x0042C399 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (462):
+
+    460:         if (LevelNumber == 1)
+    461:             {
+=>  462:             Level1 (&LevelNumber, &Man, AllImage, &Camera, &FixedCamera);
+    463:             };
+    464: 
+
+# 6 0x0042B9D5 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (377):
+
+    375:     txCreateWindow (1550, 850);
+    376: 
+=>  377:     Cycle ();
+    378: 
+    379:     return 0;
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in void DrawTransparentImage(ImageType*, int, int, int*, int*, CamType*) at C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.cpp (1390):
+
+   1388:     int ySize = txGetExtentY (Image->Picture)/Image->yNumber;
+   1389: 
+=> 1390:     txTransparentBlt (txDC (), x - Camera->x, y - Camera->y, xSize, ySize, Image->Picture, *xAnimationNumber*xSize, *yAnimationNumber*ySize, Image->color);
+   1391: 
+   1392:     if (*xAnimationNumber >= Image->xMaxAnimationNumber)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-07 01:57:24 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Downloads\TX\TXLib.h
+Compiled:	Jan 16 2021 10:39:37, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jan 16 2021 10:39:43
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CA1B в функции DrawMan() в файле C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp на строке 544. Попытка прочесть данные по адресу 0x4018000C. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-07 01:57:24 +0400], Instance: 0x0050E2FC (32-bit), Flags: CMdRe0, Thread: 0x4CE8 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CA1B in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: DrawMan() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (544):
+
+    542:     Man->xNumber += 1;
+    543: 
+=>  544:     if (Man->xNumber >= Man->Picture->xMaxAnimationNumber)
+    545:         Man->xNumber = 0;
+    546: 
+
+# 1 0x00434136 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: DrawLevelBlocks() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1411):
+
+   1409:         DrawBlock (&ManyBlocks [i], Camera, AllImage);
+   1410: 
+=> 1411:         DrawMan (&Villagers [i], Camera, AllImage);
+   1412: 
+   1413:         i = i + 1;
+
+# 2 0x00433DA1 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: DrawManyBlocks() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1326):
+
+   1324: void DrawManyBlocks (BlockType ManyBlocks [], ManType Villagers [], CamType* Camera, AllImageType AllImage)
+   1325:     {
+=> 1326:     DrawLevelBlocks (ManyBlocks, Villagers, Camera, AllImage);
+   1327:     };
+   1328: 
+
+# 3 0x0042D6E9 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (729):
+
+    727:         DrawTransparentImage (&AllImage.BackGround, 0, 0, &null, &null, FixedCamera);
+    728: 
+=>  729:         DrawManyBlocks (ManyBlocks, Villagers, Camera, AllImage);
+    730: 
+    731:         DrawMan (Man, Camera, AllImage);
+
+# 4 0x00431905 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Level1() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1143):
+
+   1141:     ManType Villagers [] = {{{2125, 525, 20}, 0, 0, 0, 0, Man_aX, 2, 0, 0, BT_BlackSpace, BT_BlackSpace, &AllImage.BlackSpace, &AllImage.BlackSpace, Man_Temperature, 0, &AllImage.Villager}};
+   1142: 
+=> 1143:     MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera, FixedCamera, Villagers);
+   1144:     };
+   1145: 
+
+# 5 0x0042C399 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (462):
+
+    460:         if (LevelNumber == 1)
+    461:             {
+=>  462:             Level1 (&LevelNumber, &Man, AllImage, &Camera, &FixedCamera);
+    463:             };
+    464: 
+
+# 6 0x0042B9D5 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (377):
+
+    375:     txCreateWindow (1550, 850);
+    376: 
+=>  377:     Cycle ();
+    378: 
+    379:     return 0;
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in void DrawTransparentImage(ImageType*, int, int, int*, int*, CamType*) at C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.cpp (1390):
+
+   1388:     int ySize = txGetExtentY (Image->Picture)/Image->yNumber;
+   1389: 
+=> 1390:     txTransparentBlt (txDC (), x - Camera->x, y - Camera->y, xSize, ySize, Image->Picture, *xAnimationNumber*xSize, *yAnimationNumber*ySize, Image->color);
+   1391: 
+   1392:     if (*xAnimationNumber >= Image->xMaxAnimationNumber)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-07 01:57:24 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Downloads\TX\TXLib.h
+Compiled:	Jan 16 2021 10:39:37, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jan 16 2021 10:39:43
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe,
+
+ВНЕЗАПНО: Целочисленное деление на ноль.
+
+#1: Исключение EXCEPTION_INT_DIVIDE_BY_ZERO (0xC0000094) при выполнении кода по адресу 0x00433F68 в функции DrawTransparentImage() в файле C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp на строке 1387. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-07 01:57:24 +0400], Instance: 0x0050E2FC (32-bit), Flags: CMdRe0, Thread: 0x40CC (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00433F68 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: DrawTransparentImage() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1387):
+
+   1385:     // printf ("DrawTransparentImage(): FileName = \"%s\", HDC = \"%p\" \n", Image.FileName, Image.Picture);
+   1386: 
+=> 1387:     int xSize = txGetExtentX (Image->Picture)/Image->xNumber;
+   1388:     int ySize = txGetExtentY (Image->Picture)/Image->yNumber;
+   1389: 
+
+# 1 0x0042CAD6 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: DrawMan() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (560):
+
+    558: 
+    559:     if (Man->Base.Health > 0)
+=>  560:         DrawTransparentImage (Man->Picture, Man->Base.x, Man->Base.y, &Man->xNumber, &Man->yNumber, Camera);
+    561: 
+    562:     // printf ("Man->x = %lf, Man->y = %lf, Camera->x = %d, Camera->y = %d \n", Man->Base.x, Man->Base.y, Camera->x, Camera->y);
+
+# 2 0x00434136 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: DrawLevelBlocks() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1411):
+
+   1409:         DrawBlock (&ManyBlocks [i], Camera, AllImage);
+   1410: 
+=> 1411:         DrawMan (&Villagers [i], Camera, AllImage);
+   1412: 
+   1413:         i = i + 1;
+
+# 3 0x00433DA1 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: DrawManyBlocks() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1326):
+
+   1324: void DrawManyBlocks (BlockType ManyBlocks [], ManType Villagers [], CamType* Camera, AllImageType AllImage)
+   1325:     {
+=> 1326:     DrawLevelBlocks (ManyBlocks, Villagers, Camera, AllImage);
+   1327:     };
+   1328: 
+
+# 4 0x0042D6E9 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (729):
+
+    727:         DrawTransparentImage (&AllImage.BackGround, 0, 0, &null, &null, FixedCamera);
+    728: 
+=>  729:         DrawManyBlocks (ManyBlocks, Villagers, Camera, AllImage);
+    730: 
+    731:         DrawMan (Man, Camera, AllImage);
+
+# 5 0x00431905 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Level1() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1143):
+
+   1141:     ManType Villagers [] = {{{2125, 525, 20}, 0, 0, 0, 0, Man_aX, 2, 0, 0, BT_BlackSpace, BT_BlackSpace, &AllImage.BlackSpace, &AllImage.BlackSpace, Man_Temperature, 0, &AllImage.Villager}};
+   1142: 
+=> 1143:     MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera, FixedCamera, Villagers);
+   1144:     };
+   1145: 
+
+# 6 0x0042C399 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (462):
+
+    460:         if (LevelNumber == 1)
+    461:             {
+=>  462:             Level1 (&LevelNumber, &Man, AllImage, &Camera, &FixedCamera);
+    463:             };
+    464: 
+
+# 7 0x0042B9D5 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (377):
+
+    375:     txCreateWindow (1550, 850);
+    376: 
+=>  377:     Cycle ();
+    378: 
+    379:     return 0;
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in void DrawTransparentImage(ImageType*, int, int, int*, int*, CamType*) at C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.cpp (1387):
+
+   1385:     // printf ("DrawTransparentImage(): FileName = \"%s\", HDC = \"%p\" \n", Image.FileName, Image.Picture);
+   1386: 
+=> 1387:     int xSize = txGetExtentX (Image->Picture)/Image->xNumber;
+   1388:     int ySize = txGetExtentY (Image->Picture)/Image->yNumber;
+   1389: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-07 01:57:24 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Downloads\TX\TXLib.h
+Compiled:	Jan 16 2021 10:40:30, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jan 16 2021 10:40:35
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe,
+
+ВНЕЗАПНО: Целочисленное деление на ноль.
+
+#1: Исключение EXCEPTION_INT_DIVIDE_BY_ZERO (0xC0000094) при выполнении кода по адресу 0x00433F68 в функции DrawTransparentImage() в файле C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp на строке 1387. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции _set_se_translator() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-07 01:57:24 +0400], Instance: 0x0050E2FC (32-bit), Flags: CMdRe0, Thread: 0x40CC (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00433F68 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: DrawTransparentImage() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1387):
+
+   1385:     // printf ("DrawTransparentImage(): FileName = \"%s\", HDC = \"%p\" \n", Image.FileName, Image.Picture);
+   1386: 
+=> 1387:     int xSize = txGetExtentX (Image->Picture)/Image->xNumber;
+   1388:     int ySize = txGetExtentY (Image->Picture)/Image->yNumber;
+   1389: 
+
+# 1 0x0042CAD6 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: DrawMan() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (560):
+
+    558: 
+    559:     if (Man->Base.Health > 0)
+=>  560:         DrawTransparentImage (Man->Picture, Man->Base.x, Man->Base.y, &Man->xNumber, &Man->yNumber, Camera);
+    561: 
+    562:     // printf ("Man->x = %lf, Man->y = %lf, Camera->x = %d, Camera->y = %d \n", Man->Base.x, Man->Base.y, Camera->x, Camera->y);
+
+# 2 0x00434136 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: DrawLevelBlocks() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1411):
+
+   1409:         DrawBlock (&ManyBlocks [i], Camera, AllImage);
+   1410: 
+=> 1411:         DrawMan (&Villagers [i], Camera, AllImage);
+   1412: 
+   1413:         i = i + 1;
+
+# 3 0x00433DA1 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: DrawManyBlocks() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1326):
+
+   1324: void DrawManyBlocks (BlockType ManyBlocks [], ManType Villagers [], CamType* Camera, AllImageType AllImage)
+   1325:     {
+=> 1326:     DrawLevelBlocks (ManyBlocks, Villagers, Camera, AllImage);
+   1327:     };
+   1328: 
+
+# 4 0x0042D6E9 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (729):
+
+    727:         DrawTransparentImage (&AllImage.BackGround, 0, 0, &null, &null, FixedCamera);
+    728: 
+=>  729:         DrawManyBlocks (ManyBlocks, Villagers, Camera, AllImage);
+    730: 
+    731:         DrawMan (Man, Camera, AllImage);
+
+# 5 0x00431905 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Level1() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1143):
+
+   1141:     ManType Villagers [] = {{{2125, 525, 20}, 0, 0, 0, 0, Man_aX, 2, 0, 0, BT_BlackSpace, BT_BlackSpace, &AllImage.BlackSpace, &AllImage.BlackSpace, Man_Temperature, 0, &AllImage.Villager}};
+   1142: 
+=> 1143:     MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera, FixedCamera, Villagers);
+   1144:     };
+   1145: 
+
+# 6 0x0042C399 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (462):
+
+    460:         if (LevelNumber == 1)
+    461:             {
+=>  462:             Level1 (&LevelNumber, &Man, AllImage, &Camera, &FixedCamera);
+    463:             };
+    464: 
+
+# 7 0x0042B9D5 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (377):
+
+    375:     txCreateWindow (1550, 850);
+    376: 
+=>  377:     Cycle ();
+    378: 
+    379:     return 0;
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in void DrawTransparentImage(ImageType*, int, int, int*, int*, CamType*) at C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.cpp (1387):
+
+   1385:     // printf ("DrawTransparentImage(): FileName = \"%s\", HDC = \"%p\" \n", Image.FileName, Image.Picture);
+   1386: 
+=> 1387:     int xSize = txGetExtentX (Image->Picture)/Image->xNumber;
+   1388:     int ySize = txGetExtentY (Image->Picture)/Image->yNumber;
+   1389: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-07 01:57:24 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Downloads\TX\TXLib.h
+Compiled:	Jan 16 2021 10:40:30, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jan 16 2021 10:40:36
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CA1B в функции DrawMan() в файле C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp на строке 544. Попытка прочесть данные по адресу 0x4018000C. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-07 01:57:24 +0400], Instance: 0x0050E2FC (32-bit), Flags: CMdRe0, Thread: 0x42C8 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CA1B in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: DrawMan() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (544):
+
+    542:     Man->xNumber += 1;
+    543: 
+=>  544:     if (Man->xNumber >= Man->Picture->xMaxAnimationNumber)
+    545:         Man->xNumber = 0;
+    546: 
+
+# 1 0x00434136 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: DrawLevelBlocks() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1411):
+
+   1409:         DrawBlock (&ManyBlocks [i], Camera, AllImage);
+   1410: 
+=> 1411:         DrawMan (&Villagers [i], Camera, AllImage);
+   1412: 
+   1413:         i = i + 1;
+
+# 2 0x00433DA1 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: DrawManyBlocks() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1326):
+
+   1324: void DrawManyBlocks (BlockType ManyBlocks [], ManType Villagers [], CamType* Camera, AllImageType AllImage)
+   1325:     {
+=> 1326:     DrawLevelBlocks (ManyBlocks, Villagers, Camera, AllImage);
+   1327:     };
+   1328: 
+
+# 3 0x0042D6E9 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (729):
+
+    727:         DrawTransparentImage (&AllImage.BackGround, 0, 0, &null, &null, FixedCamera);
+    728: 
+=>  729:         DrawManyBlocks (ManyBlocks, Villagers, Camera, AllImage);
+    730: 
+    731:         DrawMan (Man, Camera, AllImage);
+
+# 4 0x00431905 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Level1() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1143):
+
+   1141:     ManType Villagers [] = {{{2125, 525, 20}, 0, 0, 0, 0, Man_aX, 2, 0, 0, BT_BlackSpace, BT_BlackSpace, &AllImage.BlackSpace, &AllImage.BlackSpace, Man_Temperature, 0, &AllImage.Villager}};
+   1142: 
+=> 1143:     MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera, FixedCamera, Villagers);
+   1144:     };
+   1145: 
+
+# 5 0x0042C399 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (462):
+
+    460:         if (LevelNumber == 1)
+    461:             {
+=>  462:             Level1 (&LevelNumber, &Man, AllImage, &Camera, &FixedCamera);
+    463:             };
+    464: 
+
+# 6 0x0042B9D5 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (377):
+
+    375:     txCreateWindow (1550, 850);
+    376: 
+=>  377:     Cycle ();
+    378: 
+    379:     return 0;
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in void DrawTransparentImage(ImageType*, int, int, int*, int*, CamType*) at C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.cpp (1390):
+
+   1388:     int ySize = txGetExtentY (Image->Picture)/Image->yNumber;
+   1389: 
+=> 1390:     txTransparentBlt (txDC (), x - Camera->x, y - Camera->y, xSize, ySize, Image->Picture, *xAnimationNumber*xSize, *yAnimationNumber*ySize, Image->color);
+   1391: 
+   1392:     if (*xAnimationNumber >= Image->xMaxAnimationNumber)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-07 01:57:24 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Downloads\TX\TXLib.h
+Compiled:	Jan 16 2021 10:40:45, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jan 16 2021 10:40:51
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CA1B в функции DrawMan() в файле C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp на строке 544. Попытка прочесть данные по адресу 0x4018000C. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-07 01:57:24 +0400], Instance: 0x0050E2FC (32-bit), Flags: CMdRe0, Thread: 0x42C8 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CA1B in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: DrawMan() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (544):
+
+    542:     Man->xNumber += 1;
+    543: 
+=>  544:     if (Man->xNumber >= Man->Picture->xMaxAnimationNumber)
+    545:         Man->xNumber = 0;
+    546: 
+
+# 1 0x00434136 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: DrawLevelBlocks() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1411):
+
+   1409:         DrawBlock (&ManyBlocks [i], Camera, AllImage);
+   1410: 
+=> 1411:         DrawMan (&Villagers [i], Camera, AllImage);
+   1412: 
+   1413:         i = i + 1;
+
+# 2 0x00433DA1 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: DrawManyBlocks() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1326):
+
+   1324: void DrawManyBlocks (BlockType ManyBlocks [], ManType Villagers [], CamType* Camera, AllImageType AllImage)
+   1325:     {
+=> 1326:     DrawLevelBlocks (ManyBlocks, Villagers, Camera, AllImage);
+   1327:     };
+   1328: 
+
+# 3 0x0042D6E9 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (729):
+
+    727:         DrawTransparentImage (&AllImage.BackGround, 0, 0, &null, &null, FixedCamera);
+    728: 
+=>  729:         DrawManyBlocks (ManyBlocks, Villagers, Camera, AllImage);
+    730: 
+    731:         DrawMan (Man, Camera, AllImage);
+
+# 4 0x00431905 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Level1() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1143):
+
+   1141:     ManType Villagers [] = {{{2125, 525, 20}, 0, 0, 0, 0, Man_aX, 2, 0, 0, BT_BlackSpace, BT_BlackSpace, &AllImage.BlackSpace, &AllImage.BlackSpace, Man_Temperature, 0, &AllImage.Villager}};
+   1142: 
+=> 1143:     MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera, FixedCamera, Villagers);
+   1144:     };
+   1145: 
+
+# 5 0x0042C399 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (462):
+
+    460:         if (LevelNumber == 1)
+    461:             {
+=>  462:             Level1 (&LevelNumber, &Man, AllImage, &Camera, &FixedCamera);
+    463:             };
+    464: 
+
+# 6 0x0042B9D5 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (377):
+
+    375:     txCreateWindow (1550, 850);
+    376: 
+=>  377:     Cycle ();
+    378: 
+    379:     return 0;
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in void DrawTransparentImage(ImageType*, int, int, int*, int*, CamType*) at C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.cpp (1390):
+
+   1388:     int ySize = txGetExtentY (Image->Picture)/Image->yNumber;
+   1389: 
+=> 1390:     txTransparentBlt (txDC (), x - Camera->x, y - Camera->y, xSize, ySize, Image->Picture, *xAnimationNumber*xSize, *yAnimationNumber*ySize, Image->color);
+   1391: 
+   1392:     if (*xAnimationNumber >= Image->xMaxAnimationNumber)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-07 01:57:24 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Downloads\TX\TXLib.h
+Compiled:	Jan 16 2021 10:40:45, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jan 16 2021 10:40:51
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CA1B в функции DrawMan() в файле C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp на строке 544. Попытка прочесть данные по адресу 0x4018000C. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-07 01:57:24 +0400], Instance: 0x0050E2FC (32-bit), Flags: CMdRe0, Thread: 0x4FEC (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CA1B in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: DrawMan() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (544):
+
+    542:     Man->xNumber += 1;
+    543: 
+=>  544:     if (Man->xNumber >= Man->Picture->xMaxAnimationNumber)
+    545:         Man->xNumber = 0;
+    546: 
+
+# 1 0x00434136 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: DrawLevelBlocks() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1411):
+
+   1409:         DrawBlock (&ManyBlocks [i], Camera, AllImage);
+   1410: 
+=> 1411:         DrawMan (&Villagers [i], Camera, AllImage);
+   1412: 
+   1413:         i = i + 1;
+
+# 2 0x00433DA1 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: DrawManyBlocks() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1326):
+
+   1324: void DrawManyBlocks (BlockType ManyBlocks [], ManType Villagers [], CamType* Camera, AllImageType AllImage)
+   1325:     {
+=> 1326:     DrawLevelBlocks (ManyBlocks, Villagers, Camera, AllImage);
+   1327:     };
+   1328: 
+
+# 3 0x0042D6E9 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (729):
+
+    727:         DrawTransparentImage (&AllImage.BackGround, 0, 0, &null, &null, FixedCamera);
+    728: 
+=>  729:         DrawManyBlocks (ManyBlocks, Villagers, Camera, AllImage);
+    730: 
+    731:         DrawMan (Man, Camera, AllImage);
+
+# 4 0x00431905 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Level1() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1143):
+
+   1141:     ManType Villagers [] = {{{2125, 525, 20}, 0, 0, 0, 0, Man_aX, 2, 0, 0, BT_BlackSpace, BT_BlackSpace, &AllImage.BlackSpace, &AllImage.BlackSpace, Man_Temperature, 0, &AllImage.Villager}};
+   1142: 
+=> 1143:     MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera, FixedCamera, Villagers);
+   1144:     };
+   1145: 
+
+# 5 0x0042C399 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (462):
+
+    460:         if (LevelNumber == 1)
+    461:             {
+=>  462:             Level1 (&LevelNumber, &Man, AllImage, &Camera, &FixedCamera);
+    463:             };
+    464: 
+
+# 6 0x0042B9D5 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (377):
+
+    375:     txCreateWindow (1550, 850);
+    376: 
+=>  377:     Cycle ();
+    378: 
+    379:     return 0;
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in void DrawTransparentImage(ImageType*, int, int, int*, int*, CamType*) at C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.cpp (1390):
+
+   1388:     int ySize = txGetExtentY (Image->Picture)/Image->yNumber;
+   1389: 
+=> 1390:     txTransparentBlt (txDC (), x - Camera->x, y - Camera->y, xSize, ySize, Image->Picture, *xAnimationNumber*xSize, *yAnimationNumber*ySize, Image->color);
+   1391: 
+   1392:     if (*xAnimationNumber >= Image->xMaxAnimationNumber)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-07 01:57:24 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Downloads\TX\TXLib.h
+Compiled:	Jan 16 2021 10:48:31, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jan 16 2021 10:48:37
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CA1B в функции DrawMan() в файле C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp на строке 544. Попытка прочесть данные по адресу 0x4018000C. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-07 01:57:24 +0400], Instance: 0x0050E2FC (32-bit), Flags: CMdRe0, Thread: 0x4FEC (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CA1B in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: DrawMan() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (544):
+
+    542:     Man->xNumber += 1;
+    543: 
+=>  544:     if (Man->xNumber >= Man->Picture->xMaxAnimationNumber)
+    545:         Man->xNumber = 0;
+    546: 
+
+# 1 0x00434136 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: DrawLevelBlocks() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1411):
+
+   1409:         DrawBlock (&ManyBlocks [i], Camera, AllImage);
+   1410: 
+=> 1411:         DrawMan (&Villagers [i], Camera, AllImage);
+   1412: 
+   1413:         i = i + 1;
+
+# 2 0x00433DA1 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: DrawManyBlocks() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1326):
+
+   1324: void DrawManyBlocks (BlockType ManyBlocks [], ManType Villagers [], CamType* Camera, AllImageType AllImage)
+   1325:     {
+=> 1326:     DrawLevelBlocks (ManyBlocks, Villagers, Camera, AllImage);
+   1327:     };
+   1328: 
+
+# 3 0x0042D6E9 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (729):
+
+    727:         DrawTransparentImage (&AllImage.BackGround, 0, 0, &null, &null, FixedCamera);
+    728: 
+=>  729:         DrawManyBlocks (ManyBlocks, Villagers, Camera, AllImage);
+    730: 
+    731:         DrawMan (Man, Camera, AllImage);
+
+# 4 0x00431905 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Level1() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1143):
+
+   1141:     ManType Villagers [] = {{{2125, 525, 20}, 0, 0, 0, 0, Man_aX, 2, 0, 0, BT_BlackSpace, BT_BlackSpace, &AllImage.BlackSpace, &AllImage.BlackSpace, Man_Temperature, 0, &AllImage.Villager}};
+   1142: 
+=> 1143:     MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera, FixedCamera, Villagers);
+   1144:     };
+   1145: 
+
+# 5 0x0042C399 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (462):
+
+    460:         if (LevelNumber == 1)
+    461:             {
+=>  462:             Level1 (&LevelNumber, &Man, AllImage, &Camera, &FixedCamera);
+    463:             };
+    464: 
+
+# 6 0x0042B9D5 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (377):
+
+    375:     txCreateWindow (1550, 850);
+    376: 
+=>  377:     Cycle ();
+    378: 
+    379:     return 0;
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in void DrawTransparentImage(ImageType*, int, int, int*, int*, CamType*) at C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.cpp (1390):
+
+   1388:     int ySize = txGetExtentY (Image->Picture)/Image->yNumber;
+   1389: 
+=> 1390:     txTransparentBlt (txDC (), x - Camera->x, y - Camera->y, xSize, ySize, Image->Picture, *xAnimationNumber*xSize, *yAnimationNumber*ySize, Image->color);
+   1391: 
+   1392:     if (*xAnimationNumber >= Image->xMaxAnimationNumber)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-07 01:57:24 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Downloads\TX\TXLib.h
+Compiled:	Jan 16 2021 10:48:31, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jan 16 2021 10:48:37
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CA1B в функции DrawMan() в файле C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp на строке 544. Попытка прочесть данные по адресу 0x4018000C. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-07 01:57:24 +0400], Instance: 0x0050E2FC (32-bit), Flags: CMdRe0, Thread: 0x35B0 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CA1B in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: DrawMan() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (544):
+
+    542:     Man->xNumber += 1;
+    543: 
+=>  544:     if (Man->xNumber >= Man->Picture->xMaxAnimationNumber)
+    545:         Man->xNumber = 0;
+    546: 
+
+# 1 0x00434131 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: DrawLevelBlocks() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1411):
+
+   1409:         DrawBlock (&ManyBlocks [i], Camera, AllImage);
+   1410: 
+=> 1411:         DrawMan (&Villagers [1], Camera, AllImage);
+   1412: 
+   1413:         i = i + 1;
+
+# 2 0x00433DA1 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: DrawManyBlocks() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1326):
+
+   1324: void DrawManyBlocks (BlockType ManyBlocks [], ManType Villagers [], CamType* Camera, AllImageType AllImage)
+   1325:     {
+=> 1326:     DrawLevelBlocks (ManyBlocks, Villagers, Camera, AllImage);
+   1327:     };
+   1328: 
+
+# 3 0x0042D6E9 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (729):
+
+    727:         DrawTransparentImage (&AllImage.BackGround, 0, 0, &null, &null, FixedCamera);
+    728: 
+=>  729:         DrawManyBlocks (ManyBlocks, Villagers, Camera, AllImage);
+    730: 
+    731:         DrawMan (Man, Camera, AllImage);
+
+# 4 0x00431905 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Level1() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1143):
+
+   1141:     ManType Villagers [] = {{{2125, 525, 20}, 0, 0, 0, 0, Man_aX, 2, 0, 0, BT_BlackSpace, BT_BlackSpace, &AllImage.BlackSpace, &AllImage.BlackSpace, Man_Temperature, 0, &AllImage.Villager}};
+   1142: 
+=> 1143:     MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera, FixedCamera, Villagers);
+   1144:     };
+   1145: 
+
+# 5 0x0042C399 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (462):
+
+    460:         if (LevelNumber == 1)
+    461:             {
+=>  462:             Level1 (&LevelNumber, &Man, AllImage, &Camera, &FixedCamera);
+    463:             };
+    464: 
+
+# 6 0x0042B9D5 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (377):
+
+    375:     txCreateWindow (1550, 850);
+    376: 
+=>  377:     Cycle ();
+    378: 
+    379:     return 0;
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in void DrawTransparentImage(ImageType*, int, int, int*, int*, CamType*) at C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.cpp (1390):
+
+   1388:     int ySize = txGetExtentY (Image->Picture)/Image->yNumber;
+   1389: 
+=> 1390:     txTransparentBlt (txDC (), x - Camera->x, y - Camera->y, xSize, ySize, Image->Picture, *xAnimationNumber*xSize, *yAnimationNumber*ySize, Image->color);
+   1391: 
+   1392:     if (*xAnimationNumber >= Image->xMaxAnimationNumber)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-07 01:57:24 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Downloads\TX\TXLib.h
+Compiled:	Jan 16 2021 10:49:08, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jan 16 2021 10:49:14
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CA1B в функции DrawMan() в файле C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp на строке 544. Попытка прочесть данные по адресу 0x4018000C. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-07 01:57:24 +0400], Instance: 0x0050E2FC (32-bit), Flags: CMdRe0, Thread: 0x35B0 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CA1B in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: DrawMan() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (544):
+
+    542:     Man->xNumber += 1;
+    543: 
+=>  544:     if (Man->xNumber >= Man->Picture->xMaxAnimationNumber)
+    545:         Man->xNumber = 0;
+    546: 
+
+# 1 0x00434131 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: DrawLevelBlocks() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1411):
+
+   1409:         DrawBlock (&ManyBlocks [i], Camera, AllImage);
+   1410: 
+=> 1411:         DrawMan (&Villagers [1], Camera, AllImage);
+   1412: 
+   1413:         i = i + 1;
+
+# 2 0x00433DA1 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: DrawManyBlocks() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1326):
+
+   1324: void DrawManyBlocks (BlockType ManyBlocks [], ManType Villagers [], CamType* Camera, AllImageType AllImage)
+   1325:     {
+=> 1326:     DrawLevelBlocks (ManyBlocks, Villagers, Camera, AllImage);
+   1327:     };
+   1328: 
+
+# 3 0x0042D6E9 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (729):
+
+    727:         DrawTransparentImage (&AllImage.BackGround, 0, 0, &null, &null, FixedCamera);
+    728: 
+=>  729:         DrawManyBlocks (ManyBlocks, Villagers, Camera, AllImage);
+    730: 
+    731:         DrawMan (Man, Camera, AllImage);
+
+# 4 0x00431905 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Level1() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1143):
+
+   1141:     ManType Villagers [] = {{{2125, 525, 20}, 0, 0, 0, 0, Man_aX, 2, 0, 0, BT_BlackSpace, BT_BlackSpace, &AllImage.BlackSpace, &AllImage.BlackSpace, Man_Temperature, 0, &AllImage.Villager}};
+   1142: 
+=> 1143:     MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera, FixedCamera, Villagers);
+   1144:     };
+   1145: 
+
+# 5 0x0042C399 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (462):
+
+    460:         if (LevelNumber == 1)
+    461:             {
+=>  462:             Level1 (&LevelNumber, &Man, AllImage, &Camera, &FixedCamera);
+    463:             };
+    464: 
+
+# 6 0x0042B9D5 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (377):
+
+    375:     txCreateWindow (1550, 850);
+    376: 
+=>  377:     Cycle ();
+    378: 
+    379:     return 0;
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in void DrawTransparentImage(ImageType*, int, int, int*, int*, CamType*) at C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.cpp (1390):
+
+   1388:     int ySize = txGetExtentY (Image->Picture)/Image->yNumber;
+   1389: 
+=> 1390:     txTransparentBlt (txDC (), x - Camera->x, y - Camera->y, xSize, ySize, Image->Picture, *xAnimationNumber*xSize, *yAnimationNumber*ySize, Image->color);
+   1391: 
+   1392:     if (*xAnimationNumber >= Image->xMaxAnimationNumber)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-07 01:57:24 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Downloads\TX\TXLib.h
+Compiled:	Jan 16 2021 10:49:08, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jan 16 2021 10:49:14
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x00434681 в функции BlockCollision() в файле C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp на строке 1541. Попытка прочесть данные по адресу 0x0081F088. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-07 01:57:24 +0400], Instance: 0x0050E2FC (32-bit), Flags: CMdRe0, Thread: 0x3564 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00434681 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: BlockCollision() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1541):
+
+   1539: void BlockCollision (ManType* Man, BlockType* Block, CamType* Camera)
+   1540:     {
+=> 1541:     if (Block->Number == BT_Fire)
+   1542:         {
+   1543:         if (Collision (Block, Man) == true)
+
+# 1 0x00434380 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: CallPeoplePhysic() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1456):
+
+   1454:         Physic (&Villagers [i]);
+   1455: 
+=> 1456:         BlockCollision (&Villagers [i], &ManyBlocks [9999], Camera);
+   1457: 
+   1458:         i = i + 1;
+
+# 2 0x00433EE2 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: InteractManWithBlocks() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1351):
+
+   1349:     CallLevelPhysic (ManyBlocks, Man, Camera, NumberCoin);
+   1350: 
+=> 1351:     CallPeoplePhysic (Villagers, ManyBlocks, Man, Camera);
+   1352:     };
+   1353: 
+
+# 3 0x0042D8E8 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (755):
+
+    753:         DrawInventory (Man, Camera, FixedCamera, AllImage);
+    754: 
+=>  755:         InteractManWithBlocks (ManyBlocks, Man, Camera, &Man->NumberCoin, LevelNumber, Villagers);
+    756: 
+    757:         Physic (Man);
+
+# 4 0x004319D6 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Level1() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1158):
+
+   1156:                             {{-1, -1}}};
+   1157: 
+=> 1158:     MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera, FixedCamera, Villagers);
+   1159:     };
+   1160: 
+
+# 5 0x0042C3A5 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (468):
+
+    466:         if (LevelNumber == 1)
+    467:             {
+=>  468:             Level1 (&LevelNumber, &Man, AllImage, &Camera, &FixedCamera);
+    469:             };
+    470: 
+
+# 6 0x0042B9D5 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (383):
+
+    381:     txCreateWindow (1550, 850);
+    382: 
+=>  383:     Cycle ();
+    384: 
+    385:     return 0;
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in void VillagerMind(ManType*, ManType*) at C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.cpp (625):
+
+    623:         };
+    624: 
+=>  625:     $i printf ("x = %lf, y = %lf \n", Villager->Base.x, Villager->Base.y); $d
+    626:     };
+    627: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-07 01:57:24 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Downloads\TX\TXLib.h
+Compiled:	Jan 16 2021 11:28:55, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jan 16 2021 11:29:01
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x00434681 в функции BlockCollision() в файле C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp на строке 1541. Попытка прочесть данные по адресу 0x0081F088. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-07 01:57:24 +0400], Instance: 0x0050E2FC (32-bit), Flags: CMdRe0, Thread: 0x3564 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00434681 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: BlockCollision() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1541):
+
+   1539: void BlockCollision (ManType* Man, BlockType* Block, CamType* Camera)
+   1540:     {
+=> 1541:     if (Block->Number == BT_Fire)
+   1542:         {
+   1543:         if (Collision (Block, Man) == true)
+
+# 1 0x00434380 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: CallPeoplePhysic() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1456):
+
+   1454:         Physic (&Villagers [i]);
+   1455: 
+=> 1456:         BlockCollision (&Villagers [i], &ManyBlocks [9999], Camera);
+   1457: 
+   1458:         i = i + 1;
+
+# 2 0x00433EE2 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: InteractManWithBlocks() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1351):
+
+   1349:     CallLevelPhysic (ManyBlocks, Man, Camera, NumberCoin);
+   1350: 
+=> 1351:     CallPeoplePhysic (Villagers, ManyBlocks, Man, Camera);
+   1352:     };
+   1353: 
+
+# 3 0x0042D8E8 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (755):
+
+    753:         DrawInventory (Man, Camera, FixedCamera, AllImage);
+    754: 
+=>  755:         InteractManWithBlocks (ManyBlocks, Man, Camera, &Man->NumberCoin, LevelNumber, Villagers);
+    756: 
+    757:         Physic (Man);
+
+# 4 0x004319D6 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Level1() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1158):
+
+   1156:                             {{-1, -1}}};
+   1157: 
+=> 1158:     MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera, FixedCamera, Villagers);
+   1159:     };
+   1160: 
+
+# 5 0x0042C3A5 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (468):
+
+    466:         if (LevelNumber == 1)
+    467:             {
+=>  468:             Level1 (&LevelNumber, &Man, AllImage, &Camera, &FixedCamera);
+    469:             };
+    470: 
+
+# 6 0x0042B9D5 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (383):
+
+    381:     txCreateWindow (1550, 850);
+    382: 
+=>  383:     Cycle ();
+    384: 
+    385:     return 0;
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in void VillagerMind(ManType*, ManType*) at C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.cpp (625):
+
+    623:         };
+    624: 
+=>  625:     $i printf ("x = %lf, y = %lf \n", Villager->Base.x, Villager->Base.y); $d
+    626:     };
+    627: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-07 01:57:24 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Downloads\TX\TXLib.h
+Compiled:	Jan 16 2021 11:28:55, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jan 16 2021 11:29:01
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x004348DE в функции BlockCollision() в файле C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp на строке 1586. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-07 01:57:24 +0400], Instance: 0x0050E2FC (32-bit), Flags: CMdRe0, Thread: 0x4694 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x004348DE in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: BlockCollision() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1586):
+
+   1584:         Block->Number != BT_Chest)
+   1585:     {
+=> 1586:     if (ModuleDistance (Block->Base.x + Block_BaseWide + Man->Base.x, Block->Base.y + Block_BaseHigh + Man->Base.x, txMouseX(), txMouseY(), Block_BaseWide) == true)
+   1587:         if (GetAsyncKeyState (VK_LBUTTON) &&
+   1588:             Man->LeftArm == BT_Pickaxe &&
+
+# 1 0x00434393 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: CallPeoplePhysic() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1458):
+
+   1456:         Physic (&Villagers [i]);
+   1457: 
+=> 1458:         BlockCollision (&Villagers [i], &ManyBlocks [b], Camera);
+   1459: 
+   1460:         i = i + 1;
+
+# 2 0x00433EE2 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: InteractManWithBlocks() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1351):
+
+   1349:     CallLevelPhysic (ManyBlocks, Man, Camera, NumberCoin);
+   1350: 
+=> 1351:     CallPeoplePhysic (Villagers, ManyBlocks, Man, Camera);
+   1352:     };
+   1353: 
+
+# 3 0x0042D8E8 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (755):
+
+    753:         DrawInventory (Man, Camera, FixedCamera, AllImage);
+    754: 
+=>  755:         InteractManWithBlocks (ManyBlocks, Man, Camera, &Man->NumberCoin, LevelNumber, Villagers);
+    756: 
+    757:         Physic (Man);
+
+# 4 0x004319D6 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Level1() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1158):
+
+   1156:                             {{-1, -1}}};
+   1157: 
+=> 1158:     MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera, FixedCamera, Villagers);
+   1159:     };
+   1160: 
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in void BlockCollision(ManType*, BlockType*, CamType*) at C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.cpp (1586):
+
+   1584:         Block->Number != BT_Chest)
+   1585:     {
+=> 1586:     if (ModuleDistance (Block->Base.x + Block_BaseWide + Man->Base.x, Block->Base.y + Block_BaseHigh + Man->Base.x, txMouseX(), txMouseY(), Block_BaseWide) == true)
+   1587:         if (GetAsyncKeyState (VK_LBUTTON) &&
+   1588:             Man->LeftArm == BT_Pickaxe &&
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-07 01:57:24 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Downloads\TX\TXLib.h
+Compiled:	Jan 16 2021 11:30:10, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jan 16 2021 11:30:16
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe,
+
+ВНЕЗАПНО: signal (8, 0x00): SIGFPE: Грубая ошибка в вычислениях. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x004348DE в функции BlockCollision() в файле C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp на строке 1586. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-07 01:57:24 +0400], Instance: 0x0050E2FC (32-bit), Flags: CMdRe0, Thread: 0x4694 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x004348DE in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: BlockCollision() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1586):
+
+   1584:         Block->Number != BT_Chest)
+   1585:     {
+=> 1586:     if (ModuleDistance (Block->Base.x + Block_BaseWide + Man->Base.x, Block->Base.y + Block_BaseHigh + Man->Base.x, txMouseX(), txMouseY(), Block_BaseWide) == true)
+   1587:         if (GetAsyncKeyState (VK_LBUTTON) &&
+   1588:             Man->LeftArm == BT_Pickaxe &&
+
+# 1 0x00434393 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: CallPeoplePhysic() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1458):
+
+   1456:         Physic (&Villagers [i]);
+   1457: 
+=> 1458:         BlockCollision (&Villagers [i], &ManyBlocks [b], Camera);
+   1459: 
+   1460:         i = i + 1;
+
+# 2 0x00433EE2 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: InteractManWithBlocks() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1351):
+
+   1349:     CallLevelPhysic (ManyBlocks, Man, Camera, NumberCoin);
+   1350: 
+=> 1351:     CallPeoplePhysic (Villagers, ManyBlocks, Man, Camera);
+   1352:     };
+   1353: 
+
+# 3 0x0042D8E8 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (755):
+
+    753:         DrawInventory (Man, Camera, FixedCamera, AllImage);
+    754: 
+=>  755:         InteractManWithBlocks (ManyBlocks, Man, Camera, &Man->NumberCoin, LevelNumber, Villagers);
+    756: 
+    757:         Physic (Man);
+
+# 4 0x004319D6 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Level1() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1158):
+
+   1156:                             {{-1, -1}}};
+   1157: 
+=> 1158:     MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera, FixedCamera, Villagers);
+   1159:     };
+   1160: 
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in void BlockCollision(ManType*, BlockType*, CamType*) at C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.cpp (1586):
+
+   1584:         Block->Number != BT_Chest)
+   1585:     {
+=> 1586:     if (ModuleDistance (Block->Base.x + Block_BaseWide + Man->Base.x, Block->Base.y + Block_BaseHigh + Man->Base.x, txMouseX(), txMouseY(), Block_BaseWide) == true)
+   1587:         if (GetAsyncKeyState (VK_LBUTTON) &&
+   1588:             Man->LeftArm == BT_Pickaxe &&
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-07 01:57:24 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Downloads\TX\TXLib.h
+Compiled:	Jan 16 2021 11:30:10, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jan 16 2021 11:30:16
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x004348EA в функции BlockCollision() в файле C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp на строке 1585. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-07 01:57:24 +0400], Instance: 0x0050E2FC (32-bit), Flags: CMdRe0, Thread: 0x3C14 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x004348EA in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: BlockCollision() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1585):
+
+   1583:         Block->Number != BT_Chest)
+   1584:     {
+=> 1585:     if (ModuleDistance (Block->Base.x + Block_BaseWide + Man->Base.x, Block->Base.y + Block_BaseHigh + Man->Base.x, txMouseX(), txMouseY(), Block_BaseWide) == true)
+   1586:         if (GetAsyncKeyState (VK_LBUTTON) &&
+   1587:             Man->LeftArm == BT_Pickaxe &&
+
+# 1 0x004343A3 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: CallPeoplePhysic() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1458):
+
+   1456:         Physic (&Villagers [i]);
+   1457: 
+=> 1458:         BlockCollision (&Villagers [i], ManyBlocks, Camera);
+   1459: 
+   1460:         i = i + 1;
+
+# 2 0x00433F0B in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: InteractManWithBlocks() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1353):
+
+   1351:     CallLevelPhysic (ManyBlocks, Man, Camera, NumberCoin);
+   1352: 
+=> 1353:     CallPeoplePhysic (Villagers, ManyBlocks, Man, Camera);
+   1354:     };
+   1355: 
+
+# 3 0x0042D8E8 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (755):
+
+    753:         DrawInventory (Man, Camera, FixedCamera, AllImage);
+    754: 
+=>  755:         InteractManWithBlocks (ManyBlocks, Man, Camera, &Man->NumberCoin, LevelNumber, Villagers);
+    756: 
+    757:         Physic (Man);
+
+# 4 0x004319FF in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Level1() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1160):
+
+   1158:                             {{-1, -1}}};
+   1159: 
+=> 1160:     MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera, FixedCamera, Villagers);
+   1161:     };
+   1162: 
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in void BlockCollision(ManType*, BlockType*, CamType*) at C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.cpp (1585):
+
+   1583:         Block->Number != BT_Chest)
+   1584:     {
+=> 1585:     if (ModuleDistance (Block->Base.x + Block_BaseWide + Man->Base.x, Block->Base.y + Block_BaseHigh + Man->Base.x, txMouseX(), txMouseY(), Block_BaseWide) == true)
+   1586:         if (GetAsyncKeyState (VK_LBUTTON) &&
+   1587:             Man->LeftArm == BT_Pickaxe &&
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-07 01:57:24 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Downloads\TX\TXLib.h
+Compiled:	Jan 16 2021 13:41:44, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jan 16 2021 13:41:49
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe,
+
+ВНЕЗАПНО: signal (8, 0x00): SIGFPE: Грубая ошибка в вычислениях. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x004348EA в функции BlockCollision() в файле C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp на строке 1585. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-07 01:57:24 +0400], Instance: 0x0050E2FC (32-bit), Flags: CMdRe0, Thread: 0x3C14 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x004348EA in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: BlockCollision() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1585):
+
+   1583:         Block->Number != BT_Chest)
+   1584:     {
+=> 1585:     if (ModuleDistance (Block->Base.x + Block_BaseWide + Man->Base.x, Block->Base.y + Block_BaseHigh + Man->Base.x, txMouseX(), txMouseY(), Block_BaseWide) == true)
+   1586:         if (GetAsyncKeyState (VK_LBUTTON) &&
+   1587:             Man->LeftArm == BT_Pickaxe &&
+
+# 1 0x004343A3 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: CallPeoplePhysic() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1458):
+
+   1456:         Physic (&Villagers [i]);
+   1457: 
+=> 1458:         BlockCollision (&Villagers [i], ManyBlocks, Camera);
+   1459: 
+   1460:         i = i + 1;
+
+# 2 0x00433F0B in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: InteractManWithBlocks() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1353):
+
+   1351:     CallLevelPhysic (ManyBlocks, Man, Camera, NumberCoin);
+   1352: 
+=> 1353:     CallPeoplePhysic (Villagers, ManyBlocks, Man, Camera);
+   1354:     };
+   1355: 
+
+# 3 0x0042D8E8 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (755):
+
+    753:         DrawInventory (Man, Camera, FixedCamera, AllImage);
+    754: 
+=>  755:         InteractManWithBlocks (ManyBlocks, Man, Camera, &Man->NumberCoin, LevelNumber, Villagers);
+    756: 
+    757:         Physic (Man);
+
+# 4 0x004319FF in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Level1() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1160):
+
+   1158:                             {{-1, -1}}};
+   1159: 
+=> 1160:     MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera, FixedCamera, Villagers);
+   1161:     };
+   1162: 
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in void BlockCollision(ManType*, BlockType*, CamType*) at C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.cpp (1585):
+
+   1583:         Block->Number != BT_Chest)
+   1584:     {
+=> 1585:     if (ModuleDistance (Block->Base.x + Block_BaseWide + Man->Base.x, Block->Base.y + Block_BaseHigh + Man->Base.x, txMouseX(), txMouseY(), Block_BaseWide) == true)
+   1586:         if (GetAsyncKeyState (VK_LBUTTON) &&
+   1587:             Man->LeftArm == BT_Pickaxe &&
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-07 01:57:24 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Downloads\TX\TXLib.h
+Compiled:	Jan 16 2021 13:41:44, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jan 16 2021 13:41:49
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x004348FC в функции BlockCollision() в файле C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp на строке 1585. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-07 01:57:24 +0400], Instance: 0x0050E2FC (32-bit), Flags: CMdRe0, Thread: 0x12B4 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x004348FC in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: BlockCollision() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1585):
+
+   1583:         Block->Number != BT_Chest)
+   1584:     {
+=> 1585:     if (ModuleDistance (Block->Base.x + Block_BaseWide + Man->Base.x, Block->Base.y + Block_BaseHigh + Man->Base.x, txMouseX(), txMouseY(), Block_BaseWide) == true)
+   1586:         if (GetAsyncKeyState (VK_LBUTTON) &&
+   1587:             Man->LeftArm == BT_Pickaxe &&
+
+# 1 0x004343B5 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: CallPeoplePhysic() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1458):
+
+   1456:         Physic (&Villagers [i]);
+   1457: 
+=> 1458:         BlockCollision (&Villagers [i], &ManyBlocks [i], Camera);
+   1459: 
+   1460:         i = i + 1;
+
+# 2 0x00433F0B in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: InteractManWithBlocks() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1353):
+
+   1351:     CallLevelPhysic (ManyBlocks, Man, Camera, NumberCoin);
+   1352: 
+=> 1353:     CallPeoplePhysic (Villagers, ManyBlocks, Man, Camera);
+   1354:     };
+   1355: 
+
+# 3 0x0042D8E8 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (755):
+
+    753:         DrawInventory (Man, Camera, FixedCamera, AllImage);
+    754: 
+=>  755:         InteractManWithBlocks (ManyBlocks, Man, Camera, &Man->NumberCoin, LevelNumber, Villagers);
+    756: 
+    757:         Physic (Man);
+
+# 4 0x004319FF in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Level1() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1160):
+
+   1158:                             {{-1, -1}}};
+   1159: 
+=> 1160:     MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera, FixedCamera, Villagers);
+   1161:     };
+   1162: 
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in void BlockCollision(ManType*, BlockType*, CamType*) at C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.cpp (1585):
+
+   1583:         Block->Number != BT_Chest)
+   1584:     {
+=> 1585:     if (ModuleDistance (Block->Base.x + Block_BaseWide + Man->Base.x, Block->Base.y + Block_BaseHigh + Man->Base.x, txMouseX(), txMouseY(), Block_BaseWide) == true)
+   1586:         if (GetAsyncKeyState (VK_LBUTTON) &&
+   1587:             Man->LeftArm == BT_Pickaxe &&
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-07 01:57:24 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Downloads\TX\TXLib.h
+Compiled:	Jan 16 2021 13:43:04, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jan 16 2021 13:43:09
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe,
+
+ВНЕЗАПНО: signal (8, 0x00): SIGFPE: Грубая ошибка в вычислениях. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x004348FC в функции BlockCollision() в файле C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp на строке 1585. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-07 01:57:24 +0400], Instance: 0x0050E2FC (32-bit), Flags: CMdRe0, Thread: 0x12B4 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x004348FC in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: BlockCollision() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1585):
+
+   1583:         Block->Number != BT_Chest)
+   1584:     {
+=> 1585:     if (ModuleDistance (Block->Base.x + Block_BaseWide + Man->Base.x, Block->Base.y + Block_BaseHigh + Man->Base.x, txMouseX(), txMouseY(), Block_BaseWide) == true)
+   1586:         if (GetAsyncKeyState (VK_LBUTTON) &&
+   1587:             Man->LeftArm == BT_Pickaxe &&
+
+# 1 0x004343B5 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: CallPeoplePhysic() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1458):
+
+   1456:         Physic (&Villagers [i]);
+   1457: 
+=> 1458:         BlockCollision (&Villagers [i], &ManyBlocks [i], Camera);
+   1459: 
+   1460:         i = i + 1;
+
+# 2 0x00433F0B in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: InteractManWithBlocks() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1353):
+
+   1351:     CallLevelPhysic (ManyBlocks, Man, Camera, NumberCoin);
+   1352: 
+=> 1353:     CallPeoplePhysic (Villagers, ManyBlocks, Man, Camera);
+   1354:     };
+   1355: 
+
+# 3 0x0042D8E8 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (755):
+
+    753:         DrawInventory (Man, Camera, FixedCamera, AllImage);
+    754: 
+=>  755:         InteractManWithBlocks (ManyBlocks, Man, Camera, &Man->NumberCoin, LevelNumber, Villagers);
+    756: 
+    757:         Physic (Man);
+
+# 4 0x004319FF in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Level1() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1160):
+
+   1158:                             {{-1, -1}}};
+   1159: 
+=> 1160:     MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera, FixedCamera, Villagers);
+   1161:     };
+   1162: 
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in void BlockCollision(ManType*, BlockType*, CamType*) at C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.cpp (1585):
+
+   1583:         Block->Number != BT_Chest)
+   1584:     {
+=> 1585:     if (ModuleDistance (Block->Base.x + Block_BaseWide + Man->Base.x, Block->Base.y + Block_BaseHigh + Man->Base.x, txMouseX(), txMouseY(), Block_BaseWide) == true)
+   1586:         if (GetAsyncKeyState (VK_LBUTTON) &&
+   1587:             Man->LeftArm == BT_Pickaxe &&
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-07 01:57:24 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Downloads\TX\TXLib.h
+Compiled:	Jan 16 2021 13:43:04, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jan 16 2021 13:43:10
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x004348FC в функции BlockCollision() в файле C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp на строке 1585. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-07 01:57:24 +0400], Instance: 0x0050E2FC (32-bit), Flags: CMdRe0, Thread: 0x3F0C (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x004348FC in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: BlockCollision() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1585):
+
+   1583:         Block->Number != BT_Chest)
+   1584:     {
+=> 1585:     if (ModuleDistance (Block->Base.x + Block_BaseWide + Man->Base.x, Block->Base.y + Block_BaseHigh + Man->Base.x, txMouseX(), txMouseY(), Block_BaseWide) == true)
+   1586:         if (GetAsyncKeyState (VK_LBUTTON) &&
+   1587:             Man->LeftArm == BT_Pickaxe &&
+
+# 1 0x004343B5 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: CallPeoplePhysic() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1458):
+
+   1456:         Physic (&Villagers [i]);
+   1457: 
+=> 1458:         BlockCollision (&Villagers [i], &ManyBlocks [i], Camera);
+   1459: 
+   1460:         i = i + 1;
+
+# 2 0x00433F0B in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: InteractManWithBlocks() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1353):
+
+   1351:     CallLevelPhysic (ManyBlocks, Man, Camera, NumberCoin);
+   1352: 
+=> 1353:     CallPeoplePhysic (Villagers, ManyBlocks, Man, Camera);
+   1354:     };
+   1355: 
+
+# 3 0x0042D8E8 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (755):
+
+    753:         DrawInventory (Man, Camera, FixedCamera, AllImage);
+    754: 
+=>  755:         InteractManWithBlocks (ManyBlocks, Man, Camera, &Man->NumberCoin, LevelNumber, Villagers);
+    756: 
+    757:         Physic (Man);
+
+# 4 0x004319FF in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Level1() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1160):
+
+   1158:                             {{-1, -1}}};
+   1159: 
+=> 1160:     MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera, FixedCamera, Villagers);
+   1161:     };
+   1162: 
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in void BlockCollision(ManType*, BlockType*, CamType*) at C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.cpp (1585):
+
+   1583:         Block->Number != BT_Chest)
+   1584:     {
+=> 1585:     if (ModuleDistance (Block->Base.x + Block_BaseWide + Man->Base.x, Block->Base.y + Block_BaseHigh + Man->Base.x, txMouseX(), txMouseY(), Block_BaseWide) == true)
+   1586:         if (GetAsyncKeyState (VK_LBUTTON) &&
+   1587:             Man->LeftArm == BT_Pickaxe &&
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-07 01:57:24 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Downloads\TX\TXLib.h
+Compiled:	Jan 16 2021 13:43:51, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jan 16 2021 13:43:56
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe,
+
+ВНЕЗАПНО: signal (8, 0x00): SIGFPE: Грубая ошибка в вычислениях. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x004348FC в функции BlockCollision() в файле C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp на строке 1585. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-07 01:57:24 +0400], Instance: 0x0050E2FC (32-bit), Flags: CMdRe0, Thread: 0x3F0C (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x004348FC in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: BlockCollision() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1585):
+
+   1583:         Block->Number != BT_Chest)
+   1584:     {
+=> 1585:     if (ModuleDistance (Block->Base.x + Block_BaseWide + Man->Base.x, Block->Base.y + Block_BaseHigh + Man->Base.x, txMouseX(), txMouseY(), Block_BaseWide) == true)
+   1586:         if (GetAsyncKeyState (VK_LBUTTON) &&
+   1587:             Man->LeftArm == BT_Pickaxe &&
+
+# 1 0x004343B5 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: CallPeoplePhysic() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1458):
+
+   1456:         Physic (&Villagers [i]);
+   1457: 
+=> 1458:         BlockCollision (&Villagers [i], &ManyBlocks [i], Camera);
+   1459: 
+   1460:         i = i + 1;
+
+# 2 0x00433F0B in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: InteractManWithBlocks() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1353):
+
+   1351:     CallLevelPhysic (ManyBlocks, Man, Camera, NumberCoin);
+   1352: 
+=> 1353:     CallPeoplePhysic (Villagers, ManyBlocks, Man, Camera);
+   1354:     };
+   1355: 
+
+# 3 0x0042D8E8 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (755):
+
+    753:         DrawInventory (Man, Camera, FixedCamera, AllImage);
+    754: 
+=>  755:         InteractManWithBlocks (ManyBlocks, Man, Camera, &Man->NumberCoin, LevelNumber, Villagers);
+    756: 
+    757:         Physic (Man);
+
+# 4 0x004319FF in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Level1() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1160):
+
+   1158:                             {{-1, -1}}};
+   1159: 
+=> 1160:     MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera, FixedCamera, Villagers);
+   1161:     };
+   1162: 
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in void BlockCollision(ManType*, BlockType*, CamType*) at C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.cpp (1585):
+
+   1583:         Block->Number != BT_Chest)
+   1584:     {
+=> 1585:     if (ModuleDistance (Block->Base.x + Block_BaseWide + Man->Base.x, Block->Base.y + Block_BaseHigh + Man->Base.x, txMouseX(), txMouseY(), Block_BaseWide) == true)
+   1586:         if (GetAsyncKeyState (VK_LBUTTON) &&
+   1587:             Man->LeftArm == BT_Pickaxe &&
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-07 01:57:24 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Downloads\TX\TXLib.h
+Compiled:	Jan 16 2021 13:43:51, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jan 16 2021 13:43:56
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x004348EA в функции BlockCollision() в файле C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp на строке 1585. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-07 01:57:24 +0400], Instance: 0x0050E2FC (32-bit), Flags: CMdRe0, Thread: 0x3BF0 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x004348EA in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: BlockCollision() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1585):
+
+   1583:         Block->Number != BT_Chest)
+   1584:     {
+=> 1585:     if (ModuleDistance (Block->Base.x + Block_BaseWide + Man->Base.x, Block->Base.y + Block_BaseHigh + Man->Base.x, txMouseX(), txMouseY(), Block_BaseWide) == true)
+   1586:         if (GetAsyncKeyState (VK_LBUTTON) &&
+   1587:             Man->LeftArm == BT_Pickaxe &&
+
+# 1 0x004343A3 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: CallPeoplePhysic() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1458):
+
+   1456:         Physic (&Villagers [i]);
+   1457: 
+=> 1458:         BlockCollision (&Villagers [i], ManyBlocks, Camera);
+   1459: 
+   1460:         i = i + 1;
+
+# 2 0x00433F0B in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: InteractManWithBlocks() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1353):
+
+   1351:     CallLevelPhysic (ManyBlocks, Man, Camera, NumberCoin);
+   1352: 
+=> 1353:     CallPeoplePhysic (Villagers, ManyBlocks, Man, Camera);
+   1354:     };
+   1355: 
+
+# 3 0x0042D8E8 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (755):
+
+    753:         DrawInventory (Man, Camera, FixedCamera, AllImage);
+    754: 
+=>  755:         InteractManWithBlocks (ManyBlocks, Man, Camera, &Man->NumberCoin, LevelNumber, Villagers);
+    756: 
+    757:         Physic (Man);
+
+# 4 0x004319FF in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Level1() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1160):
+
+   1158:                             {{-1, -1}}};
+   1159: 
+=> 1160:     MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera, FixedCamera, Villagers);
+   1161:     };
+   1162: 
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in void BlockCollision(ManType*, BlockType*, CamType*) at C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.cpp (1585):
+
+   1583:         Block->Number != BT_Chest)
+   1584:     {
+=> 1585:     if (ModuleDistance (Block->Base.x + Block_BaseWide + Man->Base.x, Block->Base.y + Block_BaseHigh + Man->Base.x, txMouseX(), txMouseY(), Block_BaseWide) == true)
+   1586:         if (GetAsyncKeyState (VK_LBUTTON) &&
+   1587:             Man->LeftArm == BT_Pickaxe &&
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-07 01:57:24 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Downloads\TX\TXLib.h
+Compiled:	Jan 16 2021 13:45:16, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jan 16 2021 13:45:21
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe,
+
+ВНЕЗАПНО: signal (8, 0x00): SIGFPE: Грубая ошибка в вычислениях. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x004348EA в функции BlockCollision() в файле C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp на строке 1585. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-07 01:57:24 +0400], Instance: 0x0050E2FC (32-bit), Flags: CMdRe0, Thread: 0x3BF0 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x004348EA in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: BlockCollision() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1585):
+
+   1583:         Block->Number != BT_Chest)
+   1584:     {
+=> 1585:     if (ModuleDistance (Block->Base.x + Block_BaseWide + Man->Base.x, Block->Base.y + Block_BaseHigh + Man->Base.x, txMouseX(), txMouseY(), Block_BaseWide) == true)
+   1586:         if (GetAsyncKeyState (VK_LBUTTON) &&
+   1587:             Man->LeftArm == BT_Pickaxe &&
+
+# 1 0x004343A3 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: CallPeoplePhysic() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1458):
+
+   1456:         Physic (&Villagers [i]);
+   1457: 
+=> 1458:         BlockCollision (&Villagers [i], ManyBlocks, Camera);
+   1459: 
+   1460:         i = i + 1;
+
+# 2 0x00433F0B in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: InteractManWithBlocks() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1353):
+
+   1351:     CallLevelPhysic (ManyBlocks, Man, Camera, NumberCoin);
+   1352: 
+=> 1353:     CallPeoplePhysic (Villagers, ManyBlocks, Man, Camera);
+   1354:     };
+   1355: 
+
+# 3 0x0042D8E8 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (755):
+
+    753:         DrawInventory (Man, Camera, FixedCamera, AllImage);
+    754: 
+=>  755:         InteractManWithBlocks (ManyBlocks, Man, Camera, &Man->NumberCoin, LevelNumber, Villagers);
+    756: 
+    757:         Physic (Man);
+
+# 4 0x004319FF in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Level1() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1160):
+
+   1158:                             {{-1, -1}}};
+   1159: 
+=> 1160:     MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera, FixedCamera, Villagers);
+   1161:     };
+   1162: 
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in void BlockCollision(ManType*, BlockType*, CamType*) at C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.cpp (1585):
+
+   1583:         Block->Number != BT_Chest)
+   1584:     {
+=> 1585:     if (ModuleDistance (Block->Base.x + Block_BaseWide + Man->Base.x, Block->Base.y + Block_BaseHigh + Man->Base.x, txMouseX(), txMouseY(), Block_BaseWide) == true)
+   1586:         if (GetAsyncKeyState (VK_LBUTTON) &&
+   1587:             Man->LeftArm == BT_Pickaxe &&
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-07 01:57:24 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Downloads\TX\TXLib.h
+Compiled:	Jan 16 2021 13:45:16, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jan 16 2021 13:45:22
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CF52 в функции VillagerMind() в файле C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp на строке 614. Попытка прочесть данные по адресу 0x007C002C. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-07 01:57:24 +0400], Instance: 0x0050E2FC (32-bit), Flags: CMdRe0, Thread: 0x47F8 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CF52 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: VillagerMind() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (614):
+
+    612: void VillagerMind (ManType* Villager, ManType* Man)
+    613:     {
+=>  614:     if (Villager->Position == Normal_Position)
+    615:         {
+    616:         if (Man->Base.x - Villager->Base.x > 0 &&
+
+# 1 0x0043436F in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: CallPeoplePhysic() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1454):
+
+   1452:     while (ManyBlocks[i].Base.x != -1 && ManyBlocks[i].Base.y != -1)
+   1453:         {
+=> 1454:         VillagerMind (&Villagers [i], Man);
+   1455: 
+   1456:         Physic (&Villagers [i]);
+
+# 2 0x00433F0B in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: InteractManWithBlocks() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1353):
+
+   1351:     CallLevelPhysic (ManyBlocks, Man, Camera, NumberCoin);
+   1352: 
+=> 1353:     CallPeoplePhysic (Villagers, ManyBlocks, Man, Camera);
+   1354:     };
+   1355: 
+
+# 3 0x0042D8E8 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (755):
+
+    753:         DrawInventory (Man, Camera, FixedCamera, AllImage);
+    754: 
+=>  755:         InteractManWithBlocks (ManyBlocks, Man, Camera, &Man->NumberCoin, LevelNumber, Villagers);
+    756: 
+    757:         Physic (Man);
+
+# 4 0x004319FF in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Level1() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1160):
+
+   1158:                             {{-1, -1}}};
+   1159: 
+=> 1160:     MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera, FixedCamera, Villagers);
+   1161:     };
+   1162: 
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in void BlockCollision(ManType*, BlockType*, CamType*) at C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.cpp (1676):
+
+   1674:             };
+   1675: 
+=> 1676:     if (ModuleDistance (Block->Base.x+Block_BaseWide-Camera->x, Block->Base.y+Block_BaseHigh-Camera->x, txMouseX(), txMouseY(), Block_BaseWide) == true &&
+   1677:         Block->Number > BT_Berries &&
+   1678:         Block->Base.Health == Block_MaxHealth &&
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-07 01:57:24 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Downloads\TX\TXLib.h
+Compiled:	Jan 16 2021 13:45:52, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jan 16 2021 13:45:57
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CF52 в функции VillagerMind() в файле C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp на строке 614. Попытка прочесть данные по адресу 0x007C002C. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-07 01:57:24 +0400], Instance: 0x0050E2FC (32-bit), Flags: CMdRe0, Thread: 0x47F8 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CF52 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: VillagerMind() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (614):
+
+    612: void VillagerMind (ManType* Villager, ManType* Man)
+    613:     {
+=>  614:     if (Villager->Position == Normal_Position)
+    615:         {
+    616:         if (Man->Base.x - Villager->Base.x > 0 &&
+
+# 1 0x0043436F in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: CallPeoplePhysic() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1454):
+
+   1452:     while (ManyBlocks[i].Base.x != -1 && ManyBlocks[i].Base.y != -1)
+   1453:         {
+=> 1454:         VillagerMind (&Villagers [i], Man);
+   1455: 
+   1456:         Physic (&Villagers [i]);
+
+# 2 0x00433F0B in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: InteractManWithBlocks() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1353):
+
+   1351:     CallLevelPhysic (ManyBlocks, Man, Camera, NumberCoin);
+   1352: 
+=> 1353:     CallPeoplePhysic (Villagers, ManyBlocks, Man, Camera);
+   1354:     };
+   1355: 
+
+# 3 0x0042D8E8 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (755):
+
+    753:         DrawInventory (Man, Camera, FixedCamera, AllImage);
+    754: 
+=>  755:         InteractManWithBlocks (ManyBlocks, Man, Camera, &Man->NumberCoin, LevelNumber, Villagers);
+    756: 
+    757:         Physic (Man);
+
+# 4 0x004319FF in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Level1() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1160):
+
+   1158:                             {{-1, -1}}};
+   1159: 
+=> 1160:     MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera, FixedCamera, Villagers);
+   1161:     };
+   1162: 
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in void BlockCollision(ManType*, BlockType*, CamType*) at C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.cpp (1676):
+
+   1674:             };
+   1675: 
+=> 1676:     if (ModuleDistance (Block->Base.x+Block_BaseWide-Camera->x, Block->Base.y+Block_BaseHigh-Camera->x, txMouseX(), txMouseY(), Block_BaseWide) == true &&
+   1677:         Block->Number > BT_Berries &&
+   1678:         Block->Base.Health == Block_MaxHealth &&
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-07 01:57:24 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Downloads\TX\TXLib.h
+Compiled:	Jan 16 2021 13:45:52, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jan 16 2021 13:45:57
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CF90 в функции VillagerMind() в файле C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp на строке 618. Попытка записать данные по адресу 0x007C0008. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-07 01:57:24 +0400], Instance: 0x0050E2FC (32-bit), Flags: CMdRe0, Thread: 0x3D48 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CF90 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: VillagerMind() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (618):
+
+    616:         if (Man->Base.x - Villager->Base.x > 0 &&
+    617:             Man->Base.x - Villager->Base.x < 500)
+=>  618:             Villager->vX = 10;
+    619: 
+    620:         if (Villager->Base.x - Man->Base.x > 0 &&
+
+# 1 0x0043436F in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: CallPeoplePhysic() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1454):
+
+   1452:     while (ManyBlocks[i].Base.x != -1 && ManyBlocks[i].Base.y != -1)
+   1453:         {
+=> 1454:         VillagerMind (&Villagers [i], Man);
+   1455: 
+   1456:         Physic (&Villagers [i]);
+
+# 2 0x00433F0B in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: InteractManWithBlocks() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1353):
+
+   1351:     CallLevelPhysic (ManyBlocks, Man, Camera, NumberCoin);
+   1352: 
+=> 1353:     CallPeoplePhysic (Villagers, ManyBlocks, Man, Camera);
+   1354:     };
+   1355: 
+
+# 3 0x0042D8E8 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (755):
+
+    753:         DrawInventory (Man, Camera, FixedCamera, AllImage);
+    754: 
+=>  755:         InteractManWithBlocks (ManyBlocks, Man, Camera, &Man->NumberCoin, LevelNumber, Villagers);
+    756: 
+    757:         Physic (Man);
+
+# 4 0x004319FF in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Level1() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1160):
+
+   1158:                             {{-1, -1}}};
+   1159: 
+=> 1160:     MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera, FixedCamera, Villagers);
+   1161:     };
+   1162: 
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in void BlockCollision(ManType*, BlockType*, CamType*) at C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.cpp (1676):
+
+   1674:             };
+   1675: 
+=> 1676:     if (ModuleDistance (Block->Base.x+Block_BaseWide-Camera->x, Block->Base.y+Block_BaseHigh-Camera->x, txMouseX(), txMouseY(), Block_BaseWide) == true &&
+   1677:         Block->Number > BT_Berries &&
+   1678:         Block->Base.Health == Block_MaxHealth &&
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-07 01:57:24 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Downloads\TX\TXLib.h
+Compiled:	Jan 16 2021 13:47:18, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jan 16 2021 13:47:23
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CF90 в функции VillagerMind() в файле C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp на строке 618. Попытка записать данные по адресу 0x007C0008. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-07 01:57:24 +0400], Instance: 0x0050E2FC (32-bit), Flags: CMdRe0, Thread: 0x3D48 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CF90 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: VillagerMind() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (618):
+
+    616:         if (Man->Base.x - Villager->Base.x > 0 &&
+    617:             Man->Base.x - Villager->Base.x < 500)
+=>  618:             Villager->vX = 10;
+    619: 
+    620:         if (Villager->Base.x - Man->Base.x > 0 &&
+
+# 1 0x0043436F in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: CallPeoplePhysic() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1454):
+
+   1452:     while (ManyBlocks[i].Base.x != -1 && ManyBlocks[i].Base.y != -1)
+   1453:         {
+=> 1454:         VillagerMind (&Villagers [i], Man);
+   1455: 
+   1456:         Physic (&Villagers [i]);
+
+# 2 0x00433F0B in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: InteractManWithBlocks() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1353):
+
+   1351:     CallLevelPhysic (ManyBlocks, Man, Camera, NumberCoin);
+   1352: 
+=> 1353:     CallPeoplePhysic (Villagers, ManyBlocks, Man, Camera);
+   1354:     };
+   1355: 
+
+# 3 0x0042D8E8 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (755):
+
+    753:         DrawInventory (Man, Camera, FixedCamera, AllImage);
+    754: 
+=>  755:         InteractManWithBlocks (ManyBlocks, Man, Camera, &Man->NumberCoin, LevelNumber, Villagers);
+    756: 
+    757:         Physic (Man);
+
+# 4 0x004319FF in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Level1() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1160):
+
+   1158:                             {{-1, -1}}};
+   1159: 
+=> 1160:     MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera, FixedCamera, Villagers);
+   1161:     };
+   1162: 
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in void BlockCollision(ManType*, BlockType*, CamType*) at C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.cpp (1676):
+
+   1674:             };
+   1675: 
+=> 1676:     if (ModuleDistance (Block->Base.x+Block_BaseWide-Camera->x, Block->Base.y+Block_BaseHigh-Camera->x, txMouseX(), txMouseY(), Block_BaseWide) == true &&
+   1677:         Block->Number > BT_Berries &&
+   1678:         Block->Base.Health == Block_MaxHealth &&
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-07 01:57:24 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Downloads\TX\TXLib.h
+Compiled:	Jan 16 2021 13:47:18, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jan 16 2021 13:47:23
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0043453D в функции DrawTransparentImage() в файле C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp на строке 1444. Попытка прочесть данные по адресу NULL. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-07 01:57:24 +0400], Instance: 0x0050E2FC (32-bit), Flags: CMdRe0, Thread: 0x211C (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0043453D in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: DrawTransparentImage() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1444):
+
+   1442:     int ySize = txGetExtentY (Image->Picture)/Image->yNumber;
+   1443: 
+=> 1444:     txTransparentBlt (txDC (), x - Camera->x, y - Camera->y, xSize, ySize, Image->Picture, *xAnimationNumber*xSize, *yAnimationNumber*ySize, Image->color);
+   1445: 
+   1446:     if (*xAnimationNumber >= Image->xMaxAnimationNumber)
+
+# 1 0x0042D272 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: VillagerMind() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (640):
+
+    638:             {
+    639:             Villager->vX = 0;
+=>  640:             DrawTransparentImage (&AllImage.SaySign, Villager->Base.x, Villager->Base.y, 0, 0, Camera);
+    641:             };
+    642: 
+
+# 2 0x0042DB3D in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (769):
+
+    767:         InteractManWithBlocks (ManyBlocks, Villager, Camera, &Man->NumberCoin, LevelNumber);
+    768:         DrawMan (Villager, Camera, AllImage);
+=>  769:         VillagerMind (Villager, Man, Camera, AllImage);
+    770: 
+    771:         DrawMan (Man, Camera, AllImage);
+
+# 3 0x00431D87 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Level1() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1183):
+
+   1181:     ManType Villager = {{2125, 0, 20}, 0, 0, 0, 0, Man_aX, 2, 0, 0, BT_BlackSpace, BT_BlackSpace, &AllImage.BlackSpace, &AllImage.BlackSpace, Man_Temperature, 0, &AllImage.Villager, "Торговец"};
+   1182: 
+=> 1183:     MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera, FixedCamera, &Villager);
+   1184:     };
+   1185: 
+
+# 4 0x0042C41D in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (471):
+
+    469:         if (LevelNumber == 1)
+    470:             {
+=>  471:             Level1 (&LevelNumber, &Man, AllImage, &Camera, &FixedCamera);
+    472:             };
+    473: 
+
+# 5 0x0042B9D5 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (384):
+
+    382:     txCreateWindow (1550, 850);
+    383: 
+=>  384:     Cycle ();
+    385: 
+    386:     return 0;
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in void DrawTransparentImage(ImageType*, int, int, int*, int*, CamType*) at C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.cpp (1444):
+
+   1442:     int ySize = txGetExtentY (Image->Picture)/Image->yNumber;
+   1443: 
+=> 1444:     txTransparentBlt (txDC (), x - Camera->x, y - Camera->y, xSize, ySize, Image->Picture, *xAnimationNumber*xSize, *yAnimationNumber*ySize, Image->color);
+   1445: 
+   1446:     if (*xAnimationNumber >= Image->xMaxAnimationNumber)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-07 01:57:24 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Downloads\TX\TXLib.h
+Compiled:	Jan 16 2021 14:52:17, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jan 16 2021 14:52:23
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0043453D в функции DrawTransparentImage() в файле C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp на строке 1444. Попытка прочесть данные по адресу NULL. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-07 01:57:24 +0400], Instance: 0x0050E2FC (32-bit), Flags: CMdRe0, Thread: 0x211C (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0043453D in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: DrawTransparentImage() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1444):
+
+   1442:     int ySize = txGetExtentY (Image->Picture)/Image->yNumber;
+   1443: 
+=> 1444:     txTransparentBlt (txDC (), x - Camera->x, y - Camera->y, xSize, ySize, Image->Picture, *xAnimationNumber*xSize, *yAnimationNumber*ySize, Image->color);
+   1445: 
+   1446:     if (*xAnimationNumber >= Image->xMaxAnimationNumber)
+
+# 1 0x0042D272 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: VillagerMind() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (640):
+
+    638:             {
+    639:             Villager->vX = 0;
+=>  640:             DrawTransparentImage (&AllImage.SaySign, Villager->Base.x, Villager->Base.y, 0, 0, Camera);
+    641:             };
+    642: 
+
+# 2 0x0042DB3D in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (769):
+
+    767:         InteractManWithBlocks (ManyBlocks, Villager, Camera, &Man->NumberCoin, LevelNumber);
+    768:         DrawMan (Villager, Camera, AllImage);
+=>  769:         VillagerMind (Villager, Man, Camera, AllImage);
+    770: 
+    771:         DrawMan (Man, Camera, AllImage);
+
+# 3 0x00431D87 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Level1() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (1183):
+
+   1181:     ManType Villager = {{2125, 0, 20}, 0, 0, 0, 0, Man_aX, 2, 0, 0, BT_BlackSpace, BT_BlackSpace, &AllImage.BlackSpace, &AllImage.BlackSpace, Man_Temperature, 0, &AllImage.Villager, "Торговец"};
+   1182: 
+=> 1183:     MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera, FixedCamera, &Villager);
+   1184:     };
+   1185: 
+
+# 4 0x0042C41D in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (471):
+
+    469:         if (LevelNumber == 1)
+    470:             {
+=>  471:             Level1 (&LevelNumber, &Man, AllImage, &Camera, &FixedCamera);
+    472:             };
+    473: 
+
+# 5 0x0042B9D5 in C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/ИГгРА с изображениями.cpp (384):
+
+    382:     txCreateWindow (1550, 850);
+    383: 
+=>  384:     Cycle ();
+    385: 
+    386:     return 0;
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in void DrawTransparentImage(ImageType*, int, int, int*, int*, CamType*) at C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.cpp (1444):
+
+   1442:     int ySize = txGetExtentY (Image->Picture)/Image->yNumber;
+   1443: 
+=> 1444:     txTransparentBlt (txDC (), x - Camera->x, y - Camera->y, xSize, ySize, Image->Picture, *xAnimationNumber*xSize, *yAnimationNumber*ySize, Image->color);
+   1445: 
+   1446:     if (*xAnimationNumber >= Image->xMaxAnimationNumber)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 168, Date: 2021-01-07 01:57:24 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Downloads\TX\TXLib.h
+Compiled:	Jan 16 2021 14:52:17, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jan 16 2021 14:52:23
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\ИГгРА с изображениями.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
