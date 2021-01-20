@@ -23,7 +23,7 @@ enum BlockNumbers
     BT_Chest      = 8,
     BT_Pickaxe    = 11,
     BT_Berries    = 21,
-    BT_Coin       = 100
+    BT_Coin       = 101
     };
 
 enum
@@ -90,6 +90,7 @@ enum Man
 
     Normal_Position = 0,
     Fire_Position = 1,
+    Fixed_Position = 2,
 
     // Damage
 
@@ -175,20 +176,12 @@ enum Screen
     Screen_yCenter = 425
     };
 
-struct BaseType
-    {
-    double x;
-    double y;
-
-    double Health;
-    };
-
 struct ImageType
     {
     const char* FileName;
 
-    int xNumber;
-    int yNumber;
+    // int xFrame;
+    // int yFrame;
 
     int xMaxAnimationNumber;
     int yMaxAnimationNumber;
@@ -196,6 +189,24 @@ struct ImageType
     HDC Picture;
 
     COLORREF color;
+    };
+
+struct AnimationType
+    {
+    int xFrame;
+    int yFrame;
+
+    ImageType* Picture;
+    };
+
+struct BaseType
+    {
+    double x;
+    double y;
+
+    double Health;
+
+    AnimationType Animation;
     };
 
 struct AllImageType
@@ -226,14 +237,22 @@ struct AllImageType
     ImageType Water;
     ImageType Villager;
     ImageType SaySign;
+    ImageType Thief;
+    ImageType Covboy;
+    ImageType Inventory;
+    ImageType Lock;
+    ImageType Gun;
+    };
+
+struct InvType
+    {
+    int Dirt;
+    int Berries;
     };
 
 struct ManType
     {
     BaseType Base;
-
-    int xNumber;
-    int yNumber;
 
     double vX;
     double vY;
@@ -254,9 +273,11 @@ struct ManType
 
     int NumberCoin;
 
-    ImageType* Picture;
-
     char Name [50];
+
+    int Kind;
+
+    InvType Inventory;
     };
 
 struct ButtonType
@@ -279,12 +300,7 @@ struct BlockType
     {
     BaseType Base;
 
-    int xNumber;
-    int yNumber;
-
     int Number;
-
-    ImageType* Picture;
     };
 
 struct CamType
@@ -318,7 +334,7 @@ void DrawManyBlocks (BlockType ManyBlocks [], CamType* Camera, AllImageType AllI
 
 void InteractManWithBlocks (BlockType ManyBlocks [], ManType* Man, CamType* Camera, int* NumberCoin, int* LevelNumber);
 
-void LoadGameImage (ImageType* Image, const char* Picture, int xNumber, int yNumber, int xMaxNumber, int yMaxNumber, COLORREF color,
+void LoadGameImage (ImageType* Image, const char* Picture, int xMaxFrame, int yMaxFrame, COLORREF color,
                     int* Procent, double Number);
 
 void DrawMan (ManType* Man, CamType* Camera, AllImageType AllImage);
@@ -377,6 +393,14 @@ void MoveCamera (CamType* Camera, ManType* Man);
 
 void VillagerMind (ManType* Villager, ManType* Man, CamType* Camera, AllImageType AllImage);
 
+void DrawSlot (int Block, int x, int y, ImageType Picture, ImageType Lock);
+
+void Shooting (int x, int y, int vX, ImageType Picture, ManType* Man, CamType* Camera);
+
+void IncreaseAnimationNumber (ImageType* Picture);
+
+int Timer (int Time);
+
 int main ()
     {
     txCreateWindow (1550, 850);
@@ -390,59 +414,69 @@ void LoadAllImages (AllImageType* AllImages)
     {
     int Procent = 1;
 
-    LoadGameImage (&AllImages->BackGround,    "Images/Dungeon.bmp",                1, 1, 1, 1, TX_BLACK, &Procent, Number_of_Images);
+    LoadGameImage (&AllImages->BackGround,    "Images/Dungeon.bmp",                1, 1, TX_BLACK, &Procent, Number_of_Images);
 
     // printf ("1:LoadAllImages(): File = %s , HDC = %d \n", AllImages->BackGround.FileName, AllImages->BackGround.Picture);
 
-    LoadGameImage (&AllImages->Cursor,        "Images/GameCursor.bmp",             1, 1, 1, 1, TX_WHITE, &Procent, Number_of_Images);
+    LoadGameImage (&AllImages->Cursor,        "Images/GameCursor.bmp",             1, 1, TX_WHITE, &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->Dirt,          "Images/DirtAnimation.bmp",          4, 3, 1, 1, TX_WHITE, &Procent, Number_of_Images);
+    LoadGameImage (&AllImages->Dirt,          "Images/DirtAnimation.bmp",          4, 3, TX_WHITE, &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->Health,        "Images/GameHeart.bmp",              1, 1, 1, 1, TX_BLACK, &Procent, Number_of_Images);
+    LoadGameImage (&AllImages->Health,        "Images/GameHeart.bmp",              1, 1, TX_BLACK, &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->Finish,        "Images/Finish.bmp",                 1, 1, 1, 1, TX_BLACK, &Procent, Number_of_Images);
+    LoadGameImage (&AllImages->Finish,        "Images/Finish.bmp",                 1, 1, TX_BLACK, &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->Start,         "Images/Start.bmp",                  1, 1, 1, 1, TX_BLACK, &Procent, Number_of_Images);
+    LoadGameImage (&AllImages->Start,         "Images/Start.bmp",                  1, 1, TX_BLACK, &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->Pause,         "Images/GamePause.bmp",              2, 1, 1, 1, TX_WHITE, &Procent, Number_of_Images);
+    LoadGameImage (&AllImages->Pause,         "Images/GamePause.bmp",              2, 1, TX_WHITE, &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->Coin,          "Images/GameCoin.bmp",               1, 1, 1, 1, TX_WHITE, &Procent, Number_of_Images);
+    LoadGameImage (&AllImages->Coin,          "Images/GameCoin.bmp",               1, 1, TX_WHITE, &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->CoinAnimation, "Images/CoinAnimation.bmp",          4, 1, 4, 1, TX_BLACK, &Procent, Number_of_Images);
+    LoadGameImage (&AllImages->CoinAnimation, "Images/CoinAnimation.bmp",          4, 1, TX_BLACK, &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->Box,           "Images/WoodBoxAnimation.bmp",       4, 3, 1, 1, TX_BLACK, &Procent, Number_of_Images);
+    LoadGameImage (&AllImages->Box,           "Images/WoodBoxAnimation.bmp",       4, 3, TX_BLACK, &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->Man,           "Images/AllAnimationGamePeople.bmp", 9, 2, 9, 1, TX_WHITE, &Procent, Number_of_Images);
+    LoadGameImage (&AllImages->Man,           "Images/AllAnimationGamePeople.bmp", 9, 2, TX_WHITE, &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->Stairs,        "Images/Stairs.bmp",                 4, 3, 1, 1, TX_BLACK, &Procent, Number_of_Images);
+    LoadGameImage (&AllImages->Stairs,        "Images/Stairs.bmp",                 4, 3, TX_BLACK, &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->Fire,          "Images/FireAnimation.bmp",          8, 1, 5, 1, TX_BLACK, &Procent, Number_of_Images);
+    LoadGameImage (&AllImages->Fire,          "Images/FireAnimation.bmp",          8, 1, TX_BLACK, &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->GreenFire,     "Images/GreenFire.bmp",              4, 1, 5, 1, TX_BLACK, &Procent, Number_of_Images);
+    LoadGameImage (&AllImages->GreenFire,     "Images/GreenFire.bmp",              4, 1, TX_BLACK, &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->BlackSpace,    "Images/Black.bmp",                  4, 3, 1, 1, TX_BLACK, &Procent, Number_of_Images);
+    LoadGameImage (&AllImages->BlackSpace,    "Images/Black.bmp",                  4, 3, TX_BLACK, &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->Bat,           "Images/Bat.bmp",                    4, 2, 4, 1, TX_BLACK, &Procent, Number_of_Images);
+    LoadGameImage (&AllImages->Bat,           "Images/Bat.bmp",                    4, 2, TX_BLACK, &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->Stalactite,    "Images/Stalactite.bmp",             4, 3, 1, 1, TX_BLACK, &Procent, Number_of_Images);
+    LoadGameImage (&AllImages->Stalactite,    "Images/Stalactite.bmp",             4, 3, TX_BLACK, &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->GameOver,      "Images/GameOver.bmp",               1, 1, 1, 1, TX_WHITE, &Procent, Number_of_Images);
+    LoadGameImage (&AllImages->GameOver,      "Images/GameOver.bmp",               1, 1, TX_WHITE, &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->Pickaxe,       "Images/Pickaxe.bmp",                4, 3, 1, 1, TX_BLACK, &Procent, Number_of_Images);
+    LoadGameImage (&AllImages->Pickaxe,       "Images/Pickaxe.bmp",                4, 3, TX_BLACK, &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->Termometer,    "Images/termometer.bmp",             1, 1, 1, 1, TX_BLACK, &Procent, Number_of_Images);
+    LoadGameImage (&AllImages->Termometer,    "Images/termometer.bmp",             1, 1, TX_BLACK, &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->Berries,       "Images/Berries.bmp",                4, 5, 1, 1, TX_WHITE, &Procent, Number_of_Images);
+    LoadGameImage (&AllImages->Berries,       "Images/Berries.bmp",                4, 5, TX_WHITE, &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->Chest,         "Images/Chest.bmp",                  4, 3, 1, 1, TX_WHITE, &Procent, Number_of_Images);
+    LoadGameImage (&AllImages->Chest,         "Images/Chest.bmp",                  4, 3, TX_WHITE, &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->IronOre,       "Images/IronOre.bmp",                4, 3, 1, 1, TX_WHITE, &Procent, Number_of_Images);
+    LoadGameImage (&AllImages->IronOre,       "Images/IronOre.bmp",                4, 3, TX_WHITE, &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->Water,         "Images/Water2.bmp",                 4, 1, 1, 1, TX_BLACK, &Procent, Number_of_Images);
+    LoadGameImage (&AllImages->Water,         "Images/Water2.bmp",                 4, 1, TX_BLACK, &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->Villager,      "Images/Villager.bmp",               4, 2, 1, 1, TX_WHITE, &Procent, Number_of_Images);
+    LoadGameImage (&AllImages->Villager,      "Images/Villager.bmp",               2, 2, TX_WHITE, &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->SaySign,       "Images/SaySign.bmp",                1, 4, 1, 1, TX_BLACK, &Procent, Number_of_Images);
+    LoadGameImage (&AllImages->SaySign,       "Images/SaySign.bmp",                1, 6, TX_BLACK, &Procent, Number_of_Images);
+
+    LoadGameImage (&AllImages->Thief,         "Images/Thief.bmp",                  2, 2, TX_WHITE, &Procent, Number_of_Images);
+
+    LoadGameImage (&AllImages->Covboy,        "Images/Covboy.bmp",                 2, 2, TX_WHITE, &Procent, Number_of_Images);
+
+    LoadGameImage (&AllImages->Inventory,     "Images/Squares.bmp",                1, 1, TX_RED, &Procent, Number_of_Images);
+
+    LoadGameImage (&AllImages->Lock,          "Images/Lock.bmp",                   1, 1, TX_WHITE, &Procent, Number_of_Images);
+
+    LoadGameImage (&AllImages->Gun,           "Images/Gun.bmp",                    2, 2, TX_WHITE, &Procent, Number_of_Images);
     };
 
 void Cycle ()
@@ -455,11 +489,11 @@ void Cycle ()
 
     // double AllTemperature = 10;
 
-    CamType Camera = {2125 - Screen_xCenter, Man_y - Screen_yCenter, 0.3, 0.3, 0};
+    CamType Camera = {Man_x - Screen_xCenter, Man_y - Screen_yCenter, 0.3, 0.3, 0};
 
     CamType FixedCamera = {0, 0, 0, 0, 0};
 
-    ManType Man = {{2125, Man_y, Man_Health}, 0, 0, 0, 0, Man_aX, 2, 0, 0, BT_BlackSpace, BT_BlackSpace, &AllImage.BlackSpace, &AllImage.BlackSpace, Man_Temperature, 0, &AllImage.Man, "Я"};
+    ManType Man = {{Man_x, Man_y, Man_Health, {0, 0, &AllImage.Man}}, 0, 0, Man_aX, 2, 0, 0, BT_BlackSpace, BT_BlackSpace, &AllImage.BlackSpace, &AllImage.BlackSpace, Man_Temperature, 0, "Я", 0, {}};
 
     while (true)
         {
@@ -486,8 +520,20 @@ void DrawInventory (ManType* Man, CamType* Camera, CamType* FixedCamera, AllImag
     int null = 0;
 
     int one = 1;
+    int two = 2;
 
-    txSetColor (TX_DARKGREY, 5);
+    if (GetKeyState (VK_CAPITAL))
+        {
+        DrawTransparentImage (&AllImage.Inventory, 100, 100, &null, &null, FixedCamera);
+
+        DrawSlot (Man->Inventory.Dirt, 107, 107, AllImage.Dirt, AllImage.Lock);
+
+        DrawSlot (Man->Inventory.Berries, 227, 107, AllImage.Berries, AllImage.Lock);
+        };
+
+
+
+    /* txSetColor (TX_DARKGREY, 5);
     txSetFillColor (TX_TRANSPARENT);
 
     txSelectFont ("Comic Sans MS", Inventory_TextSize);
@@ -517,7 +563,7 @@ void DrawInventory (ManType* Man, CamType* Camera, CamType* FixedCamera, AllImag
                 DrawTransparentImage (Man->LeftArmPicture, Man->Base.x + 80, Man->Base.y + 25, &null, &one, Camera);
             if (Man->RightArm != BT_BlackSpace)
                 DrawTransparentImage (Man->RightArmPicture, Man->Base.x + 5, Man->Base.y + 35, &null, &one, Camera);
-            };
+            }; */
 
     if (Man->LeftArm == 0)
         Man->LeftArmPicture = &AllImage.BlackSpace;
@@ -526,15 +572,30 @@ void DrawInventory (ManType* Man, CamType* Camera, CamType* FixedCamera, AllImag
         Man->RightArmPicture = &AllImage.BlackSpace;
     };
 
+void DrawSlot (int Block, int x, int y, ImageType Picture, ImageType Lock)
+    {
+    int null = 0;
+    int one = 1;
+
+    CamType FixedCamera = {0, 0, 0, 0, 0};
+
+    if (Block > 0)
+        {
+        DrawTransparentImage (&Picture, x, y, &null, &one, &FixedCamera);
+
+        Text (x + 30, y + 30, 7, Block, "");
+        };
+
+    if (Block == 0)
+        DrawTransparentImage (&Lock, x, y, &null, &null, &FixedCamera);
+    };
+
 void DrawBlock (BlockType* Block, CamType* Camera, AllImageType AllImage)
     {
-    Block->xNumber += 1;
-
-    if (Block->xNumber >= Block->Picture->xMaxAnimationNumber)
-        Block->xNumber = 0;
+    Block->Base.Animation.xFrame += 1;
 
     if (Block->Base.Health > 0)
-        DrawTransparentImage (Block->Picture, Block->Base.x + Block_BaseWide*2, Block->Base.y, &Block->xNumber, &Block->yNumber, Camera);
+        DrawTransparentImage (Block->Base.Animation.Picture, Block->Base.x + Block_BaseWide*2, Block->Base.y, &Block->Base.Animation.xFrame, &Block->Base.Animation.yFrame, Camera);
     };
 
 int Collision (BlockType* Block, ManType* Man)
@@ -546,40 +607,52 @@ int Collision (BlockType* Block, ManType* Man)
     return 0;
     };
 
+/* void IncreaseAnimationNumber (ImageType* Picture)
+    {
+    Picture->xFrame += 1;
+
+    if (Picture->xFrame >= Picture->xMaxAnimationNumber)
+        Picture->xFrame = 0;
+    }; */
+
 void DrawMan (ManType* Man, CamType* Camera, AllImageType AllImage)
     {
-    Man->xNumber += 1;
+    // if (Man->Kind == 0)
+    //     IncreaseAnimationNumber (Man->Picture);
 
-    if (Man->xNumber >= Man->Picture->xMaxAnimationNumber)
-        Man->xNumber = 0;
+    if (Man->Base.Animation.xFrame >= Man->Base.Animation.Picture->xMaxAnimationNumber &&
+        Man->Kind == 0)
+        Man->Base.Animation.xFrame = 0;
 
     if (Man->vX > 0)
         {
-        Man->yNumber = 1;
+        Man->Base.Animation.yFrame = 1;
         };
 
     if (Man->vX < 0)
         {
-        Man->yNumber = 0;
+        Man->Base.Animation.yFrame = 0;
         };
 
     int null = 0;
 
     if (Man->Base.Health > 0)
-        DrawTransparentImage (Man->Picture, Man->Base.x, Man->Base.y, &Man->xNumber, &Man->yNumber, Camera);
+    {
+        DrawTransparentImage (Man->Base.Animation.Picture, Man->Base.x, Man->Base.y, &Man->Base.Animation.xFrame, &Man->Base.Animation.yFrame, Camera);
 
     txSetColor (TX_WHITE);
     txSelectFont ("Comic Sans MS", 30);
     txTextOut (Man->Base.x - Camera->x + 50, Man->Base.y - Camera->y, Man->Name);
+    };
 
     // printf ("Man->x = %lf, Man->y = %lf, Camera->x = %d, Camera->y = %d \n", Man->Base.x, Man->Base.y, Camera->x, Camera->y);
     };
 
 void ManFire (ManType* Man, CamType* Camera, AllImageType AllImage)
     {
-    BlockType Fire1 = {{0 - txGetExtentX (Man->Picture->Picture)/2 + Man_Fire1X, 0 - txGetExtentY (Man->Picture->Picture)/2 + Man_Fire1Y, 4}, rand() % 4, 0, 0, &AllImage.Fire};
-    BlockType Fire2 = {{0 - txGetExtentX (Man->Picture->Picture)/2 + Man_Fire2X, 0 - txGetExtentY (Man->Picture->Picture)/2 + Man_Fire2Y, 4}, rand() % 4, 0, 0, &AllImage.Fire};
-    BlockType Fire3 = {{0 - txGetExtentX (Man->Picture->Picture)/2 + Man_Fire3X, 0 - txGetExtentY (Man->Picture->Picture)/2 + Man_Fire3Y, 4}, rand() % 4, 0, 0, &AllImage.Fire};
+    BlockType Fire1 = {{0 - txGetExtentX (Man->Base.Animation.Picture->Picture)/2 + Man_Fire1X, 0 - txGetExtentY (Man->Base.Animation.Picture->Picture)/2 + Man_Fire1Y, 4, {rand() % 4, 0, &AllImage.Fire}}, 0};
+    BlockType Fire2 = {{0 - txGetExtentX (Man->Base.Animation.Picture->Picture)/2 + Man_Fire2X, 0 - txGetExtentY (Man->Base.Animation.Picture->Picture)/2 + Man_Fire2Y, 4, {rand() % 4, 0, &AllImage.Fire}}, 0};
+    BlockType Fire3 = {{0 - txGetExtentX (Man->Base.Animation.Picture->Picture)/2 + Man_Fire3X, 0 - txGetExtentY (Man->Base.Animation.Picture->Picture)/2 + Man_Fire3Y, 4, {rand() % 4, 0, &AllImage.Fire}}, 0};
 
     if (Man->Position == Fire_Position)
         {
@@ -614,12 +687,26 @@ void ManHealth (ManType* Man, CamType* Camera, AllImageType AllImage)
 
     if (Man->Base.Health > Man_MaxHealth)
         Man->Base.Health = Man_MaxHealth;
+
+    //if (Man->Position = Fixed_Position)
+    //    Man->vX *= 0.1;
     };
 
 void VillagerMind (ManType* Villager, ManType* Man, CamType* Camera, AllImageType AllImage)
     {
+    if (Villager->Base.Health > 0)
+    {
     int null = 0;
     int a = 0;
+    int three = 3;
+    int four = 4;
+    int one = 1;
+
+    int Side = 1;
+    if (Villager->Base.x > Man->Base.x)
+        Side = 0;
+    if (Villager->Base.x < Man->Base.x)
+        Side = 1;
 
     if (Man->Base.x - Villager->Base.x > 100 &&
             Man->Base.x - Villager->Base.x < 500)
@@ -641,7 +728,8 @@ void VillagerMind (ManType* Villager, ManType* Man, CamType* Camera, AllImageTyp
             Villager->vX = 0;
             };
 
-    if (fabs (Man->Base.x - Villager->Base.x) <= 100)
+    if (fabs (Man->Base.x - Villager->Base.x) <= 100 &&
+        Villager->RightArm == 0)
         {
         int two = 2;
         int one = 1;
@@ -668,8 +756,7 @@ void VillagerMind (ManType* Villager, ManType* Man, CamType* Camera, AllImageTyp
             if (a == 1)
             {
             Man->NumberCoin -= 5;
-            Man->LeftArm = BT_Berries;
-            Man->LeftArmPicture = &AllImage.Berries;
+            Man->Inventory.Berries += 1;
             };
             a = 0;
             DrawTransparentImage (&AllImage.SaySign, Villager->Base.x + 50, Villager->Base.y - 70, &null, &two, Camera);
@@ -678,8 +765,81 @@ void VillagerMind (ManType* Villager, ManType* Man, CamType* Camera, AllImageTyp
             Villager->LeftArm = 0;
             };
 
-        $i printf ("number = %d \n", Villager->LeftArm); $d
+        // $i printf ("number = %d \n", Villager->LeftArm); $d
         };
+
+    if (fabs (Man->Base.x - Villager->Base.x) <= 100 &&
+        Villager->RightArm == 1)
+        {
+        DrawTransparentImage (&AllImage.SaySign, Villager->Base.x + 20, Villager->Base.y, &null, &three, Camera);
+        if (Man->NumberCoin > 0)
+            Man->NumberCoin -= 1;
+        };
+
+    if (fabs (Man->Base.x - Villager->Base.x) <= 200 &&
+        Villager->RightArm == 2 &&
+        Villager->Base.Health > 0)
+        {
+        DrawTransparentImage (&AllImage.SaySign, Villager->Base.x + 20, Villager->Base.y, &null, &four, Camera);
+        txSetColor (RGB (185, 116, 45), 7);
+        };
+
+    /* if (Villager->RightArm == 2)
+        {
+        if (Side == 1)
+        DrawTransparentImage (&AllImage.Gun, Villager->Base.x + 74, Villager->Base.y + 93, &null, &null, Camera);
+        if (Side == 0)
+        DrawTransparentImage (&AllImage.Gun, Villager->Base.x + 44, Villager->Base.y + 93, &one, &null, Camera);
+        Villager->Position += 1;
+
+        if (Villager->Position >= 10)
+            {
+            int x = Villager->Base.x + 74;
+            int vX = 0;
+
+            if (Villager->Base.x > Man->Base.x)
+                vX = -10;
+
+            if (Villager->Base.x < Man->Base.x)
+                vX = 10;
+
+            x += vX;
+
+            int null = 0;
+            int one = 1;
+
+            if (vX > 0)
+                DrawTransparentImage (&AllImage.Gun, x, Villager->Base.y + 88, &null, &one, Camera);
+
+            if (vX < 0)
+                DrawTransparentImage (&AllImage.Gun, x, Villager->Base.y + 88, &one, &one, Camera);
+
+            if (ModuleDistance (Man->Base.x + 47, Man->Base.y + 84, x,  Villager->Base.y + 88, 30) == true)
+                {
+                Villager->Position = 0;
+                };
+            };
+        }; */
+
+    Villager->NumberCoin += 1;
+
+    if (ModuleDistance (Villager->Base.x + 50 - Camera->x, Villager->Base.y + 84 - Camera->y , txMouseX(), txMouseY(), 50) == true &&
+        GetAsyncKeyState (VK_LBUTTON) &&
+        Villager->NumberCoin >= 10)
+        {
+        Villager->Base.Health -= 1;
+        Villager->vY = -15;
+        if (Villager->Base.x > Man->Base.x)
+            Villager->vX = 50;
+        if (Villager->Base.x < Man->Base.x)
+            Villager->vX = -50;
+        Villager->Base.Animation.xFrame += 1;
+        // txCircle (Man->Base.x - Camera->x, Man->Base.y - Camera->y, 50);
+        Villager->NumberCoin = 0;
+        }
+    else
+        Villager->Base.Animation.xFrame = 0;
+    };
     };
 
 void ManTemperature (ManType* Man)
@@ -739,6 +899,10 @@ void DrawCursor (MouseType* Mouse, CamType* Camera)
     DrawTransparentImage (&Mouse->Picture, Mouse->x, Mouse->y, &null, &null, Camera);
     };
 
+void Shooting (int x, int y, int vX, ImageType Picture, ManType* Man, CamType* Camera)
+    {
+    };
+
 void DeleteAllImage (AllImageType AllImages)
     {
     txDeleteDC (AllImages.BackGround.Picture);
@@ -762,6 +926,9 @@ void DeleteAllImage (AllImageType AllImages)
     txDeleteDC (AllImages.Pickaxe.Picture);
     txDeleteDC (AllImages.Villager.Picture);
     txDeleteDC (AllImages.SaySign.Picture);
+    txDeleteDC (AllImages.Thief.Picture);
+    txDeleteDC (AllImages.Covboy.Picture);
+    txDeleteDC (AllImages.Gun.Picture);
     };
 
 void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber, ManType* Man, double* AllTemperature, CamType* Camera, CamType* FixedCamera, ManType* Villager)
@@ -801,6 +968,9 @@ void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber,
 
         DrawManyBlocks (ManyBlocks, Camera, AllImage);
 
+        txSetColor (TX_RED, 10);
+        txLine (-1000000, 10000, 1000000, 10000);
+
         DrawMan (Man, Camera, AllImage);
 
         // Villager
@@ -814,8 +984,6 @@ void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber,
         ManFire (Man, Camera, AllImage);
         ManHealth (Man, Camera, AllImage);
         ManTemperature (Man);
-
-        DrawInventory (Man, Camera, FixedCamera, AllImage);
 
         InteractManWithBlocks (ManyBlocks, Man, Camera, &Man->NumberCoin, LevelNumber);
 
@@ -866,10 +1034,14 @@ void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber,
         txRectangle (Sign_TermometerX + Sign_Term_RectLeftX, Sign_TermometerY + Sign_Term_RectDownY - Man->Temperature,
                      Sign_TermometerX + Sign_Term_RectRightX, Sign_TermometerY + Sign_Term_RectDownY);
 
+        DrawInventory (Man, Camera, FixedCamera, AllImage);
+
         if (GetAsyncKeyState (VK_SPACE))
             {
             HelpSystem ();
             };
+
+
 
         DrawCursor (&Mouse, FixedCamera);
 
@@ -912,10 +1084,10 @@ void MoveCamera (CamType* Camera, ManType* Man)
             Camera->y += 10;
             }; */
 
-    if (GetKeyState (VK_CAPITAL))
+    /* if (GetKeyState (VK_CAPITAL))
         printf ("Camera->x = %lf, Camera->y = %lf, Man->x = %lf, Man->y = %lf \n", Camera->x, Camera->y, Man->Base.x, Man->Base.y);
     else
-        txClearConsole ();
+        txClearConsole (); */
 
     int xDst = fabs (fabs (Camera->x - Man->Base.x) - Screen_xCenter);
     int yDst = fabs (fabs (Camera->y - Man->Base.y) - Screen_yCenter);
@@ -977,6 +1149,16 @@ void DrawLoading (int Procents)
     txSetColor (TX_BLACK);
     txSelectFont ("Comic Sans MS", Loading_TextSize);
     txTextOut (Loading_TextX, Loading_TextY, str);
+    };
+
+int Timer (int Time)
+    {
+    int a = GetTickCount ();
+
+    if ((GetTickCount() - a) >= Time*1000)
+        return 1;
+
+    return 0;
     };
 
 void Level1 (int* LevelNumber, ManType* Man, AllImageType AllImage, CamType* Camera, CamType* FixedCamera)
@@ -1211,13 +1393,13 @@ void Level1 (int* LevelNumber, ManType* Man, AllImageType AllImage, CamType* Cam
                                {{1110, 115, 1}, 0, 0, BT_Coin, &AllImage.CoinAnimation},
                                {{1360, 215, 1}, 0, 0, BT_Coin, &AllImage.CoinAnimation},
                                // Start
-                               {{-100, -1000000, 1}, 0, 0, BT_Start, &AllImage.Start},
+                               {{-100, -1000000, 1, {0, 0, &AllImage.Start}, BT_Start},
                                // Finish
-                               {{1450, -1000000, 1}, 0, 0, BT_Finish, &AllImage.Finish},
+                               {{1450, -1000000, 1, {0, 0, &AllImage.Finish}, BT_Finish},
                                // End
                                {{  -1,   -6}}};
 
-    ManType Villager = {{2125, 0, 20}, 0, 0, 0, 0, Man_aX, 2, 0, 0, BT_BlackSpace, BT_BlackSpace, &AllImage.BlackSpace, &AllImage.BlackSpace, Man_Temperature, 0, &AllImage.Villager, "Барыга"};
+    ManType Villager = {{2125, 0, 20}, 0, 0, 0, 0, Man_aX, 2, 0, 0, BT_BlackSpace, 0, &AllImage.BlackSpace, &AllImage.BlackSpace, Man_Temperature, 0, &AllImage.Villager, "", 1, {}};
 
     MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera, FixedCamera, &Villager);
     };
@@ -1438,7 +1620,7 @@ void DrawLevelPeople (ManType Villagers[], CamType* Camera, AllImageType AllImag
         };
     };
 
-void LoadGameImage (ImageType* Image, const char* Picture, int xNumber, int yNumber, int xMaxNumber, int yMaxNumber, COLORREF color,
+void LoadGameImage (ImageType* Image, const char* Picture, int xMaxFrame, int yMaxFrame, COLORREF color,
                         int* Procent, double Number)
     {
     *Procent += 100.0/Number;
@@ -1447,17 +1629,13 @@ void LoadGameImage (ImageType* Image, const char* Picture, int xNumber, int yNum
 
     // printf ("LoadGameImage(): Picture = \"%s\" \n", Picture);
 
-    // *Image = {Picture, xNumber, yNumber, xMaxNumber, yMaxNumber, txLoadImage (Picture), color};
+    // *Image = {Picture, xFrame, yFrame, xMaxFrame, yMaxFrame, txLoadImage (Picture), color};
 
     Image->FileName = Picture;
 
-    Image->xNumber = xNumber;
+    Image->xMaxAnimationNumber = xMaxFrame;
 
-    Image->yNumber = yNumber;
-
-    Image->xMaxAnimationNumber = xMaxNumber;
-
-    Image->yMaxAnimationNumber = yMaxNumber;
+    Image->yMaxAnimationNumber = yMaxFrame;
 
     Image->Picture = txLoadImage (Picture);
 
@@ -1477,20 +1655,10 @@ void DrawTransparentImage (ImageType* Image, int x, int y, int* xAnimationNumber
     {
     // printf ("DrawTransparentImage(): FileName = \"%s\", HDC = \"%p\" \n", Image.FileName, Image.Picture);
 
-    int xSize = txGetExtentX (Image->Picture)/Image->xNumber;
-    int ySize = txGetExtentY (Image->Picture)/Image->yNumber;
+    int xSize = txGetExtentX (Image->Picture)/Image->xMaxAnimationNumber;
+    int ySize = txGetExtentY (Image->Picture)/Image->yMaxAnimationNumber;
 
     txTransparentBlt (txDC (), x - Camera->x, y - Camera->y, xSize, ySize, Image->Picture, *xAnimationNumber*xSize, *yAnimationNumber*ySize, Image->color);
-
-    if (*xAnimationNumber >= Image->xMaxAnimationNumber)
-        {
-        *xAnimationNumber = 0;
-        };
-
-    if (*yAnimationNumber >= Image->yMaxAnimationNumber)
-        {
-        *yAnimationNumber = 0;
-        };
     };
 
 void DrawLevelBlocks (BlockType ManyBlocks[], CamType* Camera, AllImageType AllImage)
@@ -1585,6 +1753,10 @@ void Physic (ManType* Man)
 
 void BlockCollision (ManType* Man, BlockType* Block, CamType* Camera)
     {
+
+    if (Man->Base.y >= 10000)
+        Man->Base.Health = 0;
+
     if (Block->Number == BT_Fire)
         {
         if (Collision (Block, Man) == true)
