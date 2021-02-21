@@ -3,6 +3,7 @@
 // 123
 
 const int NameSize = 50;
+const int World_Size = 1;   // !!! Не делать больше 10-ти !!!
 
 enum
     {
@@ -31,6 +32,7 @@ enum BlockNumbers
     BT_Air        = 50,
     BT_House      = 51,
     BT_Snow       = 52,
+    BT_BackGround = 52,
     BT_Coin       = 101
     };
 
@@ -76,7 +78,7 @@ enum Inv
 
 enum Man
     {
-    Man_x = 400,
+    Man_x = 4000,
     Man_y = -100,
     Man_Health = 20,
     Man_Temperature = 36,
@@ -196,7 +198,7 @@ enum Screen
 
 struct ImageType
     {
-    ImageType (const char* FileName, int xMaxAnimationNumber, int yMaxAnimationNumber, HDC Picture, COLOREF color);
+    // ImageType (const char* FileName, int xMaxAnimationNumber, int yMaxAnimationNumber, HDC Picture, COLOREF color);
 
     const char* FileName;
 
@@ -303,6 +305,8 @@ struct InvType
     int Coin;
     };
 
+struct BlockType;
+
 struct ManType;
 
 struct CamType
@@ -322,6 +326,10 @@ struct CamType
 
 struct MouseType
     {
+    MouseType (int x, int y, ImageType Picture);
+
+    void DrawCursor (CamType* Camera);
+
     int x;
     int y;
 
@@ -349,6 +357,10 @@ struct ManType : BaseType
     void ManHealth (CamType* Camera, AllImageType AllImage);
 
     void ControlMan (MouseType Mouse, int* t);
+
+    void VillagerMind (ManType* Man, CamType* Camera, AllImageType AllImage);
+
+    void BlockCollision (BlockType* Block, CamType* Camera, AllImageType AllImage);
 
     void Physic ();
 
@@ -437,10 +449,6 @@ int Collision (BlockType* Block, ManType* Man);
 
 void ChangeAnimationNumber (BlockType* Block, ManType* Man, AllImageType AllImage);
 
-void DrawCursor (MouseType* Mouse, CamType* Camera);
-
-void BlockCollision (ManType* Man, BlockType* Block, CamType* Camera, AllImageType AllImage);
-
 void CoinCollision (ManType* Man, BlockType* Coin, int* NumberCoin);
 
 int ModuleDistance (int x1, int y1, int x2, int y2, int Distance);
@@ -462,8 +470,6 @@ void DrawTransparentImage (ImageType* Image, int x, int y, int* xAnimationNumber
 void LoadImages (AllImageType* AllImages);
 
 void HelpSystem ();
-
-void VillagerMind (ManType* Villager, ManType* Man, CamType* Camera, AllImageType AllImage);
 
 void DrawSlot (int Block, int x, int y, ImageType Picture, int TextX, int TextY);
 
@@ -488,16 +494,17 @@ int main ()
     return 0;
     };
 
+MouseType :: MouseType (int _x, int _y, ImageType _Picture) :
+    x (_x),
+    y (_y),
+    Picture (_Picture)
+    {};
+
 ButtonType :: ButtonType (int _x, int _y, int _Number) :
     x (_x),
     y (_y),
     Number (_Number)
     {};
-
-ImageType :: ImageType (const char* _FileName, int _xMaxAnimationNumber, int _yMaxAnimationNumber,
-                        HDC _Picture, COLOREF _color) :
-    xMaxAnimationNumber (_xMaxAnimationNumber),
-    yMaxAnimationNumber (_xMaxAnimationNumber),
 
 AnimationType :: AnimationType (int _xFrame, int _yFrame, ImageType* _Picture) :
     xFrame (_xFrame),
@@ -642,7 +649,7 @@ void LoadAllImages (AllImageType* AllImages)
 
     LoadGameImage (&AllImages->Knife,         "Images/Knife.bmp",                  1, 2, TX_WHITE, &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->Tree,          "Images/Tree.bmp",                   1, 4, TX_BLACK, &Procent, Number_of_Images);
+    LoadGameImage (&AllImages->Tree,          "Images/Tree.bmp",                   1, 8, TX_BLACK, &Procent, Number_of_Images);
 
     LoadGameImage (&AllImages->Wood,          "Images/Wood.bmp",                   1, 2, TX_WHITE, &Procent, Number_of_Images);
 
@@ -660,7 +667,7 @@ void LoadAllImages (AllImageType* AllImages)
 
     LoadGameImage (&AllImages->Bear,          "Images/Bear.bmp",                   1, 2, TX_WHITE, &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->Plus,          "Images/Plus.bmp",                   2, 1, TX_WHITE, &Procent, Number_of_Images);
+    LoadGameImage (&AllImages->Plus,          "Images/Plus.bmp",                   1, 2, TX_WHITE, &Procent, Number_of_Images);
 
     LoadGameImage (&AllImages->CommonSlot,    "Images/CommonSlot.bmp",             1, 1, TX_WHITE, &Procent, Number_of_Images);
 
@@ -850,12 +857,12 @@ void ManType :: DrawInventory (CamType* Camera, CamType* FixedCamera, AllImageTy
 
     DrawSlot (Inventory.Coin, 910, 707, AllImage.Coin, 900, 700);
 
-    int x = 1;
+    int X = 1;
 
     if (Animation.yFrame == 0)
-        x = -1;
+        X = -1;
     if (Animation.yFrame == 1)
-        x = 1;
+        X = 1;
 
     // Controlling
 
@@ -921,37 +928,37 @@ void ManType :: DrawInventory (CamType* Camera, CamType* FixedCamera, AllImageTy
     if (Animation.yFrame <= 1 &&
         Inventory.MainNumber == 2 &&
         Inventory.MainSlot > 0)
-        DrawTransparentImage (&AllImage.Knife, x + 33 - Animation.yFrame*20 + xWeapon*x,
+        DrawTransparentImage (&AllImage.Knife, x + 33 - Animation.yFrame*20 + xWeapon*X,
                               y + 112, &null, &Animation.yFrame, Camera);
 
     if (Animation.yFrame <= 1 &&
         Inventory.MainNumber == 3 &&
         Inventory.MainSlot > 0)
-        DrawTransparentImage (&AllImage.Apple, x + 33 - Animation.yFrame*20 + xWeapon*x,
+        DrawTransparentImage (&AllImage.Apple, x + 33 - Animation.yFrame*20 + xWeapon*X,
                               y + 112, &null, &Animation.yFrame, Camera);
 
     if (Animation.yFrame <= 1 &&
         Inventory.MainNumber == 6 &&
         Inventory.MainSlot > 0)
-        DrawTransparentImage (&AllImage.Arrow, x + 33 - Animation.yFrame*20 + xWeapon*x,
+        DrawTransparentImage (&AllImage.Arrow, x + 33 - Animation.yFrame*20 + xWeapon*X,
                               y + 112, &null, &Animation.yFrame, Camera);
 
     if (Animation.yFrame <= 1 &&
         Inventory.MainNumber == 4 &&
         Inventory.MainSlot > 0)
-        DrawTransparentImage (&AllImage.Stone, x + 33 - Animation.yFrame*20 + xWeapon*x,
+        DrawTransparentImage (&AllImage.Stone, x + 33 - Animation.yFrame*20 + xWeapon*X,
                               y + 112, &null, &Animation.yFrame, Camera);
 
     if (Animation.yFrame <= 1 &&
         Inventory.MainNumber == 1 &&
         Inventory.MainSlot > 0)
-        DrawTransparentImage (&AllImage.Wood, x + 33 - Animation.yFrame*20 + xWeapon*x,
+        DrawTransparentImage (&AllImage.Wood, x + 33 - Animation.yFrame*20 + xWeapon*X,
                               y + 70, &null, &Animation.yFrame, Camera);
 
     if (Animation.yFrame <= 1 &&
         Inventory.MainNumber == 7 &&
         Inventory.MainSlot > 0)
-        DrawTransparentImage (&AllImage.Coin, x + 33 - Animation.yFrame*20 + xWeapon*x,
+        DrawTransparentImage (&AllImage.Coin, x + 33 - Animation.yFrame*20 + xWeapon*X,
                               y + 70, &null, &Animation.yFrame, Camera);
 
     if (Animation.yFrame <= 1 &&
@@ -996,14 +1003,72 @@ void CreateBlocks (BlockType Blocks [], AllImageType AllImage)
     {
     int i = 0;
 
-    int x = -1;
+    int x = 0;
 
-    while (i < 1000)
+    while (Blocks[i].x != -1 && Blocks[i].y != -1)
         {
-        Blocks [i] = BlockType {x*190, 700, 10, {0, 0, &AllImage.Grass}, BT_Dirt};
+        // printf ("i = %d \n", i);
 
-        if (x <= 100)
-            x += 1;
+        // int Type = 0;
+
+        if (i < 19*World_Size)
+            {
+            Blocks[i].Health = 100;
+            Blocks[i].Number = BT_Air;
+            Blocks[i].x = x*604;
+            Blocks[i].y = 500;
+            Blocks[i].Animation.Picture = &AllImage.BackGround;
+            };
+
+        if (i == 19*World_Size)
+            x = 0;
+
+        if (i <= 79*World_Size &&
+            i >= 19*World_Size)
+            {
+            Blocks[i].Health = 10;
+            Blocks[i].Number = BT_Dirt;
+            Blocks[i].x = x*190;
+            Blocks[i].y = 700;
+            Blocks[i].Animation.Picture = &AllImage.Grass;
+            };
+
+        if (i > 79*World_Size &&
+            i <= 99*World_Size)
+            {
+            Blocks[i].Health = 100;
+            Blocks[i].Number = BT_Tree;
+            Blocks[i].x = (rand() % 60*World_Size)*200;
+            Blocks[i].y = 415;
+            Blocks[i].Animation.Picture = &AllImage.Tree;
+            };
+
+        if (i > 99*World_Size &&
+            i <= 109*World_Size)
+            {
+            Blocks[i].Health = 100;
+            Blocks[i].Number = BT_Rock;
+            Blocks[i].x = (rand() % 6*World_Size)*2000;
+            Blocks[i].y = 577;
+            Blocks[i].Animation.Picture = &AllImage.Rock;
+            };
+
+        if (i > 109*World_Size &&
+            i <= 110*World_Size)
+            {
+            Blocks[i].Health = 6;
+            Blocks[i].Number = BT_BonFire;
+            Blocks[i].x = rand() % 11000*World_Size;
+            Blocks[i].y = 633;
+            Blocks[i].Animation.Picture = &AllImage.BonFire;
+            };
+
+        if (i > 110*World_Size)
+            {
+            Blocks[i].Health = 0;
+            };
+
+        x += 1;
 
         i += 1;
         };
@@ -1146,9 +1211,9 @@ void ManType :: ManHealth (CamType* Camera, AllImageType AllImage)
     //    vX *= 0.1;
     };
 
-void VillagerMind (ManType* Villager, ManType* Man, CamType* Camera, AllImageType AllImage)
+void ManType :: VillagerMind (ManType* Man, CamType* Camera, AllImageType AllImage)
     {
-    if (Villager->Health > 0)
+    if (Health > 0)
     {
     int null = 0;
     int a = 0;
@@ -1157,228 +1222,228 @@ void VillagerMind (ManType* Villager, ManType* Man, CamType* Camera, AllImageTyp
     int one = 1;
     int two = 2;
 
-    if (Villager->Kind == MT_Seller)
+    if (Kind == MT_Seller)
     {
-    /* Villager->Inventory.Axe = rand() % 3;
-       Villager->Inventory.Knife = rand() % 3;
-       Villager->Inventory.Bow = rand() % 3;  */
+    /* Inventory.Axe = rand() % 3;
+       Inventory.Knife = rand() % 3;
+       Inventory.Bow = rand() % 3;  */
 
     int Side = 1;
-    if (Villager->x > Man->x)
+    if (x > Man->x)
         Side = 0;
-    if (Villager->x < Man->x)
+    if (x < Man->x)
         Side = 1;
 
-    if (Man->x - Villager->x > 100 &&
-            Man->x - Villager->x < 500)
-            Villager->vX = 10;
+    if (Man->x - x > 100 &&
+            Man->x - x < 500)
+            vX = 10;
 
-    if (Man->x - Villager->x < 100 &&
-            Man->x - Villager->x > 0)
+    if (Man->x - x < 100 &&
+            Man->x - x > 0)
             {
-            Villager->vX = 0;
+            vX = 0;
             };
 
-    if (Villager->x - Man->x > 100 &&
-            Villager->x - Man->x < 500)
-            Villager->vX = -10;
+    if (x - Man->x > 100 &&
+            x - Man->x < 500)
+            vX = -10;
 
-    if (Villager->x - Man->x < 100 &&
-            Villager->x - Man->x > 0)
+    if (x - Man->x < 100 &&
+            x - Man->x > 0)
             {
-            Villager->vX = 0;
+            vX = 0;
             };
 
-    if (fabs (Man->x - Villager->x) <= 200)
+    if (fabs (Man->x - x) <= 200)
         {
 
-        if (Villager->Inventory.Wood == 0)
+        if (Inventory.Wood == 0)
             {
-            if (ModuleDistance (Villager->x + 50 - Camera->x, Villager->y + 84 - Camera->y , txMouseX(), txMouseY(), 50) == true &&
+            if (ModuleDistance (x + 50 - Camera->x, y + 84 - Camera->y , txMouseX(), txMouseY(), 50) == true &&
                 GetAsyncKeyState (VK_LBUTTON))
-            Villager->Inventory.Wood = 1;
+            Inventory.Wood = 1;
             };
 
-        if (Villager->Inventory.Wood == 1)
+        if (Inventory.Wood == 1)
             {
-            DrawTransparentImage (&AllImage.CommonSlot, Villager->x - 20, Villager->y - 60, &null, &null, Camera);
+            DrawTransparentImage (&AllImage.CommonSlot, x - 20, y - 60, &null, &null, Camera);
 
-            DrawTransparentImage (&AllImage.CommonSlot, Villager->x + 50, Villager->y - 60, &null, &null, Camera);
+            DrawTransparentImage (&AllImage.CommonSlot, x + 50, y - 60, &null, &null, Camera);
 
-            DrawTransparentImage (&AllImage.CommonSlot, Villager->x + 120, Villager->y - 60, &null, &null, Camera);
+            DrawTransparentImage (&AllImage.CommonSlot, x + 120, y - 60, &null, &null, Camera);
 
             // slot1
-            if (Villager->Inventory.Axe == 0)
+            if (Inventory.Axe == 0)
                 {
-                DrawTransparentImage (&AllImage.Coin, Villager->x - 10, Villager->y - 53, &null, &null, Camera);
+                DrawTransparentImage (&AllImage.Coin, x - 10, y - 53, &null, &null, Camera);
 
-                DrawTransparentImage (&AllImage.SmallItems, Villager->x + 10, Villager->y - 33, &null, &null, Camera);
-                // Text (Villager->x + 8, Villager->y - 16, 20, one, "");
+                DrawTransparentImage (&AllImage.SmallItems, x + 10, y - 33, &null, &null, Camera);
+                // Text (x + 8, y - 16, 20, one, "");
 
-                if (ModuleDistance (Villager->x + 5 - Camera->x, Villager->y - 35 - Camera->y, txMouseX(), txMouseY(), 50) == true &&
+                if (ModuleDistance (x + 5 - Camera->x, y - 35 - Camera->y, txMouseX(), txMouseY(), 50) == true &&
                     GetAsyncKeyState (VK_LBUTTON) &&
                     Man->Inventory.Wood >= 1)
                     {
                     Man->Inventory.Wood -= 1;
                     Man->Inventory.Coin += 1;
-                    Villager->Inventory.Wood = 0;
+                    Inventory.Wood = 0;
                     };
                 };
 
-            if (Villager->Inventory.Axe == 1)
+            if (Inventory.Axe == 1)
                 {
-                DrawTransparentImage (&AllImage.Axe, Villager->x - 20, Villager->y - 60, &null, &null, Camera);
+                DrawTransparentImage (&AllImage.Axe, x - 20, y - 60, &null, &null, Camera);
 
-                DrawTransparentImage (&AllImage.SmallItems, Villager->x + 10, Villager->y - 33, &null, &two, Camera);
-                // Text (Villager->x + 8, Villager->y - 16, 20, one, "");
-                if (ModuleDistance (Villager->x + 5 - Camera->x, Villager->y - 35 - Camera->y, txMouseX(), txMouseY(), 50) == true &&
+                DrawTransparentImage (&AllImage.SmallItems, x + 10, y - 33, &null, &two, Camera);
+                // Text (x + 8, y - 16, 20, one, "");
+                if (ModuleDistance (x + 5 - Camera->x, y - 35 - Camera->y, txMouseX(), txMouseY(), 50) == true &&
                     GetAsyncKeyState (VK_LBUTTON) &&
                     Man->Inventory.Stone >= 1)
                     {
                     Man->Inventory.Stone -= 1;
                     Man->Inventory.Axe += 1;
-                    Villager->Inventory.Wood = 0;
+                    Inventory.Wood = 0;
                     };
                 };
 
-            if (Villager->Inventory.Axe == 2)
+            if (Inventory.Axe == 2)
                 {
-                DrawTransparentImage (&AllImage.Apple, Villager->x - 20, Villager->y - 60, &null, &null, Camera);
+                DrawTransparentImage (&AllImage.Apple, x - 20, y - 60, &null, &null, Camera);
 
-                DrawTransparentImage (&AllImage.SmallItems, Villager->x + 10, Villager->y - 33, &null, &one, Camera);
-                // Text (Villager->x + 8, Villager->y - 16, 20, one, "");
-                if (ModuleDistance (Villager->x + 5 - Camera->x, Villager->y - 35 - Camera->y, txMouseX(), txMouseY(), 50) == true &&
+                DrawTransparentImage (&AllImage.SmallItems, x + 10, y - 33, &null, &one, Camera);
+                // Text (x + 8, y - 16, 20, one, "");
+                if (ModuleDistance (x + 5 - Camera->x, y - 35 - Camera->y, txMouseX(), txMouseY(), 50) == true &&
                     GetAsyncKeyState (VK_LBUTTON) &&
                     Man->Inventory.Coin >= 1)
                     {
                     Man->Inventory.Coin -= 1;
                     Man->Inventory.Apple += 1;
-                    Villager->Inventory.Wood = 0;
+                    Inventory.Wood = 0;
                     };
                 };
 
             // slot2
-            if (Villager->Inventory.Knife == 0)
+            if (Inventory.Knife == 0)
                 {
-                DrawTransparentImage (&AllImage.Knife, Villager->x + 50, Villager->y - 40, &null, &null, Camera);
+                DrawTransparentImage (&AllImage.Knife, x + 50, y - 40, &null, &null, Camera);
 
-                DrawTransparentImage (&AllImage.SmallItems, Villager->x + 80, Villager->y - 33, &null, &null, Camera);
+                DrawTransparentImage (&AllImage.SmallItems, x + 80, y - 33, &null, &null, Camera);
 
-                if (ModuleDistance (Villager->x + 75 - Camera->x, Villager->y - 35 - Camera->y, txMouseX(), txMouseY(), 50) == true &&
+                if (ModuleDistance (x + 75 - Camera->x, y - 35 - Camera->y, txMouseX(), txMouseY(), 50) == true &&
                     GetAsyncKeyState (VK_LBUTTON) &&
                     Man->Inventory.Wood >= 1)
                     {
                     Man->Inventory.Wood -= 1;
                     Man->Inventory.Knife += 1;
-                    Villager->Inventory.Wood = 0;
+                    Inventory.Wood = 0;
                     };
                 };
 
-            if (Villager->Inventory.Knife == 1)
+            if (Inventory.Knife == 1)
                 {
-                DrawTransparentImage (&AllImage.Stone, Villager->x + 50, Villager->y - 60, &null, &null, Camera);
+                DrawTransparentImage (&AllImage.Stone, x + 50, y - 60, &null, &null, Camera);
 
-                DrawTransparentImage (&AllImage.SmallItems, Villager->x + 80, Villager->y - 33, &null, &one, Camera);
+                DrawTransparentImage (&AllImage.SmallItems, x + 80, y - 33, &null, &one, Camera);
 
-                if (ModuleDistance (Villager->x + 75 - Camera->x, Villager->y - 35 - Camera->y, txMouseX(), txMouseY(), 50) == true &&
+                if (ModuleDistance (x + 75 - Camera->x, y - 35 - Camera->y, txMouseX(), txMouseY(), 50) == true &&
                     GetAsyncKeyState (VK_LBUTTON) &&
                     Man->Inventory.Coin >= 1)
                     {
                     Man->Inventory.Coin -= 1;
                     Man->Inventory.Stone += 1;
-                    Villager->Inventory.Wood = 0;
+                    Inventory.Wood = 0;
                     };
                 };
 
-            if (Villager->Inventory.Knife == 2)
+            if (Inventory.Knife == 2)
                 {
-                DrawTransparentImage (&AllImage.Arrow, Villager->x + 50, Villager->y - 46, &null, &null, Camera);
+                DrawTransparentImage (&AllImage.Arrow, x + 50, y - 46, &null, &null, Camera);
 
-                DrawTransparentImage (&AllImage.SmallItems, Villager->x + 80, Villager->y - 33, &null, &two, Camera);
+                DrawTransparentImage (&AllImage.SmallItems, x + 80, y - 33, &null, &two, Camera);
 
-                if (ModuleDistance (Villager->x + 75 - Camera->x, Villager->y - 35 - Camera->y, txMouseX(), txMouseY(), 50) == true &&
+                if (ModuleDistance (x + 75 - Camera->x, y - 35 - Camera->y, txMouseX(), txMouseY(), 50) == true &&
                     GetAsyncKeyState (VK_LBUTTON) &&
                     Man->Inventory.Stone >= 1)
                     {
                     Man->Inventory.Stone -= 1;
                     Man->Inventory.Arrow += 1;
-                    Villager->Inventory.Wood = 0;
+                    Inventory.Wood = 0;
                     };
                 };
 
             // slot3
-            if (Villager->Inventory.Bow == 0)
+            if (Inventory.Bow == 0)
                 {
-                DrawTransparentImage (&AllImage.Bow, Villager->x + 120, Villager->y - 70, &null, &null, Camera);
+                DrawTransparentImage (&AllImage.Bow, x + 120, y - 70, &null, &null, Camera);
 
-                DrawTransparentImage (&AllImage.SmallItems, Villager->x + 150, Villager->y - 33, &null, &one, Camera);
+                DrawTransparentImage (&AllImage.SmallItems, x + 150, y - 33, &null, &one, Camera);
 
-                if (ModuleDistance (Villager->x + 145 - Camera->x, Villager->y - 35 - Camera->y, txMouseX(), txMouseY(), 50) == true &&
+                if (ModuleDistance (x + 145 - Camera->x, y - 35 - Camera->y, txMouseX(), txMouseY(), 50) == true &&
                     GetAsyncKeyState (VK_LBUTTON) &&
                     Man->Inventory.Coin >= 1)
                     {
                     Man->Inventory.Coin -= 1;
                     Man->Inventory.Bow += 1;
-                    Villager->Inventory.Wood = 0;
+                    Inventory.Wood = 0;
                     };
                 };
 
-            if (Villager->Inventory.Bow == 1)
+            if (Inventory.Bow == 1)
                 {
-                DrawTransparentImage (&AllImage.Apple, Villager->x + 120, Villager->y - 60, &null, &null, Camera);
+                DrawTransparentImage (&AllImage.Apple, x + 120, y - 60, &null, &null, Camera);
 
-                DrawTransparentImage (&AllImage.SmallItems, Villager->x + 150, Villager->y - 33, &null, &two, Camera);
+                DrawTransparentImage (&AllImage.SmallItems, x + 150, y - 33, &null, &two, Camera);
 
-                if (ModuleDistance (Villager->x + 145 - Camera->x, Villager->y - 35 - Camera->y, txMouseX(), txMouseY(), 50) == true &&
+                if (ModuleDistance (x + 145 - Camera->x, y - 35 - Camera->y, txMouseX(), txMouseY(), 50) == true &&
                     GetAsyncKeyState (VK_LBUTTON) &&
                     Man->Inventory.Stone >= 1)
                     {
                     Man->Inventory.Stone -= 1;
                     Man->Inventory.Apple += 1;
-                    Villager->Inventory.Wood = 0;
+                    Inventory.Wood = 0;
                     };
                 };
 
-            if (Villager->Inventory.Bow == 2)
+            if (Inventory.Bow == 2)
                 {
-                DrawTransparentImage (&AllImage.Coin, Villager->x + 130, Villager->y - 53, &null, &null, Camera);
+                DrawTransparentImage (&AllImage.Coin, x + 130, y - 53, &null, &null, Camera);
 
-                DrawTransparentImage (&AllImage.SmallItems, Villager->x + 150, Villager->y - 33, &null, &null, Camera);
+                DrawTransparentImage (&AllImage.SmallItems, x + 150, y - 33, &null, &null, Camera);
 
-                if (ModuleDistance (Villager->x + 145 - Camera->x, Villager->y - 35 - Camera->y, txMouseX(), txMouseY(), 50) == true &&
+                if (ModuleDistance (x + 145 - Camera->x, y - 35 - Camera->y, txMouseX(), txMouseY(), 50) == true &&
                     GetAsyncKeyState (VK_LBUTTON) &&
                     Man->Inventory.Wood >= 1)
                     {
                     Man->Inventory.Wood -= 1;
                     Man->Inventory.Coin += 1;
-                    Villager->Inventory.Wood = 0;
+                    Inventory.Wood = 0;
                     };
                 };
             };
 
-        // $i printf ("number = %d \n", Villager->Inventory.Wood); $d
+        // $i printf ("number = %d \n", Inventory.Wood); $d
         }
         else
-            Villager->Inventory.Wood = 0;
+            Inventory.Wood = 0;
     };
 
-    /* if (Villager->Inventory.Knife == 2)
+    /* if (Inventory.Knife == 2)
         {
         if (Side == 1)
-        DrawTransparentImage (&AllImage.Gun, Villager->x + 74, Villager->y + 93, &null, &null, Camera);
+        DrawTransparentImage (&AllImage.Gun, x + 74, y + 93, &null, &null, Camera);
         if (Side == 0)
-        DrawTransparentImage (&AllImage.Gun, Villager->x + 44, Villager->y + 93, &one, &null, Camera);
-        Villager->Position += 1;
+        DrawTransparentImage (&AllImage.Gun, x + 44, y + 93, &one, &null, Camera);
+        Position += 1;
 
-        if (Villager->Position >= 10)
+        if (Position >= 10)
             {
-            int x = Villager->x + 74;
+            int x = x + 74;
             int vX = 0;
 
-            if (Villager->x > Man->x)
+            if (x > Man->x)
                 vX = -10;
 
-            if (Villager->x < Man->x)
+            if (x < Man->x)
                 vX = 10;
 
             x += vX;
@@ -1387,39 +1452,39 @@ void VillagerMind (ManType* Villager, ManType* Man, CamType* Camera, AllImageTyp
             int one = 1;
 
             if (vX > 0)
-                DrawTransparentImage (&AllImage.Gun, x, Villager->y + 88, &null, &one, Camera);
+                DrawTransparentImage (&AllImage.Gun, x, y + 88, &null, &one, Camera);
 
             if (vX < 0)
-                DrawTransparentImage (&AllImage.Gun, x, Villager->y + 88, &one, &one, Camera);
+                DrawTransparentImage (&AllImage.Gun, x, y + 88, &one, &one, Camera);
 
-            if (ModuleDistance (Man->x + 47, Man->y + 84, x,  Villager->y + 88, 30) == true)
+            if (ModuleDistance (Man->x + 47, Man->y + 84, x,  y + 88, 30) == true)
                 {
-                Villager->Position = 0;
+                Position = 0;
                 };
             };
         }; */
 
     // Fighting:
 
-    if (ModuleDistance (Villager->x + 50 - Camera->x, Villager->y + 84 - Camera->y , txMouseX(), txMouseY(), 50) == true &&
+    if (ModuleDistance (x + 50 - Camera->x, y + 84 - Camera->y , txMouseX(), txMouseY(), 50) == true &&
         GetAsyncKeyState (VK_LBUTTON) &&
         Man->Inventory.MainNumber == 2 &&
         Man->Inventory.MainSlot > 0 &&
         Man->ArmSpeed >= 10)
         {
-        Villager->Health -= 1;
-        Villager->vY = -15;
-        if (Villager->x > Man->x)
-            Villager->vX = 50;
-        if (Villager->x < Man->x)
-            Villager->vX = -50;
-        // Villager->Animation.xFrame += 1;
+        Health -= 1;
+        vY = -15;
+        if (x > Man->x)
+            vX = 50;
+        if (x < Man->x)
+            vX = -50;
+        // Animation.xFrame += 1;
         // txCircle (Man->x - Camera->x, Man->y - Camera->y, 50);
         Man->ArmSpeed = 0;
-        Villager->Time = 1;
+        Time = 1;
         };
     // else
-    //     Villager->Animation.xFrame = 0;
+    //     Animation.xFrame = 0;
 
     if (Man->xWeapon > 0)
         Man->xWeapon -= 1;
@@ -1430,18 +1495,18 @@ void VillagerMind (ManType* Villager, ManType* Man, CamType* Camera, AllImageTyp
 
     // Bow
 
-    if (fabs (Man->ArrowX - Villager->x) <= 200 &&
-        fabs (Man->ArrowY - Villager->y) <= 80 &&
-        Villager->Health > 0 &&
+    if (fabs (Man->ArrowX - x) <= 200 &&
+        fabs (Man->ArrowY - y) <= 80 &&
+        Health > 0 &&
         Man->ArrowVX != 0 &&
         Man->Inventory.Arrow > 0)
         {
-        Villager->vY = -15;
-        if (Villager->x > Man->x)
-            Villager->vX = 50;
-        if (Villager->x < Man->x)
-            Villager->vX = -50;
-        Villager->Health -= 5;
+        vY = -15;
+        if (x > Man->x)
+            vX = 50;
+        if (x < Man->x)
+            vX = -50;
+        Health -= 5;
         Man->Inventory.Arrow -= 1;
         Man->ArrowVX = 0;
         Man->ArrowVY = 0;
@@ -1449,159 +1514,158 @@ void VillagerMind (ManType* Villager, ManType* Man, CamType* Camera, AllImageTyp
         Man->ArrowY  = Man->y;
         };
 
-
     // House
     if (Man->Position == House_Position)
-        Villager->Position = OutSide_Position;
+        Position = OutSide_Position;
 
     if (Man->Position != House_Position &&
-        Villager->Position == OutSide_Position)
-        Villager->Position = Normal_Position;
+        Position == OutSide_Position)
+        Position = Normal_Position;
 
     // Bear
-    if (Villager->Kind == MT_Bear &&
-        Villager->Health > 0)
+    if (Kind == MT_Bear &&
+        Health > 0)
         {
-        if (Villager->Time == 1)
+        if (Time == 1)
             {
-            if (Man->x > Villager->x)
-                Villager->vX = 10;
+            if (Man->x > x)
+                vX = 10;
 
-            if (Man->x < Villager->x)
-                Villager->vX = -10;
+            if (Man->x < x)
+                vX = -10;
 
-            if (Man->x - Villager->x < 100 &&
-            Man->x - Villager->x > 0)
+            if (Man->x - x < 100 &&
+            Man->x - x > 0)
             {
-            Villager->vX = 0;
+            vX = 0;
             };
 
-            if (Villager->x - Man->x < 100 &&
-                Villager->x - Man->x > 0)
+            if (x - Man->x < 100 &&
+                x - Man->x > 0)
             {
-            Villager->vX = 0;
+            vX = 0;
             };
 
             // Fighting
-            Villager->ArmSpeed += 1;
+            ArmSpeed += 1;
 
-            if (Villager->ArmSpeed >= 10 &&
-                Villager->vX == 0)
+            if (ArmSpeed >= 10 &&
+                vX == 0)
                 {
                 Man->Health -= 1;
                 Man->vY = -15;
-                if (Man->x > Villager->x)
+                if (Man->x > x)
                     Man->vX = 50;
-                if (Man->x < Villager->x)
+                if (Man->x < x)
                     Man->vX = -50;
                 // Man->Animation.xFrame += 1;
                 // txCircle (Man->x - Camera->x, Man->y - Camera->y, 50);
-                Villager->ArmSpeed = 0;
+                ArmSpeed = 0;
                 };
             };
 
         if (Man->Time < 500)
             {
-            // Villager->Animation.xFrame = 0;
-            Villager->vX = 1;
+            // Animation.xFrame = 0;
+            vX = 1;
             };
         if (Man->Time >= 500 &&
-            Villager->y - Man->y <= 300 &&
-            Villager->y - Man->y >= -300 &&
-            Villager->Time != 1)
+            y - Man->y <= 300 &&
+            y - Man->y >= -300 &&
+            Time != 1)
             {
-            // Villager->Animation.xFrame = 2;
-            if (Man->x > Villager->x)
-                Villager->vX = 10;
+            // Animation.xFrame = 2;
+            if (Man->x > x)
+                vX = 10;
 
-            if (Man->x < Villager->x)
-                Villager->vX = -10;
+            if (Man->x < x)
+                vX = -10;
 
-            if (Man->x - Villager->x < 100 &&
-            Man->x - Villager->x > 0)
+            if (Man->x - x < 100 &&
+            Man->x - x > 0)
             {
-            Villager->vX = 0;
+            vX = 0;
             };
 
-            if (Villager->x - Man->x < 100 &&
-                Villager->x - Man->x > 0)
+            if (x - Man->x < 100 &&
+                x - Man->x > 0)
             {
-            Villager->vX = 0;
+            vX = 0;
             };
 
             // Fighting
-            Villager->ArmSpeed += 1;
+            ArmSpeed += 1;
 
-            if (Villager->ArmSpeed >= 10 &&
-                Villager->vX == 0)
+            if (ArmSpeed >= 10 &&
+                vX == 0)
                 {
                 Man->Health -= 1;
                 Man->vY = -15;
-                if (Man->x > Villager->x)
+                if (Man->x > x)
                     Man->vX = 50;
-                if (Man->x < Villager->x)
+                if (Man->x < x)
                     Man->vX = -50;
                 // Man->Animation.xFrame += 1;
                 // txCircle (Man->x - Camera->x, Man->y - Camera->y, 50);
-                Villager->ArmSpeed = 0;
+                ArmSpeed = 0;
                 };
             };
         };
 
     // Bandit
-    if (Villager->Kind == MT_Bandit &&
-        Villager->Health > 0)
+    if (Kind == MT_Bandit &&
+        Health > 0)
         {
-        if (Man->x > Villager->x)
-            Villager->vX = 10;
+        if (Man->x > x)
+            vX = 10;
 
-        if (Man->x < Villager->x)
-            Villager->vX = -10;
+        if (Man->x < x)
+            vX = -10;
 
-        /* if (Villager->Animation.yFrame == 0 &&
-            Villager->vX == 0)
-            Villager->Animation.yFrame = 2;
+        /* if (Animation.yFrame == 0 &&
+            vX == 0)
+            Animation.yFrame = 2;
 
-        if (Villager->Animation.yFrame == 1 &&
-            Villager->vX == 0)
-            Villager->Animation.yFrame = 3; */
+        if (Animation.yFrame == 1 &&
+            vX == 0)
+            Animation.yFrame = 3; */
 
-        if (fabs (Man->x - Villager->x) <= 200)
-            Villager->vX = 0;
+        if (fabs (Man->x - x) <= 200)
+            vX = 0;
 
-        Villager->ArmSpeed += 1;
+        ArmSpeed += 1;
 
-        Villager->ArrowX += Villager->ArrowVX;
-        Villager->ArrowY += Villager->ArrowVY;
+        ArrowX += ArrowVX;
+        ArrowY += ArrowVY;
 
         int null = 0;
 
-        DrawTransparentImage (&AllImage.Bullet, -11 + 61*Villager->Animation.yFrame + Villager->ArrowX,
-                              Villager->ArrowY + 60, &null, &Villager->Animation.yFrame, Camera);
+        DrawTransparentImage (&AllImage.Bullet, -11 + 61*Animation.yFrame + ArrowX,
+                              ArrowY + 60, &null, &Animation.yFrame, Camera);
 
-        if (Villager->ArmSpeed >= 80)
+        if (ArmSpeed >= 80)
             {
-            // Villager->ArrowVY = 5;
-            Villager->ArrowX = Villager->x;
-            Villager->ArrowY = Villager->y;
+            // ArrowVY = 5;
+            ArrowX = x;
+            ArrowY = y;
 
-            if (Man->x > Villager->x)
-            Villager->ArrowVX =  100;
-            if (Man->x < Villager->x)
-            Villager->ArrowVX = -100;
+            if (Man->x > x)
+            ArrowVX =  100;
+            if (Man->x < x)
+            ArrowVX = -100;
 
-            // Villager->xWeapon = 1;
-            Villager->ArmSpeed = 0;
+            // xWeapon = 1;
+            ArmSpeed = 0;
             };
 
-        if (fabs (Villager->ArrowX - Man->x) <= 200 &&
-            fabs (Villager->ArrowY - Man->y) <= 80)
+        if (fabs (ArrowX - Man->x) <= 200 &&
+            fabs (ArrowY - Man->y) <= 80)
             {
             Man->Health -= 1;
             Man->vY = -15;
-            if (Villager->x > Man->x)
+            if (x > Man->x)
                 Man->vX = -50;
-            if (Villager->x < Man->x)
+            if (x < Man->x)
                 Man->vX = 50;
             };
         };
@@ -1653,15 +1717,15 @@ void ButtonType :: DrawButton (CamType* Camera, AllImageType AllImage)
     DrawTransparentImage (&AllImage.Pause, x, y, &null, &Number, Camera);
     };
 
-void DrawCursor (MouseType* Mouse, CamType* Camera)
+void MouseType :: DrawCursor (CamType* Camera)
     {
-    Mouse->x = txMouseX ();
+    x = txMouseX ();
 
-    Mouse->y = txMouseY ();
+    y = txMouseY ();
 
     int null = 0;
 
-    DrawTransparentImage (&Mouse->Picture, Mouse->x, Mouse->y, &null, &null, Camera);
+    DrawTransparentImage (&Picture, x, y, &null, &null, Camera);
     };
 
 void Shooting (int x, int y, int vX, ImageType Picture, ManType* Man, CamType* Camera)
@@ -1722,6 +1786,8 @@ void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber,
 
     COLORREF color = TX_BLACK;
 
+
+
     // CreateBlocks (ManyBlocks, AllImage);
 
     txBegin ();
@@ -1752,7 +1818,7 @@ void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber,
 
         txSetColor (RGB (143, 86, 59), 1);
         txSetFillColor (RGB (143, 86, 59));
-        txRectangle (-1390 - Camera->x, 700 - Camera->y, 3740 - Camera->x, 2000 - Camera->y);
+        txRectangle (-99999, 700 - Camera->y, 99999, 2000 - Camera->y);
 
         DrawManyBlocks (ManyBlocks, Camera, AllImage);
 
@@ -1769,7 +1835,7 @@ void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber,
         Villager->Physic ();
         InteractManWithBlocks (ManyBlocks, Villager, Camera, &Man->NumberCoin, LevelNumber, AllImage);
         Villager->DrawMan (Camera, AllImage);
-        VillagerMind (Villager, Man, Camera, AllImage);
+        Villager->VillagerMind (Man, Camera, AllImage);
 
         DrawTransparentImage (&AllImage.Coin, Sign_CoinX, Sign_CoinY, &null, &null, FixedCamera);
 
@@ -1833,7 +1899,7 @@ void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber,
 
 
 
-        DrawCursor (&Mouse, FixedCamera);
+        Mouse.DrawCursor (FixedCamera);
 
         if (StartLevelNumber != *LevelNumber)
             {
@@ -1972,64 +2038,1776 @@ void Level1 (int* LevelNumber, ManType* Man, AllImageType AllImage, CamType* Cam
             AllTemperature = 40;
 
     BlockType ManyBlocks [] = {
-                            {130, 500, 10, {0, 0, &AllImage.BackGround}, BT_Air},
-                            {734, 500, 10, {0, 0, &AllImage.BackGround}, BT_Air},
-                            {1338, 500, 10, {0, 0, &AllImage.BackGround}, BT_Air},
-                            {1942, 500, 10, {0, 0, &AllImage.BackGround}, BT_Air},
-                            {2546, 500, 10, {0, 0, &AllImage.BackGround}, BT_Air},
-                            {3150, 500, 10, {0, 0, &AllImage.BackGround}, BT_Air},
-                            {3754, 500, 10, {0, 0, &AllImage.BackGround}, BT_Air},
-                            // Snow
-                            {-1000, 100,    10, {0, 0, &AllImage.Snow}, BT_Snow},
-                            {0,     100,    10, {0, 0, &AllImage.Snow}, BT_Snow},
-                            {1000,  100,    10, {0, 0, &AllImage.Snow}, BT_Snow},
-                            {2000,  100,    10, {0, 0, &AllImage.Snow}, BT_Snow},
-                            // Grass
-                            {0, 640, 10, {0, 0, &AllImage.Fire}, BT_Fire},
-                            {130, 700, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
-                            {320, 700, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
-                            {510, 700, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
-                            {700, 700, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
-                            {890, 700, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
-                            {1080, 700, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
-                            {1270, 700, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
-                            {1460, 700, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
-                            {1650, 700, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
-                            {1840, 700, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
-                            {2030, 700, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
-                            {2220, 700, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
-                            {2410, 700, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
-                            {2600, 700, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
-                            {2790, 700, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
-                            {2980, 700, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
-                            {3170, 700, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
-                            {3360, 700, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
-                            {3550, 700, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
-                            {-60, 700, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
-                            {-250, 700, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
-                            {-440, 700, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
-                            {-630, 700, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
-                            {-820, 700, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
-                            {-1010, 700, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
-                            {-1200, 700, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
-                            {-1390, 700, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
-                            // Rock
-                            {-1010, 577, 100, {0, 0, &AllImage.Rock}, BT_Rock},
-                            {-440, 577, 100, {0, 0, &AllImage.Rock}, BT_Rock},
-                            // House
-                            {590, 342, 10, {0, 0, &AllImage.House}, BT_House},
-                            {590, 633, 10, {0, 0, &AllImage.BonFire}, BT_BonFire},
-                            // Tree
-                            {1270, 415, 100, {0, 0, &AllImage.Tree}, BT_Tree},
-                            {1470, 415, 100, {0, 0, &AllImage.Tree}, BT_Tree},
-                            {1870, 415, 100, {0, 0, &AllImage.Tree}, BT_Tree},
+                            // {0, 640, 10, {0, 0, &AllImage.Fire}, BT_Fire},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
+                            {0, 0, 10, {0, 0, &AllImage.Grass}, BT_Dirt},
                             // End
                             {-1, -1, 1, {0, 0, &AllImage.Finish}, BT_Finish}};
 
-    ManType Villager = {2125, 521, 20, {0, 0, &AllImage.Villager},
+    CreateBlocks (ManyBlocks, AllImage);
+
+    ManType Villager = {2125, 521, 20, {0, 0, &AllImage.Bear},
                         0, 0, Man_aX, 2,
                         0, 0, Man_Temperature,
-                        0, 0, 0, "", MT_Seller, {0, 0, 0, rand() % 3, 0, 0, rand() % 3, 0, rand() % 3, 0}, 0, 0,
+                        0, 0, 0, "", MT_Bear, {0, 0, 0, rand() % 3, 0, 0, rand() % 3, 0, rand() % 3, 0}, 0, 0,
                         2125, 521, 0, 0};
 
     MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera, FixedCamera, &Villager);
@@ -2380,7 +4158,7 @@ void DrawLevelBlocks (BlockType ManyBlocks[], CamType* Camera, AllImageType AllI
     {
     int i = 0;
 
-    while (ManyBlocks [i].x != -1 && ManyBlocks [i].y != -1)
+    while (ManyBlocks[i].x != -1 && ManyBlocks[i].y != -1)
         {
         ManyBlocks [i].DrawBlock (Camera, AllImage);
 
@@ -2388,14 +4166,13 @@ void DrawLevelBlocks (BlockType ManyBlocks[], CamType* Camera, AllImageType AllI
         };
     };
 
-
 void CallLevelPhysic (BlockType ManyBlocks[], ManType* Man, CamType* Camera, int* NumberCoin, AllImageType AllImage)
     {
     int i = 0;
 
-    while (ManyBlocks [i].x != -1 && ManyBlocks [i].y != -1)
+    while (ManyBlocks[i].x != -1 && ManyBlocks[i].y != -1)
         {
-        BlockCollision (Man, &ManyBlocks [i], Camera, AllImage);
+        Man->BlockCollision (&ManyBlocks [i], Camera, AllImage);
 
         CoinCollision (Man, &ManyBlocks [i], NumberCoin);
 
@@ -2461,13 +4238,16 @@ void ManType :: ControlMan (MouseType Mouse, int* t)
         Inventory.MainNumber == 0 &&
         Inventory.MainSlot > 0 &&
         xWeapon <= 3)
+        {
         xWeapon += 1;
+        ArmSpeed = 0;
+        }
     else
         if (Inventory.MainNumber == 0 &&
             Inventory.MainSlot > 0)
         {
         xWeapon -= 1;
-        // ArmSpeed = 100;
+        ArmSpeed = 10;
         };
 
 
@@ -2554,7 +4334,7 @@ void ManType :: Physic ()
         vX = -50;
 
     // Time;
-    Time += 100;
+    Time += 1;
 
     if (Time >= 1000)
         Time = 0;
@@ -2568,7 +4348,7 @@ void ManType :: Physic ()
     // printf ("Days = %d \n", Days);
     };
 
-void BlockCollision (ManType* Man, BlockType* Block, CamType* Camera, AllImageType AllImage)
+void ManType :: BlockCollision (BlockType* Block, CamType* Camera, AllImageType AllImage)
     {
     int null = 0;
     int two = 2;
@@ -2578,16 +4358,16 @@ void BlockCollision (ManType* Man, BlockType* Block, CamType* Camera, AllImageTy
     // Rock
     if (Block->Number == BT_Rock)
     {
-    if (Man->Inventory.MainNumber == 0 &&
-        Man->Inventory.MainSlot > 0 &&
-        fabs (Block->x + Block_BaseWide - Man->x) <= Block_BaseWide + Man_Wide + 100 &&
+    if (Inventory.MainNumber == 0 &&
+        Inventory.MainSlot > 0 &&
+        fabs (Block->x + Block_BaseWide - x) <= Block_BaseWide + Man_Wide + 200 &&
         ModuleDistance (Block->x + 90 - Camera->x, Block->y + 50 - Camera->y , txMouseX(), txMouseY(), 50) == true &&
         GetAsyncKeyState (VK_LBUTTON) &&
-        Man->ArmSpeed >= 10)
+        ArmSpeed >= 10)
             {
             Block->Health -= 10;
             Block->Animation.yFrame = 1;
-            Man->ArmSpeed = 0;
+            ArmSpeed = 0;
             }
         else
             Block->Animation.yFrame = 0;
@@ -2595,7 +4375,7 @@ void BlockCollision (ManType* Man, BlockType* Block, CamType* Camera, AllImageTy
         if (Block->Health <= 20 &&
             Block->Health > 0)
             {
-            Man->Inventory.Stone += 3;
+            Inventory.Stone += 3;
             Block->Health = 0;
             };
     };
@@ -2606,55 +4386,55 @@ void BlockCollision (ManType* Man, BlockType* Block, CamType* Camera, AllImageTy
         if (Block->Health <= 3)
         {
         Block->Animation.yFrame = 0;
-        if (Man->Temperature < 10 &&
-            fabs (Block->x - Man->x) <= 200)
-        Man->Temperature += 0.025;
+        if (Temperature < 10 &&
+            fabs (Block->x - x) <= 200)
+        Temperature += 0.025;
         };
 
         if (Block->Health > 3 &&
             Block->Health <= 6)
             {
         Block->Animation.yFrame = 1;
-        if (Man->Temperature < 32 &&
-            fabs (Block->x - Man->x) <= 200)
-        Man->Temperature += 0.05;
+        if (Temperature < 32 &&
+            fabs (Block->x - x) <= 200)
+        Temperature += 0.05;
         };
 
         if (Block->Health > 6 &&
-            fabs (Block->x - Man->x) <= 200)
+            fabs (Block->x - x) <= 200)
         {
         Block->Animation.yFrame = 2;
-        if (Man->Temperature < 36.6)
-        Man->Temperature += 0.1;
+        if (Temperature < 36.6)
+        Temperature += 0.1;
         };
 
         if (Block->Health >= 1)
             {
-            if (Man->Days >= 0 &&
-                Man->Days < 10)
+            if (Days >= 0 &&
+                Days < 10)
                 Block->Health -= 0.0025;
 
-            if (Man->Days >= 10 &&
-                Man->Days < 20)
+            if (Days >= 10 &&
+                Days < 20)
                 Block->Health -= 0.025;
 
-            if (Man->Days >= 20 &&
-                Man->Days < 30)
+            if (Days >= 20 &&
+                Days < 30)
                 Block->Health -= 0.0025;
 
-            if (Man->Days >= 30 &&
-                Man->Days < 40)
+            if (Days >= 30 &&
+                Days < 40)
                 Block->Health -= 0.0012;
             };
 
-        if (Man->Inventory.MainNumber == 1 &&
-            Man->Inventory.MainSlot > 0 &&
+        if (Inventory.MainNumber == 1 &&
+            Inventory.MainSlot > 0 &&
             ModuleDistance (Block->x + 30 - Camera->x, Block->y + 30 - Camera->y, txMouseX(), txMouseY(), 100) == true &&
             GetAsyncKeyState (VK_LBUTTON) &&
             Block->Health <= 6 &&
             Block->Health > 0)
             {
-            Man->Inventory.Wood -= 1;
+            Inventory.Wood -= 1;
             Block->Health += 3;
             };
         };
@@ -2662,66 +4442,66 @@ void BlockCollision (ManType* Man, BlockType* Block, CamType* Camera, AllImageTy
     // Year
     if (Block->Number == BT_Dirt)
     {
-    if (Man->Days >= 0 &&
-        Man->Days < 10)
+    if (Days >= 0 &&
+        Days < 10)
             Block->Animation.yFrame = 0;
 
-    if (Man->Days >= 10 &&
-        Man->Days < 20)
+    if (Days >= 10 &&
+        Days < 20)
             Block->Animation.yFrame = 1;
 
-    if (Man->Days >= 20 &&
-        Man->Days < 30)
+    if (Days >= 20 &&
+        Days < 30)
             Block->Animation.yFrame = 2;
 
-    if (Man->Days >= 30 &&
-        Man->Days < 40)
+    if (Days >= 30 &&
+        Days < 40)
             Block->Animation.yFrame = 3;
     };
 
     if (Block->Number == BT_Tree)
     {
-    if (Man->Days >= 0 &&
-        Man->Days < 10)
+    if (Days >= 0 &&
+        Days < 10)
             Block->Animation.yFrame = 0;
 
-    if (Man->Days >= 10 &&
-        Man->Days < 20)
+    if (Days >= 10 &&
+        Days < 20)
             Block->Animation.yFrame = 1;
 
-    if (Man->Days >= 20 &&
-        Man->Days < 30)
+    if (Days >= 20 &&
+        Days < 30)
             Block->Animation.yFrame = 2;
 
-    if (Man->Days >= 30 &&
-        Man->Days < 40)
+    if (Days >= 30 &&
+        Days < 40)
             Block->Animation.yFrame = 3;
     };
 
     if (Block->Number == BT_Snow)
         {
-        if (Man->Days >= 10 &&
-            Man->Days < 20)
+        if (Days >= 10 &&
+            Days < 20)
             Block->Animation.yFrame = 0;
         else
             Block->Animation.yFrame = 1;
         };
 
     // House
-    if (fabs (Block->x + 150 - Man->x) <= Man_Wide + 40 &&
+    if (fabs (Block->x + 150 - x) <= Man_Wide + 40 &&
         Block->Number == BT_House &&
-        Man->Position != House_Position &&
-        Man->Kind == 0)
+        Position != House_Position &&
+        Kind == 0)
         {
         DrawTransparentImage (&AllImage.Pause, Block->x + 180, Block->y + 100, &null, &two, Camera);
         if (ModuleDistance (Block->x + 180 - Camera->x, Block->y + 100 - Camera->y ,
                             txMouseX(), txMouseY(), 50) == true &&
             GetAsyncKeyState (VK_LBUTTON))
-            Man->Position = House_Position;
+            Position = House_Position;
         };
 
     if (Block->Number == BT_House &&
-        Man->Position == House_Position)
+        Position == House_Position)
         {
         Block->Animation.yFrame = 1;
 
@@ -2729,82 +4509,82 @@ void BlockCollision (ManType* Man, BlockType* Block, CamType* Camera, AllImageTy
         if (ModuleDistance (Block->x + 420 - Camera->x, Block->y + 120 - Camera->y ,
                             txMouseX(), txMouseY(), 50) == true &&
             GetAsyncKeyState (VK_LBUTTON))
-            Man->Position = Normal_Position;
+            Position = Normal_Position;
 
-        if (Man->x >= Block->x + 460 &&
-            Man->vX > 0)
-            Man->vX = 0;
+        if (x >= Block->x + 460 &&
+            vX > 0)
+            vX = 0;
 
-        if (Man->x <= Block->x + 80 &&
-            Man->vX < 0)
-            Man->vX = 0;
+        if (x <= Block->x + 80 &&
+            vX < 0)
+            vX = 0;
         };
 
     if (Block->Number == BT_House &&
-        Man->Position == OutSide_Position)
+        Position == OutSide_Position)
         {
-        if (Man->x >= Block->x &&
-            Man->x <= Block->x + 500)
-        Man->x = Block->x - 200;
+        if (x >= Block->x &&
+            x <= Block->x + 500)
+        x = Block->x - 200;
         };
 
     if (Block->Number == BT_House &&
-        Man->Position != House_Position)
+        Position != House_Position)
         Block->Animation.yFrame = 0;
 
     if (Block->Number == BT_Fire)
         {
-        if (Man->Time >= 500)
+        if (Time >= 500)
             Block->Animation.yFrame = 1;
         else
             Block->Animation.yFrame = 0;
             };
     if (Block->Number == BT_Air)
         {
-        if (Man->Time >= 500)
+        if (Time >= 500)
             Block->Animation.yFrame = 1;
         else
             Block->Animation.yFrame = 0;
             };
 
-    if (Man->y >= 10000)
-        Man->Health -= 1;
+    if (y >= 10000)
+        Health -= 1;
 
-    if (Block->Number == BT_Fire)
+    /* if (Block->Number == BT_Fire)
         {
         if (Collision (Block, Man) == true)
             {
             Camera->Timer = GetTickCount () + 30000;
             };
-        };
+        }; */
 
     // Tree
     if (Block->Number == BT_Tree)
         {
-        /*if (Man->Time >= 500)
+        /*if (Time >= 500)
             Block->Animation.yFrame = 1;
         else
             Block->Animation.yFrame = 0; */
 
-        if (Man->Inventory.MainNumber == 0 &&
-            Man->Inventory.MainSlot > 0 &&
-            fabs (Block->x + Block_BaseWide - Man->x) <= Block_BaseWide + Man_Wide + 100 &&
+        if (Inventory.MainNumber == 0 &&
+            Inventory.MainSlot > 0 &&
+            fabs (Block->x + Block_BaseWide - x) <= Block_BaseWide + Man_Wide + 100 &&
             ModuleDistance (Block->x + 140 - Camera->x, Block->y + 215 - Camera->y , txMouseX(), txMouseY(), 140) == true &&
             GetAsyncKeyState (VK_LBUTTON) &&
-            Man->ArmSpeed >= 10)
+            ArmSpeed >= 10)
             {
             Block->Health -= 10;
-            // Block->Animation.yFrame = 2;
-            Man->ArmSpeed = 0;
+            Block->Animation.yFrame += 4;
+            ArmSpeed = 0;
             };
 
         if (Block->Health <= 20 &&
             Block->Health > 0)
             {
-            Man->Inventory.Wood += 2;
-            if (Man->Days >= 30 &&
-                Man->Days < 40)
-                Man->Inventory.Apple += 1;
+            Inventory.Wood += 2;
+            if (Days >= 30 &&
+                Days < 40)
+                Inventory.Apple += 1;
             Block->Health = 0;
             };
         };
@@ -2818,22 +4598,23 @@ void BlockCollision (ManType* Man, BlockType* Block, CamType* Camera, AllImageTy
         Block->Number != BT_Water &&
         Block->Number != BT_Stalactite &&
         Block->Number != BT_BonFire &&
+        Block->Number != BT_Air &&
         Block->Number < BT_Pickaxe)
     {
-    if (fabs (Block->x + Block_BaseWide - Man->x) <= Block_BaseWide + Man_Wide &&
-        Block->y + Block_BaseHigh - Man->y <= Block_BaseHigh + txGetExtentY (Man->Animation.Picture->Picture) / Man->Animation.Picture->yMaxAnimationNumber &&
-        Block->y + Block_BaseHigh - Man->y  >=  0)
+    if (fabs (Block->x + Block_BaseWide - x) <= Block_BaseWide + Man_Wide &&
+        Block->y + Block_BaseHigh - y <= Block_BaseHigh + txGetExtentY (Animation.Picture->Picture) / Animation.Picture->yMaxAnimationNumber &&
+        Block->y + Block_BaseHigh - y  >=  0)
             {
             if (GetAsyncKeyState (VK_UP) &&
-                Man->Kind == MT_Main)
+                Kind == MT_Main)
                 {
-                Man->vY = -Man_JumpSpeed;
+                vY = -Man_JumpSpeed;
                 };
 
-            if (Man->vY > 0)
+            if (vY > 0)
                 {
-                Man->vY = 0;
-                Man->y = Block->y - Man_High;
+                vY = 0;
+                y = Block->y - Man_High;
                 };
             };
 
@@ -2844,61 +4625,62 @@ void BlockCollision (ManType* Man, BlockType* Block, CamType* Camera, AllImageTy
         Block->Number != BT_Stalactite &&
         Block->Number < BT_Pickaxe)
             {
-            if (fabs (Block->x + Block_BaseWide - Man->x) <= Block_BaseWide + Man_Wide &&
-                Block->y + Block_BaseHigh > Man->y &&
-                Block->y < Man->y + Man_High)
+            if (fabs (Block->x + Block_BaseWide - x) <= Block_BaseWide + Man_Wide &&
+                Block->y + Block_BaseHigh > y &&
+                Block->y < y + Man_High)
                 {
-                if (Block->x <= Man->x + Man_Wide &&
-                    Man->vX > 0)
-                        Man->vX = 0;
+                if (Block->x <= x + Man_Wide &&
+                    vX > 0)
+                        vX = 0;
 
-                if (Block->x + Block_BaseWide >= Man->x &&
-                    Man->vX < 0)
-                        Man->vX = 0;
+                if (Block->x + Block_BaseWide >= x &&
+                    vX < 0)
+                        vX = 0;
                 };
             };
 
-    /* if ((Block->x - Man->x - Man_Wide) <= Man_Wide + 2 &&
-        (Block->x - Man->x - Man_Wide) >= 0 &&
-        Block->y + Block_BaseHigh - Man->y <= Block_BaseHigh + Man_High &&
-        Block->y + Block_BaseHigh - Man->y  >=  0 &&
-        Man->vX > 0)
-            Man->vX = 0;
+    /* if ((Block->x - x - Man_Wide) <= Man_Wide + 2 &&
+        (Block->x - x - Man_Wide) >= 0 &&
+        Block->y + Block_BaseHigh - y <= Block_BaseHigh + Man_High &&
+        Block->y + Block_BaseHigh - y  >=  0 &&
+        vX > 0)
+            vX = 0;
 
-    if ((Man->x - Block->x - Block_BaseWide) <= Block_BaseWide + 2 &&
-        (Man->x - Block->x - Block_BaseWide) >= 0 &&
-        Block->y + Block_BaseHigh - Man->y <= Block_BaseHigh + Man_High &&
-        Block->y + Block_BaseHigh - Man->y  >=  0 &&
-        Man->vX < 0)
-            Man->vX = 0; */
+    if ((x - Block->x - Block_BaseWide) <= Block_BaseWide + 2 &&
+        (x - Block->x - Block_BaseWide) >= 0 &&
+        Block->y + Block_BaseHigh - y <= Block_BaseHigh + Man_High &&
+        Block->y + Block_BaseHigh - y  >=  0 &&
+        vX < 0)
+            vX = 0; */
 
         };
 
     // Destroying
-    if (Block->Health > 0 &&
+    /* if (Block->Health > 0 &&
         Block->Health < 50 &&
         Block->Number != BT_Fire &&
         Block->Number != BT_Berries &&
         Block->Number != BT_Chest)
     {
-    /* if (ModuleDistance (Block->x + Block_BaseWide + Man->x, Block->y + Block_BaseHigh + Man->x, txMouseX(), txMouseY(), Block_BaseWide) == true)
+    if (ModuleDistance (Block->x + Block_BaseWide + x, Block->y + Block_BaseHigh + x, txMouseX(), txMouseY(), Block_BaseWide) == true)
         if (GetAsyncKeyState (VK_LBUTTON) &&
-            Man->LeftArm == BT_Pickaxe &&
+            LeftArm == BT_Pickaxe &&
             Block->Health > 1)
                Block->Health -= 1;
 
-    if (ModuleDistance (Block->x + Block_BaseWide + Man->x, Block->y + Block_BaseHigh + Man->x, txMouseX(), txMouseY(), Block_BaseWide) == true)
+    if (ModuleDistance (Block->x + Block_BaseWide + x, Block->y + Block_BaseHigh + x, txMouseX(), txMouseY(), Block_BaseWide) == true)
         if (GetAsyncKeyState (VK_RBUTTON) &&
-            Man->RightArm == BT_Pickaxe &&
+            RightArm == BT_Pickaxe &&
             Block->Health > 1)
-               Block->Health -= 1; */
+               Block->Health -= 1;
 
-    };
+    }; */
 
     // Boxes
+
     if (Block->Number == BT_Box)
         {
-        if (Collision (Block, Man) == true)
+        if (Collision (Block, this) == true)
             {
             Block->Health = Block->Health - 0.005;
             };
@@ -2907,30 +4689,30 @@ void BlockCollision (ManType* Man, BlockType* Block, CamType* Camera, AllImageTy
     // Fire
     if (Block->Number == BT_Fire)
         {
-        if (Collision (Block, Man) == true)
+        if (Collision (Block, this) == true)
             {
-            Man->Position = Fire_Position;
-            Man->Temperature += 0.5;
+            Position = Fire_Position;
+            Temperature += 0.5;
             };
         };
 
     // Water
     if (Block->Number == BT_Water)
         {
-        if (Collision (Block, Man) == true)
+        if (Collision (Block, this) == true)
             {
-            Man->Position = Normal_Position;
+            Position = Normal_Position;
             };
         };
 
     // High
-    if (Block->x + Block_BaseWide - Man->x >= Block_BaseWide + Man_Wide &&
-        Block->x + Block_BaseWide - Man->x <= 0   &&
-        Block->y + Block_BaseHigh - Man->y <= Block_BaseHigh + Man_High &&
-        Block->y + Block_BaseHigh - Man->y > 0    &&
-        Man->vY >= Man_FallingSpeed)
+    if (Block->x + Block_BaseWide - x >= Block_BaseWide + Man_Wide &&
+        Block->x + Block_BaseWide - x <= 0   &&
+        Block->y + Block_BaseHigh - y <= Block_BaseHigh + Man_High &&
+        Block->y + Block_BaseHigh - y > 0    &&
+        vY >= Man_FallingSpeed)
             {
-            Man->Health -= 3;
+            Health -= 3;
             };
 
     // Things
@@ -2941,35 +4723,35 @@ void BlockCollision (ManType* Man, BlockType* Block, CamType* Camera, AllImageTy
             /* if (ModuleDistance (Block->x+Block_BaseWide-Camera->x, Block->y+Block_BaseHigh-Camera->y, txMouseX(), txMouseY(), Block_BaseWide) == true &&
                 GetAsyncKeyState (VK_MBUTTON))
                     {
-                    if (Man->LeftArm == BT_BlackSpace)
+                    if (LeftArm == BT_BlackSpace)
                         {
-                        Man->LeftArm = Block->Number;
-                        Man->ArmPicture = Block->Animation.Picture;
+                        LeftArm = Block->Number;
+                        ArmPicture = Block->Animation.Picture;
                         Block->Health = 0;
                         }
                 else
-                if (Man->RightArm == BT_BlackSpace)
+                if (RightArm == BT_BlackSpace)
                     {
-                    Man->RightArm = Block->Number;
-                    Man->ArmPicture = Block->Animation.Picture;
+                    RightArm = Block->Number;
+                    ArmPicture = Block->Animation.Picture;
                     Block->Health = 0;
                     };
             }; */
             };
 
     // Food
-   /*  if (Man->LeftArm >= BT_Berries &&
+   /*  if (LeftArm >= BT_Berries &&
         GetAsyncKeyState (VK_NUMPAD1))
             {
-            Man->LeftArm = BT_BlackSpace;
-            Man->Health += 4;
+            LeftArm = BT_BlackSpace;
+            Health += 4;
             };
 
-    if (Man->RightArm >= BT_Berries &&
+    if (RightArm >= BT_Berries &&
         GetAsyncKeyState (VK_NUMPAD2))
             {
-            Man->RightArm = BT_BlackSpace;
-            Man->Health += 4;
+            RightArm = BT_BlackSpace;
+            Health += 4;
             };
 
     if (ModuleDistance (Block->x+Block_BaseWide-Camera->x, Block->y+Block_BaseHigh-Camera->x, txMouseX(), txMouseY(), Block_BaseWide) == true &&
@@ -2977,17 +4759,17 @@ void BlockCollision (ManType* Man, BlockType* Block, CamType* Camera, AllImageTy
         Block->Health == Block_MaxHealth &&
         GetAsyncKeyState (VK_RETURN))
         {
-        if (Man->LeftArm == 0)
+        if (LeftArm == 0)
             {
-            Man->LeftArm = Block->Number;
-            Man->ArmPicture = Block->Animation.Picture;
+            LeftArm = Block->Number;
+            ArmPicture = Block->Animation.Picture;
             Block->Health = 1;
             }
         else
-        if (Man->RightArm == 0)
+        if (RightArm == 0)
             {
-            Man->RightArm = Block->Number;
-            Man->ArmPicture = Block->Animation.Picture;
+            RightArm = Block->Number;
+            ArmPicture = Block->Animation.Picture;
             Block->Health = 1;
             };  */
         };
@@ -3014,7 +4796,7 @@ void BlockCollision (ManType* Man, BlockType* Block, CamType* Camera, AllImageTy
                 Block->Health >= 100)
                 {
                 Block->Health = 1;
-                Man->Inventory.Berries += 1;
+                Inventory.Berries += 1;
                 };
 
             Block->Health += 1;
