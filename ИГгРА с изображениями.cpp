@@ -1,7 +1,5 @@
 #include "TXLib.h"
 
-// 123
-
 const int NameSize = 50;
 const int World_Size = 1;   // !!! Не делать больше 10-ти !!!
 
@@ -22,12 +20,14 @@ enum BlockNumbers
     BT_Stairs     = 3,
     BT_Fire       = 4,
     BT_Tree       = 5,
-    BT_Water      = 5,
     BT_Stalactite = 7,
     BT_Chest      = 8,
     BT_BonFire    = 9,
     BT_Rock       = 10,
     BT_Pickaxe    = 11,
+    BT_Water      = 12,
+    BT_FallingTree = 13,
+    BT_SmallStone = 14,
     BT_Berries    = 21,
     BT_Air        = 50,
     BT_House      = 51,
@@ -41,7 +41,11 @@ enum ManKinds
     MT_Main = 0,
     MT_Seller = 1,
     MT_Bandit = 2,
-    MT_Bear = 3
+    MT_Bear = 3,
+    MT_Fish = 5,
+    MT_Spider = 6,
+    MT_Wolf  = 7,
+    MT_Boat = 10
     };
 
 enum
@@ -111,6 +115,7 @@ enum Man
     Water_Position = 2,
     House_Position = 3,
     OutSide_Position = 4,
+    Boat_Position = 5,
 
     // Damage
 
@@ -159,7 +164,7 @@ enum
     Sign_HealthX = 19,
     Sign_HealthY = 113,
 
-    Main_Sleep = 30
+    Main_Sleep = 10
     };
 
 enum
@@ -288,6 +293,17 @@ struct AllImageType
     ImageType SmallItems;
     ImageType Bandit;
     ImageType Bullet;
+    ImageType Bridge;
+    ImageType Boat;
+    ImageType Wolf;
+    ImageType Fish;
+    ImageType FishingSmall;
+    ImageType FishingBig;
+    ImageType CookedFish;
+    ImageType FallingTree;
+    ImageType Spider;
+    ImageType Rope;
+    ImageType CraftImage;
     };
 
 struct InvType
@@ -295,6 +311,8 @@ struct InvType
     int CraftNumber;
     int MainSlot;
     int MainNumber;
+    int CraftControlSpeed;
+    int InvControlSpeed;
     int Axe;
     int Wood;
     int Apple;
@@ -303,6 +321,10 @@ struct InvType
     int Bow;
     int Arrow;
     int Coin;
+    int Fishing;
+    int Fish;
+    int CookedFish;
+    int Rope;
     };
 
 struct BlockType;
@@ -424,7 +446,7 @@ struct BlockType : BaseType
 
 void Cycle ();
 
-void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber, ManType* Man, double* AllTemperature, CamType* Camera, CamType* FixedCamera, ManType* Villager);
+void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber, ManType* Man, double* AllTemperature, CamType* Camera, CamType* FixedCamera, ManType Villagers []);
 
 void DeleteImage (AllImageType AllImage);
 
@@ -471,7 +493,7 @@ void LoadImages (AllImageType* AllImages);
 
 void HelpSystem ();
 
-void DrawSlot (int Block, int x, int y, ImageType Picture, int TextX, int TextY);
+
 
 void Shooting (int x, int y, int vX, ImageType Picture, ManType* Man, CamType* Camera);
 
@@ -482,6 +504,8 @@ void Menu (int* LevelNumber, AllImageType AllImage, CamType* FixedCamera);
 int Timer (int Time);
 
 void CreateBlocks (BlockType Blocks [], AllImageType AllImage);
+
+void CallPeoplePhysic (ManType Villagers[], CamType* Camera, AllImageType AllImage, BlockType ManyBlocks [], ManType* Man);
 
 void StrCpy (char Name [], char _Name []);
 
@@ -684,7 +708,30 @@ void LoadAllImages (AllImageType* AllImages)
     LoadGameImage (&AllImages->Bandit,        "Images/Bandit.bmp",                 1, 4, TX_WHITE, &Procent, Number_of_Images);
 
     LoadGameImage (&AllImages->Bullet,        "Images/Bullet.bmp",                 1, 2, TX_WHITE, &Procent, Number_of_Images);
+
+    LoadGameImage (&AllImages->Bridge,        "Images/Bridge.bmp",                 1, 4, TX_BLACK, &Procent, Number_of_Images);
+
+    LoadGameImage (&AllImages->Boat,          "Images/Boat.bmp",                   1, 1, TX_WHITE, &Procent, Number_of_Images);
+
+    LoadGameImage (&AllImages->Wolf,          "Images/Wolf.bmp",                   1, 2, TX_WHITE, &Procent, Number_of_Images);
+
+    LoadGameImage (&AllImages->Fish,          "Images/Fish.bmp",                   1, 2, TX_WHITE, &Procent, Number_of_Images);
+
+    LoadGameImage (&AllImages->FishingSmall,  "Images/FishingRod.bmp",             1, 2, TX_WHITE, &Procent, Number_of_Images);
+
+    LoadGameImage (&AllImages->FishingBig,    "Images/FishingBig.bmp",             1, 2, TX_WHITE, &Procent, Number_of_Images);
+
+    LoadGameImage (&AllImages->CookedFish,    "Images/CookedFish.bmp",             1, 2, TX_WHITE, &Procent, Number_of_Images);
+
+    LoadGameImage (&AllImages->FallingTree,   "Images/FallingTree.bmp",            1, 1, TX_WHITE, &Procent, Number_of_Images);
+
+    LoadGameImage (&AllImages->Spider,        "Images/Spider.bmp",                 1, 2, TX_WHITE, &Procent, Number_of_Images);
+
+    LoadGameImage (&AllImages->Rope,          "Images/Rope.bmp",                   1, 2, TX_BLACK, &Procent, Number_of_Images);
+
+    LoadGameImage (&AllImages->CraftImage,    "Images/CraftImage.bmp",             1, 1, TX_WHITE, &Procent, Number_of_Images);
     };
+
 
 void Cycle ()
     {
@@ -700,10 +747,10 @@ void Cycle ()
 
     CamType FixedCamera {0, 0, 0, 0, 0};
 
-    ManType Man {Man_x, Man_y, Man_Health, {0, 0, &AllImage.Man},
+    ManType Man {0, Man_y, Man_Health, {0, 0, &AllImage.Man},
                  0, 0, Man_aX, 2,
                  0, 0, Man_Temperature,
-                 0, 0, 0, "Я", 0, {0, 0, 0, 0, 1, 1, 1, 1, 1, 111, 2},
+                 0, 0, 0, "", 0, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                  0, rand() % 40, Man_x, Man_y, 0, 0};
 
     while (true)
@@ -753,13 +800,23 @@ void ManType :: Crafting (AllImageType AllImage, CamType* FixedCamera)
     int four = 4;
     int five = 5;
 
+    if (GetAsyncKeyState (VK_LBUTTON))
+        {}
+    else
+        Inventory.CraftControlSpeed = 0;
+
     if (Inventory.CraftNumber == 0)
         {
         DrawTransparentImage (&AllImage.CommonSlot, 15, 300, &null, &null, FixedCamera);
 
+        DrawTransparentImage (&AllImage.CraftImage, 10, 295, &null, &null, FixedCamera);
+
         if (ModuleDistance (40, 325, txMouseX(), txMouseY(), 50) == true &&
             GetAsyncKeyState (VK_LBUTTON))
+            {
             Inventory.CraftNumber = 1;
+            Inventory.CraftControlSpeed = 1;
+            };
         };
 
     if (Inventory.CraftNumber > 0)
@@ -779,51 +836,132 @@ void ManType :: Crafting (AllImageType AllImage, CamType* FixedCamera)
     DrawTransparentImage (&AllImage.Pause, 309, 370, &null, &five, FixedCamera);
 
     if (ModuleDistance (324, 325, txMouseX(), txMouseY(), 50) == true &&
-        GetAsyncKeyState (VK_LBUTTON))
+        GetAsyncKeyState (VK_LBUTTON) &&
+        Inventory.CraftControlSpeed == 0 &&
+        Inventory.CraftNumber < 5)
+        {
         Inventory.CraftNumber += 1;
+        Inventory.CraftControlSpeed = 1;
+        };
 
     if (ModuleDistance (324, 395, txMouseX(), txMouseY(), 50) == true &&
-        GetAsyncKeyState (VK_LBUTTON))
+        GetAsyncKeyState (VK_LBUTTON) &&
+        Inventory.CraftControlSpeed == 0)
+        {
         Inventory.CraftNumber -= 1;
+        Inventory.CraftControlSpeed = 1;
+        };
 
     if (Inventory.CraftNumber < 0)
         Inventory.CraftNumber = 0;
 
     if (Inventory.CraftNumber == 1)
         {
-        DrawTransparentImage (&AllImage.Wood, 15, 300, &null, &one, FixedCamera);
+        DrawSlot (2, 15, 230, AllImage.Wood, 15, 230);
 
         DrawTransparentImage (&AllImage.Stone, 127, 300, &null, &one, FixedCamera);
 
         DrawTransparentImage (&AllImage.Axe, 240, 292, &null, &one, FixedCamera);
 
-        if (Inventory.Wood >= 1 &&
+        if (Inventory.Wood >= 2 &&
             Inventory.Stone >= 1 &&
             ModuleDistance (265, 325, txMouseX(), txMouseY(), 50) == true &&
-            GetAsyncKeyState (VK_LBUTTON))
+            GetAsyncKeyState (VK_LBUTTON) &&
+            Inventory.CraftControlSpeed == 0)
             {
-            Inventory.Wood -= 1;
+            Inventory.Wood -= 2;
             Inventory.Stone -= 1;
             Inventory.Axe += 1;
             Inventory.CraftNumber = 0;
+            Inventory.CraftControlSpeed = 1;
             };
         };
 
     if (Inventory.CraftNumber == 2)
         {
-        DrawTransparentImage (&AllImage.Wood, 15, 300, &null, &one, FixedCamera);
-
         DrawTransparentImage (&AllImage.Wood, 127, 300, &null, &one, FixedCamera);
+
+        DrawTransparentImage (&AllImage.Stone, 15, 300, &null, &one, FixedCamera);
 
         DrawTransparentImage (&AllImage.Knife, 240, 312, &null, &one, FixedCamera);
 
-        if (Inventory.Wood >= 2 &&
+        if (Inventory.Wood >= 1 &&
+            Inventory.Stone >= 1 &&
             ModuleDistance (265, 325, txMouseX(), txMouseY(), 50) == true &&
-            GetAsyncKeyState (VK_LBUTTON))
+            GetAsyncKeyState (VK_LBUTTON) &&
+            Inventory.CraftControlSpeed == 0)
             {
-            Inventory.Wood -= 2;
+            Inventory.Wood -= 1;
+            Inventory.Stone -= 1;
             Inventory.Knife += 1;
             Inventory.CraftNumber = 0;
+            Inventory.CraftControlSpeed = 1;
+            };
+        };
+
+    if (Inventory.CraftNumber == 3)
+        {
+        DrawSlot (2, 15, 230, AllImage.Wood, 15, 230);
+
+        DrawTransparentImage (&AllImage.Rope, 127, 300, &null, &one, FixedCamera);
+
+        DrawTransparentImage (&AllImage.FishingSmall, 240, 292, &null, &one, FixedCamera);
+
+        if (Inventory.Wood >= 2 &&
+            Inventory.Rope >= 1 &&
+            ModuleDistance (265, 325, txMouseX(), txMouseY(), 50) == true &&
+            GetAsyncKeyState (VK_LBUTTON) &&
+            Inventory.CraftControlSpeed == 0)
+            {
+            Inventory.Wood -= 2;
+            Inventory.Rope -= 1;
+            Inventory.Fishing += 1;
+            Inventory.CraftNumber = 0;
+            Inventory.CraftControlSpeed = 1;
+            };
+        };
+
+    if (Inventory.CraftNumber == 4)
+        {
+        DrawSlot (2, 127, 230, AllImage.Wood, 127, 230);
+
+        DrawSlot (2, 15, 230, AllImage.Rope, 15, 230);
+
+        DrawTransparentImage (&AllImage.Bow, 240, 292, &null, &one, FixedCamera);
+
+        if (Inventory.Wood >= 2 &&
+            Inventory.Rope >= 2 &&
+            ModuleDistance (265, 325, txMouseX(), txMouseY(), 50) == true &&
+            GetAsyncKeyState (VK_LBUTTON) &&
+            Inventory.CraftControlSpeed == 0)
+            {
+            Inventory.Wood -= 2;
+            Inventory.Rope -= 2;
+            Inventory.Bow += 1;
+            Inventory.CraftNumber = 0;
+            Inventory.CraftControlSpeed = 1;
+            };
+        };
+
+    if (Inventory.CraftNumber == 5)
+        {
+        DrawTransparentImage (&AllImage.Wood, 127, 300, &null, &one, FixedCamera);
+
+        DrawTransparentImage (&AllImage.Stone, 15, 300, &null, &one, FixedCamera);
+
+        DrawSlot (3, 233, 254, AllImage.Arrow, 240, 230);
+
+        if (Inventory.Wood >= 1 &&
+            Inventory.Stone >= 1 &&
+            ModuleDistance (265, 325, txMouseX(), txMouseY(), 50) == true &&
+            GetAsyncKeyState (VK_LBUTTON) &&
+            Inventory.CraftControlSpeed == 0)
+            {
+            Inventory.Wood -= 1;
+            Inventory.Stone -= 1;
+            Inventory.Arrow += 3;
+            Inventory.CraftNumber = 0;
+            Inventory.CraftControlSpeed = 1;
             };
         };
     };
@@ -837,25 +975,34 @@ void ManType :: DrawInventory (CamType* Camera, CamType* FixedCamera, AllImageTy
     int one = 1;
     int two = 2;
 
-    DrawTransparentImage (&AllImage.Inventory, 550, 700, &null, &null, FixedCamera);
+    DrawTransparentImage (&AllImage.Inventory, 325, 770, &null, &null, FixedCamera);
+    DrawTransparentImage (&AllImage.Inventory, 775, 770, &null, &null, FixedCamera);
 
-    DrawTransparentImage (&AllImage.Slot, 549 + Inventory.MainNumber*50, 699, &null, &null, FixedCamera);
+    DrawTransparentImage (&AllImage.Slot, 324 + Inventory.MainNumber*50, 769, &null, &null, FixedCamera);
 
-    DrawSlot (Inventory.Axe, 550, 690, AllImage.Axe, 550, 700);
+    DrawSlot (Inventory.Axe, 325, 690, AllImage.Axe, 325, 700);
 
-    DrawSlot (Inventory.Wood, 600, 700, AllImage.Wood, 600, 700);
+    DrawSlot (Inventory.Wood, 375, 700, AllImage.Wood, 375, 700);
 
-    DrawSlot (Inventory.Apple, 700, 700, AllImage.Apple, 700, 700);
+    DrawSlot (Inventory.Apple, 475, 700, AllImage.Apple, 475, 700);
 
-    DrawSlot (Inventory.Knife, 650, 720, AllImage.Knife, 650, 700);
+    DrawSlot (Inventory.Knife, 425, 720, AllImage.Knife, 425, 700);
 
-    DrawSlot (Inventory.Stone, 750, 700, AllImage.Stone, 750, 700);
+    DrawSlot (Inventory.Stone, 525, 700, AllImage.Stone, 525, 700);
 
-    DrawSlot (Inventory.Bow, 800, 690, AllImage.Bow, 800, 700);
+    DrawSlot (Inventory.Bow, 575, 690, AllImage.Bow, 575, 700);
 
-    DrawSlot (Inventory.Arrow, 828, 719, AllImage.Arrow, 850, 700);
+    DrawSlot (Inventory.Arrow, 603, 719, AllImage.Arrow, 625, 700);
 
-    DrawSlot (Inventory.Coin, 910, 707, AllImage.Coin, 900, 700);
+    DrawSlot (Inventory.Coin, 685, 707, AllImage.Coin, 675, 700);
+
+    DrawSlot (Inventory.Fishing, 725, 700, AllImage.FishingSmall, 725, 700);
+
+    DrawSlot (Inventory.Fish, 780, 713, AllImage.Fish, 775, 700);
+
+    DrawSlot (Inventory.CookedFish, 825, 712, AllImage.CookedFish, 825, 700);
+
+    DrawSlot (Inventory.Rope, 875, 700, AllImage.Rope, 875, 700);
 
     int X = 1;
 
@@ -868,18 +1015,36 @@ void ManType :: DrawInventory (CamType* Camera, CamType* FixedCamera, AllImageTy
 
     if (GetAsyncKeyState (VK_LCONTROL))
         {
-        Inventory.MainNumber -= 1;
+        // InvControlSpeed = -1;
+        }
+    else
+        {
+        if (GetAsyncKeyState (VK_RCONTROL))
+        {
+        // InvControlSpeed = 1;
+        }
+        else
+            Inventory.InvControlSpeed = 0;
         };
 
-    if (GetAsyncKeyState (VK_RCONTROL))
+    if (GetAsyncKeyState (VK_LCONTROL) &&
+        Inventory.InvControlSpeed == 0)
+        {
+        Inventory.MainNumber -= 1;
+        Inventory.InvControlSpeed = -1;
+        };
+
+    if (GetAsyncKeyState (VK_RCONTROL) &&
+        Inventory.InvControlSpeed == 0)
         {
         Inventory.MainNumber += 1;
+        Inventory.InvControlSpeed = 1;
         };
 
     if (Inventory.MainNumber < 0)
-        Inventory.MainNumber = 8;
+        Inventory.MainNumber = 17;
 
-    if (Inventory.MainNumber > 8)
+    if (Inventory.MainNumber > 17)
         Inventory.MainNumber = 0;
 
     // Numbers
@@ -922,6 +1087,26 @@ void ManType :: DrawInventory (CamType* Camera, CamType* FixedCamera, AllImageTy
     if (Inventory.MainNumber == 7)
         {
         Inventory.MainSlot = Inventory.Coin;
+        };
+
+    if (Inventory.MainNumber == 8)
+        {
+        Inventory.MainSlot = Inventory.Fishing;
+        };
+
+    if (Inventory.MainNumber == 9)
+        {
+        Inventory.MainSlot = Inventory.Fish;
+        };
+
+    if (Inventory.MainNumber == 10)
+        {
+        Inventory.MainSlot = Inventory.CookedFish;
+        };
+
+    if (Inventory.MainNumber == 11)
+        {
+        Inventory.MainSlot = Inventory.Rope;
         };
 
     // ManArm
@@ -967,6 +1152,30 @@ void ManType :: DrawInventory (CamType* Camera, CamType* FixedCamera, AllImageTy
         DrawTransparentImage (&AllImage.Axe, x - 26 + Animation.yFrame*98,
                               y + 60, &xWeapon, &Animation.yFrame, Camera);
 
+    if (Animation.yFrame <= 1 &&
+        Inventory.MainNumber == 8 &&
+        Inventory.MainSlot > 0)
+        DrawTransparentImage (&AllImage.FishingBig, x - 23 + Animation.yFrame*101,
+                              y + 60, &null, &Animation.yFrame, Camera);
+
+    if (Animation.yFrame <= 1 &&
+        Inventory.MainNumber == 9 &&
+        Inventory.MainSlot > 0)
+        DrawTransparentImage (&AllImage.Fish, x - 23 + Animation.yFrame*101,
+                              y + 110, &null, &Animation.yFrame, Camera);
+
+    if (Animation.yFrame <= 1 &&
+        Inventory.MainNumber == 10 &&
+        Inventory.MainSlot > 0)
+        DrawTransparentImage (&AllImage.CookedFish, x - 23 + Animation.yFrame*101,
+                              y + 110, &null, &Animation.yFrame, Camera);
+
+    if (Animation.yFrame <= 1 &&
+        Inventory.MainNumber == 11 &&
+        Inventory.MainSlot > 0)
+        DrawTransparentImage (&AllImage.Rope, x - 23 + Animation.yFrame*101,
+                              y + 110, &null, &Animation.yFrame, Camera);
+
     // Bow
 
     if (Animation.yFrame <= 1 &&
@@ -993,9 +1202,9 @@ void DrawSlot (int Block, int x, int y, ImageType Picture, int TextX, int TextY)
 
     if (Block > 0)
         {
-        DrawTransparentImage (&Picture, x, y, &null, &one, &FixedCamera);
+        DrawTransparentImage (&Picture, x, y + 70, &null, &one, &FixedCamera);
 
-        Text (TextX + 38, TextY + 44, 20, Block, "");
+        Text (TextX + 38, TextY + 114, 20, Block, "");
         };
     };
 
@@ -1034,7 +1243,7 @@ void CreateBlocks (BlockType Blocks [], AllImageType AllImage)
             };
 
         if (i > 79*World_Size &&
-            i <= 99*World_Size)
+            i <= 95*World_Size)
             {
             Blocks[i].Health = 100;
             Blocks[i].Number = BT_Tree;
@@ -1043,14 +1252,34 @@ void CreateBlocks (BlockType Blocks [], AllImageType AllImage)
             Blocks[i].Animation.Picture = &AllImage.Tree;
             };
 
+        if (i > 95*World_Size &&
+            i <= 99*World_Size)
+            {
+            Blocks[i].Health = 100;
+            Blocks[i].Number = BT_FallingTree;
+            Blocks[i].x = (rand() % 60*World_Size)*200;
+            Blocks[i].y = 627;
+            Blocks[i].Animation.Picture = &AllImage.FallingTree;
+            };
+
         if (i > 99*World_Size &&
-            i <= 109*World_Size)
+            i <= 105*World_Size)
             {
             Blocks[i].Health = 100;
             Blocks[i].Number = BT_Rock;
             Blocks[i].x = (rand() % 6*World_Size)*2000;
             Blocks[i].y = 577;
             Blocks[i].Animation.Picture = &AllImage.Rock;
+            };
+
+        if (i > 105*World_Size &&
+            i <= 109*World_Size)
+            {
+            Blocks[i].Health = 100;
+            Blocks[i].Number = BT_SmallStone;
+            Blocks[i].x = (rand() % 6*World_Size)*2000;
+            Blocks[i].y = 658;
+            Blocks[i].Animation.Picture = &AllImage.Stone;
             };
 
         if (i > 109*World_Size &&
@@ -1063,7 +1292,25 @@ void CreateBlocks (BlockType Blocks [], AllImageType AllImage)
             Blocks[i].Animation.Picture = &AllImage.BonFire;
             };
 
-        if (i > 110*World_Size)
+        if (i == 110*World_Size + 1)
+            {
+            Blocks[i].Health = 6;
+            Blocks[i].Number = BT_Dirt;
+            Blocks[i].x = -140;
+            Blocks[i].y = 700;
+            Blocks[i].Animation.Picture = &AllImage.Bridge;
+            };
+
+        if (i == 110*World_Size + 2)
+            {
+            Blocks[i].Health = 6;
+            Blocks[i].Number = BT_Dirt;
+            Blocks[i].x = 11400*World_Size;
+            Blocks[i].y = 700;
+            Blocks[i].Animation.Picture = &AllImage.Bridge;
+            };
+
+        if (i > 110*World_Size + 2)
             {
             Blocks[i].Health = 0;
             };
@@ -1134,7 +1381,8 @@ void ManType :: DrawMan (CamType* Camera, AllImageType AllImage)
 
     // printf ("x = %d, y = %d, twonumber = %d\n", Animation.xFrame, Animation.yFrame, twonumber);
 
-    if (Kind != 0)
+    if (Kind != 0 &&
+        Kind != MT_Boat)
         {
         if (vX < 0)
             {
@@ -1235,7 +1483,7 @@ void ManType :: VillagerMind (ManType* Man, CamType* Camera, AllImageType AllIma
         Side = 1;
 
     if (Man->x - x > 100 &&
-            Man->x - x < 500)
+            Man->x - x < 200)
             vX = 10;
 
     if (Man->x - x < 100 &&
@@ -1245,7 +1493,7 @@ void ManType :: VillagerMind (ManType* Man, CamType* Camera, AllImageType AllIma
             };
 
     if (x - Man->x > 100 &&
-            x - Man->x < 500)
+            x - Man->x < 200)
             vX = -10;
 
     if (x - Man->x < 100 &&
@@ -1472,7 +1720,7 @@ void ManType :: VillagerMind (ManType* Man, CamType* Camera, AllImageType AllIma
         Man->Inventory.MainSlot > 0 &&
         Man->ArmSpeed >= 10)
         {
-        Health -= 1;
+        Health -= 2;
         vY = -15;
         if (x > Man->x)
             vX = 50;
@@ -1540,8 +1788,7 @@ void ManType :: VillagerMind (ManType* Man, CamType* Camera, AllImageType AllIma
             vX = 0;
             };
 
-            if (x - Man->x < 100 &&
-                x - Man->x > 0)
+            if (fabs (Man->x - x) >= 400)
             {
             vX = 0;
             };
@@ -1669,6 +1916,94 @@ void ManType :: VillagerMind (ManType* Man, CamType* Camera, AllImageType AllIma
                 Man->vX = 50;
             };
         };
+
+    // Boat
+    if (Kind == MT_Boat &&
+        Position != Water_Position)
+        {
+        };
+
+    if (Health > 0 &&
+        Kind == MT_Boat &&
+        Man->Health > 0)
+        {
+        y = 687;
+
+        if (ModuleDistance (x + 130 - Camera->x, y + 15 - Camera->y , txMouseX(), txMouseY(), 100) == true &&
+            GetAsyncKeyState (VK_LBUTTON))
+            {
+            Man->Position = Boat_Position;
+            };
+        };
+
+    if (Man->Position == Boat_Position &&
+        Kind == MT_Boat)
+        {
+        Man->x = x + 80;
+        Man->y = y - 135;
+        Man->vX = 0;
+        Man->vY = 0;
+
+        if (GetAsyncKeyState (VK_LEFT))
+            vX = -20;
+
+        if (GetAsyncKeyState (VK_RIGHT) &&
+            x <= -300)
+            vX = 20;
+
+        if (GetAsyncKeyState (VK_UP))
+            Man->Position = Normal_Position;
+        };
+
+    // Fish
+    if (Kind == MT_Fish &&
+        Health > 0)
+        {
+        if (y < 720)
+            y = 720;
+
+        if (Man->Inventory.MainNumber == 8 &&
+            Man->Inventory.MainSlot > 0)
+            {
+            if (Man->x + 55 > x)
+                vX = 4;
+            if (Man->x + 55 < x)
+                vX = -4;
+
+            if (y >= 720)
+                vY = -2;
+            else
+                vY = 0;
+
+            if (ModuleDistance (Man->x + 55, Man->y + 85, x+25, y+10, 100) == true)
+                {
+                Health = 0;
+                Man->Inventory.Fish += 1;
+                };
+            }
+        else
+            vX = 4*(rand()%3 - 1);
+
+        aY = 0;
+
+        if (Man->Days >= 20 &&
+            Man->Days < 30)
+            vX = 4*(rand()%3 - 1);
+        };
+
+    if (Health <= 5 &&
+        Health > 0)
+        {
+        Health = 0;
+        if (Inventory.Stone == MT_Bear)
+            Man->Inventory.Fish += 1;
+
+        if (Inventory.Stone == MT_Wolf)
+            Man->Inventory.Coin += 1;
+
+        if (Inventory.Stone == MT_Spider)
+            Man->Inventory.Rope += 1;
+        };
     };
 
 void ManType :: ManTemperature ()
@@ -1684,22 +2019,22 @@ void ManType :: ManTemperature ()
         };
 
     if (Temperature <= Man_ColdTemp1)
-        Health -= Man_ColdTempDamage/1000*Man_TempDamage1;
+        Health -= Man_ColdTempDamage/10*Man_TempDamage1;
 
     if (Temperature <= Man_ColdTemp2)
-        Health -= Man_ColdTempDamage/1000*Man_TempDamage2;
+        Health -= Man_ColdTempDamage/10*Man_TempDamage2;
 
     if (Temperature <= Man_ColdTemp3)
-        Health -= Man_ColdTempDamage/1000*Man_TempDamage3;
+        Health -= Man_ColdTempDamage/10*Man_TempDamage3;
 
     if (Temperature >= Man_HotTemp1)
-        Health -= Man_HotTempDamage/1000*Man_TempDamage1;
+        Health -= Man_HotTempDamage/10*Man_TempDamage1;
 
     if (Temperature >= Man_HotTemp2)
-        Health -= Man_HotTempDamage/1000*Man_TempDamage2;
+        Health -= Man_HotTempDamage/10*Man_TempDamage2;
 
     if (Temperature >= Man_HotTemp3)
-        Health -= Man_HotTempDamage/1000*Man_TempDamage3;
+        Health -= Man_HotTempDamage/10*Man_TempDamage3;
     };
 
 int Distance (int a, int b, int Dst)
@@ -1766,7 +2101,7 @@ void DeleteAllImage (AllImageType AllImages)
     txDeleteDC (AllImages.Menu.Picture);
     };
 
-void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber, ManType* Man, double* AllTemperature, CamType* Camera, CamType* FixedCamera, ManType* Villager)
+void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber, ManType* Man, double* AllTemperature, CamType* Camera, CamType* FixedCamera, ManType Villagers [])
     {
     int StartLevelNumber = *LevelNumber;
 
@@ -1785,8 +2120,7 @@ void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber,
     int PauseNumber = Pause_Active;
 
     COLORREF color = TX_BLACK;
-
-
+    COLORREF WaterColor = TX_WHITE;
 
     // CreateBlocks (ManyBlocks, AllImage);
 
@@ -1798,9 +2132,15 @@ void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber,
         txClear ();
 
         if (Man->Time <= 500)
-            color = RGB (91, 110, 225);
+            color = RGB (99, 155, 255);
         else
             color = RGB (18, 18, 33);
+
+        if (Man->Days >= 20 &&
+            Man->Days <  30)
+            WaterColor = RGB (203, 219, 252);
+        else
+            WaterColor = RGB (91, 110, 225);
 
         NumberLevel = *LevelNumber;
 
@@ -1818,7 +2158,12 @@ void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber,
 
         txSetColor (RGB (143, 86, 59), 1);
         txSetFillColor (RGB (143, 86, 59));
-        txRectangle (-99999, 700 - Camera->y, 99999, 2000 - Camera->y);
+        txRectangle (0 - Camera->x, 700 - Camera->y, 99999 - Camera->x, 9000 - Camera->y);
+
+        txSetColor (WaterColor, 1);
+        txSetFillColor (WaterColor);
+        txRectangle (-99999 - Camera->x, 720 - Camera->y, 0 - Camera->x, 9000 - Camera->y);
+        txRectangle (11400*World_Size - Camera->x, 720 - Camera->y, 999999 - Camera->x, 9999 - Camera->y);
 
         DrawManyBlocks (ManyBlocks, Camera, AllImage);
 
@@ -1827,15 +2172,19 @@ void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber,
 
         Man->DrawMan (Camera, AllImage);
 
+
         Man->Crafting (AllImage, FixedCamera);
+
+        // Villager
+        // Villager->Physic ();
+        // InteractManWithBlocks (ManyBlocks, Villager, Camera, &Man->NumberCoin, LevelNumber, AllImage);
+        // Villager->DrawMan (Camera, AllImage);
+        // Villager->VillagerMind (Man, Camera, AllImage);
+        DrawLevelPeople (Villagers, Camera, AllImage);
 
         Man->DrawInventory (Camera, FixedCamera, AllImage);
 
-        // Villager
-        Villager->Physic ();
-        InteractManWithBlocks (ManyBlocks, Villager, Camera, &Man->NumberCoin, LevelNumber, AllImage);
-        Villager->DrawMan (Camera, AllImage);
-        Villager->VillagerMind (Man, Camera, AllImage);
+        CallPeoplePhysic (Villagers, Camera, AllImage, ManyBlocks, Man);
 
         DrawTransparentImage (&AllImage.Coin, Sign_CoinX, Sign_CoinY, &null, &null, FixedCamera);
 
@@ -3804,13 +4153,63 @@ void Level1 (int* LevelNumber, ManType* Man, AllImageType AllImage, CamType* Cam
 
     CreateBlocks (ManyBlocks, AllImage);
 
-    ManType Villager = {2125, 521, 20, {0, 0, &AllImage.Bear},
-                        0, 0, Man_aX, 2,
-                        0, 0, Man_Temperature,
-                        0, 0, 0, "", MT_Bear, {0, 0, 0, rand() % 3, 0, 0, rand() % 3, 0, rand() % 3, 0}, 0, 0,
-                        2125, 521, 0, 0};
+    ManType Villagers [] = {{-500, 521, 999, {0, 0, &AllImage.Boat},
+                            0, 0, Man_aX, 2,
+                            0, 0, Man_Temperature,
+                            0, 0, 0, "", MT_Boat, {0, 0, 0, 0, 0, rand() % 3, 0, 0, rand() % 3, 0, rand() % 3, 0}, 0, 0,
+                            2125, 521, 0, 0},
+                            {1000, -100, 20, {0, 0, &AllImage.Villager},
+                            0, 0, Man_aX, 2,
+                            0, 0, Man_Temperature,
+                            0, 0, 0, "", MT_Seller, {0, 0, 0, 0, 0, rand() % 3, 0, 0, rand() % 3, 0, rand() % 3, 0}, 0, 0,
+                            2125, 521, 0, 0},
+                            {3000, -100, 20, {0, 0, &AllImage.Villager},
+                            0, 0, Man_aX, 2,
+                            0, 0, Man_Temperature,
+                            0, 0, 0, "", MT_Seller, {0, 0, 0, 0, 0, rand() % 3, 0, 0, rand() % 3, 0, rand() % 3, 0}, 0, 0,
+                            2125, 521, 0, 0},
+                            {4000, -100, 20, {0, 0, &AllImage.Villager},
+                            0, 0, Man_aX, 2,
+                            0, 0, Man_Temperature,
+                            0, 0, 0, "", MT_Seller, {0, 0, 0, 0, 0, rand() % 3, 0, 0, rand() % 3, 0, rand() % 3, 0}, 0, 0,
+                            2125, 521, 0, 0},
+                            {6000, -100, 20, {0, 0, &AllImage.Villager},
+                            0, 0, Man_aX, 2,
+                            0, 0, Man_Temperature,
+                            0, 0, 0, "", MT_Seller, {0, 0, 0, 0, 0, rand() % 3, 0, 0, rand() % 3, 0, rand() % 3, 0}, 0, 0,
+                            2125, 521, 0, 0},
+                            {-400, 800, 20, {0, 0, &AllImage.Fish},
+                            10, 0, Man_aX, 2,
+                            0, 0, Man_Temperature,
+                            0, 0, 0, "", MT_Fish, {-400, 0, 0, 0, 0, rand() % 3, 0, 0, rand() % 3, 0, rand() % 3, 0}, 0, 0,
+                            2125, 521, 0, 0},
+                            {-600, 750, 20, {0, 0, &AllImage.Fish},
+                            0, 0, Man_aX, 2,
+                            0, 0, Man_Temperature,
+                            0, 0, 0, "", MT_Fish, {0, 0, 0, 0, 0, rand() % 3, 0, 0, rand() % 3, 0, rand() % 3, 0}, 0, 0,
+                            2125, 521, 0, 0},
+                            {6000, -100, 20, {0, 0, &AllImage.Spider},
+                            0, 0, Man_aX, 2,
+                            0, 0, Man_Temperature,
+                            0, 0, 0, "", MT_Bear, {0, 0, 0, 0, 0, rand() % 3, 0, 0, rand() % 3, MT_Spider, rand() % 3, 85}, 0, 0,
+                            2125, 521, 0, 0},
+                            {4000, -100, 20, {0, 0, &AllImage.Wolf},
+                            0, 0, Man_aX, 2,
+                            0, 0, Man_Temperature,
+                            0, 0, 0, "", MT_Bear, {0, 0, 0, 0, 0, rand() % 3, 0, 0, rand() % 3, MT_Wolf, rand() % 3, 0}, 0, 0,
+                            2125, 521, 0, 0},
+                            {3000, -100, 20, {0, 0, &AllImage.Bear},
+                            0, 0, Man_aX, 2,
+                            0, 0, Man_Temperature,
+                            0, 0, 0, "", MT_Bear, {0, 0, 0, 0, 0, rand() % 3, 0, 0, rand() % 3, MT_Bear, rand() % 3, 0}, 0, 0,
+                            2125, 521, 0, 0},
+                            {-1, -1, 20, {0, 0, &AllImage.Boat},
+                            0, 0, Man_aX, 2,
+                            0, 0, Man_Temperature,
+                            0, 0, 0, "", MT_Boat, {0, 0, 0, 0, 0, rand() % 3, 0, 0, rand() % 3, 0, rand() % 3, 0}, 0, 0,
+                            2125, 521, 0, 0}};
 
-    MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera, FixedCamera, &Villager);
+    MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera, FixedCamera, Villagers);
     };
 
 void Level2 (int* LevelNumber, ManType* Man, AllImageType AllImage, CamType* Camera, CamType* FixedCamera)
@@ -4066,13 +4465,24 @@ void Level2 (int* LevelNumber, ManType* Man, AllImageType AllImage, CamType* Cam
                                // End
                                {-1, -1000000, 1, {0, 0, &AllImage.Finish}, BT_Finish}};
 
-    ManType Villager = {2125, 0, 20, {0, 0, &AllImage.Villager},
-                        0, 0, Man_aX, 2,
-                        0, 0, Man_Temperature,
-                        0, 0, 0, "", 1, {}, 0, 0,
-                        0, 0, 0, 0};
 
-    MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera, FixedCamera, &Villager);
+    ManType Villagers [] = {{-500, 521, 20, {0, 0, &AllImage.Boat},
+                            0, 0, Man_aX, 2,
+                            0, 0, Man_Temperature,
+                            0, 0, 0, "", MT_Boat, {0, 0, 0, 0, 0, rand() % 3, 0, 0, rand() % 3, 0, rand() % 3, 0}, 0, 0,
+                            2125, 521, 0, 0},
+                            {-500, 521, 20, {0, 0, &AllImage.Boat},
+                            0, 0, Man_aX, 2,
+                            0, 0, Man_Temperature,
+                            0, 0, 0, "", MT_Boat, {0, 0, 0, 0, 0, rand() % 3, 0, 0, rand() % 3, 0, rand() % 3, 0}, 0, 0,
+                            2125, 521, 0, 0},
+                            {-1, -1, 20, {0, 0, &AllImage.Boat},
+                            0, 0, Man_aX, 2,
+                            0, 0, Man_Temperature,
+                            0, 0, 0, "", MT_Boat, {0, 0, 0, 0, 0, rand() % 3, 0, 0, rand() % 3, 0, rand() % 3, 0}, 0, 0,
+                            2125, 521, 0, 0}};
+
+    MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera, FixedCamera, Villagers);
     };
 
 void DrawManyBlocks (BlockType ManyBlocks [], CamType* Camera, AllImageType AllImage)
@@ -4107,9 +4517,44 @@ void DrawLevelPeople (ManType Villagers[], CamType* Camera, AllImageType AllImag
 
     while (Villagers[i].x != -1 && Villagers[i].y != -1)
         {
-        // DrawMan (&Villagers [i], Camera, AllImage);
+        Villagers [i].DrawMan (Camera, AllImage);
 
-        i = i + 1;
+        i += 1;
+        };
+    };
+
+void CallPeoplePhysic (ManType Villagers[], CamType* Camera, AllImageType AllImage, BlockType ManyBlocks [], ManType* Man)
+    {
+    /* int i = 0;
+    int b = 0;
+
+    AllImageType AllImage1 = AllImage;
+
+    while (ManyBlocks[i].x != -1 && ManyBlocks[i].y != -1)
+        {
+        Villagers[i].BlockCollision (&ManyBlocks[b], Camera, AllImage);
+
+        Villagers[i].VillagerMind (Man, Camera, AllImage);
+
+        Villagers[i].Physic ();
+
+        i += 1;
+
+        if (Villagers[i].x == -1)
+            {
+            b += 1;
+            i = 0;
+            };
+        }; */
+
+    int i = 0;
+
+    while (Villagers[i].x != -1 && Villagers[i].y != -1)
+        {
+        Villagers[i].VillagerMind (Man, Camera, AllImage);
+        Villagers[i].Physic ();
+
+        i += 1;
         };
     };
 
@@ -4193,6 +4638,12 @@ void ManType :: ControlMan (MouseType Mouse, int* t)
         x = 100;
         };
 
+    if (GetAsyncKeyState (VK_END))
+        {
+        y = -1000;
+        x = 11400;
+        };
+
     if (GetAsyncKeyState (VK_RIGHT))
         {
         vX = Man_FastSpeed;
@@ -4256,7 +4707,8 @@ void ManType :: ControlMan (MouseType Mouse, int* t)
 
     ArmSpeed += 1;
 
-    // Berries
+    // Food
+
     if (GetAsyncKeyState (VK_LBUTTON) &&
         Inventory.MainNumber == 3 &&
         Inventory.MainSlot > 0 &&
@@ -4264,6 +4716,25 @@ void ManType :: ControlMan (MouseType Mouse, int* t)
         {
         Health += 1;
         Inventory.Apple -= 1;
+        };
+
+    if (GetAsyncKeyState (VK_LBUTTON) &&
+        Inventory.MainNumber == 9 &&
+        Inventory.MainSlot > 0 &&
+        Health < 20)
+        {
+        Health += 1;
+        Inventory.Fish -= 1;
+        };
+
+    if (GetAsyncKeyState (VK_LBUTTON) &&
+        Inventory.MainNumber == 10 &&
+        Inventory.MainSlot > 0 &&
+        Health < 20)
+        {
+        Health += 5;
+        Temperature += 5;
+        Inventory.CookedFish -= 1;
         };
 
     // Bow
@@ -4307,15 +4778,17 @@ void ManType :: ControlMan (MouseType Mouse, int* t)
             else
                 xWeapon = 1;
             };
+
+    // printf ("x = %lf, y = %lf \n", x, y);
     };
 
 void ManType :: Physic ()
     {
-    x = x + vX;
-    y = y + vY;
+    x += vX;
+    y += vY;
 
-    vX = vX + aX;
-    vY = vY + aY;
+    vX += aX;
+    vY += aY;
 
     vX = vX*0.5;
 
@@ -4345,7 +4818,52 @@ void ManType :: Physic ()
     if (Days >= 40)
         Days = 0;
 
+    // Water
+    if (y >= 620)
+        Position = Water_Position;
+    else
+        if (Position == Water_Position)
+            Position = Normal_Position;
+
+    if (Position == Water_Position &&
+        Kind != MT_Boat &&
+        Kind != MT_Fish)
+        {
+        vY = -3;
+        Health -= 0.01;
+        };
+
+    if (Kind == MT_Boat)
+        {
+        y = 687;
+        };
     // printf ("Days = %d \n", Days);
+
+    if (Kind != MT_Boat &&
+        Kind != 0 &&
+        x >= -160 &&
+        x <= 190*11400*World_Size)
+        {
+        if (y >= 700 - txGetExtentY(Animation.Picture->Picture)/Animation.Picture->yMaxAnimationNumber + Inventory.Arrow &&
+            vY > 0)
+            {
+            // y = 500;
+            vY = 0;
+            };
+
+        if (y >= 700 - txGetExtentY(Animation.Picture->Picture)/Animation.Picture->yMaxAnimationNumber + Inventory.Arrow)
+            {
+            y = 700 - txGetExtentY(Animation.Picture->Picture)/Animation.Picture->yMaxAnimationNumber + Inventory.Arrow;
+            // vY = 0;
+            };
+        };
+
+    if (Days >= 20 &&
+        Days <  30)
+        {
+        if (Position == Water_Position)
+            Temperature -= 1;
+        };
     };
 
 void ManType :: BlockCollision (BlockType* Block, CamType* Camera, AllImageType AllImage)
@@ -4354,6 +4872,31 @@ void ManType :: BlockCollision (BlockType* Block, CamType* Camera, AllImageType 
     int two = 2;
     int three = 3;
     int four = 4;
+
+    // FallingTree
+    if (Block->Number == BT_FallingTree)
+        {
+        if (fabs (Block->x + Block_BaseWide - x) <= Block_BaseWide + Man_Wide + 200 &&
+            ModuleDistance (Block->x + 90 - Camera->x, Block->y + 50 - Camera->y , txMouseX(), txMouseY(), 50) == true &&
+            GetAsyncKeyState (VK_LBUTTON) &&
+            Block->Health > 0)
+            {
+            Inventory.Wood += 2;
+            Block->Health = 0;
+            };
+        };
+
+    if (Block->Number == BT_SmallStone)
+        {
+        if (fabs (Block->x + Block_BaseWide - x) <= Block_BaseWide + Man_Wide + 200 &&
+            ModuleDistance (Block->x + 15 - Camera->x, Block->y + 50 - Camera->y , txMouseX(), txMouseY(), 50) == true &&
+            GetAsyncKeyState (VK_LBUTTON) &&
+            Block->Health > 0)
+            {
+            Inventory.Stone += 1;
+            Block->Health = 0;
+            };
+        };
 
     // Rock
     if (Block->Number == BT_Rock)
@@ -4436,6 +4979,17 @@ void ManType :: BlockCollision (BlockType* Block, CamType* Camera, AllImageType 
             {
             Inventory.Wood -= 1;
             Block->Health += 3;
+            };
+
+        if (Inventory.MainNumber == 9 &&
+            Inventory.MainSlot > 0 &&
+            ModuleDistance (Block->x + 30 - Camera->x, Block->y + 30 - Camera->y, txMouseX(), txMouseY(), 100) == true &&
+            GetAsyncKeyState (VK_LBUTTON) &&
+            Block->Health >= 3)
+            {
+            Inventory.Fish -= 1;
+            Inventory.CookedFish += 1;
+            Block->Health -= 3;
             };
         };
 
@@ -4571,23 +5125,36 @@ void ManType :: BlockCollision (BlockType* Block, CamType* Camera, AllImageType 
             fabs (Block->x + Block_BaseWide - x) <= Block_BaseWide + Man_Wide + 100 &&
             ModuleDistance (Block->x + 140 - Camera->x, Block->y + 215 - Camera->y , txMouseX(), txMouseY(), 140) == true &&
             GetAsyncKeyState (VK_LBUTTON) &&
-            ArmSpeed >= 10)
+            ArmSpeed >= 10 &&
+            Block->Health > 2)
             {
+            ArmSpeed = 0;
             Block->Health -= 10;
             Block->Animation.yFrame += 4;
-            ArmSpeed = 0;
             };
 
-        if (Block->Health <= 20 &&
+        if (Block->Health <= 12 &&
             Block->Health > 0)
             {
             Inventory.Wood += 2;
             if (Days >= 30 &&
                 Days < 40)
                 Inventory.Apple += 1;
-            Block->Health = 0;
+            Block->Health = -88;
             };
+
+        if (Block->Health < 0 &&
+            Block->Health >= -88)
+            {
+            Block->Health += 0.5;
+            // Block->Animation.yFrame = 8;
+            };
+
+        if (Block->Health == 0)
+            Block->Health = 100;
         };
+
+    //-----------------------------------------------------------------------------
 
     if (Block->Number != BT_Coin)
     {
@@ -4599,6 +5166,7 @@ void ManType :: BlockCollision (BlockType* Block, CamType* Camera, AllImageType 
         Block->Number != BT_Stalactite &&
         Block->Number != BT_BonFire &&
         Block->Number != BT_Air &&
+        Block->Number != BT_Tree &&
         Block->Number < BT_Pickaxe)
     {
     if (fabs (Block->x + Block_BaseWide - x) <= Block_BaseWide + Man_Wide &&
