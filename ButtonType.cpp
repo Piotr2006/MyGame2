@@ -1,7 +1,6 @@
 #include "ButtonType.h"
 #include "AllImageType.h"
 #include "ImageFunctions.h"
-#include "ImageFunctions.cpp"
 
 ButtonType :: ButtonType (int _x, int _y, int _Number) :
     x (_x),

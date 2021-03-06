@@ -1,20 +1,20 @@
-#include "TXLib.h"
+#include "Graphycs.h"
 
-#include "AnimationType.cpp"
-#include "BaseType.cpp"
-#include "CamType.cpp"
-#include "MouseType.cpp"
-#include "ButtonType.cpp"
-#include "ManType.cpp"
-#include "BlockType.cpp"
-#include "Levels.cpp"
-#include "SmallHelpFunctions.cpp"
+#include "AnimationType.h"
+#include "BaseType.h"
+#include "CamType.h"
+#include "MouseType.h"
+#include "ButtonType.h"
+#include "ManType.h"
+#include "BlockType.h"
+#include "Levels.h"
+#include "SmallHelpFunctions.h"
 
 void Cycle ();
 
 int main ()
     {
-    txCreateWindow (1550, 850);
+    GRCreateWindow (1550, 850);
 
     Cycle ();
 

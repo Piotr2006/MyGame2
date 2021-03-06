@@ -9,6 +9,7 @@
 #include "InvType.h"
 #include "CamType.h"
 #include "ManType.h"
+#include "ButtonType.h"
 
 void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber, ManType* Man, double* AllTemperature, CamType* Camera, CamType* FixedCamera, ManType Villagers []);
 

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="MyGame2" />
+		<Option pch_mode="2" />
+		<Option compiler="gnu_gcc_compiler__strict" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/MyGame2" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="0" />
+				<Option compiler="gnu_gcc_compiler__strict" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/MyGame2" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="0" />
+				<Option compiler="gnu_gcc_compiler__strict" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Unit filename="AllImageType.h" />
+		<Unit filename="AnimationType.cpp" />
+		<Unit filename="AnimationType.h" />
+		<Unit filename="BaseType.cpp" />
+		<Unit filename="BaseType.h" />
+		<Unit filename="BlockType.cpp" />
+		<Unit filename="BlockType.h" />
+		<Unit filename="ButtonType.cpp" />
+		<Unit filename="ButtonType.h" />
+		<Unit filename="CamType.cpp" />
+		<Unit filename="CamType.h" />
+		<Unit filename="Enums.h" />
+		<Unit filename="Graphycs.cpp" />
+		<Unit filename="Graphycs.h" />
+		<Unit filename="ImageFunctions.cpp" />
+		<Unit filename="ImageFunctions.h" />
+		<Unit filename="ImageType.h" />
+		<Unit filename="InvType.h" />
+		<Unit filename="Levels.cpp" />
+		<Unit filename="Levels.h" />
+		<Unit filename="Main.cpp" />
+		<Unit filename="ManType.cpp" />
+		<Unit filename="ManType.h" />
+		<Unit filename="MouseType.cpp" />
+		<Unit filename="MouseType.h" />
+		<Unit filename="SmallHelpFunctions.cpp" />
+		<Unit filename="SmallHelpFunctions.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

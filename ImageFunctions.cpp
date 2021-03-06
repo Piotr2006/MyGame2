@@ -224,6 +224,6 @@ void DrawTransparentImage (ImageType* Image, int x, int y, int* xAnimationNumber
     int xSize = txGetExtentX (Image->Picture)/Image->xMaxAnimationNumber;
     int ySize = txGetExtentY (Image->Picture)/Image->yMaxAnimationNumber;
 
-    txTransparentBlt (txDC (), x - Camera->x, y - Camera->y, xSize, ySize, Image->Picture, *xAnimationNumber*xSize, *yAnimationNumber*ySize, Image->color);
+    DrawTransparentBlt (x - Camera->x, y - Camera->y, xSize, ySize, Image->Picture, *xAnimationNumber*xSize, *yAnimationNumber*ySize, Image->color);
     };
 

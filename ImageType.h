@@ -1,8 +1,7 @@
 #ifndef IMAGETYPE_H
 #define IMAGETYPE_H
 
-#include "TXLib.h"
-
+#include "Graphycs.h"
 
 struct ImageType
     {
