@@ -153,8 +153,8 @@ enum
     Sign_CoinTextX = 70,
     Sign_CoinTextY = 95,
 
-    Sign_LevelTextX = 180,
-    Sign_LevelTextY = 38,
+    Sign_LevelTextX = 220,
+    Sign_LevelTextY = 53,
 
     Sign_TermometerX = 10,
     Sign_TermometerY = 160,

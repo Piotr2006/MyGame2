@@ -4,7 +4,7 @@ ManType :: ManType (double _x, double _y, double _Health, AnimationType _Animati
                     double _vX, double _vY, double _aX, double _aY,
                     int _Side, int _Position, double _Temperature,
                     int _NumberCoin, int _xWeapon, int _ArmSpeed, char _Name [50], int _Kind, InvType _Inventory,
-                    int _Time, int _Days, double _ArrowX, double _ArrowY, int _ArrowVX, int _ArrowVY) :
+                    int _Time, int _Days, double _ArrowX, double _ArrowY, int _ArrowVX, int _ArrowVY, HelpType _HelpSystem) :
     BaseType (_x, _y, _Health, _Animation),
     vX (_vX),
     vY (_vY),
@@ -23,7 +23,8 @@ ManType :: ManType (double _x, double _y, double _Health, AnimationType _Animati
     ArrowX (_ArrowX),
     ArrowY (_ArrowY),
     ArrowVX (_ArrowVX),
-    ArrowVY (_ArrowVY)
+    ArrowVY (_ArrowVY),
+    HelpSystem (_HelpSystem)
     {
     /* for (int i = 0; i < NameSize; i += 1)
         {
@@ -34,6 +35,89 @@ ManType :: ManType (double _x, double _y, double _Health, AnimationType _Animati
 
     StrCpy (Name, _Name);
     };
+
+void CreateVillagers (ManType Villagers [], AllImageType AllImage)
+    {
+    int i = 0;
+
+    int BearNumber = rand() % 4;
+
+    while (Villagers[i].x != -1 && Villagers[i].y != -1)
+        {
+        if (i < BearNumber)
+            {
+            Villagers[i].Health = 20;
+            Villagers[i].Kind = MT_Bear;
+            Villagers[i].Inventory.Rope = 10;
+            Villagers[i].x = rand() % 11400*World_Size;
+            Villagers[i].y = -500;
+            Villagers[i].Animation.Picture = &AllImage.Bear;
+            };
+
+        if (i >= BearNumber &&
+            i < 7)
+            {
+            Villagers[i].Health = 15;
+            Villagers[i].Kind = MT_Bear;
+            Villagers[i].Inventory.Rope = 13;
+            Villagers[i].x = rand() % 11400*World_Size;
+            Villagers[i].y = -500;
+            Villagers[i].Animation.Picture = &AllImage.Wolf;
+            };
+
+        if (i >= 7 &&
+            i < 10)
+            {
+            Villagers[i].Health = 10;
+            Villagers[i].Kind = MT_Bear;
+            Villagers[i].Inventory.Rope = 12;
+            Villagers[i].x = rand() % 11400*World_Size;
+            Villagers[i].y = -500;
+            Villagers[i].Animation.Picture = &AllImage.Spider;
+            };
+
+        if (i >= 10 &&
+            i < 13)
+            {
+            Villagers[i].Health = 20;
+            Villagers[i].Kind = MT_Seller;
+            Villagers[i].Inventory.Rope = 10;
+            Villagers[i].x = rand() % 11400*World_Size;
+            Villagers[i].y = -500;
+            Villagers[i].Animation.Picture = &AllImage.Villager;
+            };
+
+        if (i >= 13 &&
+            i < 20)
+            {
+            Villagers[i].Health = 20;
+            Villagers[i].Kind = MT_Fish;
+            // Villagers[i].Inventory.Rope = 10;
+            Villagers[i].x = -rand() % 700 - 100;
+            Villagers[i].y = 750 + rand() % 100;
+            Villagers[i].Animation.Picture = &AllImage.Fish;
+            };
+
+        if (i == 20)
+            {
+            Villagers[i].Health = 999;
+            Villagers[i].Kind = MT_Boat;
+            Villagers[i].x = -rand() % 700 - 100;
+            Villagers[i].y = 521;
+            Villagers[i].Animation.Picture = &AllImage.Boat;
+            };
+
+        if (i > 20)
+            {
+            Villagers[i].Health = 0;
+            };
+
+        // x += 1;
+
+        i += 1;
+        };
+    };
+
 
 void DrawSlot (int Block, int x, int y, ImageType Picture, int TextX, int TextY)
     {
@@ -131,6 +215,8 @@ void ManType :: Crafting (AllImageType AllImage, CamType* FixedCamera)
             Inventory.Axe += 1;
             Inventory.CraftNumber = 0;
             Inventory.CraftControlSpeed = 1;
+            if (HelpSystem.Number == 2)
+                HelpSystem.Number = 3;
             };
         };
 
@@ -512,19 +598,18 @@ void ManType :: DrawMan (CamType* Camera, AllImageType AllImage)
     int null = 0;
 
     if (Health > 0)
-    {
-
-    txSetColor (TX_WHITE);
-    txSelectFont ("Comic Sans MS", 30);
-    txTextOut (x - Camera->x + 50, y - Camera->y, Name);
-    };
+        {
+        GRSetColor (TX_WHITE, 5);
+        GRSelectFont ("Comic Sans MS", 30);
+        GRTextOut (x - Camera->x + 50, y - Camera->y, Name);
+        };
     };
 
 void ManType :: ManFire (CamType* Camera, AllImageType AllImage)
     {
-    BlockType Fire1 {0 - txGetExtentX (Animation.Picture->Picture)/2 + Man_Fire1X, 0 - txGetExtentY (Animation.Picture->Picture)/2 + Man_Fire1Y, 4, {rand() % 4, 0, &AllImage.Fire}, 0};
-    BlockType Fire2 {0 - txGetExtentX (Animation.Picture->Picture)/2 + Man_Fire2X, 0 - txGetExtentY (Animation.Picture->Picture)/2 + Man_Fire2Y, 4, {rand() % 4, 0, &AllImage.Fire}, 0};
-    BlockType Fire3 {0 - txGetExtentX (Animation.Picture->Picture)/2 + Man_Fire3X, 0 - txGetExtentY (Animation.Picture->Picture)/2 + Man_Fire3Y, 4, {rand() % 4, 0, &AllImage.Fire}, 0};
+    BlockType Fire1 {0 - GRGetExtentX (Animation.Picture->Picture)/2 + Man_Fire1X, 0 - GRGetExtentY (Animation.Picture->Picture)/2 + Man_Fire1Y, 4, {rand() % 4, 0, &AllImage.Fire}, 0};
+    BlockType Fire2 {0 - GRGetExtentX (Animation.Picture->Picture)/2 + Man_Fire2X, 0 - GRGetExtentY (Animation.Picture->Picture)/2 + Man_Fire2Y, 4, {rand() % 4, 0, &AllImage.Fire}, 0};
+    BlockType Fire3 {0 - GRGetExtentX (Animation.Picture->Picture)/2 + Man_Fire3X, 0 - GRGetExtentY (Animation.Picture->Picture)/2 + Man_Fire3Y, 4, {rand() % 4, 0, &AllImage.Fire}, 0};
 
     if (Position == Fire_Position)
         {
@@ -588,7 +673,7 @@ void ManType :: VillagerMind (ManType* Man, CamType* Camera, AllImageType AllIma
 
     if (Man->x - x > 100 &&
             Man->x - x < 200)
-            vX = 10;
+            vX = Inventory.Rope;
 
     if (Man->x - x < 100 &&
             Man->x - x > 0)
@@ -598,7 +683,7 @@ void ManType :: VillagerMind (ManType* Man, CamType* Camera, AllImageType AllIma
 
     if (x - Man->x > 100 &&
             x - Man->x < 200)
-            vX = -10;
+            vX = -Inventory.Rope;
 
     if (x - Man->x < 100 &&
             x - Man->x > 0)
@@ -880,7 +965,7 @@ void ManType :: VillagerMind (ManType* Man, CamType* Camera, AllImageType AllIma
         {
         if (Man->x - x > 50 &&
             Man->x - x < 500)
-            vX = 12;
+            vX = Inventory.Rope;
 
         if (Man->x - x < 50 &&
             Man->x - x > 0)
@@ -890,7 +975,7 @@ void ManType :: VillagerMind (ManType* Man, CamType* Camera, AllImageType AllIma
 
         if (x - Man->x > 50 &&
             x - Man->x < 500)
-            vX = -12;
+            vX = -Inventory.Rope;
 
         if (x - Man->x < 50 &&
             x - Man->x > 0)
@@ -1063,6 +1148,33 @@ void ManType :: VillagerMind (ManType* Man, CamType* Camera, AllImageType AllIma
         if (Inventory.Stone == MT_Spider)
             Man->Inventory.Rope += 1;
         };
+
+    if (Man->Days % 3 == 0 &&
+        Man->Time == 0 &&
+        Kind == MT_Bear)
+        {
+        Health = 20;
+        x = rand() % 11400 * World_Size;
+        y = -500;
+        };
+
+    if (Man->Days % 3 == 0 &&
+        Man->Time == 0 &&
+        Kind == MT_Seller)
+        {
+        Health = 20;
+        x = rand() % 11400 * World_Size;
+        y = -500;
+        };
+
+    if (Man->Days % 3 == 0 &&
+        Man->Time == 0 &&
+        Kind == MT_Fish)
+        {
+        Health = 20;
+        x = -rand() % 700 - 100;
+        y = 750 + rand() % 100;
+        };
     };
 
 void ManType :: ManTemperature ()
@@ -1078,22 +1190,22 @@ void ManType :: ManTemperature ()
         };
 
     if (Temperature <= Man_ColdTemp1)
-        Health -= 0.025;
+        Health -= 0.01;
 
     if (Temperature <= Man_ColdTemp2)
-        Health -= 0.05;
+        Health -= 0.02;
 
     if (Temperature <= Man_ColdTemp3)
-        Health -= 0.1;
+        Health -= 0.04;
 
     if (Temperature >= Man_HotTemp1)
-        Health -= 0.025;
+        Health -= 0.01;
 
     if (Temperature >= Man_HotTemp2)
-        Health -= 0.05;
+        Health -= 0.02;
 
     if (Temperature >= Man_HotTemp3)
-        Health -= 0.1;
+        Health -= 0.04;
     };
 
 void ManType :: ControlMan (MouseType Mouse, int* t)
@@ -1310,16 +1422,16 @@ void ManType :: Physic ()
         x >= -160 &&
         x <= 190*11400*World_Size)
         {
-        if (y >= 700 - txGetExtentY(Animation.Picture->Picture)/Animation.Picture->yMaxAnimationNumber + Inventory.Arrow &&
+        if (y >= 700 - GRGetExtentY(Animation.Picture->Picture)/Animation.Picture->yMaxAnimationNumber + Inventory.Arrow &&
             vY > 0)
             {
             // y = 500;
             vY = 0;
             };
 
-        if (y >= 700 - txGetExtentY(Animation.Picture->Picture)/Animation.Picture->yMaxAnimationNumber + Inventory.Arrow)
+        if (y >= 700 - GRGetExtentY(Animation.Picture->Picture)/Animation.Picture->yMaxAnimationNumber + Inventory.Arrow)
             {
-            y = 700 - txGetExtentY(Animation.Picture->Picture)/Animation.Picture->yMaxAnimationNumber + Inventory.Arrow;
+            y = 700 - GRGetExtentY(Animation.Picture->Picture)/Animation.Picture->yMaxAnimationNumber + Inventory.Arrow;
             // vY = 0;
             };
         };
@@ -1349,6 +1461,8 @@ void ManType :: BlockCollision (BlockType* Block, CamType* Camera, AllImageType 
             {
             Inventory.Wood += 2;
             Block->Health = 0;
+            if (HelpSystem.Number == 0)
+                HelpSystem.Number = 1;
             };
         };
 
@@ -1361,6 +1475,8 @@ void ManType :: BlockCollision (BlockType* Block, CamType* Camera, AllImageType 
             {
             Inventory.Stone += 1;
             Block->Health = 0;
+            if (HelpSystem.Number == 1)
+                HelpSystem.Number = 2;
             };
         };
 
@@ -1445,6 +1561,8 @@ void ManType :: BlockCollision (BlockType* Block, CamType* Camera, AllImageType 
             {
             Inventory.Wood -= 1;
             Block->Health += 3;
+            if (HelpSystem.Number == 5)
+                HelpSystem.Number = 6;
             };
 
         if (Inventory.MainNumber == 9 &&
@@ -1456,6 +1574,12 @@ void ManType :: BlockCollision (BlockType* Block, CamType* Camera, AllImageType 
             Inventory.Fish -= 1;
             Inventory.CookedFish += 1;
             Block->Health -= 3;
+            };
+
+        if (fabs (x - Block->x) <= 200)
+            {
+            if (HelpSystem.Number == 4)
+                HelpSystem.Number = 5;
             };
         };
 
@@ -1606,6 +1730,8 @@ void ManType :: BlockCollision (BlockType* Block, CamType* Camera, AllImageType 
             if (Days >= 30 &&
                 Days < 40)
                 Inventory.Apple += 1;
+            if (HelpSystem.Number == 3)
+                HelpSystem.Number = 4;
             Block->Health = -88;
             };
 
@@ -1636,7 +1762,7 @@ void ManType :: BlockCollision (BlockType* Block, CamType* Camera, AllImageType 
         Block->Number < BT_Pickaxe)
     {
     if (fabs (Block->x + Block_BaseWide - x) <= Block_BaseWide + Man_Wide &&
-        Block->y + Block_BaseHigh - y <= Block_BaseHigh + txGetExtentY (Animation.Picture->Picture) / Animation.Picture->yMaxAnimationNumber &&
+        Block->y + Block_BaseHigh - y <= Block_BaseHigh + GRGetExtentY (Animation.Picture->Picture) / Animation.Picture->yMaxAnimationNumber &&
         Block->y + Block_BaseHigh - y  >=  0)
             {
             if (GetAsyncKeyState (VK_UP) &&

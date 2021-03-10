@@ -55,7 +55,7 @@ void CreateBlocks (BlockType Blocks [], AllImageType AllImage)
             {
             Blocks[i].Health = 100;
             Blocks[i].Number = BT_Tree;
-            Blocks[i].x = (rand() % 60*World_Size)*200;
+            Blocks[i].x = (rand() % 600*World_Size)*20;
             Blocks[i].y = 415;
             Blocks[i].Animation.Picture = &AllImage.Tree;
             };
@@ -65,7 +65,7 @@ void CreateBlocks (BlockType Blocks [], AllImageType AllImage)
             {
             Blocks[i].Health = 100;
             Blocks[i].Number = BT_FallingTree;
-            Blocks[i].x = (rand() % 60*World_Size)*200;
+            Blocks[i].x = (rand() % 12000*World_Size);
             Blocks[i].y = 627;
             Blocks[i].Animation.Picture = &AllImage.FallingTree;
             };
@@ -75,7 +75,7 @@ void CreateBlocks (BlockType Blocks [], AllImageType AllImage)
             {
             Blocks[i].Health = 100;
             Blocks[i].Number = BT_Rock;
-            Blocks[i].x = (rand() % 6*World_Size)*2000;
+            Blocks[i].x = (rand() % 6000*World_Size)*2;
             Blocks[i].y = 577;
             Blocks[i].Animation.Picture = &AllImage.Rock;
             };
@@ -85,7 +85,7 @@ void CreateBlocks (BlockType Blocks [], AllImageType AllImage)
             {
             Blocks[i].Health = 100;
             Blocks[i].Number = BT_SmallStone;
-            Blocks[i].x = (rand() % 6*World_Size)*2000;
+            Blocks[i].x = (rand() % 12000*World_Size);
             Blocks[i].y = 658;
             Blocks[i].Animation.Picture = &AllImage.Stone;
             };

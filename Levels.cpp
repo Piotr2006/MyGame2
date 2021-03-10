@@ -9,8 +9,9 @@ void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber,
     int Time = GetTickCount();
 
     ButtonType Pause = {Sign_PauseX - Sign_Pause_Radius, Sign_PauseY - Sign_Pause_Radius, 0};
+    ButtonType Restart = {120, 35, 0};
 
-    MouseType Mouse = {txMouseX(), txMouseY(), AllImage.Cursor};
+    MouseType Mouse = {GRMouseX(), GRMouseY(), AllImage.Cursor};
 
     int t = 0;
 
@@ -18,17 +19,21 @@ void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber,
 
     int PauseNumber = Pause_Active;
 
-    COLORREF color = TX_BLACK;
-    COLORREF WaterColor = TX_WHITE;
+    COLORREF color = RGB (0, 0, 0);
+    COLORREF WaterColor = RGB(255, 255, 255);
 
     // CreateBlocks (ManyBlocks, AllImage);
 
-    txBegin ();
+    HDC Light = txLoadImage ("Images/Light2.bmp");
+
+    GRBegin ();
 
     while (true)
         {
-        txSetFillColor (color);
-        txClear ();
+        GRSetFillColor (color);
+        GRClear ();
+
+        // GRPlaySound ("Music/MyGame2Music.wav");
 
         if (Man->Time <= 500)
             color = RGB (99, 155, 255);
@@ -46,31 +51,31 @@ void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber,
         Time = Time + 1;
 
         int null = 0;
+        int six = 6;
 
         Camera->MoveCamera (Man);
 
         // DrawTransparentImage (&AllImage.BackGround, 0, 0, &null, &null, FixedCamera);
 
-        // txSetColor (RGB (143, 86, 59), 0);
-        // txSetFillColor (RGB (143, 86, 59));
-        // txRectangle (130, 700, 2410, 700);
+        // GRSetColor (RGB (143, 86, 59), 0);
+        // GRSetFillColor (RGB (143, 86, 59));
+        // GRRectangle (130, 700, 2410, 700);
 
-        txSetColor (RGB (143, 86, 59), 1);
-        txSetFillColor (RGB (143, 86, 59));
-        txRectangle (0 - Camera->x, 700 - Camera->y, 99999 - Camera->x, 9000 - Camera->y);
+        GRSetColor (RGB (143, 86, 59), 1);
+        GRSetFillColor (RGB (143, 86, 59));
+        GRRectangle (0 - Camera->x, 700 - Camera->y, 99999 - Camera->x, 9000 - Camera->y);
 
-        txSetColor (WaterColor, 1);
-        txSetFillColor (WaterColor);
-        txRectangle (-99999 - Camera->x, 720 - Camera->y, 0 - Camera->x, 9000 - Camera->y);
-        txRectangle (11400*World_Size - Camera->x, 720 - Camera->y, 999999 - Camera->x, 9999 - Camera->y);
+        GRSetColor (WaterColor, 1);
+        GRSetFillColor (WaterColor);
+        GRRectangle (-99999 - Camera->x, 720 - Camera->y, 0 - Camera->x, 9000 - Camera->y);
+        GRRectangle (11400*World_Size - Camera->x, 720 - Camera->y, 999999 - Camera->x, 9999 - Camera->y);
 
         DrawManyBlocks (ManyBlocks, Camera, AllImage);
 
-        txSetColor (TX_RED, 10);
-        txLine (-1000000, 10000, 1000000, 10000);
+        // GRSetColor (GR_RED, 10);
+        // GRLine (-1000000, 10000, 1000000, 10000);
 
         Man->DrawMan (Camera, AllImage);
-
 
         Man->Crafting (AllImage, FixedCamera);
 
@@ -97,18 +102,30 @@ void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber,
 
         Man->ControlMan (Mouse, &t);
 
-        if (Pause.ButtonCheckClick (txMouseX(), txMouseY(), Sign_Pause_Radius, Sign_Pause_Radius) == true)
+        if (Pause.ButtonCheckClick (GRMouseX(), GRMouseY(), Sign_Pause_Radius, Sign_Pause_Radius) == true)
             {
             PauseNumber = Pause_Stopped;
             };
 
+        if (Restart.ButtonCheckClick (GRMouseX(), GRMouseY(), Sign_Pause_Radius, Sign_Pause_Radius) == true)
+            {
+            Man->Health = 20;
+            // Man->Inventory = 0;
+            Man->Time = 0;
+            Man->Days = 0;
+            CreateBlocks (ManyBlocks, AllImage);
+            };
+
         Text (Sign_CoinTextX, Sign_CoinTextY, Coin_TextSize, Man->NumberCoin, "");
 
-        Text (Sign_LevelTextX, Sign_LevelTextY, Level_TextSize, NumberLevel, "Level");
+        Text (Sign_LevelTextX, Sign_LevelTextY, Level_TextSize, Man->Days+1, "Day");
 
         Pause.DrawButton (FixedCamera, AllImage);
+        DrawTransparentImage (&AllImage.Pause, 95, 10, &null, &six, FixedCamera);
 
         DrawHealth (Man->Health, FixedCamera, AllImage);
+
+        Helping (&Man->HelpSystem);
 
         if (PauseNumber == Pause_Stopped)
             {
@@ -117,7 +134,7 @@ void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber,
 
             Pause.Number = Pause_Stopped;
 
-            if (Pause.ButtonCheckClick (txMouseX(), txMouseY(), Sign_Pause_Radius, Sign_Pause_Radius) == 1)
+            if (Pause.ButtonCheckClick (GRMouseX(), GRMouseY(), Sign_Pause_Radius, Sign_Pause_Radius) == 1)
                 PauseNumber = Pause_Active;
             }
         else
@@ -133,19 +150,19 @@ void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber,
             Man->Temperature += (*AllTemperature - Man->Temperature)*0.001;
             };
 
-        txSetColor (TX_RED);
-        txSetFillColor (TX_RED);
+        GRSetColor (RGB (237, 28, 36), 1);
+        GRSetFillColor (RGB (237, 28, 36));
 
         DrawTransparentImage (&AllImage.Termometer, Sign_TermometerX, Sign_TermometerY, &null, &null, FixedCamera);
-        txRectangle (Sign_TermometerX + Sign_Term_RectLeftX, Sign_TermometerY + Sign_Term_RectDownY - Man->Temperature,
+        GRRectangle (Sign_TermometerX + Sign_Term_RectLeftX, Sign_TermometerY + Sign_Term_RectDownY - Man->Temperature,
                      Sign_TermometerX + Sign_Term_RectRightX, Sign_TermometerY + Sign_Term_RectDownY);
+
+        GRAlphaBlend (Man->x, Man->y, 50, 50, Light, 0, 0, 1);
 
         if (GetAsyncKeyState (VK_SPACE))
             {
             // HelpSystem ();
             };
-
-
 
         Mouse.DrawCursor (FixedCamera);
 
@@ -157,14 +174,12 @@ void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber,
         if (GetAsyncKeyState (VK_ESCAPE))
             break;
 
-        txSleep (Main_Sleep);
+        GRSleep (Main_Sleep);
         };
-    txEnd ();
+    GREnd ();
 
     DeleteAllImage (AllImage);
     };
-
-
 
 void Level1 (int* LevelNumber, ManType* Man, AllImageType AllImage, CamType* Camera, CamType* FixedCamera)
     {
@@ -1953,61 +1968,30 @@ void Level1 (int* LevelNumber, ManType* Man, AllImageType AllImage, CamType* Cam
 
     CreateBlocks (ManyBlocks, AllImage);
 
-    ManType Villagers [] = {{-500, 521, 999, {0, 0, &AllImage.Boat},
-                            0, 0, Man_aX, 2,
-                            0, 0, Man_Temperature,
-                            0, 0, 0, "", MT_Boat, {0, 0, 0, 0, 0, rand() % 3, 0, 0, rand() % 3, 0, rand() % 3, 0}, 0, 0,
-                            2125, 521, 0, 0},
-                            {1000, -100, 20, {0, 0, &AllImage.Villager},
-                            0, 0, Man_aX, 2,
-                            0, 0, Man_Temperature,
-                            0, 0, 0, "", MT_Seller, {0, 0, 0, 0, 0, rand() % 3, 0, 0, rand() % 3, 0, rand() % 3, 0}, 0, 0,
-                            2125, 521, 0, 0},
-                            {3000, -100, 20, {0, 0, &AllImage.Villager},
-                            0, 0, Man_aX, 2,
-                            0, 0, Man_Temperature,
-                            0, 0, 0, "", MT_Seller, {0, 0, 0, 0, 0, rand() % 3, 0, 0, rand() % 3, 0, rand() % 3, 0}, 0, 0,
-                            2125, 521, 0, 0},
-                            {4000, -100, 20, {0, 0, &AllImage.Villager},
-                            0, 0, Man_aX, 2,
-                            0, 0, Man_Temperature,
-                            0, 0, 0, "", MT_Seller, {0, 0, 0, 0, 0, rand() % 3, 0, 0, rand() % 3, 0, rand() % 3, 0}, 0, 0,
-                            2125, 521, 0, 0},
-                            {6000, -100, 20, {0, 0, &AllImage.Villager},
-                            0, 0, Man_aX, 2,
-                            0, 0, Man_Temperature,
-                            0, 0, 0, "", MT_Seller, {0, 0, 0, 0, 0, rand() % 3, 0, 0, rand() % 3, 0, rand() % 3, 0}, 0, 0,
-                            2125, 521, 0, 0},
-                            {-400, 800, 20, {0, 0, &AllImage.Fish},
-                            10, 0, Man_aX, 2,
-                            0, 0, Man_Temperature,
-                            0, 0, 0, "", MT_Fish, {-400, 0, 0, 0, 0, rand() % 3, 0, 0, rand() % 3, 0, rand() % 3, 0}, 0, 0,
-                            2125, 521, 0, 0},
-                            {-600, 750, 20, {0, 0, &AllImage.Fish},
-                            0, 0, Man_aX, 2,
-                            0, 0, Man_Temperature,
-                            0, 0, 0, "", MT_Fish, {0, 0, 0, 0, 0, rand() % 3, 0, 0, rand() % 3, 0, rand() % 3, 0}, 0, 0,
-                            2125, 521, 0, 0},
-                            {6000, -100, 20, {0, 0, &AllImage.Spider},
-                            0, 0, Man_aX, 2,
-                            0, 0, Man_Temperature,
-                            0, 0, 0, "", MT_Bear, {0, 0, 0, 0, 0, rand() % 3, 0, 0, rand() % 3, MT_Spider, rand() % 3, 85}, 0, 0,
-                            2125, 521, 0, 0},
-                            {4000, -100, 20, {0, 0, &AllImage.Wolf},
-                            0, 0, Man_aX, 2,
-                            0, 0, Man_Temperature,
-                            0, 0, 0, "", MT_Bear, {0, 0, 0, 0, 0, rand() % 3, 0, 0, rand() % 3, MT_Wolf, rand() % 3, 0}, 0, 0,
-                            2125, 521, 0, 0},
-                            {3000, -100, 20, {0, 0, &AllImage.Bear},
-                            0, 0, Man_aX, 2,
-                            0, 0, Man_Temperature,
-                            0, 0, 0, "", MT_Bear, {0, 0, 0, 0, 0, rand() % 3, 0, 0, rand() % 3, MT_Bear, rand() % 3, 0}, 0, 0,
-                            2125, 521, 0, 0},
-                            {-1, -1, 20, {0, 0, &AllImage.Boat},
-                            0, 0, Man_aX, 2,
-                            0, 0, Man_Temperature,
-                            0, 0, 0, "", MT_Boat, {0, 0, 0, 0, 0, rand() % 3, 0, 0, rand() % 3, 0, rand() % 3, 0}, 0, 0,
-                            2125, 521, 0, 0}};
+    ManType Villagers [] = {{0, 0, 0, {0, 0, &AllImage.Bear}, 0, 0, Man_aX, 2, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {0, 0, 0, {0, 0, &AllImage.Bear}, 0, 0, Man_aX, 2, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {0, 0, 0, {0, 0, &AllImage.Bear}, 0, 0, Man_aX, 2, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {0, 0, 0, {0, 0, &AllImage.Bear}, 0, 0, Man_aX, 2, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {0, 0, 0, {0, 0, &AllImage.Bear}, 0, 0, Man_aX, 2, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {0, 0, 0, {0, 0, &AllImage.Bear}, 0, 0, Man_aX, 2, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {0, 0, 0, {0, 0, &AllImage.Bear}, 0, 0, Man_aX, 2, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {0, 0, 0, {0, 0, &AllImage.Bear}, 0, 0, Man_aX, 2, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {0, 0, 0, {0, 0, &AllImage.Bear}, 0, 0, Man_aX, 2, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {0, 0, 0, {0, 0, &AllImage.Bear}, 0, 0, Man_aX, 2, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {0, 0, 0, {0, 0, &AllImage.Bear}, 0, 0, Man_aX, 2, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {0, 0, 0, {0, 0, &AllImage.Bear}, 0, 0, Man_aX, 2, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {0, 0, 0, {0, 0, &AllImage.Bear}, 0, 0, Man_aX, 2, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {0, 0, 0, {0, 0, &AllImage.Bear}, 0, 0, Man_aX, 2, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {0, 0, 0, {0, 0, &AllImage.Bear}, 0, 0, Man_aX, 2, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {0, 0, 0, {0, 0, &AllImage.Bear}, 0, 0, Man_aX, 2, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {0, 0, 0, {0, 0, &AllImage.Bear}, 0, 0, Man_aX, 2, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {0, 0, 0, {0, 0, &AllImage.Bear}, 0, 0, Man_aX, 2, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {0, 0, 0, {0, 0, &AllImage.Bear}, 0, 0, Man_aX, 2, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {0, 0, 0, {0, 0, &AllImage.Bear}, 0, 0, Man_aX, 2, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {-1, -1, 0, {0, 0, &AllImage.Bear}, 0, 0, Man_aX, 2, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            };
+
+    CreateVillagers (Villagers, AllImage);
 
     MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera, FixedCamera, Villagers);
     };
@@ -2266,21 +2250,11 @@ void Level2 (int* LevelNumber, ManType* Man, AllImageType AllImage, CamType* Cam
                                {-1, -1000000, 1, {0, 0, &AllImage.Finish}, BT_Finish}};
 
 
-    ManType Villagers [] = {{-500, 521, 20, {0, 0, &AllImage.Boat},
+    ManType Villagers [] = {{-1, -1, 20, {0, 0, &AllImage.Boat},
                             0, 0, Man_aX, 2,
                             0, 0, Man_Temperature,
                             0, 0, 0, "", MT_Boat, {0, 0, 0, 0, 0, rand() % 3, 0, 0, rand() % 3, 0, rand() % 3, 0}, 0, 0,
-                            2125, 521, 0, 0},
-                            {-500, 521, 20, {0, 0, &AllImage.Boat},
-                            0, 0, Man_aX, 2,
-                            0, 0, Man_Temperature,
-                            0, 0, 0, "", MT_Boat, {0, 0, 0, 0, 0, rand() % 3, 0, 0, rand() % 3, 0, rand() % 3, 0}, 0, 0,
-                            2125, 521, 0, 0},
-                            {-1, -1, 20, {0, 0, &AllImage.Boat},
-                            0, 0, Man_aX, 2,
-                            0, 0, Man_Temperature,
-                            0, 0, 0, "", MT_Boat, {0, 0, 0, 0, 0, rand() % 3, 0, 0, rand() % 3, 0, rand() % 3, 0}, 0, 0,
-                            2125, 521, 0, 0}};
+                            2125, 521, 0, 0, {}}};
 
     MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera, FixedCamera, Villagers);
     };

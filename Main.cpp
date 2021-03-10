@@ -1,4 +1,5 @@
 #include "Graphycs.h"
+#include "HelpSystem.h"
 
 #include "AnimationType.h"
 #include "BaseType.h"
@@ -21,7 +22,6 @@ int main ()
     return 0;
     };
 
-
 void Cycle ()
     {
     AllImageType AllImage = {};
@@ -40,12 +40,12 @@ void Cycle ()
                  0, 0, Man_aX, 2,
                  0, 0, Man_Temperature,
                  0, 0, 0, "", 0, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                 0, 0, Man_x, Man_y, 0, 0};
+                 0, 0, Man_x, Man_y, 0, 0, {}};
 
     while (true)
         {
-        txSetFillColor (RGB (72, 72, 72));
-        txClear ();
+        GRSetFillColor (RGB (72, 72, 72));
+        GRClear ();
 
         /* if (LevelNumber == 0)
             Menu (&LevelNumber, AllImage, &FixedCamera); */

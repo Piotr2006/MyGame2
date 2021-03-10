@@ -1,0 +1,90 @@
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe, файл: C:\Users\007\Downloads\TX\TXLib.h, строка: 12862, функция: HPEN__* {anonymous}::TX::txSetColor(COLORREF, double, HDC),
+
+Сообщение: Окно рисования не создано или не в порядке.
+
+#1: TXLib [Ver: 00173a, Rev: 169, Date: 2021-01-23 10:12:28 +0400], Instance: 0x00A36C34 (32-bit), Flags: Cmdre0, Thread: 0x48C (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00648263 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: txSetColor() at C:/Users/007/Downloads/TX/TXLib.h (12862)
+
+# 1 0x00657E2C in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawHealth() at C:/Users/007/Desktop/программирование/MyGame2/SmallHelpFunctions.cpp (62):
+
+     60:     DrawTransparentImage (&AllImage.Coin, Sign_HealthX, Sign_HealthY, &one, &null, Camera);
+     61: 
+=>   62:     txSetColor (TX_BLACK, 2);
+     63:     txSetFillColor (TX_TRANSPARENT);
+     64:     txRectangle (60, 120, 160, 140);
+
+# 2 0x00563771 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/Levels.cpp (111):
+
+    109:         Pause.DrawButton (FixedCamera, AllImage);
+    110: 
+=>  111:         DrawHealth (Man->Health, FixedCamera, AllImage);
+    112: 
+    113:         if (PauseNumber == Pause_Stopped)
+
+# 3 0x00596CC1 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Level1() at C:/Users/007/Desktop/программирование/MyGame2/Levels.cpp (2012):
+
+   2010:                             2125, 521, 0, 0}};
+   2011: 
+=> 2012:     MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera, FixedCamera, Villagers);
+   2013:     };
+   2014: 
+
+# 4 0x005CC3F2 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (54):
+
+     52:         if (LevelNumber == 1)
+     53:             {
+=>   54:             Level1 (&LevelNumber, &Man, AllImage, &Camera, &FixedCamera);
+     55:             };
+     56: 
+
+# 5 0x005CC1A5 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (19):
+
+     17:     GRCreateWindow (1550, 850);
+     18: 
+=>   19:     Cycle ();
+     20: 
+     21:     return 0;
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in HPEN__* {anonymous}::TX::txSetColor(COLORREF, double, HDC) at C:\Users\007\Downloads\TX\TXLib.h (12862):
+
+  12860: HPEN txSetColor (COLORREF color, double thickness /*= 1*/, HDC dc /*= txDC()*/)
+  12861:     {
+=>12862: $1  if (_TX_DEFAULT_HDC_FAILED (dc)) return NULL;
+  12863: 
+  12864: $   HPEN pen = Win32::CreatePen ((color == TX_TRANSPARENT? PS_NULL : PS_SOLID), ROUND (thickness), color);
+
+# 1 in void DrawHealth(int, CamType*, AllImageType) at C:\Users\007\Desktop\программирование\MyGame2\SmallHelpFunctions.cpp (62):
+
+     60:     DrawTransparentImage (&AllImage.Coin, Sign_HealthX, Sign_HealthY, &one, &null, Camera);
+     61: 
+=>   62:     txSetColor (TX_BLACK, 2);
+     63:     txSetFillColor (TX_TRANSPARENT);
+     64:     txRectangle (60, 120, 160, 140);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 169, Date: 2021-01-23 10:12:28 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Downloads\TX\TXLib.h
+Compiled:	Mar  7 2021 15:05:53, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Mar 07 2021 16:11:50
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------

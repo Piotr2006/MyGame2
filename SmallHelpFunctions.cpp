@@ -33,10 +33,10 @@ void Text (int x, int y, int Size, int Number, char Name [])
 
     sprintf (str, "%s %d", Name, Number);
 
-    txSetTextAlign ();
-    txSetColor (TX_WHITE);
-    txSelectFont ("Comic Sans MS", Size);
-    txTextOut (x, y, str);
+    GRSetAlign ();
+    GRSetColor (TX_WHITE, 1);
+    GRSelectFont ("Comic Sans MS", Size);
+    GRTextOut (x, y, str);
     };
 
 int ModuleDistance (int x1, int y1, int x2, int y2, int Distance)
@@ -59,10 +59,10 @@ void DrawHealth (int Health, CamType* Camera, AllImageType AllImage)
 
     DrawTransparentImage (&AllImage.Coin, Sign_HealthX, Sign_HealthY, &one, &null, Camera);
 
-    txSetColor (TX_BLACK, 2);
-    txSetFillColor (TX_TRANSPARENT);
-    txRectangle (60, 120, 160, 140);
-    txSetFillColor (RGB (237, 28, 36));
-    txRectangle (60, 120, 60+(Health*5), 140);
+    GRSetColor (TX_BLACK, 2);
+    GRSetFillColor (TX_TRANSPARENT);
+    GRRectangle (60, 120, 160, 140);
+    GRSetFillColor (RGB (237, 28, 36));
+    GRRectangle (60, 120, 60+(Health*5), 140);
     };
 

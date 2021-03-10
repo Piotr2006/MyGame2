@@ -46,6 +46,8 @@
 		<Unit filename="Enums.h" />
 		<Unit filename="Graphycs.cpp" />
 		<Unit filename="Graphycs.h" />
+		<Unit filename="HelpSystem.cpp" />
+		<Unit filename="HelpSystem.h" />
 		<Unit filename="ImageFunctions.cpp" />
 		<Unit filename="ImageFunctions.h" />
 		<Unit filename="ImageType.h" />

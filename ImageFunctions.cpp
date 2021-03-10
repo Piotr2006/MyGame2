@@ -18,7 +18,7 @@ void LoadAllImages (AllImageType* AllImages)
 
     LoadGameImage (&AllImages->Start,         "Images/Start.bmp",                  1, 1, TX_BLACK, &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->Pause,         "Images/GamePause.bmp",              1, 6, TX_WHITE, &Procent, Number_of_Images);
+    LoadGameImage (&AllImages->Pause,         "Images/GamePause.bmp",              1, 7, TX_WHITE, &Procent, Number_of_Images);
 
     LoadGameImage (&AllImages->Coin,          "Images/GameCoin.bmp",               2, 2, TX_WHITE, &Procent, Number_of_Images);
 
@@ -134,56 +134,56 @@ void LoadAllImages (AllImageType* AllImages)
 
 void DeleteAllImage (AllImageType AllImages)
     {
-    txDeleteDC (AllImages.BackGround.Picture);
-    txDeleteDC (AllImages.Cursor.Picture);
-    txDeleteDC (AllImages.Dirt.Picture);
-    txDeleteDC (AllImages.Health.Picture);
-    txDeleteDC (AllImages.Finish.Picture);
-    txDeleteDC (AllImages.Start.Picture);
-    txDeleteDC (AllImages.Pause.Picture);
-    txDeleteDC (AllImages.Coin.Picture);
-    txDeleteDC (AllImages.CoinAnimation.Picture);
-    txDeleteDC (AllImages.Box.Picture);
-    txDeleteDC (AllImages.Man.Picture);
-    txDeleteDC (AllImages.Stairs.Picture);
-    txDeleteDC (AllImages.Fire.Picture);
-    txDeleteDC (AllImages.GreenFire.Picture);
-    txDeleteDC (AllImages.Water.Picture);
-    txDeleteDC (AllImages.Bat.Picture);
-    txDeleteDC (AllImages.Stalactite.Picture);
-    txDeleteDC (AllImages.GameOver.Picture);
-    txDeleteDC (AllImages.Pickaxe.Picture);
-    txDeleteDC (AllImages.Villager.Picture);
-    txDeleteDC (AllImages.SaySign.Picture);
-    txDeleteDC (AllImages.Thief.Picture);
-    txDeleteDC (AllImages.Covboy.Picture);
-    txDeleteDC (AllImages.Gun.Picture);
-    txDeleteDC (AllImages.Grass.Picture);
-    txDeleteDC (AllImages.Knife.Picture);
-    txDeleteDC (AllImages.Wood.Picture);
-    txDeleteDC (AllImages.House.Picture);
-    txDeleteDC (AllImages.Snow.Picture);
-    txDeleteDC (AllImages.Menu.Picture);
+    GRDeleteDC (AllImages.BackGround.Picture);
+    GRDeleteDC (AllImages.Cursor.Picture);
+    GRDeleteDC (AllImages.Dirt.Picture);
+    GRDeleteDC (AllImages.Health.Picture);
+    GRDeleteDC (AllImages.Finish.Picture);
+    GRDeleteDC (AllImages.Start.Picture);
+    GRDeleteDC (AllImages.Pause.Picture);
+    GRDeleteDC (AllImages.Coin.Picture);
+    GRDeleteDC (AllImages.CoinAnimation.Picture);
+    GRDeleteDC (AllImages.Box.Picture);
+    GRDeleteDC (AllImages.Man.Picture);
+    GRDeleteDC (AllImages.Stairs.Picture);
+    GRDeleteDC (AllImages.Fire.Picture);
+    GRDeleteDC (AllImages.GreenFire.Picture);
+    GRDeleteDC (AllImages.Water.Picture);
+    GRDeleteDC (AllImages.Bat.Picture);
+    GRDeleteDC (AllImages.Stalactite.Picture);
+    GRDeleteDC (AllImages.GameOver.Picture);
+    GRDeleteDC (AllImages.Pickaxe.Picture);
+    GRDeleteDC (AllImages.Villager.Picture);
+    GRDeleteDC (AllImages.SaySign.Picture);
+    GRDeleteDC (AllImages.Thief.Picture);
+    GRDeleteDC (AllImages.Covboy.Picture);
+    GRDeleteDC (AllImages.Gun.Picture);
+    GRDeleteDC (AllImages.Grass.Picture);
+    GRDeleteDC (AllImages.Knife.Picture);
+    GRDeleteDC (AllImages.Wood.Picture);
+    GRDeleteDC (AllImages.House.Picture);
+    GRDeleteDC (AllImages.Snow.Picture);
+    GRDeleteDC (AllImages.Menu.Picture);
     };
 
 void DrawLoading (int Procents)
     {
-    txSetColor (RGB (72, 72, 72));
-    txSetFillColor (RGB (72, 72, 72));
-    txRectangle (0, 0, 2000, 2000);
-    txSetColor (TX_BLACK, 3);
-    txRectangle (Load_BigRect_X1, Load_BigRect_Y1, Load_BigRect_X2, Load_BigRect_Y2);
-    txSetFillColor (TX_GREEN);
-    txRectangle (Load_SmallRect_X1, Load_SmallRect_Y1, 200+(11.50*Procents), Load_SmallRect_Y2);
+    GRSetColor (RGB (72, 72, 72), 1);
+    GRSetFillColor (RGB (72, 72, 72));
+    GRRectangle (0, 0, 2000, 2000);
+    GRSetColor (TX_BLACK, 3);
+    GRRectangle (Load_BigRect_X1, Load_BigRect_Y1, Load_BigRect_X2, Load_BigRect_Y2);
+    GRSetFillColor (TX_GREEN);
+    GRRectangle (Load_SmallRect_X1, Load_SmallRect_Y1, 200+(11.50*Procents), Load_SmallRect_Y2);
 
     char str [50] = "";
 
     sprintf (str, "Loading: %d%%", Procents);
 
-    txSetTextAlign ();
-    txSetColor (TX_BLACK);
-    txSelectFont ("Comic Sans MS", Loading_TextSize);
-    txTextOut (Loading_TextX, Loading_TextY, str);
+    GRSetAlign ();
+    GRSetColor (TX_BLACK, 1);
+    GRSelectFont ("Comic Sans MS", Loading_TextSize);
+    GRTextOut (Loading_TextX, Loading_TextY, str);
     };
 
 void LoadGameImage (ImageType* Image, const char* Picture, int xMaxFrame, int yMaxFrame, COLORREF color,
@@ -203,7 +203,7 @@ void LoadGameImage (ImageType* Image, const char* Picture, int xMaxFrame, int yM
 
     Image->yMaxAnimationNumber = yMaxFrame;
 
-    Image->Picture = txLoadImage (Picture);
+    Image->Picture = GRLoadImage (Picture);
 
     Image->color = color;
 
@@ -214,16 +214,16 @@ void LoadGameImage (ImageType* Image, const char* Picture, int xMaxFrame, int yM
 
     // printf ("LoadGameImage(): FileName = \"%s\", HDC = \"%p\" \n", Image->FileName, Image->Picture);
 
-    txSleep (Loading_Sleep);
+    GRSleep (Loading_Sleep);
     };
 
 void DrawTransparentImage (ImageType* Image, int x, int y, int* xAnimationNumber, int* yAnimationNumber, CamType* Camera)
     {
     // printf ("DrawTransparentImage(): FileName = \"%s\", HDC = \"%p\" \n", Image.FileName, Image.Picture);
 
-    int xSize = txGetExtentX (Image->Picture)/Image->xMaxAnimationNumber;
-    int ySize = txGetExtentY (Image->Picture)/Image->yMaxAnimationNumber;
+    int xSize = GRGetExtentX (Image->Picture)/Image->xMaxAnimationNumber;
+    int ySize = GRGetExtentY (Image->Picture)/Image->yMaxAnimationNumber;
 
-    DrawTransparentBlt (x - Camera->x, y - Camera->y, xSize, ySize, Image->Picture, *xAnimationNumber*xSize, *yAnimationNumber*ySize, Image->color);
+    GRTransparentBlt (x - Camera->x, y - Camera->y, xSize, ySize, Image->Picture, *xAnimationNumber*xSize, *yAnimationNumber*ySize, Image->color);
     };
 

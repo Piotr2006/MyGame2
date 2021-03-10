@@ -1,6 +1,7 @@
 #ifndef MANTYPE_H
 #define MANTYPE_H
 
+#include "HelpSystem.h"
 #include "BaseType.h"
 #include "CamType.h"
 #include "AllImageType.h"
@@ -16,7 +17,7 @@ struct ManType : BaseType
              double _vX, double _vY, double _aX, double _aY,
              int _Side, int _Position, double _Temperature,
              int _NumberCoin, int _xWeapon, int _ArmSpeed, char _Name [50], int _Kind, InvType _Inventory,
-             int _Time, int _Days, double _ArrowX, double _ArrowY, int _ArrowVX, int _ArrowVY);
+             int _Time, int _Days, double _ArrowX, double _ArrowY, int _ArrowVX, int _ArrowVY, HelpType _HelpSystem);
 
     void DrawMan (CamType* Camera, AllImageType AllImage);
 
@@ -70,9 +71,13 @@ struct ManType : BaseType
 
     int ArrowVX;
     int ArrowVY;
+
+    HelpType HelpSystem;
     };
 
 void DrawSlot (int Block, int x, int y, ImageType Picture, int TextX, int TextY);
+
+void CreateVillagers (ManType Villagers [], AllImageType AllImage);
 
 void DrawLevelPeople (ManType Villagers[], CamType* Camera, AllImageType AllImage);
 
