@@ -49,6 +49,7 @@ struct AllImageType
     ImageType Menu;
     ImageType BonFire;
     ImageType Bear;
+    ImageType Ghost;
     ImageType Plus;
     ImageType CommonSlot;
     ImageType Rock;

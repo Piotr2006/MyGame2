@@ -28,7 +28,7 @@ void Cycle ()
 
     LoadAllImages (&AllImage);
 
-    int LevelNumber = 1;
+    int LevelNumber = 0;
 
     // double AllTemperature = 10;
 
@@ -50,14 +50,11 @@ void Cycle ()
         /* if (LevelNumber == 0)
             Menu (&LevelNumber, AllImage, &FixedCamera); */
 
-        if (LevelNumber == 1)
-            {
-            Level1 (&LevelNumber, &Man, AllImage, &Camera, &FixedCamera);
-            };
+        Level1 (&LevelNumber, &Man, AllImage, &Camera, &FixedCamera);
 
-        if (LevelNumber == 2)
+        if (LevelNumber == 0)
             {
-            Level2 (&LevelNumber, &Man, AllImage, &Camera, &FixedCamera);
+            TestLevel (&LevelNumber, &Man, AllImage, &Camera, &FixedCamera);
             };
 
         if (GetAsyncKeyState (VK_ESCAPE))

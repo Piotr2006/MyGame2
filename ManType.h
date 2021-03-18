@@ -8,6 +8,7 @@
 #include "BlockType.h"
 #include "InvType.h"
 #include "MouseType.h"
+#include "Enums.h"
 
 struct BlockType;
 
@@ -36,6 +37,8 @@ struct ManType : BaseType
     void VillagerMind (ManType* Man, CamType* Camera, AllImageType AllImage);
 
     void BlockCollision (BlockType* Block, CamType* Camera, AllImageType AllImage);
+
+    void BlockInteraction (BlockType* Block, CamType* Camera, AllImageType AllImage);
 
     void Physic ();
 

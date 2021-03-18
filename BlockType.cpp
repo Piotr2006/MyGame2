@@ -155,6 +155,7 @@ void CoinCollision (ManType* Man, BlockType* Coin, int* NumberCoin)
         }; */
     };
     };
+
 void DrawLevelBlocks (BlockType ManyBlocks[], CamType* Camera, AllImageType AllImage)
     {
     int i = 0;
@@ -173,9 +174,12 @@ void CallLevelPhysic (BlockType ManyBlocks[], ManType* Man, CamType* Camera, int
 
     while (ManyBlocks[i].x != -1 && ManyBlocks[i].y != -1)
         {
-        Man->BlockCollision (&ManyBlocks [i], Camera, AllImage);
+        if (ManyBlocks[i].Health > 0)
+            Man->BlockCollision (&ManyBlocks [i], Camera, AllImage);
 
-        CoinCollision (Man, &ManyBlocks [i], NumberCoin);
+        Man->BlockInteraction (&ManyBlocks [i], Camera, AllImage);
+
+        // CoinCollision (Man, &ManyBlocks [i], NumberCoin);
 
         i = i + 1;
         };

@@ -2,7 +2,23 @@
 #define ENUMS_H
 
 const int NameSize = 50;
-const int World_Size = 1;   // !!! Не делать больше 10-ти !!!
+const int World_Size = 10;   // !!! Не делать больше 10-ти !!!
+
+enum InventoryNumbers
+    {
+    IT_Axe        = 0,
+    IT_Wood       = 1,
+    IT_Knife      = 2,
+    IT_Apple      = 3,
+    IT_Stone      = 4,
+    IT_Bow        = 5,
+    IT_Arrow      = 6,
+    IT_Coin       = 7,
+    IT_Fishing    = 8,
+    IT_Fish       = 9,
+    IT_CookedFish = 10,
+    IT_Rope       = 11
+    };
 
 enum
     {
@@ -87,8 +103,8 @@ enum Man
     Man_y = -100,
     Man_Health = 20,
     Man_Temperature = 36,
-    Man_FastSpeed = 15,
-    Man_SlowSpeed = 5,
+    Man_FastSpeed = 20,
+    Man_SlowSpeed = 7,
     Man_DrawingX = 0,
     Man_DrawingY = -48,
     Man_MaxHealth = 20,

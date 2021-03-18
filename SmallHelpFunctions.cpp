@@ -66,3 +66,24 @@ void DrawHealth (int Health, CamType* Camera, AllImageType AllImage)
     GRRectangle (60, 120, 60+(Health*5), 140);
     };
 
+int BlockCheckClick (BlockType* Block, CamType* Camera)
+    {
+    int xDst = GRGetExtentX (Block->Animation.Picture->Picture)/Block->Animation.Picture->xMaxAnimationNumber;
+    int yDst = GRGetExtentY (Block->Animation.Picture->Picture)/Block->Animation.Picture->yMaxAnimationNumber;
+
+    if (fabs (Block->x - Camera->x + xDst - GRMouseX()) <= xDst &&
+        fabs (Block->y - Camera->y + yDst - GRMouseY()) <= yDst &&
+        GetAsyncKeyState (VK_LBUTTON))
+                return true;
+
+    return false;
+    };
+
+int InBorders (double smaller, double x, double bigger)
+    {
+    if (smaller <= x &&
+                   x <= bigger)
+                   return true;
+
+    return false;
+    };

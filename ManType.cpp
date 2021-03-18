@@ -48,6 +48,7 @@ void CreateVillagers (ManType Villagers [], AllImageType AllImage)
             {
             Villagers[i].Health = 20;
             Villagers[i].Kind = MT_Bear;
+            Villagers[i].Inventory.Stone = MT_Bear;
             Villagers[i].Inventory.Rope = 10;
             Villagers[i].x = rand() % 11400*World_Size;
             Villagers[i].y = -500;
@@ -59,6 +60,7 @@ void CreateVillagers (ManType Villagers [], AllImageType AllImage)
             {
             Villagers[i].Health = 15;
             Villagers[i].Kind = MT_Bear;
+            Villagers[i].Inventory.Stone = MT_Wolf;
             Villagers[i].Inventory.Rope = 13;
             Villagers[i].x = rand() % 11400*World_Size;
             Villagers[i].y = -500;
@@ -70,7 +72,9 @@ void CreateVillagers (ManType Villagers [], AllImageType AllImage)
             {
             Villagers[i].Health = 10;
             Villagers[i].Kind = MT_Bear;
+            Villagers[i].Inventory.Stone = MT_Spider;
             Villagers[i].Inventory.Rope = 12;
+            Villagers[i].Inventory.Arrow = 34;
             Villagers[i].x = rand() % 11400*World_Size;
             Villagers[i].y = -500;
             Villagers[i].Animation.Picture = &AllImage.Spider;
@@ -82,6 +86,9 @@ void CreateVillagers (ManType Villagers [], AllImageType AllImage)
             Villagers[i].Health = 20;
             Villagers[i].Kind = MT_Seller;
             Villagers[i].Inventory.Rope = 10;
+            Villagers[i].Inventory.Axe = rand() % 3;
+            Villagers[i].Inventory.Knife = rand() % 3;
+            Villagers[i].Inventory.Bow = rand() % 3;
             Villagers[i].x = rand() % 11400*World_Size;
             Villagers[i].y = -500;
             Villagers[i].Animation.Picture = &AllImage.Villager;
@@ -93,21 +100,26 @@ void CreateVillagers (ManType Villagers [], AllImageType AllImage)
             Villagers[i].Health = 20;
             Villagers[i].Kind = MT_Fish;
             // Villagers[i].Inventory.Rope = 10;
-            Villagers[i].x = -rand() % 700 - 100;
+            Villagers[i].x = -rand() % 700 - 500;
             Villagers[i].y = 750 + rand() % 100;
             Villagers[i].Animation.Picture = &AllImage.Fish;
             };
 
-        if (i == 20)
+        if (i >= 20 &&
+            i < 22)
             {
-            Villagers[i].Health = 999;
-            Villagers[i].Kind = MT_Boat;
-            Villagers[i].x = -rand() % 700 - 100;
-            Villagers[i].y = 521;
-            Villagers[i].Animation.Picture = &AllImage.Boat;
+            Villagers[i].Health = 20;
+            Villagers[i].Kind = MT_Bear;
+            Villagers[i].Inventory.Rope = 10;
+            Villagers[i].Inventory.Stone = MT_Spider;
+            Villagers[i].Inventory.Arrow = 0;
+            Villagers[i].x = rand() % 100;
+            Villagers[i].Inventory.Arrow = -100;
+            Villagers[i].y = 0;
+            Villagers[i].Animation.Picture = &AllImage.Ghost;
             };
 
-        if (i > 20)
+        if (i >= 22)
             {
             Villagers[i].Health = 0;
             };
@@ -215,8 +227,8 @@ void ManType :: Crafting (AllImageType AllImage, CamType* FixedCamera)
             Inventory.Axe += 1;
             Inventory.CraftNumber = 0;
             Inventory.CraftControlSpeed = 1;
-            if (HelpSystem.Number == 2)
-                HelpSystem.Number = 3;
+            if (HelpSystem.Number == HelpCrafting)
+                HelpSystem.Number = HelpDestroyTree;
             };
         };
 
@@ -384,146 +396,146 @@ void ManType :: DrawInventory (CamType* Camera, CamType* FixedCamera, AllImageTy
         Inventory.InvControlSpeed = 1;
         };
 
-    if (Inventory.MainNumber < 0)
+    if (Inventory.MainNumber < IT_Axe)
         Inventory.MainNumber = 17;
 
     if (Inventory.MainNumber > 17)
-        Inventory.MainNumber = 0;
+        Inventory.MainNumber = IT_Axe;
 
     // Numbers
 
-    if (Inventory.MainNumber == 0)
+    if (Inventory.MainNumber == IT_Axe)
         {
         Inventory.MainSlot = Inventory.Axe;
         };
 
-    if (Inventory.MainNumber == 1)
+    if (Inventory.MainNumber == IT_Wood)
         {
         Inventory.MainSlot = Inventory.Wood;
         };
 
-    if (Inventory.MainNumber == 2)
+    if (Inventory.MainNumber == IT_Knife)
         {
         Inventory.MainSlot = Inventory.Knife;
         };
 
-    if (Inventory.MainNumber == 3)
+    if (Inventory.MainNumber == IT_Apple)
         {
         Inventory.MainSlot = Inventory.Apple;
         };
 
-    if (Inventory.MainNumber == 4)
+    if (Inventory.MainNumber == IT_Stone)
         {
         Inventory.MainSlot = Inventory.Stone;
         };
 
-    if (Inventory.MainNumber == 5)
+    if (Inventory.MainNumber == IT_Bow)
         {
         Inventory.MainSlot = Inventory.Bow;
         };
 
-    if (Inventory.MainNumber == 6)
+    if (Inventory.MainNumber == IT_Arrow)
         {
         Inventory.MainSlot = Inventory.Arrow;
         };
 
-    if (Inventory.MainNumber == 7)
+    if (Inventory.MainNumber == IT_Coin)
         {
         Inventory.MainSlot = Inventory.Coin;
         };
 
-    if (Inventory.MainNumber == 8)
+    if (Inventory.MainNumber == IT_Fishing)
         {
         Inventory.MainSlot = Inventory.Fishing;
         };
 
-    if (Inventory.MainNumber == 9)
+    if (Inventory.MainNumber == IT_Fish)
         {
         Inventory.MainSlot = Inventory.Fish;
         };
 
-    if (Inventory.MainNumber == 10)
+    if (Inventory.MainNumber == IT_CookedFish)
         {
         Inventory.MainSlot = Inventory.CookedFish;
         };
 
-    if (Inventory.MainNumber == 11)
+    if (Inventory.MainNumber == IT_Rope)
         {
         Inventory.MainSlot = Inventory.Rope;
         };
 
     // ManArm
     if (Animation.yFrame <= 1 &&
-        Inventory.MainNumber == 2 &&
-        Inventory.MainSlot > 0)
+        Inventory.MainNumber == IT_Knife &&
+        Inventory.Knife > 0)
         DrawTransparentImage (&AllImage.Knife, x + 33 - Animation.yFrame*20 + xWeapon*X,
                               y + 112, &null, &Animation.yFrame, Camera);
 
     if (Animation.yFrame <= 1 &&
-        Inventory.MainNumber == 3 &&
-        Inventory.MainSlot > 0)
+        Inventory.MainNumber == IT_Apple &&
+        Inventory.Apple > 0)
         DrawTransparentImage (&AllImage.Apple, x + 33 - Animation.yFrame*20 + xWeapon*X,
                               y + 112, &null, &Animation.yFrame, Camera);
 
     if (Animation.yFrame <= 1 &&
-        Inventory.MainNumber == 6 &&
-        Inventory.MainSlot > 0)
+        Inventory.MainNumber == IT_Arrow &&
+        Inventory.Arrow > 0)
         DrawTransparentImage (&AllImage.Arrow, x + 33 - Animation.yFrame*20 + xWeapon*X,
                               y + 112, &null, &Animation.yFrame, Camera);
 
     if (Animation.yFrame <= 1 &&
-        Inventory.MainNumber == 4 &&
-        Inventory.MainSlot > 0)
+        Inventory.MainNumber == IT_Stone &&
+        Inventory.Stone > 0)
         DrawTransparentImage (&AllImage.Stone, x + 33 - Animation.yFrame*20 + xWeapon*X,
                               y + 112, &null, &Animation.yFrame, Camera);
 
     if (Animation.yFrame <= 1 &&
-        Inventory.MainNumber == 1 &&
-        Inventory.MainSlot > 0)
+        Inventory.MainNumber == IT_Wood &&
+        Inventory.Wood > 0)
         DrawTransparentImage (&AllImage.Wood, x + 33 - Animation.yFrame*20 + xWeapon*X,
                               y + 70, &null, &Animation.yFrame, Camera);
 
     if (Animation.yFrame <= 1 &&
-        Inventory.MainNumber == 7 &&
-        Inventory.MainSlot > 0)
+        Inventory.MainNumber == IT_Coin &&
+        Inventory.Coin > 0)
         DrawTransparentImage (&AllImage.Coin, x + 33 - Animation.yFrame*20 + xWeapon*X,
                               y + 70, &null, &Animation.yFrame, Camera);
 
     if (Animation.yFrame <= 1 &&
-        Inventory.MainNumber == 0 &&
-        Inventory.MainSlot > 0)
+        Inventory.MainNumber == IT_Axe &&
+        Inventory.Axe > 0)
         DrawTransparentImage (&AllImage.Axe, x - 26 + Animation.yFrame*98,
                               y + 60, &xWeapon, &Animation.yFrame, Camera);
 
     if (Animation.yFrame <= 1 &&
-        Inventory.MainNumber == 8 &&
-        Inventory.MainSlot > 0)
+        Inventory.MainNumber == IT_Fishing &&
+        Inventory.Fishing > 0)
         DrawTransparentImage (&AllImage.FishingBig, x - 23 + Animation.yFrame*101,
                               y + 60, &null, &Animation.yFrame, Camera);
 
     if (Animation.yFrame <= 1 &&
-        Inventory.MainNumber == 9 &&
-        Inventory.MainSlot > 0)
+        Inventory.MainNumber == IT_Fish &&
+        Inventory.Fish > 0)
         DrawTransparentImage (&AllImage.Fish, x - 23 + Animation.yFrame*101,
                               y + 110, &null, &Animation.yFrame, Camera);
 
     if (Animation.yFrame <= 1 &&
-        Inventory.MainNumber == 10 &&
-        Inventory.MainSlot > 0)
+        Inventory.MainNumber == IT_CookedFish &&
+        Inventory.CookedFish > 0)
         DrawTransparentImage (&AllImage.CookedFish, x - 23 + Animation.yFrame*101,
                               y + 110, &null, &Animation.yFrame, Camera);
 
     if (Animation.yFrame <= 1 &&
-        Inventory.MainNumber == 11 &&
-        Inventory.MainSlot > 0)
+        Inventory.MainNumber == IT_Rope &&
+        Inventory.Rope > 0)
         DrawTransparentImage (&AllImage.Rope, x - 23 + Animation.yFrame*101,
                               y + 110, &null, &Animation.yFrame, Camera);
 
     // Bow
 
     if (Animation.yFrame <= 1 &&
-        Inventory.MainNumber == 5 &&
-        Inventory.MainSlot > 0)
+        Inventory.MainNumber == IT_Bow &&
+        Inventory.Bow > 0)
         {
         DrawTransparentImage (&AllImage.Bow, x + Animation.yFrame*72,
                               y + 70, &xWeapon, &Animation.yFrame, Camera);
@@ -538,8 +550,20 @@ void ManType :: DrawInventory (CamType* Camera, CamType* FixedCamera, AllImageTy
 
 void ManType :: DrawMan (CamType* Camera, AllImageType AllImage)
     {
-    // if (Kind == 0)
-    //    IncreaseAnimationNumber (&Animation);
+    if (Kind == 0 &&
+        Animation.yFrame < 2 &&
+        fabs (vX) > Man_SlowSpeed)
+        IncreaseAnimationNumber (&Animation);
+
+    if (Kind == 0)
+        {
+        if (Animation.yFrame >= 2)
+            Animation.xFrame = 0;
+
+        if (Animation.yFrame < 2 &&
+            fabs (vX) <= Man_SlowSpeed)
+            Animation.xFrame = 1;
+        };
 
     int nine = 9;
     // int twonumber = Animation.yFrame + 2;
@@ -1444,7 +1468,9 @@ void ManType :: Physic ()
         };
     };
 
-void ManType :: BlockCollision (BlockType* Block, CamType* Camera, AllImageType AllImage)
+
+
+void ManType :: BlockInteraction (BlockType* Block, CamType* Camera, AllImageType AllImage)
     {
     int null = 0;
     int two = 2;
@@ -1455,39 +1481,36 @@ void ManType :: BlockCollision (BlockType* Block, CamType* Camera, AllImageType 
     if (Block->Number == BT_FallingTree)
         {
         if (fabs (Block->x + Block_BaseWide - x) <= Block_BaseWide + Man_Wide + 200 &&
-            ModuleDistance (Block->x + 90 - Camera->x, Block->y + 50 - Camera->y , txMouseX(), txMouseY(), 50) == true &&
-            GetAsyncKeyState (VK_LBUTTON) &&
+            BlockCheckClick (Block, Camera) == true &&
             Block->Health > 0)
             {
             Inventory.Wood += 2;
             Block->Health = 0;
-            if (HelpSystem.Number == 0)
-                HelpSystem.Number = 1;
+            if (HelpSystem.Number == HelpFallingTree)
+                HelpSystem.Number = HelpFindStone;
             };
         };
 
     if (Block->Number == BT_SmallStone)
         {
         if (fabs (Block->x + Block_BaseWide - x) <= Block_BaseWide + Man_Wide + 200 &&
-            ModuleDistance (Block->x + 15 - Camera->x, Block->y + 50 - Camera->y , txMouseX(), txMouseY(), 50) == true &&
-            GetAsyncKeyState (VK_LBUTTON) &&
+            BlockCheckClick (Block, Camera) == true &&
             Block->Health > 0)
             {
             Inventory.Stone += 1;
             Block->Health = 0;
-            if (HelpSystem.Number == 1)
-                HelpSystem.Number = 2;
+            if (HelpSystem.Number == HelpFindStone)
+                HelpSystem.Number = HelpCrafting;
             };
         };
 
     // Rock
     if (Block->Number == BT_Rock)
     {
-    if (Inventory.MainNumber == 0 &&
-        Inventory.MainSlot > 0 &&
+    if (Inventory.MainNumber == IT_Axe &&
+        Inventory.Axe > 0 &&
         fabs (Block->x + Block_BaseWide - x) <= Block_BaseWide + Man_Wide + 200 &&
-        ModuleDistance (Block->x + 90 - Camera->x, Block->y + 50 - Camera->y , txMouseX(), txMouseY(), 50) == true &&
-        GetAsyncKeyState (VK_LBUTTON) &&
+        BlockCheckClick (Block, Camera) == true &&
         ArmSpeed >= 10)
             {
             Block->Health -= 10;
@@ -1552,22 +1575,22 @@ void ManType :: BlockCollision (BlockType* Block, CamType* Camera, AllImageType 
                 Block->Health -= 0.0012;
             };
 
-        if (Inventory.MainNumber == 1 &&
-            Inventory.MainSlot > 0 &&
-            ModuleDistance (Block->x + 30 - Camera->x, Block->y + 30 - Camera->y, txMouseX(), txMouseY(), 100) == true &&
-            GetAsyncKeyState (VK_LBUTTON) &&
+        if (Inventory.MainNumber == IT_Wood &&
+            Inventory.Wood > 0 &&
+            // ModuleDistance (Block->x + 30 - Camera->x, Block->y + 30 - Camera->y, txMouseX(), txMouseY(), 100) == true &&
+            BlockCheckClick (Block, Camera) == true &&
             Block->Health <= 6 &&
             Block->Health > 0)
             {
             Inventory.Wood -= 1;
             Block->Health += 3;
-            if (HelpSystem.Number == 5)
-                HelpSystem.Number = 6;
+            if (HelpSystem.Number == HelpAddWood)
+                HelpSystem.Number = HelpWarmBonfire;
             };
 
-        if (Inventory.MainNumber == 9 &&
-            Inventory.MainSlot > 0 &&
-            ModuleDistance (Block->x + 30 - Camera->x, Block->y + 30 - Camera->y, txMouseX(), txMouseY(), 100) == true &&
+        if (Inventory.MainNumber == IT_Fish &&
+            Inventory.Fish > 0 &&
+            BlockCheckClick (Block, Camera) == true &&
             GetAsyncKeyState (VK_LBUTTON) &&
             Block->Health >= 3)
             {
@@ -1578,8 +1601,8 @@ void ManType :: BlockCollision (BlockType* Block, CamType* Camera, AllImageType 
 
         if (fabs (x - Block->x) <= 200)
             {
-            if (HelpSystem.Number == 4)
-                HelpSystem.Number = 5;
+            if (HelpSystem.Number == HelpFindBonfire)
+                HelpSystem.Number = HelpAddWood;
             };
         };
 
@@ -1710,11 +1733,10 @@ void ManType :: BlockCollision (BlockType* Block, CamType* Camera, AllImageType 
         else
             Block->Animation.yFrame = 0; */
 
-        if (Inventory.MainNumber == 0 &&
-            Inventory.MainSlot > 0 &&
+        if (Inventory.MainNumber == IT_Axe &&
+            Inventory.Axe > 0 &&
             fabs (Block->x + Block_BaseWide - x) <= Block_BaseWide + Man_Wide + 100 &&
-            ModuleDistance (Block->x + 140 - Camera->x, Block->y + 215 - Camera->y , txMouseX(), txMouseY(), 140) == true &&
-            GetAsyncKeyState (VK_LBUTTON) &&
+            BlockCheckClick (Block, Camera) == true &&
             ArmSpeed >= 10 &&
             Block->Health > 2)
             {
@@ -1730,8 +1752,8 @@ void ManType :: BlockCollision (BlockType* Block, CamType* Camera, AllImageType 
             if (Days >= 30 &&
                 Days < 40)
                 Inventory.Apple += 1;
-            if (HelpSystem.Number == 3)
-                HelpSystem.Number = 4;
+            if (HelpSystem.Number == HelpDestroyTree)
+                HelpSystem.Number = HelpFindBonfire;
             Block->Health = -88;
             };
 
@@ -1746,25 +1768,31 @@ void ManType :: BlockCollision (BlockType* Block, CamType* Camera, AllImageType 
             Block->Health = 100;
         };
 
-    //-----------------------------------------------------------------------------
+    };
 
-    if (Block->Number != BT_Coin)
+void ManType :: BlockCollision (BlockType* Block, CamType* Camera, AllImageType AllImage)
     {
+
+    if (Block->Number == BT_Coin)
+        return;
+
+    if (Block->Health < 1)
+        return;
+
+    if (Block->Number != BT_Rock &&
+        Block->Number != BT_FallingTree &&
+        Block->Number != BT_Dirt)
+        return;
 
     // Physic
-    if (Block->Health  >= 1 &&
-        Block->Number != BT_Fire &&
-        Block->Number != BT_Water &&
-        Block->Number != BT_Stalactite &&
-        Block->Number != BT_BonFire &&
-        Block->Number != BT_Air &&
-        Block->Number != BT_Tree &&
-        Block->Number < BT_Pickaxe)
-    {
+
+    // CollisionDetection
+
     if (fabs (Block->x + Block_BaseWide - x) <= Block_BaseWide + Man_Wide &&
-        Block->y + Block_BaseHigh - y <= Block_BaseHigh + GRGetExtentY (Animation.Picture->Picture) / Animation.Picture->yMaxAnimationNumber &&
-        Block->y + Block_BaseHigh - y  >=  0)
+        InBorders (0, Block->y + Block->SizeY - y, Block->SizeY + this->SizeY) == true)
             {
+            // CollisionResponse
+
             if (GetAsyncKeyState (VK_UP) &&
                 Kind == MT_Main)
                 {
@@ -1774,7 +1802,7 @@ void ManType :: BlockCollision (BlockType* Block, CamType* Camera, AllImageType 
             if (vY > 0)
                 {
                 vY = 0;
-                y = Block->y - Man_High;
+                y = Block->y - SizeY;
                 };
             };
 
@@ -1798,15 +1826,7 @@ void ManType :: BlockCollision (BlockType* Block, CamType* Camera, AllImageType 
                         vX = 0;
                 };
             };
-        };
     };
-    };
-
-
-
-//-----------------------------------------------------------------------------
-
-
 
 //-----------------------------------------------------------------------------
 

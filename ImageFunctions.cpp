@@ -26,7 +26,7 @@ void LoadAllImages (AllImageType* AllImages)
 
     LoadGameImage (&AllImages->Box,           "Images/WoodBoxAnimation.bmp",       4, 3, TX_BLACK, &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->Man,           "Images/RedManAnimation.bmp",        1, 6, TX_WHITE, &Procent, Number_of_Images);
+    LoadGameImage (&AllImages->Man,           "Images/RedManAnimation.bmp",        3, 6, TX_WHITE, &Procent, Number_of_Images);
 
     LoadGameImage (&AllImages->Stairs,        "Images/Stairs.bmp",                 4, 3, TX_BLACK, &Procent, Number_of_Images);
 
@@ -89,6 +89,8 @@ void LoadAllImages (AllImageType* AllImages)
     LoadGameImage (&AllImages->BonFire,       "Images/BonFire.bmp",                1, 3, TX_WHITE, &Procent, Number_of_Images);
 
     LoadGameImage (&AllImages->Bear,          "Images/Bear.bmp",                   1, 2, TX_WHITE, &Procent, Number_of_Images);
+
+    LoadGameImage (&AllImages->Ghost,         "Images/Ghost.bmp",                  1, 2, TX_WHITE, &Procent, Number_of_Images);
 
     LoadGameImage (&AllImages->Plus,          "Images/Plus.bmp",                   1, 2, TX_WHITE, &Procent, Number_of_Images);
 

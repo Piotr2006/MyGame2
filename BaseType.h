@@ -11,6 +11,9 @@ struct BaseType
     double x;
     double y;
 
+    double SizeX;
+    double SizeY;
+
     double Health;
 
     AnimationType Animation;

@@ -4,116 +4,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
 <body>
 <tt>
-Build started on: <u>10-03-2021 at 17:50.22</u><br />
-Build ended on: <u>10-03-2021 at 17:50.30</u><p />
+Build started on: <u>18-03-2021 at 18:27.38</u><br />
+Build ended on: <u>18-03-2021 at 18:27.45</u><p />
 <b>-------------- Build: Debug in MyGame2 (compiler: GNU GCC Compiler - Strict)---------------</b><br />
-mingw32-g++.exe  -c C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp -o obj\Debug\Levels.o -Wall -fexceptions  -g  -Wshadow -Winit-self -Wredundant-decls -Wcast-align -Wundef -Wfloat-equal -Winline -Wunreachable-code -Wmissing-declarations -Wmissing-include-dirs -Wswitch-enum -Wswitch-default -Weffc++ -Wmain -Wextra -Wall -g -pipe -fexceptions -Wcast-qual -Wconversion -Wctor-dtor-privacy -Wempty-body -Wformat-security -Wformat=2 -Wignored-qualifiers -Wlogical-op -Wmissing-field-initializers -Wnon-virtual-dtor -Woverloaded-virtual -Wpointer-arith -Wsign-promo -Wstack-usage=8192 -Wstrict-aliasing -Wstrict-null-sentinel -Wtype-limits -Wwrite-strings -D_DEBUG -D_EJUDGE_CLIENT_SIDE -D_EJC<br />
-In file included from C:\Users\007\Desktop\программирование\MyGame2\ManType.h:8:0,<br />
-                 from C:\Users\007\Desktop\программирование\MyGame2\Levels.h:11,<br />
-                 from C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:1:<br />
-<font color="#0000ff">C:\Users\007\Desktop\программирование\MyGame2\BlockType.h:13:8: warning: base class 'struct BaseType' has a non-virtual destructor [-Weffc++]</font><br />
- struct BlockType : BaseType<br />
-        ^<br />
-In file included from C:\Users\007\Desktop\программирование\MyGame2\Levels.h:11:0,<br />
-                 from C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:1:<br />
-<font color="#0000ff">C:\Users\007\Desktop\программирование\MyGame2\ManType.h:14:8: warning: base class 'struct BaseType' has a non-virtual destructor [-Weffc++]</font><br />
- struct ManType : BaseType<br />
-        ^<br />
-C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp: In function 'void MoveGame(BlockType*, AllImageType, int*, ManType*, double*, CamType*, CamType*, ManType*)':<br />
-<font color="#0000ff">C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:66:24: warning: conversion to 'int' from 'double' may alter its value [-Wconversion]</font><br />
-         GRRectangle (0 - Camera-&gt;x, 700 - Camera-&gt;y, 99999 - Camera-&gt;x, 9000 - Camera-&gt;y);<br />
-                        ^<br />
-<font color="#0000ff">C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:66:41: warning: conversion to 'int' from 'double' may alter its value [-Wconversion]</font><br />
-         GRRectangle (0 - Camera-&gt;x, 700 - Camera-&gt;y, 99999 - Camera-&gt;x, 9000 - Camera-&gt;y);<br />
-                                         ^<br />
-<font color="#0000ff">C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:66:60: warning: conversion to 'int' from 'double' may alter its value [-Wconversion]</font><br />
-         GRRectangle (0 - Camera-&gt;x, 700 - Camera-&gt;y, 99999 - Camera-&gt;x, 9000 - Camera-&gt;y);<br />
-                                                            ^<br />
-<font color="#0000ff">C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:66:78: warning: conversion to 'int' from 'double' may alter its value [-Wconversion]</font><br />
-         GRRectangle (0 - Camera-&gt;x, 700 - Camera-&gt;y, 99999 - Camera-&gt;x, 9000 - Camera-&gt;y);<br />
-                                                                              ^<br />
-<font color="#0000ff">C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:70:29: warning: conversion to 'int' from 'double' may alter its value [-Wconversion]</font><br />
-         GRRectangle (-99999 - Camera-&gt;x, 720 - Camera-&gt;y, 0 - Camera-&gt;x, 9000 - Camera-&gt;y);<br />
-                             ^<br />
-<font color="#0000ff">C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:70:46: warning: conversion to 'int' from 'double' may alter its value [-Wconversion]</font><br />
-         GRRectangle (-99999 - Camera-&gt;x, 720 - Camera-&gt;y, 0 - Camera-&gt;x, 9000 - Camera-&gt;y);<br />
-                                              ^<br />
-<font color="#0000ff">C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:70:61: warning: conversion to 'int' from 'double' may alter its value [-Wconversion]</font><br />
-         GRRectangle (-99999 - Camera-&gt;x, 720 - Camera-&gt;y, 0 - Camera-&gt;x, 9000 - Camera-&gt;y);<br />
-                                                             ^<br />
-<font color="#0000ff">C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:70:79: warning: conversion to 'int' from 'double' may alter its value [-Wconversion]</font><br />
-         GRRectangle (-99999 - Camera-&gt;x, 720 - Camera-&gt;y, 0 - Camera-&gt;x, 9000 - Camera-&gt;y);<br />
-                                                                               ^<br />
-<font color="#0000ff">C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:71:39: warning: conversion to 'int' from 'double' may alter its value [-Wconversion]</font><br />
-         GRRectangle (11400*World_Size - Camera-&gt;x, 720 - Camera-&gt;y, 999999 - Camera-&gt;x, 9999 - Camera-&gt;y);<br />
-                                       ^<br />
-<font color="#0000ff">C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:71:56: warning: conversion to 'int' from 'double' may alter its value [-Wconversion]</font><br />
-         GRRectangle (11400*World_Size - Camera-&gt;x, 720 - Camera-&gt;y, 999999 - Camera-&gt;x, 9999 - Camera-&gt;y);<br />
-                                                        ^<br />
-<font color="#0000ff">C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:71:76: warning: conversion to 'int' from 'double' may alter its value [-Wconversion]</font><br />
-         GRRectangle (11400*World_Size - Camera-&gt;x, 720 - Camera-&gt;y, 999999 - Camera-&gt;x, 9999 - Camera-&gt;y);<br />
-                                                                            ^<br />
-<font color="#0000ff">C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:71:94: warning: conversion to 'int' from 'double' may alter its value [-Wconversion]</font><br />
-         GRRectangle (11400*World_Size - Camera-&gt;x, 720 - Camera-&gt;y, 999999 - Camera-&gt;x, 9999 - Camera-&gt;y);<br />
-                                                                                              ^<br />
-<font color="#0000ff">C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:119:81: warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]</font><br />
-         Text (Sign_CoinTextX, Sign_CoinTextY, Coin_TextSize, Man-&gt;NumberCoin, "");<br />
-                                                                                 ^<br />
-<font color="#0000ff">C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:121:83: warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]</font><br />
-         Text (Sign_LevelTextX, Sign_LevelTextY, Level_TextSize, Man-&gt;Days+1, "Day");<br />
-                                                                                   ^<br />
-<font color="#0000ff">C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:126:55: warning: conversion to 'int' from 'double' may alter its value [-Wconversion]</font><br />
-         DrawHealth (Man-&gt;Health, FixedCamera, AllImage);<br />
-                                                       ^<br />
-<font color="#0000ff">C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:157:101: warning: conversion to 'int' from 'double' may alter its value [-Wconversion]</font><br />
-         GRRectangle (Sign_TermometerX + Sign_Term_RectLeftX, Sign_TermometerY + Sign_Term_RectDownY - Man-&gt;Temperature,<br />
-                                                                                                     ^<br />
-<font color="#0000ff">C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:7:9: warning: unused variable 'NumberPicture' [-Wunused-variable]</font><br />
-     int NumberPicture = 0;<br />
-         ^<br />
-<font color="#0000ff">C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:18:9: warning: variable 'NumberLevel' set but not used [-Wunused-but-set-variable]</font><br />
-     int NumberLevel = *LevelNumber;<br />
-         ^<br />
-C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp: In function 'void Level1(int*, ManType*, AllImageType, CamType*, CamType*)':<br />
-<font color="#0000ff">C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:1992:29: warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]</font><br />
-                             };<br />
-                             ^<br />
-<font color="#0000ff">C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:1992:29: warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]</font><br />
-<font color="#0000ff">C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:1992:29: warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]</font><br />
-<font color="#0000ff">C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:1992:29: warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]</font><br />
-<font color="#0000ff">C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:1992:29: warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]</font><br />
-<font color="#0000ff">C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:1992:29: warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]</font><br />
-<font color="#0000ff">C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:1992:29: warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]</font><br />
-<font color="#0000ff">C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:1992:29: warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]</font><br />
-<font color="#0000ff">C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:1992:29: warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]</font><br />
-<font color="#0000ff">C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:1992:29: warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]</font><br />
-<font color="#0000ff">C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:1992:29: warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]</font><br />
-<font color="#0000ff">C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:1992:29: warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]</font><br />
-<font color="#0000ff">C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:1992:29: warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]</font><br />
-<font color="#0000ff">C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:1992:29: warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]</font><br />
-<font color="#0000ff">C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:1992:29: warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]</font><br />
-<font color="#0000ff">C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:1992:29: warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]</font><br />
-<font color="#0000ff">C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:1992:29: warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]</font><br />
-<font color="#0000ff">C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:1992:29: warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]</font><br />
-<font color="#0000ff">C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:1992:29: warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]</font><br />
-<font color="#0000ff">C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:1992:29: warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]</font><br />
-<font color="#0000ff">C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:1992:29: warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]</font><br />
-C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp: In function 'void Level2(int*, ManType*, AllImageType, CamType*, CamType*)':<br />
-<font color="#0000ff">C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:2257:49: warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]</font><br />
-                             2125, 521, 0, 0, {}}};<br />
-                                                 ^<br />
-C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp: In function 'void Level1(int*, ManType*, AllImageType, CamType*, CamType*)':<br />
-<font color="#0000ff">C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:1997:5: warning: stack usage is 101888 bytes [-Wstack-usage=]</font><br />
-     };<br />
-     ^<br />
-C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp: In function 'void Level2(int*, ManType*, AllImageType, CamType*, CamType*)':<br />
-<font color="#0000ff">C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:2260:5: warning: stack usage is 13088 bytes [-Wstack-usage=]</font><br />
-     };<br />
-     ^<br />
 mingw32-g++.exe  -o bin\Debug\MyGame2.exe obj\Debug\AnimationType.o obj\Debug\BaseType.o obj\Debug\BlockType.o obj\Debug\ButtonType.o obj\Debug\CamType.o obj\Debug\Graphycs.o obj\Debug\HelpSystem.o obj\Debug\ImageFunctions.o obj\Debug\Levels.o obj\Debug\Main.o obj\Debug\ManType.o obj\Debug\MouseType.o obj\Debug\SmallHelpFunctions.o     -mwindows<br />
-Output size is 8,96 MB<br />
-<font color="#0000ff">Process terminated with status 0 (0 minutes, 8 seconds)</font><br />
-<font color="#0000ff">0 errors, 44 warnings (0 minutes, 8 seconds)</font><br />
+Output size is 8,93 MB<br />
+<font color="#0000ff">Process terminated with status 0 (0 minutes, 6 seconds)</font><br />
+<font color="#0000ff">0 errors, 0 warnings (0 minutes, 6 seconds)</font><br />
 </tt>
 </body>
 </html>
