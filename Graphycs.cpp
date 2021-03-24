@@ -91,9 +91,9 @@ void GRSelectFont (char Name [], int Size)
     txSelectFont (Name, Size);
     };
 
-void GRTextOut (int x, int y, char Str [])
+void GRTextOut (PointType Point, char Str [])
     {
-    txTextOut (x, y, Str);
+    txTextOut (Point.x, Point.y, Str);
     };
 
 void GRPlaySound (const char  Name[])

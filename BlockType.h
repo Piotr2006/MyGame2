@@ -12,7 +12,7 @@ struct ManType;
 
 struct BlockType : BaseType
     {
-    BlockType (double x, double y, double Health, AnimationType Animation,
+    BlockType (PointType Point, double Health, AnimationType Animation,
                int Number);
 
     void DrawBlock (CamType* Camera, AllImageType AllImage);

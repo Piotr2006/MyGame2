@@ -14,7 +14,7 @@ struct BlockType;
 
 struct ManType : BaseType
     {
-    ManType (double x, double y, double _Health, AnimationType Animation,
+    ManType (PointType Point, double _Health, AnimationType Animation,
              double _vX, double _vY, double _aX, double _aY,
              int _Side, int _Position, double _Temperature,
              int _NumberCoin, int _xWeapon, int _ArmSpeed, char _Name [50], int _Kind, InvType _Inventory,

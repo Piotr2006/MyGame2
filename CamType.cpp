@@ -37,8 +37,8 @@ void CamType :: MoveCamera (BaseType* Object)
     else
         txClearConsole (); */
 
-    int xDst = fabs (fabs (x - Object->x) - Screen_xCenter);
-    int yDst = fabs (fabs (y - Object->y) - Screen_yCenter);
+    int xDst = fabs (fabs (x - Object->Point.x) - Screen_xCenter);
+    int yDst = fabs (fabs (y - Object->Point.y) - Screen_yCenter);
 
     /* if (xDst >= 500)
         vX = 0.02;
@@ -52,7 +52,7 @@ void CamType :: MoveCamera (BaseType* Object)
 
     // $i printf ("Object->x = %lf, Object->y = %lf, Cam->x = %lf, Cam->y = %lf, xDst = %d, yDst = %d, vX = %lf, vY = %lf \n", Object->x, Object->y, x, y, xDst, yDst, vX, vY); $d
 
-    x -= (x + Screen_xCenter - Object->x) * vX;
-    y -= (y + Screen_yCenter - Object->y) * vY;
+    x -= (x + Screen_xCenter - Object->Point.x) * vX;
+    y -= (y + Screen_yCenter - Object->Point.y) * vY;
     };
 

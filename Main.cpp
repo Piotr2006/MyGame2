@@ -36,10 +36,10 @@ void Cycle ()
 
     CamType FixedCamera {0, 0, 0, 0, 0};
 
-    ManType Man {0, Man_y, Man_Health, {0, 0, &AllImage.Man},
+    ManType Man {{(rand()%11200) * World_Size, Man_y}, Man_Health, {0, 0, &AllImage.Man},
                  0, 0, Man_aX, 2,
                  0, 0, Man_Temperature,
-                 0, 0, 0, "", 0, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                 0, 0, 0, "", 0, {ST_Weapon, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
                  0, 0, Man_x, Man_y, 0, 0, {}};
 
     while (true)

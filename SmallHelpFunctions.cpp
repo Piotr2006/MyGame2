@@ -27,7 +27,7 @@ void HelpSystem ()
     txTextOut (Text2_X, Text2_Y, "Удачной игры!");
     };
 
-void Text (int x, int y, int Size, int Number, char Name [])
+void Text (PointType Point, int Size, int Number, char Name [])
     {
     char str [50] = "";
 
@@ -36,14 +36,14 @@ void Text (int x, int y, int Size, int Number, char Name [])
     GRSetAlign ();
     GRSetColor (TX_WHITE, 1);
     GRSelectFont ("Comic Sans MS", Size);
-    GRTextOut (x, y, str);
+    GRTextOut (Point, str);
     };
 
-int ModuleDistance (int x1, int y1, int x2, int y2, int Distance)
+int ModuleDistance (PointType Point1, PointType Point2, int Distance)
     {
-    if (fabs (x1 - x2) <= Distance)
+    if (fabs (Point1.x - Point2.x) <= Distance)
         {
-        if (fabs (y1 - y2) <= Distance)
+        if (fabs (Point1.y - Point2.y) <= Distance)
             {
             return 1;
             };
@@ -71,8 +71,8 @@ int BlockCheckClick (BlockType* Block, CamType* Camera)
     int xDst = GRGetExtentX (Block->Animation.Picture->Picture)/Block->Animation.Picture->xMaxAnimationNumber;
     int yDst = GRGetExtentY (Block->Animation.Picture->Picture)/Block->Animation.Picture->yMaxAnimationNumber;
 
-    if (fabs (Block->x - Camera->x + xDst - GRMouseX()) <= xDst &&
-        fabs (Block->y - Camera->y + yDst - GRMouseY()) <= yDst &&
+    if (fabs (Block->Point.x - Camera->x + xDst - GRMouseX()) <= xDst &&
+        fabs (Block->Point.y - Camera->y + yDst - GRMouseY()) <= yDst &&
         GetAsyncKeyState (VK_LBUTTON))
                 return true;
 

@@ -1,9 +1,9 @@
 #include "BlockType.h"
 
 
-BlockType :: BlockType (double _x, double _y, double _Health, AnimationType _Animation,
+BlockType :: BlockType (PointType _Point, double _Health, AnimationType _Animation,
                int _Number) :
-    BaseType (_x, _y, _Health, _Animation),
+    BaseType (_Point, _Health, _Animation),
     Number (_Number)
     {
     };
@@ -13,16 +13,16 @@ void BlockType :: DrawBlock (CamType* Camera, AllImageType AllImage)
     IncreaseAnimationNumber (&Animation);
 
     if (Health > 0)
-        DrawTransparentImage (Animation.Picture, x + 50, y, &Animation.xFrame, &Animation.yFrame, Camera);
+        DrawTransparentImage (Animation.Picture, Point.x + 50, Point.y, &Animation.xFrame, &Animation.yFrame, Camera);
     };
 
 void CreateBlocks (BlockType Blocks [], AllImageType AllImage)
     {
     int i = 0;
 
-    int x = 0;
+    int X = 0;
 
-    while (Blocks[i].x != -1 && Blocks[i].y != -1)
+    while (Blocks[i].Point.x != -1 && Blocks[i].Point.y != -1)
         {
         // printf ("i = %d \n", i);
 
@@ -32,21 +32,21 @@ void CreateBlocks (BlockType Blocks [], AllImageType AllImage)
             {
             Blocks[i].Health = 100;
             Blocks[i].Number = BT_Air;
-            Blocks[i].x = x*604;
-            Blocks[i].y = 500;
+            Blocks[i].Point.x = X*604;
+            Blocks[i].Point.y = 500;
             Blocks[i].Animation.Picture = &AllImage.BackGround;
             };
 
         if (i == 19*World_Size)
-            x = 0;
+            X = 0;
 
         if (i <= 79*World_Size &&
             i >= 19*World_Size)
             {
             Blocks[i].Health = 10;
             Blocks[i].Number = BT_Dirt;
-            Blocks[i].x = x*190;
-            Blocks[i].y = 700;
+            Blocks[i].Point.x = X*190;
+            Blocks[i].Point.y = 700;
             Blocks[i].Animation.Picture = &AllImage.Grass;
             };
 
@@ -55,8 +55,8 @@ void CreateBlocks (BlockType Blocks [], AllImageType AllImage)
             {
             Blocks[i].Health = 100;
             Blocks[i].Number = BT_Tree;
-            Blocks[i].x = (rand() % 600*World_Size)*20;
-            Blocks[i].y = 415;
+            Blocks[i].Point.x = (rand() % 600*World_Size)*20;
+            Blocks[i].Point.y = 415;
             Blocks[i].Animation.Picture = &AllImage.Tree;
             };
 
@@ -65,8 +65,8 @@ void CreateBlocks (BlockType Blocks [], AllImageType AllImage)
             {
             Blocks[i].Health = 100;
             Blocks[i].Number = BT_FallingTree;
-            Blocks[i].x = (rand() % 12000*World_Size);
-            Blocks[i].y = 627;
+            Blocks[i].Point.x = (rand() % 12000*World_Size);
+            Blocks[i].Point.y = 627;
             Blocks[i].Animation.Picture = &AllImage.FallingTree;
             };
 
@@ -75,8 +75,8 @@ void CreateBlocks (BlockType Blocks [], AllImageType AllImage)
             {
             Blocks[i].Health = 100;
             Blocks[i].Number = BT_Rock;
-            Blocks[i].x = (rand() % 6000*World_Size)*2;
-            Blocks[i].y = 577;
+            Blocks[i].Point.x = (rand() % 6000*World_Size)*2;
+            Blocks[i].Point.y = 577;
             Blocks[i].Animation.Picture = &AllImage.Rock;
             };
 
@@ -85,8 +85,8 @@ void CreateBlocks (BlockType Blocks [], AllImageType AllImage)
             {
             Blocks[i].Health = 100;
             Blocks[i].Number = BT_SmallStone;
-            Blocks[i].x = (rand() % 12000*World_Size);
-            Blocks[i].y = 658;
+            Blocks[i].Point.x = (rand() % 12000*World_Size);
+            Blocks[i].Point.y = 662;
             Blocks[i].Animation.Picture = &AllImage.Stone;
             };
 
@@ -95,8 +95,8 @@ void CreateBlocks (BlockType Blocks [], AllImageType AllImage)
             {
             Blocks[i].Health = 6;
             Blocks[i].Number = BT_BonFire;
-            Blocks[i].x = rand() % 11000*World_Size;
-            Blocks[i].y = 633;
+            Blocks[i].Point.x = rand() % 11000*World_Size;
+            Blocks[i].Point.y = 633;
             Blocks[i].Animation.Picture = &AllImage.BonFire;
             };
 
@@ -104,18 +104,18 @@ void CreateBlocks (BlockType Blocks [], AllImageType AllImage)
             {
             Blocks[i].Health = 6;
             Blocks[i].Number = BT_Dirt;
-            Blocks[i].x = -140;
-            Blocks[i].y = 700;
-            Blocks[i].Animation.Picture = &AllImage.Bridge;
+            Blocks[i].Point.x = 700;
+            Blocks[i].Point.y = 310;
+            Blocks[i].Animation.Picture = &AllImage.Fence;
             };
 
         if (i == 110*World_Size + 2)
             {
             Blocks[i].Health = 6;
             Blocks[i].Number = BT_Dirt;
-            Blocks[i].x = 11400*World_Size;
-            Blocks[i].y = 700;
-            Blocks[i].Animation.Picture = &AllImage.Bridge;
+            Blocks[i].Point.x = 11400*World_Size - 700;
+            Blocks[i].Point.y = 310;
+            Blocks[i].Animation.Picture = &AllImage.Fence;
             };
 
         if (i > 110*World_Size + 2)
@@ -123,7 +123,7 @@ void CreateBlocks (BlockType Blocks [], AllImageType AllImage)
             Blocks[i].Health = 0;
             };
 
-        x += 1;
+        X += 1;
 
         i += 1;
         };
@@ -160,7 +160,7 @@ void DrawLevelBlocks (BlockType ManyBlocks[], CamType* Camera, AllImageType AllI
     {
     int i = 0;
 
-    while (ManyBlocks[i].x != -1 && ManyBlocks[i].y != -1)
+    while (ManyBlocks[i].Point.x != -1 && ManyBlocks[i].Point.y != -1)
         {
         ManyBlocks [i].DrawBlock (Camera, AllImage);
 
@@ -172,7 +172,7 @@ void CallLevelPhysic (BlockType ManyBlocks[], ManType* Man, CamType* Camera, int
     {
     int i = 0;
 
-    while (ManyBlocks[i].x != -1 && ManyBlocks[i].y != -1)
+    while (ManyBlocks[i].Point.x != -1 && ManyBlocks[i].Point.y != -1)
         {
         if (ManyBlocks[i].Health > 0)
             Man->BlockCollision (&ManyBlocks [i], Camera, AllImage);

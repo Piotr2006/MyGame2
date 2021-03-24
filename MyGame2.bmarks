@@ -1,119 +1,106 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <BrowseTracker_layout_file>
 	<ActiveTarget name="Debug" />
-	<File name="BaseType.h" open="1" top="0" tabpos="11">
-		<Cursor position="0" topLine="0" />
+	<File name="ImageFunctions.cpp" open="1" top="0" tabpos="25">
+		<Cursor position="3464" topLine="16" />
+		<BrowseMarks positions="1546,10289,10365" />
+		<Book_Marks positions="" />
+	</File>
+	<File name="BlockType.cpp" open="1" top="0" tabpos="9">
+		<Cursor position="2699" topLine="8" />
+		<BrowseMarks positions="590" />
+		<Book_Marks positions="" />
+	</File>
+	<File name="ButtonType.cpp" open="1" top="0" tabpos="8">
+		<Cursor position="668" topLine="0" />
+	</File>
+	<File name="Graphycs.cpp" open="1" top="0" tabpos="4">
+		<Cursor position="1670" topLine="30" />
+	</File>
+	<File name="ImageFunctions.h" open="0" top="0" tabpos="4">
+		<Cursor position="524" topLine="0" />
+	</File>
+	<File name="ImageType.h" open="1" top="0" tabpos="19">
+		<Cursor position="241" topLine="0" />
+	</File>
+	<File name="Levels.cpp" open="1" top="0" tabpos="7">
+		<Cursor position="6281" topLine="12" />
+		<BrowseMarks positions="146892" />
+	</File>
+	<File name="AnimationType.cpp" open="1" top="0" tabpos="16">
+		<Cursor position="193" topLine="0" />
+	</File>
+	<File name="InvType.h" open="1" top="0" tabpos="11">
+		<Cursor position="84" topLine="1" />
+	</File>
+	<File name="BaseType.cpp" open="1" top="0" tabpos="21">
+		<Cursor position="306" topLine="0" />
+	</File>
+	<File name="Main.cpp" open="1" top="1" tabpos="1">
+		<Cursor position="216" topLine="9" />
 		<BrowseMarks positions="" />
 		<Book_Marks positions="" />
 	</File>
-	<File name="Enums.h" open="1" top="0" tabpos="8">
-		<Cursor position="167" topLine="8" />
+	<File name="BaseType.h" open="1" top="0" tabpos="20">
+		<Cursor position="64" topLine="0" />
+	</File>
+	<File name="ManType.cpp" open="1" top="0" tabpos="2">
+		<Cursor position="14023" topLine="114" />
+		<BrowseMarks positions="4347,11494,11819,26387,27110,35243" />
+		<Book_Marks positions="54975" />
+	</File>
+	<File name="ButtonType.h" open="0" top="0" tabpos="13">
+		<Cursor position="408" topLine="0" />
+	</File>
+	<File name="Levels.h" open="1" top="0" tabpos="22">
+		<Cursor position="557" topLine="0" />
+	</File>
+	<File name="PointType.h" open="1" top="0" tabpos="23">
+		<Cursor position="44" topLine="0" />
+	</File>
+	<File name="ManType.h" open="1" top="0" tabpos="10">
+		<Cursor position="80" topLine="0" />
+		<BrowseMarks positions="587" />
+	</File>
+	<File name="MouseType.h" open="0" top="0" tabpos="19">
+		<Cursor position="131" topLine="0" />
+	</File>
+	<File name="SmallHelpFunctions.cpp" open="1" top="0" tabpos="3">
+		<Cursor position="2114" topLine="0" />
+		<BrowseMarks positions="2426" />
+	</File>
+	<File name="BlockType.h" open="1" top="0" tabpos="14">
+		<Cursor position="42" topLine="0" />
+	</File>
+	<File name="SmallHelpFunctions.h" open="1" top="0" tabpos="15">
+		<Cursor position="347" topLine="0" />
+	</File>
+	<File name="Graphycs.h" open="1" top="0" tabpos="5">
+		<Cursor position="42" topLine="0" />
+	</File>
+	<File name="HelpSystem.h" open="1" top="0" tabpos="12">
+		<Cursor position="63" topLine="0" />
+	</File>
+	<File name="AllImageType.h" open="1" top="0" tabpos="17">
+		<Cursor position="1135" topLine="0" />
 		<BrowseMarks positions="" />
 		<Book_Marks positions="" />
 	</File>
 	<File name="CamType.h" open="0" top="0" tabpos="14">
 		<Cursor position="103" topLine="0" />
 	</File>
-	<File name="Graphycs.cpp" open="1" top="0" tabpos="4">
-		<Cursor position="1344" topLine="28" />
-		<BrowseMarks positions="" />
-		<Book_Marks positions="" />
+	<File name="AnimationType.h" open="1" top="0" tabpos="18">
+		<Cursor position="237" topLine="0" />
 	</File>
-	<File name="BlockType.h" open="1" top="0" tabpos="15">
-		<Cursor position="248" topLine="0" />
+	<File name="CamType.cpp" open="1" top="0" tabpos="24">
+		<Cursor position="1023" topLine="1" />
 	</File>
-	<File name="ButtonType.h" open="0" top="0" tabpos="13">
-		<Cursor position="408" topLine="0" />
+	<File name="Enums.h" open="1" top="0" tabpos="6">
+		<Cursor position="260" topLine="0" />
+		<BrowseMarks positions="2290" />
 	</File>
-	<File name="AnimationType.cpp" open="1" top="0" tabpos="17">
-		<Cursor position="0" topLine="0" />
-		<BrowseMarks positions="" />
-		<Book_Marks positions="" />
-	</File>
-	<File name="HelpSystem.h" open="1" top="0" tabpos="13">
-		<Cursor position="63" topLine="0" />
-	</File>
-	<File name="ButtonType.cpp" open="1" top="0" tabpos="9">
-		<Cursor position="668" topLine="0" />
-	</File>
-	<File name="HelpSystem.cpp" open="1" top="0" tabpos="14">
-		<Cursor position="1270" topLine="0" />
-		<BrowseMarks positions="88" />
-	</File>
-	<File name="Graphycs.h" open="1" top="0" tabpos="5">
-		<Cursor position="346" topLine="0" />
-		<BrowseMarks positions="" />
-		<Book_Marks positions="" />
-	</File>
-	<File name="ImageFunctions.h" open="0" top="0" tabpos="4">
-		<Cursor position="524" topLine="0" />
-	</File>
-	<File name="ImageFunctions.cpp" open="1" top="0" tabpos="3">
-		<Cursor position="5821" topLine="15" />
-		<BrowseMarks positions="10285,10402" />
-	</File>
-	<File name="ImageType.h" open="1" top="0" tabpos="16">
-		<Cursor position="87" topLine="0" />
-		<BrowseMarks positions="" />
-		<Book_Marks positions="" />
-	</File>
-	<File name="InvType.h" open="1" top="0" tabpos="12">
-		<Cursor position="378" topLine="0" />
-	</File>
-	<File name="MouseType.h" open="0" top="0" tabpos="19">
-		<Cursor position="131" topLine="0" />
-	</File>
-	<File name="Main.cpp" open="1" top="1" tabpos="1">
-		<Cursor position="629" topLine="16" />
-		<BrowseMarks positions="" />
-		<Book_Marks positions="" />
-	</File>
-	<File name="Levels.h" open="1" top="0" tabpos="3">
-		<Cursor position="249" topLine="0" />
-		<BrowseMarks positions="" />
-		<Book_Marks positions="" />
-	</File>
-	<File name="ManType.cpp" open="1" top="0" tabpos="2">
-		<Cursor position="15652" topLine="464" />
-		<BrowseMarks positions="3751,17871,51111" />
-		<Book_Marks positions="" />
-	</File>
-	<File name="AnimationType.h" open="1" top="0" tabpos="10">
-		<Cursor position="0" topLine="0" />
-		<BrowseMarks positions="" />
-		<Book_Marks positions="" />
-	</File>
-	<File name="ManType.h" open="1" top="0" tabpos="11">
-		<Cursor position="277" topLine="0" />
-		<BrowseMarks positions="" />
-		<Book_Marks positions="" />
-	</File>
-	<File name="BaseType.cpp" open="1" top="0" tabpos="21">
-		<Cursor position="0" topLine="0" />
-		<BrowseMarks positions="" />
-		<Book_Marks positions="" />
-	</File>
-	<File name="BlockType.cpp" open="1" top="0" tabpos="10">
-		<Cursor position="5032" topLine="3" />
-		<BrowseMarks positions="" />
-		<Book_Marks positions="" />
-	</File>
-	<File name="Levels.cpp" open="1" top="0" tabpos="7">
-		<Cursor position="138489" topLine="29" />
-		<BrowseMarks positions="143308" />
-		<Book_Marks positions="" />
-	</File>
-	<File name="SmallHelpFunctions.h" open="1" top="0" tabpos="16">
-		<Cursor position="647" topLine="0" />
-		<BrowseMarks positions="" />
-		<Book_Marks positions="" />
-	</File>
-	<File name="SmallHelpFunctions.cpp" open="1" top="0" tabpos="6">
-		<Cursor position="2073" topLine="0" />
-		<BrowseMarks positions="" />
-		<Book_Marks positions="" />
-	</File>
-	<File name="AllImageType.h" open="1" top="0" tabpos="18">
-		<Cursor position="1135" topLine="0" />
+	<File name="HelpSystem.cpp" open="1" top="0" tabpos="13">
+		<Cursor position="1731" topLine="0" />
+		<BrowseMarks positions="96" />
 	</File>
 </BrowseTracker_layout_file>

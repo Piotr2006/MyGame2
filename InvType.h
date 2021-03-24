@@ -3,6 +3,7 @@
 
 struct InvType
     {
+    int SelectedType;
     int CraftNumber;
     int MainSlot;
     int MainNumber;

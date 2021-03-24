@@ -1,4 +1,5 @@
 #include "TXLib.h"
+#include "PointType.h"
 
 void GRSetColor (COLORREF color, int Wide);
 
@@ -34,7 +35,7 @@ int GRGetExtentY (HDC Image);
 
 void GRSetAlign ();
 void GRSelectFont (char Name [], int Size);
-void GRTextOut (int x, int y, char Str []);
+void GRTextOut (PointType Point, char Str []);
 
 void GRPlaySound (const char  Name[]);
 

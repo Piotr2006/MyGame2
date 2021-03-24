@@ -26,7 +26,7 @@ void LoadAllImages (AllImageType* AllImages)
 
     LoadGameImage (&AllImages->Box,           "Images/WoodBoxAnimation.bmp",       4, 3, TX_BLACK, &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->Man,           "Images/RedManAnimation.bmp",        3, 6, TX_WHITE, &Procent, Number_of_Images);
+    LoadGameImage (&AllImages->Man,           "Images/RedManAnimation.bmp",        2,10, TX_WHITE, &Procent, Number_of_Images);
 
     LoadGameImage (&AllImages->Stairs,        "Images/Stairs.bmp",                 4, 3, TX_BLACK, &Procent, Number_of_Images);
 
@@ -54,7 +54,7 @@ void LoadAllImages (AllImageType* AllImages)
 
     LoadGameImage (&AllImages->Water,         "Images/Water2.bmp",                 1, 1, TX_BLACK, &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->Villager,      "Images/Villager.bmp",               3, 2, TX_WHITE, &Procent, Number_of_Images);
+    LoadGameImage (&AllImages->Villager,      "Images/Forester.bmp",               3, 2, TX_WHITE, &Procent, Number_of_Images);
 
     LoadGameImage (&AllImages->SaySign,       "Images/SaySign.bmp",                1, 6, TX_BLACK, &Procent, Number_of_Images);
 
@@ -90,7 +90,7 @@ void LoadAllImages (AllImageType* AllImages)
 
     LoadGameImage (&AllImages->Bear,          "Images/Bear.bmp",                   1, 2, TX_WHITE, &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->Ghost,         "Images/Ghost.bmp",                  1, 2, TX_WHITE, &Procent, Number_of_Images);
+    LoadGameImage (&AllImages->Ghost,         "Images/Ghost.bmp",                  2, 2, TX_WHITE, &Procent, Number_of_Images);
 
     LoadGameImage (&AllImages->Plus,          "Images/Plus.bmp",                   1, 2, TX_WHITE, &Procent, Number_of_Images);
 
@@ -131,6 +131,8 @@ void LoadAllImages (AllImageType* AllImages)
     LoadGameImage (&AllImages->Rope,          "Images/Rope.bmp",                   1, 2, TX_BLACK, &Procent, Number_of_Images);
 
     LoadGameImage (&AllImages->CraftImage,    "Images/CraftImage.bmp",             1, 1, TX_WHITE, &Procent, Number_of_Images);
+
+    LoadGameImage (&AllImages->Fence,         "Images/BigFence.bmp",               1, 1, TX_WHITE, &Procent, Number_of_Images);
     };
 
 
@@ -182,10 +184,12 @@ void DrawLoading (int Procents)
 
     sprintf (str, "Loading: %d%%", Procents);
 
+    PointType LoadingPoint = {Loading_TextX, Loading_TextY};
+
     GRSetAlign ();
     GRSetColor (TX_BLACK, 1);
     GRSelectFont ("Comic Sans MS", Loading_TextSize);
-    GRTextOut (Loading_TextX, Loading_TextY, str);
+    GRTextOut (LoadingPoint, str);
     };
 
 void LoadGameImage (ImageType* Image, const char* Picture, int xMaxFrame, int yMaxFrame, COLORREF color,

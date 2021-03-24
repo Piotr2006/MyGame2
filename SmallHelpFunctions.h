@@ -12,13 +12,13 @@ struct BlockType;
 
 // int Collision (BlockType* Block, ManType* Man);
 
-int ModuleDistance (int x1, int y1, int x2, int y2, int Distance);
+int ModuleDistance (PointType Point1, PointType Point2, int Distance);
 
 int Distance (int a, int b, int Distance);
 
 void DrawHealth (int Health, CamType* Camera, AllImageType AllImage);
 
-void Text (int x, int y, int Size, int Number, char Name []);
+void Text (PointType Point, int Size, int Number, char Name []);
 
 void HelpSystem ();
 

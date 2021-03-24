@@ -4,6 +4,13 @@
 const int NameSize = 50;
 const int World_Size = 10;   // !!! Не делать больше 10-ти !!!
 
+enum SelectedInvTypes
+    {
+    ST_Weapon    = 0,
+    ST_Resourses = 1,
+    ST_Food      = 2
+    };
+
 enum InventoryNumbers
     {
     IT_Axe        = 0,
@@ -55,14 +62,15 @@ enum BlockNumbers
 
 enum ManKinds
     {
-    MT_Main = 0,
+    MT_Main   = 0,
     MT_Seller = 1,
     MT_Bandit = 2,
-    MT_Bear = 3,
-    MT_Fish = 5,
+    MT_Bear   = 3,
+    MT_Fish   = 5,
     MT_Spider = 6,
-    MT_Wolf  = 7,
-    MT_Boat = 10
+    MT_Wolf   = 7,
+    MT_Ghost  = 8,
+    MT_Boat   = 10
     };
 
 enum
@@ -101,13 +109,13 @@ enum Man
     {
     Man_x = 4000,
     Man_y = -100,
-    Man_Health = 20,
+    Man_Health = 50,
     Man_Temperature = 36,
     Man_FastSpeed = 20,
     Man_SlowSpeed = 7,
     Man_DrawingX = 0,
     Man_DrawingY = -48,
-    Man_MaxHealth = 20,
+    Man_MaxHealth = 50,
     Man_MaxTemperature = 90,
     Man_LeftSide = 1,
     Man_RightSide = 2,

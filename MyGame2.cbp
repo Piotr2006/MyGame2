@@ -59,6 +59,7 @@
 		<Unit filename="ManType.h" />
 		<Unit filename="MouseType.cpp" />
 		<Unit filename="MouseType.h" />
+		<Unit filename="PointType.h" />
 		<Unit filename="SmallHelpFunctions.cpp" />
 		<Unit filename="SmallHelpFunctions.h" />
 		<Extensions>

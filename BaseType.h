@@ -1,15 +1,14 @@
 #ifndef BASETYPE_H
 #define BASETYPE_H
 
-
+#include "PointType.h"
 #include "AnimationType.h"
 
 struct BaseType
     {
-    BaseType (double x, double y, double Health, AnimationType Animation);
+    BaseType (PointType Point, double Health, AnimationType Animation);
 
-    double x;
-    double y;
+    PointType Point;
 
     double SizeX;
     double SizeY;

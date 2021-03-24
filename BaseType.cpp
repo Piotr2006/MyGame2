@@ -1,9 +1,8 @@
 #include "BaseType.h"
 #include "SmallHelpFunctions.h"
 
-BaseType :: BaseType (double _x, double _y, double _Health, AnimationType _Animation) :
-    x (_x),
-    y (_y),
+BaseType :: BaseType (PointType _Point, double _Health, AnimationType _Animation) :
+    Point (_Point),
     SizeX (_Animation.GetFrameSizeX ()),
     SizeY (_Animation.GetFrameSizeY ()),
     Health (_Health),

@@ -1,4 +1,3 @@
-
 #ifndef ALLIMAGETYPE_H
 #define ALLIMAGETYPE_H
 
@@ -70,6 +69,7 @@ struct AllImageType
     ImageType Spider;
     ImageType Rope;
     ImageType CraftImage;
+    ImageType Fence;
     };
 
 #endif
