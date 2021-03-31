@@ -86,17 +86,17 @@ void GRSetAlign ()
     txSetTextAlign ();
     };
 
-void GRSelectFont (char Name [], int Size)
+void GRSelectFont (const char Name [], int Size)
     {
     txSelectFont (Name, Size);
     };
 
-void GRTextOut (PointType Point, char Str [])
+void GRTextOut (PointType Point, const char Str [])
     {
     txTextOut (Point.x, Point.y, Str);
     };
 
-void GRPlaySound (const char  Name[])
+void GRPlaySound (const char Name[])
     {
     txPlaySound (Name);
     };

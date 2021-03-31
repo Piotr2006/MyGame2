@@ -2,7 +2,7 @@
 #define ENUMS_H
 
 const int NameSize = 50;
-const int World_Size = 10;   // !!! Не делать больше 10-ти !!!
+const int World_Size = 5;   // !!! Не делать больше 10-ти !!!
 
 enum SelectedInvTypes
     {
@@ -52,7 +52,11 @@ enum BlockNumbers
     BT_Water      = 12,
     BT_FallingTree = 13,
     BT_SmallStone = 14,
+    BT_Floor      = 15,
+    BT_Dynamite   = 16,
+    BT_Case       = 17,
     BT_Berries    = 21,
+    BT_Wall       = 22,
     BT_Air        = 50,
     BT_House      = 51,
     BT_Snow       = 52,
@@ -75,7 +79,7 @@ enum ManKinds
 
 enum
     {
-    Number_of_Images = 24
+    Number_of_Images = 100
     };
 
 enum
@@ -108,7 +112,7 @@ enum Inv
 enum Man
     {
     Man_x = 4000,
-    Man_y = -100,
+    Man_y = 500,
     Man_Health = 50,
     Man_Temperature = 36,
     Man_FastSpeed = 20,
@@ -141,6 +145,7 @@ enum Man
     House_Position = 3,
     OutSide_Position = 4,
     Boat_Position = 5,
+    Ghost_Position = 6,
 
     // Damage
 
@@ -217,7 +222,7 @@ enum
     Loading_TextX = 750,
     Loading_TextY = 400,
 
-    Loading_Sleep = 20
+    Loading_Sleep = 10
     };
 
 enum Screen

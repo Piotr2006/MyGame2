@@ -1,10 +1,8 @@
 #include "CamType.h"
 
-CamType :: CamType (double _x, double _y, double _vX, double _vY, int _Timer) :
-    x (_x),
-    y (_y),
-    vX (_vX),
-    vY (_vY),
+CamType :: CamType (PointType _Point, PointType _Speed, int _Timer) :
+    Point (_Point),
+    Speed (_Speed),
     Timer (_Timer)
     {};
 
@@ -37,22 +35,22 @@ void CamType :: MoveCamera (BaseType* Object)
     else
         txClearConsole (); */
 
-    int xDst = fabs (fabs (x - Object->Point.x) - Screen_xCenter);
-    int yDst = fabs (fabs (y - Object->Point.y) - Screen_yCenter);
+    int xDst = fabs (fabs (Point.x - Object->Point.x) - Screen_xCenter);
+    int yDst = fabs (fabs (Point.y - Object->Point.y) - Screen_yCenter);
 
     /* if (xDst >= 500)
-        vX = 0.02;
+        Speed.x = 0.02;
     else
-        vX = 0;
+        Speed.x = 0;
 
     if (yDst >= 100)
-        vY = 0.05;
+        Speed.y = 0.05;
     else
-        vY = 0; */
+        Speed.y = 0; */
 
-    // $i printf ("Object->x = %lf, Object->y = %lf, Cam->x = %lf, Cam->y = %lf, xDst = %d, yDst = %d, vX = %lf, vY = %lf \n", Object->x, Object->y, x, y, xDst, yDst, vX, vY); $d
+    // $i printf ("Object->x = %lf, Object->y = %lf, Cam->x = %lf, Cam->y = %lf, xDst = %d, yDst = %d, Speed.x = %lf, Speed.y = %lf \n", Object->x, Object->y, x, y, xDst, yDst, Speed.x, Speed.y); $d
 
-    x -= (x + Screen_xCenter - Object->Point.x) * vX;
-    y -= (y + Screen_yCenter - Object->Point.y) * vY;
+    Point.x -= (Point.x + Screen_xCenter - Object->Point.x) * Speed.x;
+    Point.y -= (Point.y + Screen_yCenter - Object->Point.y) * Speed.y;
     };
 

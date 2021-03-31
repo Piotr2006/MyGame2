@@ -34,9 +34,9 @@ int GRGetExtentX (HDC Image);
 int GRGetExtentY (HDC Image);
 
 void GRSetAlign ();
-void GRSelectFont (char Name [], int Size);
-void GRTextOut (PointType Point, char Str []);
+void GRSelectFont (const char Name [], int Size);
+void GRTextOut (PointType Point, const char Str []);
 
-void GRPlaySound (const char  Name[]);
+void GRPlaySound (const char Name[]);
 
 HDC GRLoadImage (const char* Picture);

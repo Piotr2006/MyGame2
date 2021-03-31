@@ -1,15 +1,13 @@
 #include "ManType.h"
 
 ManType :: ManType (PointType _Point, double _Health, AnimationType _Animation,
-                    double _vX, double _vY, double _aX, double _aY,
+                    PointType _Speed, PointType _Acceleration,
                     int _Side, int _Position, double _Temperature,
                     int _NumberCoin, int _xWeapon, int _ArmSpeed, char _Name [50], int _Kind, InvType _Inventory,
-                    int _Time, int _Days, double _ArrowX, double _ArrowY, int _ArrowVX, int _ArrowVY, HelpType _HelpSystem) :
+                    int _Time, int _Days, double _ArrowX, double _ArrowY, int _ArrowVX, int _ArroeVY, HelpType _HelpSystem) :
     BaseType (_Point, _Health, _Animation),
-    vX (_vX),
-    vY (_vY),
-    aX (_aX),                                                  // & - Àìïåðñàíä(áåðåò àäðåñ ïåðåìåííîé)
-    aY (_aY),                                                  // & - Амперсанд (берет адрес переменной)
+    Speed (_Speed),
+    Acceleration (_Acceleration),                                                  // & - Амперсанд (берет адрес переменной)
     Side (_Side),
     Position (_Position),
     Temperature (_Temperature),
@@ -23,7 +21,7 @@ ManType :: ManType (PointType _Point, double _Health, AnimationType _Animation,
     ArrowX (_ArrowX),
     ArrowY (_ArrowY),
     ArrowVX (_ArrowVX),
-    ArrowVY (_ArrowVY),
+    ArroeVY (_ArroeVY),
     HelpSystem (_HelpSystem)
     {
     /* for (int i = 0; i < NameSize; i += 1)
@@ -36,7 +34,7 @@ ManType :: ManType (PointType _Point, double _Health, AnimationType _Animation,
     StrCpy (Name, _Name);
     };
 
-void CreateVillagers (ManType Villagers [], AllImageType AllImage)
+void CreateVillagers (ManType Villagers [], const AllImageType& AllImage)
     {
     int i = 0;
 
@@ -108,13 +106,13 @@ void CreateVillagers (ManType Villagers [], AllImageType AllImage)
         if (i >= 20 &&
             i < 22)
             {
-            Villagers[i].Health = 20;
+            Villagers[i].Health = 2000;
             Villagers[i].Kind = MT_Bear;
             Villagers[i].Inventory.Rope = 10;
             Villagers[i].Inventory.Stone = MT_Ghost;
             Villagers[i].Inventory.Arrow = 0;
             Villagers[i].Point.x = rand() % 100;
-            Villagers[i].Inventory.Arrow = -300;
+            Villagers[i].Inventory.Arrow = -200;
             Villagers[i].Point.y = 400;
             Villagers[i].Animation.Picture = &AllImage.Ghost;
             };
@@ -131,24 +129,22 @@ void CreateVillagers (ManType Villagers [], AllImageType AllImage)
     };
 
 
-void DrawSlot (int Block, int x, int y, ImageType Picture, int TextX, int TextY)
+void DrawSlot (int Block, int x, int y, const ImageType& Picture, int TextX, int TextY)
     {
     int null = 0;
     int one = 1;
-
-    CamType FixedCamera = {0, 0, 0, 0, 0};
 
     PointType TextPoint = {TextX + 38, TextY + 114};
 
     if (Block > 0)
         {
-        DrawTransparentImage (&Picture, x, y + 70, &null, &one, &FixedCamera);
+        DrawTransparentImage (Picture, x, y + 70, &null, &one);
 
         Text (TextPoint, 20, Block, "");
         };
     };
 
-void ManType :: Crafting (AllImageType AllImage, CamType* FixedCamera)
+void ManType :: Crafting (const AllImageType& AllImage)
     {
     PointType Mouse = {txMouseX(), txMouseY()};
 
@@ -171,9 +167,9 @@ void ManType :: Crafting (AllImageType AllImage, CamType* FixedCamera)
 
     if (Inventory.CraftNumber == 0)
         {
-        DrawTransparentImage (&AllImage.CommonSlot, 15, 300, &null, &null, FixedCamera);
+        DrawTransparentImage (AllImage.CommonSlot, 15, 300, &null, &null);
 
-        DrawTransparentImage (&AllImage.CraftImage, 10, 295, &null, &null, FixedCamera);
+        DrawTransparentImage (AllImage.CraftImage, 10, 295, &null, &null);
 
         if (ModuleDistance (CraftPoint, Mouse, 50) == true &&
             GetAsyncKeyState (VK_LBUTTON))
@@ -185,19 +181,19 @@ void ManType :: Crafting (AllImageType AllImage, CamType* FixedCamera)
 
     if (Inventory.CraftNumber > 0)
     {
-    DrawTransparentImage (&AllImage.CommonSlot, 15, 300, &null, &null, FixedCamera);
+    DrawTransparentImage (AllImage.CommonSlot, 15, 300, &null, &null);
 
-    DrawTransparentImage (&AllImage.Plus, 75, 304, &null, &null, FixedCamera);
+    DrawTransparentImage (AllImage.Plus, 75, 304, &null, &null);
 
-    DrawTransparentImage (&AllImage.CommonSlot, 127, 300, &null, &null, FixedCamera);
+    DrawTransparentImage (AllImage.CommonSlot, 127, 300, &null, &null);
 
-    DrawTransparentImage (&AllImage.Plus, 187, 304, &null, &one, FixedCamera);
+    DrawTransparentImage (AllImage.Plus, 187, 304, &null, &one);
 
-    DrawTransparentImage (&AllImage.Slot, 239, 300, &null, &null, FixedCamera);
+    DrawTransparentImage (AllImage.Slot, 239, 300, &null, &null);
 
-    DrawTransparentImage (&AllImage.Pause, 309, 300, &null, &four, FixedCamera);
+    DrawTransparentImage (AllImage.Pause, 309, 300, &null, &four);
 
-    DrawTransparentImage (&AllImage.Pause, 309, 370, &null, &five, FixedCamera);
+    DrawTransparentImage (AllImage.Pause, 309, 370, &null, &five);
 
     if (ModuleDistance (CraftRight, Mouse, 50) == true &&
         GetAsyncKeyState (VK_LBUTTON) &&
@@ -223,9 +219,9 @@ void ManType :: Crafting (AllImageType AllImage, CamType* FixedCamera)
         {
         DrawSlot (2, 15, 230, AllImage.Wood, 15, 230);
 
-        DrawTransparentImage (&AllImage.Stone, 127, 300, &null, &one, FixedCamera);
+        DrawTransparentImage (AllImage.Stone, 127, 300, &null, &one);
 
-        DrawTransparentImage (&AllImage.Axe, 240, 292, &null, &one, FixedCamera);
+        DrawTransparentImage (AllImage.Axe, 240, 292, &null, &one);
 
         if (Inventory.Wood >= 2 &&
             Inventory.Stone >= 1 &&
@@ -245,11 +241,11 @@ void ManType :: Crafting (AllImageType AllImage, CamType* FixedCamera)
 
     if (Inventory.CraftNumber == 2)
         {
-        DrawTransparentImage (&AllImage.Wood, 127, 300, &null, &one, FixedCamera);
+        DrawTransparentImage (AllImage.Wood, 127, 300, &null, &one);
 
-        DrawTransparentImage (&AllImage.Stone, 15, 300, &null, &one, FixedCamera);
+        DrawTransparentImage (AllImage.Stone, 15, 300, &null, &one);
 
-        DrawTransparentImage (&AllImage.Knife, 240, 312, &null, &one, FixedCamera);
+        DrawTransparentImage (AllImage.Knife, 240, 312, &null, &one);
 
         if (Inventory.Wood >= 1 &&
             Inventory.Stone >= 1 &&
@@ -269,9 +265,9 @@ void ManType :: Crafting (AllImageType AllImage, CamType* FixedCamera)
         {
         DrawSlot (2, 15, 230, AllImage.Wood, 15, 230);
 
-        DrawTransparentImage (&AllImage.Rope, 127, 300, &null, &one, FixedCamera);
+        DrawTransparentImage (AllImage.Rope, 127, 300, &null, &one);
 
-        DrawTransparentImage (&AllImage.FishingSmall, 240, 292, &null, &one, FixedCamera);
+        DrawTransparentImage (AllImage.FishingSmall, 240, 292, &null, &one);
 
         if (Inventory.Wood >= 2 &&
             Inventory.Rope >= 1 &&
@@ -293,7 +289,7 @@ void ManType :: Crafting (AllImageType AllImage, CamType* FixedCamera)
 
         DrawSlot (2, 15, 230, AllImage.Rope, 15, 230);
 
-        DrawTransparentImage (&AllImage.Bow, 240, 292, &null, &one, FixedCamera);
+        DrawTransparentImage (AllImage.Bow, 240, 292, &null, &one);
 
         if (Inventory.Wood >= 2 &&
             Inventory.Rope >= 2 &&
@@ -311,9 +307,9 @@ void ManType :: Crafting (AllImageType AllImage, CamType* FixedCamera)
 
     if (Inventory.CraftNumber == 5)
         {
-        DrawTransparentImage (&AllImage.Wood, 127, 300, &null, &one, FixedCamera);
+        DrawTransparentImage (AllImage.Wood, 127, 300, &null, &one);
 
-        DrawTransparentImage (&AllImage.Stone, 15, 300, &null, &one, FixedCamera);
+        DrawTransparentImage (AllImage.Stone, 15, 300, &null, &one);
 
         DrawSlot (3, 233, 254, AllImage.Arrow, 240, 230);
 
@@ -334,7 +330,7 @@ void ManType :: Crafting (AllImageType AllImage, CamType* FixedCamera)
 
     };
 
-void ManType :: DrawInventory (CamType* Camera, CamType* FixedCamera, AllImageType AllImage)
+void ManType :: DrawInventory (CamType* Camera, const AllImageType& AllImage)
     {
     int null = 0;
 
@@ -355,24 +351,24 @@ void ManType :: DrawInventory (CamType* Camera, CamType* FixedCamera, AllImageTy
     PointType Fish        = {450, 585};
     PointType CookedFish  = {450, 655};
 
-    DrawTransparentImage (&AllImage.CommonSlot, 325, 700, &null, &null, FixedCamera);
-    DrawTransparentImage (&AllImage.CommonSlot, 375, 700, &null, &null, FixedCamera);
-    DrawTransparentImage (&AllImage.CommonSlot, 425, 700, &null, &null, FixedCamera);
+    DrawTransparentImage (AllImage.CommonSlot, 325, 700, &null, &null);
+    DrawTransparentImage (AllImage.CommonSlot, 375, 700, &null, &null);
+    DrawTransparentImage (AllImage.CommonSlot, 425, 700, &null, &null);
 
     if (Inventory.SelectedType == ST_Weapon)
         {
-        DrawTransparentImage (&AllImage.CommonSlot, 325, 490, &null, &null, FixedCamera);
-        DrawTransparentImage (&AllImage.CommonSlot, 325, 560, &null, &null, FixedCamera);
-        DrawTransparentImage (&AllImage.CommonSlot, 325, 630, &null, &null, FixedCamera);
+        DrawTransparentImage (AllImage.CommonSlot, 325, 490, &null, &null);
+        DrawTransparentImage (AllImage.CommonSlot, 325, 560, &null, &null);
+        DrawTransparentImage (AllImage.CommonSlot, 325, 630, &null, &null);
 
         if (Inventory.MainNumber == IT_Axe)
-            DrawTransparentImage (&AllImage.Slot, 324, 489, &null, &null, FixedCamera);
+            DrawTransparentImage (AllImage.Slot, 324, 489, &null, &null);
 
         if (Inventory.MainNumber == IT_Bow)
-            DrawTransparentImage (&AllImage.Slot, 324, 559, &null, &null, FixedCamera);
+            DrawTransparentImage (AllImage.Slot, 324, 559, &null, &null);
 
         if (Inventory.MainNumber == IT_Arrow)
-            DrawTransparentImage (&AllImage.Slot, 324, 629, &null, &null, FixedCamera);
+            DrawTransparentImage (AllImage.Slot, 324, 629, &null, &null);
 
         DrawSlot (Inventory.Axe, 325, 410, AllImage.Axe, 325, 420);
 
@@ -395,18 +391,18 @@ void ManType :: DrawInventory (CamType* Camera, CamType* FixedCamera, AllImageTy
 
     if (Inventory.SelectedType == ST_Resourses)
         {
-        DrawTransparentImage (&AllImage.CommonSlot, 375, 490, &null, &null, FixedCamera);
-        DrawTransparentImage (&AllImage.CommonSlot, 375, 560, &null, &null, FixedCamera);
-        DrawTransparentImage (&AllImage.CommonSlot, 375, 630, &null, &null, FixedCamera);
+        DrawTransparentImage (AllImage.CommonSlot, 375, 490, &null, &null);
+        DrawTransparentImage (AllImage.CommonSlot, 375, 560, &null, &null);
+        DrawTransparentImage (AllImage.CommonSlot, 375, 630, &null, &null);
 
         if (Inventory.MainNumber == IT_Wood)
-            DrawTransparentImage (&AllImage.Slot, 374, 489, &null, &null, FixedCamera);
+            DrawTransparentImage (AllImage.Slot, 374, 489, &null, &null);
 
         if (Inventory.MainNumber == IT_Stone)
-            DrawTransparentImage (&AllImage.Slot, 374, 559, &null, &null, FixedCamera);
+            DrawTransparentImage (AllImage.Slot, 374, 559, &null, &null);
 
         if (Inventory.MainNumber == IT_Coin)
-            DrawTransparentImage (&AllImage.Slot, 374, 629, &null, &null, FixedCamera);
+            DrawTransparentImage (AllImage.Slot, 374, 629, &null, &null);
 
         DrawSlot (Inventory.Wood,  375, 420, AllImage.Wood, 375, 420);
 
@@ -429,18 +425,18 @@ void ManType :: DrawInventory (CamType* Camera, CamType* FixedCamera, AllImageTy
 
     if (Inventory.SelectedType == ST_Food)
         {
-        DrawTransparentImage (&AllImage.CommonSlot, 425, 490, &null, &null, FixedCamera);
-        DrawTransparentImage (&AllImage.CommonSlot, 425, 560, &null, &null, FixedCamera);
-        DrawTransparentImage (&AllImage.CommonSlot, 425, 630, &null, &null, FixedCamera);
+        DrawTransparentImage (AllImage.CommonSlot, 425, 490, &null, &null);
+        DrawTransparentImage (AllImage.CommonSlot, 425, 560, &null, &null);
+        DrawTransparentImage (AllImage.CommonSlot, 425, 630, &null, &null);
 
         if (Inventory.MainNumber == IT_Apple)
-            DrawTransparentImage (&AllImage.Slot, 424, 489, &null, &null, FixedCamera);
+            DrawTransparentImage (AllImage.Slot, 424, 489, &null, &null);
 
         if (Inventory.MainNumber == IT_Fish)
-            DrawTransparentImage (&AllImage.Slot, 424, 559, &null, &null, FixedCamera);
+            DrawTransparentImage (AllImage.Slot, 424, 559, &null, &null);
 
         if (Inventory.MainNumber == IT_CookedFish)
-            DrawTransparentImage (&AllImage.Slot, 424, 629, &null, &null, FixedCamera);
+            DrawTransparentImage (AllImage.Slot, 424, 629, &null, &null);
 
         DrawSlot (Inventory.Apple,  425, 420, AllImage.Apple, 375, 420);
 
@@ -595,70 +591,70 @@ void ManType :: DrawInventory (CamType* Camera, CamType* FixedCamera, AllImageTy
         yFrame= 2;
 
     // ManArm
-    if (yFrame <= 1 &&
+    /* if (yFrame <= 1 &&
         Inventory.MainNumber == IT_Knife &&
         Inventory.Knife > 0)
-        DrawTransparentImage (&AllImage.Knife, Point.x + 33 - yFrame*20 + xWeapon*X,
+        DrawTransparentImage (AllImage.Knife, Point.x + 33 - yFrame*20 + xWeapon*X,
                               Point.y + 112, &null, &yFrame, Camera);
 
     if (yFrame <= 1 &&
         Inventory.MainNumber == IT_Apple &&
         Inventory.Apple > 0)
-        DrawTransparentImage (&AllImage.Apple, Point.x + 33 - yFrame*20 + xWeapon*X,
+        DrawTransparentImage (AllImage.Apple, Point.x + 33 - yFrame*20 + xWeapon*X,
                               Point.y + 112, &null, &yFrame, Camera);
 
     if (yFrame <= 1 &&
         Inventory.MainNumber == IT_Arrow &&
         Inventory.Arrow > 0)
-        DrawTransparentImage (&AllImage.Arrow, Point.x + 33 - yFrame*20 + xWeapon*X,
+        DrawTransparentImage (AllImage.Arrow, Point.x + 33 - yFrame*20 + xWeapon*X,
                               Point.y + 112, &null, &yFrame, Camera);
 
     if (yFrame <= 1 &&
         Inventory.MainNumber == IT_Stone &&
         Inventory.Stone > 0)
-        DrawTransparentImage (&AllImage.Stone, Point.x + 33 - yFrame*20 + xWeapon*X,
+        DrawTransparentImage (AllImage.Stone, Point.x + 33 - yFrame*20 + xWeapon*X,
                               Point.y + 112, &null, &yFrame, Camera);
 
     if (yFrame <= 1 &&
         Inventory.MainNumber == IT_Wood &&
         Inventory.Wood > 0)
-        DrawTransparentImage (&AllImage.Wood, Point.x + 33 - yFrame*20 + xWeapon*X,
+        DrawTransparentImage (AllImage.Wood, Point.x + 33 - yFrame*20 + xWeapon*X,
                               Point.y + 70, &null, &yFrame, Camera);
 
     if (yFrame <= 1 &&
         Inventory.MainNumber == IT_Coin &&
         Inventory.Coin > 0)
-        DrawTransparentImage (&AllImage.Coin, Point.x + 33 - yFrame*20 + xWeapon*X,
+        DrawTransparentImage (AllImage.Coin, Point.x + 33 - yFrame*20 + xWeapon*X,
                               Point.y + 70, &null, &yFrame, Camera);
 
     if (yFrame <= 1 &&
         Inventory.MainNumber == IT_Axe &&
         Inventory.Axe > 0)
-        DrawTransparentImage (&AllImage.Axe, Point.x - 26 + yFrame*98,
+        DrawTransparentImage (AllImage.Axe, Point.x - 26 + yFrame*98,
                               Point.y + 60, &xWeapon, &yFrame, Camera);
 
     if (yFrame <= 1 &&
         Inventory.MainNumber == IT_Fishing &&
         Inventory.Fishing > 0)
-        DrawTransparentImage (&AllImage.FishingBig, Point.x - 23 + yFrame*101,
+        DrawTransparentImage (AllImage.FishingBig, Point.x - 23 + yFrame*101,
                               Point.y + 60, &null, &yFrame, Camera);
 
     if (yFrame <= 1 &&
         Inventory.MainNumber == IT_Fish &&
         Inventory.Fish > 0)
-        DrawTransparentImage (&AllImage.Fish, Point.x - 23 + yFrame*101,
+        DrawTransparentImage (AllImage.Fish, Point.x - 23 + yFrame*101,
                               Point.y + 110, &null, &yFrame, Camera);
 
     if (yFrame <= 1 &&
         Inventory.MainNumber == IT_CookedFish &&
         Inventory.CookedFish > 0)
-        DrawTransparentImage (&AllImage.CookedFish, Point.x - 23 + yFrame*101,
+        DrawTransparentImage (AllImage.CookedFish, Point.x - 23 + yFrame*101,
                               Point.y + 110, &null, &yFrame, Camera);
 
     if (yFrame <= 1 &&
         Inventory.MainNumber == IT_Rope &&
         Inventory.Rope > 0)
-        DrawTransparentImage (&AllImage.Rope, Point.x - 23 + yFrame*101,
+        DrawTransparentImage (AllImage.Rope, Point.x - 23 + yFrame*101,
                               Point.y + 110, &null, &yFrame, Camera);
 
     // Bow
@@ -667,18 +663,18 @@ void ManType :: DrawInventory (CamType* Camera, CamType* FixedCamera, AllImageTy
         Inventory.MainNumber == IT_Bow &&
         Inventory.Bow > 0)
         {
-        DrawTransparentImage (&AllImage.Bow, Point.x + yFrame*72,
+        DrawTransparentImage (AllImage.Bow, Point.x + yFrame*72,
                               Point.y + 70, &xWeapon, &yFrame, Camera);
 
         if (Inventory.Arrow > 0)
-            DrawTransparentImage (&AllImage.Arrow, -11 + 61*yFrame + ArrowX,
+            DrawTransparentImage (AllImage.Arrow, -11 + 61*yFrame + ArrowX,
                                   ArrowY + 100, &null, &yFrame, Camera);
         };
 
-    // printf ("y = %d \n", ArrowY);
+    // printf ("y = %d \n", ArrowY); */
     };
 
-void ManType :: DrawMan (CamType* Camera, AllImageType AllImage)
+void ManType :: DrawMan (CamType* Camera, const AllImageType& AllImage)
     {
     /* if (GetAsyncKeyState (VK_LBUTTON) &&
         ArmSpeed > 0)
@@ -693,7 +689,6 @@ void ManType :: DrawMan (CamType* Camera, AllImageType AllImage)
     else
         ArmSpeed = 2; */
 
-
     IncreaseAnimationNumber (&Animation);
 
     int nine = 9;
@@ -701,36 +696,50 @@ void ManType :: DrawMan (CamType* Camera, AllImageType AllImage)
 
     if (Kind == 0)
     {
-    if (vX > 0)
+    if (Animation.yFrame <= 3)
         {
-        if (vY <= 0)
-            Animation.yFrame = 7;
-        else
-            {
-            if (vX < Man_SlowSpeed)
-                Animation.yFrame = 5;
-            else
-                Animation.yFrame = 6;
-            };
+        if (Speed.x > 0)
+            Animation.yFrame = 6;
 
-        if (Health <= 0)
-            Animation.yFrame = 8;
+        if (Speed.y < 0)
+            Animation.yFrame = 3;
+
+        if (GetAsyncKeyState (VK_LBUTTON) &&
+            Speed.y >= 0)
+            Animation.yFrame = 1;
+
+        if (Speed.y >= 0 &&
+            !GetAsyncKeyState (VK_LBUTTON) &&
+            Speed.x < 0)
+            Animation.yFrame = 2;
+
+        if (Speed.x == 0 &&
+            Speed.y >= 0 &&
+            !GetAsyncKeyState (VK_LBUTTON))
+            Animation.yFrame = 0;
         };
 
-    if (vX < 0)
+    if (Animation.yFrame >= 4)
         {
-        if (vY <= 0)
+        if (Speed.x < 0)
             Animation.yFrame = 2;
-        else
-            {
-            if (vX > -Man_SlowSpeed)
-                Animation.yFrame = 0;
-            else
-                Animation.yFrame = 1;
-            };
 
-        if (Health <= 0)
-            Animation.yFrame = 3;
+        if (Speed.y < 0)
+            Animation.yFrame = 7;
+
+        if (GetAsyncKeyState (VK_LBUTTON) &&
+            Speed.y >= 0)
+            Animation.yFrame = 5;
+
+        if (Speed.y >= 0 &&
+            !GetAsyncKeyState (VK_LBUTTON) &&
+            Speed.x > 0)
+            Animation.yFrame = 6;
+
+       if (Speed.x == 0 &&
+           Speed.y >= 0 &&
+           !GetAsyncKeyState (VK_LBUTTON))
+           Animation.yFrame = 4;
         };
     };
 
@@ -739,12 +748,12 @@ void ManType :: DrawMan (CamType* Camera, AllImageType AllImage)
     if (Kind != 0 &&
         Kind != MT_Boat)
         {
-        if (vX < 0)
+        if (Speed.x < 0)
             {
             Animation.yFrame = 0;
             };
 
-        if (vX > 0)
+        if (Speed.x > 0)
             {
             Animation.yFrame = 1;
             };
@@ -754,25 +763,34 @@ void ManType :: DrawMan (CamType* Camera, AllImageType AllImage)
     //        Animation.yFrame = 2;
 
     if (Kind == 0)
-        DrawTransparentImage (Animation.Picture, Point.x, Point.y, &Animation.xFrame, &Animation.yFrame, Camera);
+        DrawTransparentImage (*Animation.Picture, Point.x, Point.y, &Animation.xFrame, &Animation.yFrame, Camera);
 
     if (Kind != 0 &&
         Health > 0)
-        DrawTransparentImage (Animation.Picture, Point.x, Point.y, &Animation.xFrame, &Animation.yFrame, Camera);
+        DrawTransparentImage (*Animation.Picture, Point.x, Point.y, &Animation.xFrame, &Animation.yFrame, Camera);
 
     int null = 0;
 
-    PointType TextPoint = {Point.x - Camera->x + 50, Point.y - Camera->y};
+    // PointType TextPoint = {Point.x - Camera->Point.x + 50, Point.y - Camera->Point.y};
 
     if (Health > 0)
         {
         GRSetColor (TX_WHITE, 5);
         GRSelectFont ("Comic Sans MS", 30);
-        GRTextOut (TextPoint, Name);
+        GRTextOut (Point - Camera->Point + PointType {50, 0}, Name);
+        };
+
+    if (Position == Ghost_Position)
+        {
+        if (Animation.yFrame <= 4)
+            Animation.yFrame = 4;
+
+        if (Animation.yFrame >= 5)
+            Animation.yFrame = 9;
         };
     };
 
-void ManType :: ManFire (CamType* Camera, AllImageType AllImage)
+void ManType :: ManFire (CamType* Camera, const AllImageType& AllImage)
     {
     /* BlockType Fire1 {0 - GRGetExtentX (Animation.Picture->Picture)/2 + Man_Fire1X, 0 - GRGetExtentY (Animation.Picture->Picture)/2 + Man_Fire1Y, 4, {rand() % 4, 0, &AllImage.Fire}, 0};
     BlockType Fire2 {0 - GRGetExtentX (Animation.Picture->Picture)/2 + Man_Fire2X, 0 - GRGetExtentY (Animation.Picture->Picture)/2 + Man_Fire2Y, 4, {rand() % 4, 0, &AllImage.Fire}, 0};
@@ -788,7 +806,7 @@ void ManType :: ManFire (CamType* Camera, AllImageType AllImage)
         }; */
     };
 
-void ManType :: ManHealth (CamType* Camera, AllImageType AllImage)
+void ManType :: ManHealth (CamType* Camera, const AllImageType& AllImage)
     {
     int null = 0;
 
@@ -799,9 +817,9 @@ void ManType :: ManHealth (CamType* Camera, AllImageType AllImage)
 
     if (Health == 0)
         {
-        DrawTransparentImage (&AllImage.GameOver, Point.x, Point.y, &null, &null, Camera);
-        vX = 0;
-        vY = 0;
+        DrawTransparentImage (AllImage.GameOver, Point.x, Point.y, &null, &null, Camera);
+        Speed.x = 0;
+        Speed.y = 0;
         Position = 0;
         // Inventory.Wood = 0;
         // ArmPicture = &AllImage.BlackSpace;
@@ -812,10 +830,10 @@ void ManType :: ManHealth (CamType* Camera, AllImageType AllImage)
         Health = Man_MaxHealth;
 
     //if (Position = Fixed_Position)
-    //    vX *= 0.1;
+    //    Speed.x *= 0.1;
     };
 
-void ManType :: VillagerMind (ManType* Man, CamType* Camera, AllImageType AllImage)
+void ManType :: VillagerMind (ManType* Man, CamType* Camera, const AllImageType& AllImage)
     {
     PointType Mouse = {txMouseX(), txMouseY()};
 
@@ -842,28 +860,28 @@ void ManType :: VillagerMind (ManType* Man, CamType* Camera, AllImageType AllIma
 
     if (Man->Point.x - Point.x > 100 &&
             Man->Point.x - Point.x < 200)
-            vX = Inventory.Rope;
+            Speed.x = Inventory.Rope;
 
     if (Man->Point.x - Point.x < 100 &&
             Man->Point.x - Point.x > 0)
             {
-            vX = 0;
+            Speed.x = 0;
             };
 
     if (Point.x - Man->Point.x > 100 &&
             Point.x - Man->Point.x < 200)
-            vX = -Inventory.Rope;
+            Speed.x = -Inventory.Rope;
 
     if (Point.x - Man->Point.x < 100 &&
             Point.x - Man->Point.x > 0)
             {
-            vX = 0;
+            Speed.x = 0;
             };
 
     if (fabs (Man->Point.x - Point.x) <= 200)
         {
 
-        PointType TradePoint = {Point.x + 50 - Camera->x, Point.y + 84 - Camera->y};
+        PointType TradePoint = {Point.x + 50 - Camera->Point.x, Point.y + 84 - Camera->Point.y};
 
         if (Inventory.Wood == 0)
             {
@@ -874,22 +892,22 @@ void ManType :: VillagerMind (ManType* Man, CamType* Camera, AllImageType AllIma
 
         if (Inventory.Wood == 1)
             {
-            DrawTransparentImage (&AllImage.CommonSlot, Point.x - 20, Point.y - 60, &null, &null, Camera);
+            DrawTransparentImage (AllImage.CommonSlot, Point.x - 20, Point.y - 60, &null, &null, Camera);
 
-            DrawTransparentImage (&AllImage.CommonSlot, Point.x + 50, Point.y - 60, &null, &null, Camera);
+            DrawTransparentImage (AllImage.CommonSlot, Point.x + 50, Point.y - 60, &null, &null, Camera);
 
-            DrawTransparentImage (&AllImage.CommonSlot, Point.x + 120, Point.y - 60, &null, &null, Camera);
+            DrawTransparentImage (AllImage.CommonSlot, Point.x + 120, Point.y - 60, &null, &null, Camera);
 
-            PointType Slot1 = {Point.x + 5 - Camera->x, Point.y - 35 - Camera->y};
-            PointType Slot2 = {Point.x + 75 - Camera->x, Point.y - 35 - Camera->y};
-            PointType Slot3 = {Point.x + 145 - Camera->x, Point.y - 35 - Camera->y};
+            PointType Slot1 = {Point.x + 5 - Camera->Point.x, Point.y - 35 - Camera->Point.y};
+            PointType Slot2 = {Point.x + 75 - Camera->Point.x, Point.y - 35 - Camera->Point.y};
+            PointType Slot3 = {Point.x + 145 - Camera->Point.x, Point.y - 35 - Camera->Point.y};
 
             // slot1
             if (Inventory.Axe == 0)
                 {
-                DrawTransparentImage (&AllImage.Coin, Point.x - 10, Point.y - 53, &null, &null, Camera);
+                DrawTransparentImage (AllImage.Coin, Point.x - 10, Point.y - 53, &null, &null, Camera);
 
-                DrawTransparentImage (&AllImage.SmallItems, Point.x + 10, Point.y - 33, &null, &null, Camera);
+                DrawTransparentImage (AllImage.SmallItems, Point.x + 10, Point.y - 33, &null, &null, Camera);
                 // Text (x + 8, y - 16, 20, one, "");
 
                 if (ModuleDistance (Slot1, Mouse, 50) == true &&
@@ -904,9 +922,9 @@ void ManType :: VillagerMind (ManType* Man, CamType* Camera, AllImageType AllIma
 
             if (Inventory.Axe == 1)
                 {
-                DrawTransparentImage (&AllImage.Axe, Point.x - 20, Point.y - 60, &null, &null, Camera);
+                DrawTransparentImage (AllImage.Axe, Point.x - 20, Point.y - 60, &null, &null, Camera);
 
-                DrawTransparentImage (&AllImage.SmallItems, Point.x + 10, Point.y - 33, &null, &two, Camera);
+                DrawTransparentImage (AllImage.SmallItems, Point.x + 10, Point.y - 33, &null, &two, Camera);
                 // Text (x + 8, y - 16, 20, one, "");
                 if (ModuleDistance (Slot1, Mouse, 50) == true &&
                     GetAsyncKeyState (VK_LBUTTON) &&
@@ -920,9 +938,9 @@ void ManType :: VillagerMind (ManType* Man, CamType* Camera, AllImageType AllIma
 
             if (Inventory.Axe == 2)
                 {
-                DrawTransparentImage (&AllImage.Apple, Point.x - 20, Point.y - 60, &null, &null, Camera);
+                DrawTransparentImage (AllImage.Apple, Point.x - 20, Point.y - 60, &null, &null, Camera);
 
-                DrawTransparentImage (&AllImage.SmallItems, Point.x + 10, Point.y - 33, &null, &one, Camera);
+                DrawTransparentImage (AllImage.SmallItems, Point.x + 10, Point.y - 33, &null, &one, Camera);
                 // Text (x + 8, y - 16, 20, one, "");
                 if (ModuleDistance (Slot1, Mouse, 50) == true &&
                     GetAsyncKeyState (VK_LBUTTON) &&
@@ -937,9 +955,9 @@ void ManType :: VillagerMind (ManType* Man, CamType* Camera, AllImageType AllIma
             // slot2
             if (Inventory.Knife == 0)
                 {
-                DrawTransparentImage (&AllImage.Knife, Point.x + 50, Point.y - 40, &null, &null, Camera);
+                DrawTransparentImage (AllImage.Knife, Point.x + 50, Point.y - 40, &null, &null, Camera);
 
-                DrawTransparentImage (&AllImage.SmallItems, Point.x + 80, Point.y - 33, &null, &null, Camera);
+                DrawTransparentImage (AllImage.SmallItems, Point.x + 80, Point.y - 33, &null, &null, Camera);
 
                 if (ModuleDistance (Slot2, Mouse, 50) == true &&
                     GetAsyncKeyState (VK_LBUTTON) &&
@@ -953,9 +971,9 @@ void ManType :: VillagerMind (ManType* Man, CamType* Camera, AllImageType AllIma
 
             if (Inventory.Knife == 1)
                 {
-                DrawTransparentImage (&AllImage.Stone, Point.x + 50, Point.y - 60, &null, &null, Camera);
+                DrawTransparentImage (AllImage.Stone, Point.x + 50, Point.y - 60, &null, &null, Camera);
 
-                DrawTransparentImage (&AllImage.SmallItems, Point.x + 80, Point.y - 33, &null, &one, Camera);
+                DrawTransparentImage (AllImage.SmallItems, Point.x + 80, Point.y - 33, &null, &one, Camera);
 
                 if (ModuleDistance (Slot2, Mouse, 50) == true &&
                     GetAsyncKeyState (VK_LBUTTON) &&
@@ -969,9 +987,9 @@ void ManType :: VillagerMind (ManType* Man, CamType* Camera, AllImageType AllIma
 
             if (Inventory.Knife == 2)
                 {
-                DrawTransparentImage (&AllImage.Arrow, Point.x + 50, Point.y - 46, &null, &null, Camera);
+                DrawTransparentImage (AllImage.Arrow, Point.x + 50, Point.y - 46, &null, &null, Camera);
 
-                DrawTransparentImage (&AllImage.SmallItems, Point.x + 80, Point.y - 33, &null, &two, Camera);
+                DrawTransparentImage (AllImage.SmallItems, Point.x + 80, Point.y - 33, &null, &two, Camera);
 
                 if (ModuleDistance (Slot2, Mouse, 50) == true &&
                     GetAsyncKeyState (VK_LBUTTON) &&
@@ -986,9 +1004,9 @@ void ManType :: VillagerMind (ManType* Man, CamType* Camera, AllImageType AllIma
             // slot3
             if (Inventory.Bow == 0)
                 {
-                DrawTransparentImage (&AllImage.Bow, Point.x + 120, Point.y - 70, &null, &null, Camera);
+                DrawTransparentImage (AllImage.Bow, Point.x + 120, Point.y - 70, &null, &null, Camera);
 
-                DrawTransparentImage (&AllImage.SmallItems, Point.x + 150, Point.y - 33, &null, &one, Camera);
+                DrawTransparentImage (AllImage.SmallItems, Point.x + 150, Point.y - 33, &null, &one, Camera);
 
                 if (ModuleDistance (Slot3, Mouse, 50) == true &&
                     GetAsyncKeyState (VK_LBUTTON) &&
@@ -1002,9 +1020,9 @@ void ManType :: VillagerMind (ManType* Man, CamType* Camera, AllImageType AllIma
 
             if (Inventory.Bow == 1)
                 {
-                DrawTransparentImage (&AllImage.Apple, Point.x + 120, Point.y - 60, &null, &null, Camera);
+                DrawTransparentImage (AllImage.Apple, Point.x + 120, Point.y - 60, &null, &null, Camera);
 
-                DrawTransparentImage (&AllImage.SmallItems, Point.x + 150, Point.y - 33, &null, &two, Camera);
+                DrawTransparentImage (AllImage.SmallItems, Point.x + 150, Point.y - 33, &null, &two, Camera);
 
                 if (ModuleDistance (Slot3, Mouse, 50) == true &&
                     GetAsyncKeyState (VK_LBUTTON) &&
@@ -1018,9 +1036,9 @@ void ManType :: VillagerMind (ManType* Man, CamType* Camera, AllImageType AllIma
 
             if (Inventory.Bow == 2)
                 {
-                DrawTransparentImage (&AllImage.Coin, Point.x + 130, Point.y - 53, &null, &null, Camera);
+                DrawTransparentImage (AllImage.Coin, Point.x + 130, Point.y - 53, &null, &null, Camera);
 
-                DrawTransparentImage (&AllImage.SmallItems, Point.x + 150, Point.y - 33, &null, &null, Camera);
+                DrawTransparentImage (AllImage.SmallItems, Point.x + 150, Point.y - 33, &null, &null, Camera);
 
                 if (ModuleDistance (Slot3, Mouse, 50) == true &&
                     GetAsyncKeyState (VK_LBUTTON) &&
@@ -1042,25 +1060,25 @@ void ManType :: VillagerMind (ManType* Man, CamType* Camera, AllImageType AllIma
     /* if (Inventory.Knife == 2)
         {
         if (Side == 1)
-        DrawTransparentImage (&AllImage.Gun, x + 74, y + 93, &null, &null, Camera);
+        DrawTransparentImage (AllImage.Gun, x + 74, y + 93, &null, &null, Camera);
         if (Side == 0)
-        DrawTransparentImage (&AllImage.Gun, x + 44, y + 93, &one, &null, Camera);
+        DrawTransparentImage (AllImage.Gun, x + 44, y + 93, &one, &null, Camera);
         Position += 1;
         if (Position >= 10)
             {
             int x = x + 74;
-            int vX = 0;
+            int Speed.x = 0;
             if (x > Man->Point.x)
-                vX = -10;
+                Speed.x = -10;
             if (x < Man->Point.x)
-                vX = 10;
-            x += vX;
+                Speed.x = 10;
+            x += Speed.x;
             int null = 0;
             int one = 1;
-            if (vX > 0)
-                DrawTransparentImage (&AllImage.Gun, x, y + 88, &null, &one, Camera);
-            if (vX < 0)
-                DrawTransparentImage (&AllImage.Gun, x, y + 88, &one, &one, Camera);
+            if (Speed.x > 0)
+                DrawTransparentImage (AllImage.Gun, x, y + 88, &null, &one, Camera);
+            if (Speed.x < 0)
+                DrawTransparentImage (AllImage.Gun, x, y + 88, &one, &one, Camera);
             if (ModuleDistance (Man->Point.x + 47, Man->Point.y + 84, x,  y + 88, 30) == true)
                 {
                 Position = 0;
@@ -1070,7 +1088,7 @@ void ManType :: VillagerMind (ManType* Man, CamType* Camera, AllImageType AllIma
 
     // Fighting:
 
-    PointType FightPoint = {Point.x + 50 - Camera->x, Point.y + 84 - Camera->y};
+    PointType FightPoint = {Point.x + 50 - Camera->Point.x, Point.y + 84 - Camera->Point.y};
     // PointType Mouse = {txMouseX(), txMouseY()};
 
     if (ModuleDistance (FightPoint, Mouse, 50) == true &&
@@ -1080,13 +1098,13 @@ void ManType :: VillagerMind (ManType* Man, CamType* Camera, AllImageType AllIma
         Man->ArmSpeed >= 10)
         {
         Health -= 2;
-        vY = -15;
+        Speed.y = -15;
         if (Point.x > Man->Point.x)
-            vX = 50;
+            Speed.x = 50;
         if (Point.x < Man->Point.x)
-            vX = -50;
+            Speed.x = -50;
         // Animation.xFrame += 1;
-        // txCircle (Man->Point.x - Camera->x, Man->Point.y - Camera->y, 50);
+        // txCircle (Man->Point.x - Camera->Point.x, Man->Point.y - Camera->Point.y, 50);
         Man->ArmSpeed = 0;
         Time = 1;
         };
@@ -1108,15 +1126,15 @@ void ManType :: VillagerMind (ManType* Man, CamType* Camera, AllImageType AllIma
         Man->ArrowVX != 0 &&
         Man->Inventory.Arrow > 0)
         {
-        vY = -15;
+        Speed.y = -15;
         if (Point.x > Man->Point.x)
-            vX = 50;
+            Speed.x = 50;
         if (Point.x < Man->Point.x)
-            vX = -50;
+            Speed.x = -50;
         Health -= 5;
         Man->Inventory.Arrow -= 1;
         Man->ArrowVX = 0;
-        Man->ArrowVY = 0;
+        Man->ArroeVY = 0;
         Man->ArrowX  = Man->Point.x;
         Man->ArrowY  = Man->Point.y;
         };
@@ -1135,40 +1153,41 @@ void ManType :: VillagerMind (ManType* Man, CamType* Camera, AllImageType AllIma
         {
         if (Man->Point.x - Point.x > 50 &&
             Man->Point.x - Point.x < 500)
-            vX = Inventory.Rope;
+            Speed.x = Inventory.Rope;
 
         if (Man->Point.x - Point.x < 50 &&
             Man->Point.x - Point.x > 0)
             {
-            vX = 0;
+            Speed.x = 0;
             };
 
         if (Point.x - Man->Point.x > 50 &&
             Point.x - Man->Point.x < 500)
-            vX = -Inventory.Rope;
+            Speed.x = -Inventory.Rope;
 
         if (Point.x - Man->Point.x < 50 &&
             Point.x - Man->Point.x > 0)
             {
-            vX = 0;
+            Speed.x = 0;
             };
 
         // Fighting
         ArmSpeed += 1;
 
         if (ArmSpeed >= 10 &&
-            vX == 0 &&
+            Speed.x == 0 &&
+            Inventory.Stone != MT_Ghost &&
             fabs (Man->Point.x + Man->SizeX/2 - Point.x - SizeX/2) <= SizeX/2 + Man->SizeX/2&&
             fabs (Man->Point.y + Man->SizeY/2 - Point.y - SizeY/2) <= SizeY/2 + Man->SizeY/2)
             {
             Man->Health -= 1;
-            Man->vY = -15;
+            Man->Speed.y = -15;
             if (Man->Point.x > Point.x)
-                Man->vX = 50;
+                Man->Speed.x = 50;
             if (Man->Point.x < Point.x)
-                Man->vX = -50;
+                Man->Speed.x = -50;
             // Man->Animation.xFrame += 1;
-            // txCircle (Man->Point.x - Camera->x, Man->Point.y - Camera->y, 50);
+            // txCircle (Man->Point.x - Camera->Point.x, Man->Point.y - Camera->Point.y, 50);
             ArmSpeed = 0;
             };
 
@@ -1179,34 +1198,34 @@ void ManType :: VillagerMind (ManType* Man, CamType* Camera, AllImageType AllIma
         Health > 0)
         {
         if (Man->Point.x > Point.x)
-            vX = 10;
+            Speed.x = 10;
 
         if (Man->Point.x < Point.x)
-            vX = -10;
+            Speed.x = -10;
 
         /* if (Animation.yFrame == 0 &&
-            vX == 0)
+            Speed.x == 0)
             Animation.yFrame = 2;
         if (Animation.yFrame == 1 &&
-            vX == 0)
+            Speed.x == 0)
             Animation.yFrame = 3; */
 
         if (fabs (Man->Point.x - Point.x) <= 200)
-            vX = 0;
+            Speed.x = 0;
 
         ArmSpeed += 1;
 
         ArrowX += ArrowVX;
-        ArrowY += ArrowVY;
+        ArrowY += ArroeVY;
 
         int null = 0;
 
-        DrawTransparentImage (&AllImage.Bullet, -11 + 61*Animation.yFrame + ArrowX,
+        DrawTransparentImage (AllImage.Bullet, -11 + 61*Animation.yFrame + ArrowX,
                               ArrowY + 60, &null, &Animation.yFrame, Camera);
 
         if (ArmSpeed >= 80)
             {
-            // ArrowVY = 5;
+            // ArroeVY = 5;
             ArrowX = Point.x;
             ArrowY = Point.y;
 
@@ -1223,11 +1242,11 @@ void ManType :: VillagerMind (ManType* Man, CamType* Camera, AllImageType AllIma
             fabs (ArrowY - Man->Point.y) <= 80)
             {
             Man->Health -= 1;
-            Man->vY = -15;
+            Man->Speed.y = -15;
             if (Point.x > Man->Point.x)
-                Man->vX = -50;
+                Man->Speed.x = -50;
             if (Point.x < Man->Point.x)
-                Man->vX = 50;
+                Man->Speed.x = 50;
             };
         };
 
@@ -1243,7 +1262,7 @@ void ManType :: VillagerMind (ManType* Man, CamType* Camera, AllImageType AllIma
         {
         Point.y = 687;
 
-        PointType BoatPoint = {Point.x + 130 - Camera->x, Point.y + 15 - Camera->y};
+        PointType BoatPoint = {Point.x + 130 - Camera->Point.x, Point.y + 15 - Camera->Point.y};
 
         if (ModuleDistance (BoatPoint, Mouse, 100) == true &&
             GetAsyncKeyState (VK_LBUTTON))
@@ -1257,15 +1276,15 @@ void ManType :: VillagerMind (ManType* Man, CamType* Camera, AllImageType AllIma
         {
         Man->Point.x = Point.x + 80;
         Man->Point.y = Point.y - 135;
-        Man->vX = 0;
-        Man->vY = 0;
+        Man->Speed.x = 0;
+        Man->Speed.y = 0;
 
         if (GetAsyncKeyState (VK_LEFT))
-            vX = -20;
+            Speed.x = -20;
 
         if (GetAsyncKeyState (VK_RIGHT) &&
             Point.x <= -300)
-            vX = 20;
+            Speed.x = 20;
 
         if (GetAsyncKeyState (VK_UP))
             Man->Position = Normal_Position;
@@ -1282,14 +1301,14 @@ void ManType :: VillagerMind (ManType* Man, CamType* Camera, AllImageType AllIma
             Man->Inventory.MainSlot > 0)
             {
             if (Man->Point.x + 55 > Point.x)
-                vX = 4;
+                Speed.x = 4;
             if (Man->Point.x + 55 < Point.x)
-                vX = -4;
+                Speed.x = -4;
 
             if (Point.y >= 720)
-                vY = -2;
+                Speed.y = -2;
             else
-                vY = 0;
+                Speed.y = 0;
 
             PointType Fish = {Point.x+25, Point.y+10};
             PointType FishingMan = {Man->Point.x + 55, Man->Point.y + 85};
@@ -1301,13 +1320,13 @@ void ManType :: VillagerMind (ManType* Man, CamType* Camera, AllImageType AllIma
                 };
             }
         else
-            vX = 4*(rand()%3 - 1);
+            Speed.x = 4*(rand()%3 - 1);
 
-        aY = 0;
+        Acceleration.y = 0;
 
         if (Man->Days >= 20 &&
             Man->Days < 30)
-            vX = 4*(rand()%3 - 1);
+            Speed.x = 4*(rand()%3 - 1);
         };
 
     if (Health <= 5 &&
@@ -1356,43 +1375,29 @@ void ManType :: VillagerMind (ManType* Man, CamType* Camera, AllImageType AllIma
         {
         ArmSpeed += 1;
 
-        ArrowX += ArrowVX;
-        ArrowY += ArrowVY;
-
-        if (fabs (Point.x + SizeX/2 - (Man->Point.x + Man->SizeX/2)) <= SizeX/2)
-        {
-
-        int null = 0;
-
-        if (ArmSpeed >= 10)
+        if (InBorders (70, ArmSpeed, 149) == true &&
+            fabs (Point.x + SizeX/2 - Man->Point.x - Man->SizeX/2) <= SizeX)
             {
-            DrawTransparentImage (&AllImage.Bullet, ArrowX,
-                              ArrowY, &null, &null, Camera);
+            // Health = 0;
+            Man->Position = Ghost_Position;
+            // Health += 1;
+            // ArmSpeed += 1;
+            };
 
-            ArrowVX = 0;
-            ArrowVY = 10;
+        if (InBorders (70, ArmSpeed, 149) == false &&
+            Man->Position == Ghost_Position)
+            Man->Position = Normal_Position;
 
-            // xWeapon = 1;
+        if (ArmSpeed == 150)
+            {
             ArmSpeed = 0;
+            // Health = Man_Health;
             };
 
-        if (fabs (ArrowX - Man->Point.x + Man->SizeX/2) <= 50 &&
-            fabs (ArrowY - Man->Point.y + Man->SizeY/2) <= 20)
+        if (Man->Position == Ghost_Position)
             {
-            Man->Health -= 2;
-            // Man->vY = -15;
-            if (Point.x > Man->Point.x)
-                Man->vX = -50;
-            if (Point.x < Man->Point.x)
-                Man->vX = 50;
-
-            ArrowVX = 0;
-            ArrowVY = 0;
-
-            ArrowX = Point.x + SizeX/2;
-            ArrowY = Point.y + SizeY/2;
+            Health += 1;
             };
-        };
         };
     };
 
@@ -1427,7 +1432,7 @@ void ManType :: ManTemperature ()
         Health -= 0.04;
     };
 
-void ManType :: ControlMan (MouseType Mouse, int* t)
+void ManType :: ControlMan (const MouseType& Mouse, int* t)
     {
     if (GetAsyncKeyState (VK_HOME))
         {
@@ -1441,31 +1446,33 @@ void ManType :: ControlMan (MouseType Mouse, int* t)
         Point.x = 11400*World_Size - 1000;
         };
 
-    if (GetAsyncKeyState (VK_RIGHT))
+    if (GetAsyncKeyState (VK_RIGHT) &&
+        Position != Ghost_Position)
         {
-        vX = Man_FastSpeed;
+        Speed.x = Man_FastSpeed;
         Side = Man_RightSide;
         };
 
-    if (GetAsyncKeyState (VK_LEFT))
+    if (GetAsyncKeyState (VK_LEFT) &&
+        Position != Ghost_Position)
         {
-        vX = -Man_FastSpeed;
+        Speed.x = -Man_FastSpeed;
         Side = Man_LeftSide;
         };
 
-    if (vX > 0)
+    if (Speed.x > 0)
         {
         if (GetAsyncKeyState (VK_SHIFT))
             {
-            vX = Man_SlowSpeed;
+            Speed.x = Man_SlowSpeed;
             };
         };
 
-    if (vX < 0)
+    if (Speed.x < 0)
         {
         if (GetAsyncKeyState (VK_SHIFT))
             {
-            vX = -Man_SlowSpeed;
+            Speed.x = -Man_SlowSpeed;
             };
         };
 
@@ -1536,7 +1543,7 @@ void ManType :: ControlMan (MouseType Mouse, int* t)
 
     // Bow
     ArrowX += ArrowVX;
-    ArrowY += ArrowVY;
+    ArrowY += ArroeVY;
 
     if (Inventory.MainNumber == 5 &&
         Inventory.MainSlot > 0)
@@ -1545,7 +1552,7 @@ void ManType :: ControlMan (MouseType Mouse, int* t)
                 {
                 Inventory.Arrow -= 1;
                 ArrowVX = 0;
-                ArrowVY = 0;
+                ArroeVY = 0;
                 ArrowX  = Point.x;
                 ArrowY  = Point.y;
                 };
@@ -1555,7 +1562,7 @@ void ManType :: ControlMan (MouseType Mouse, int* t)
                 Inventory.Arrow > 0)
                 {
                 ArrowVX = 100;
-                ArrowVY = 2;
+                ArroeVY = 2;
                 };
 
             if (Animation.yFrame == 0 &&
@@ -1563,7 +1570,7 @@ void ManType :: ControlMan (MouseType Mouse, int* t)
                 Inventory.Arrow > 0)
                 {
                 ArrowVX = -100;
-                ArrowVY = 8;
+                ArroeVY = 8;
                 };
 
             if (ArrowVX == 0)
@@ -1581,35 +1588,41 @@ void ManType :: ControlMan (MouseType Mouse, int* t)
 
 void ManType :: Physic ()
     {
+    /* if (Point.y + SizeY >= 2308 &&
+        Speed.y > 0)
+        Speed.y = 0; */
+
+    if (!GetAsyncKeyState (VK_LEFT) &&
+        !GetAsyncKeyState (VK_RIGHT))
+        Speed.x = 0;
+
     if (Point.x < 1000 &&
-        vX < 0)
-        vX = 0;
+        Speed.x < 0)
+        Speed.x = 0;
 
     if (Point.x > 11400*World_Size - 730 &&
-        vX > 0)
-        vX = 0;
+        Speed.x > 0)
+        Speed.x = 0;
 
-    Point.x += vX;
-    Point.y += vY;
+    Point += Speed;
 
-    vX += aX;
-    vY += aY;
+    Speed += Acceleration;
 
-    vX = vX*0.5;
+    Speed.x = Speed.x*0.5;
 
-    aY = Man_aY;
+    Acceleration.y = Man_aY;
 
-    if (vY > 50)
-        vY = 50;
+    if (Speed.y > 50)
+        Speed.y = 50;
 
-    if (vY < -50)
-        vY = -50;
+    if (Speed.y < -50)
+        Speed.y = -50;
 
-    if (vX > 50)
-        vX = 50;
+    if (Speed.x > 50)
+        Speed.x = 50;
 
-    if (vX < -50)
-        vX = -50;
+    if (Speed.x < -50)
+        Speed.x = -50;
 
     // Time;
     Time += 1;
@@ -1624,17 +1637,17 @@ void ManType :: Physic ()
         Days = 0;
 
     // Water
-    if (Point.y >= 620)
+    /* if (Point.y >= 620)
         Position = Water_Position;
     else
         if (Position == Water_Position)
-            Position = Normal_Position;
+            Position = Normal_Position; */
 
     if (Position == Water_Position &&
         Kind != MT_Boat &&
         Kind != MT_Fish)
         {
-        vY = -3;
+        Speed.y = -3;
         Health -= 0.01;
         };
 
@@ -1650,16 +1663,16 @@ void ManType :: Physic ()
         Point.x <= 190*11400*World_Size)
         {
         if (Point.y >= 700 - GRGetExtentY(Animation.Picture->Picture)/Animation.Picture->yMaxAnimationNumber + Inventory.Arrow &&
-            vY > 0)
+            Speed.y > 0)
             {
             // y = 500;
-            vY = 0;
+            Speed.y = 0;
             };
 
         if (Point.y >= 700 - GRGetExtentY(Animation.Picture->Picture)/Animation.Picture->yMaxAnimationNumber + Inventory.Arrow)
             {
             Point.y = 700 - GRGetExtentY(Animation.Picture->Picture)/Animation.Picture->yMaxAnimationNumber + Inventory.Arrow;
-            // vY = 0;
+            // Speed.y = 0;
             };
         };
 
@@ -1669,16 +1682,24 @@ void ManType :: Physic ()
         if (Position == Water_Position)
             Temperature -= 1;
         };
+
+    if (Position == Ghost_Position)
+        {
+        Health -= 0.5;
+        Speed.x = 0;
+        };
     };
 
 
 
-void ManType :: BlockInteraction (BlockType* Block, CamType* Camera, AllImageType AllImage)
+void ManType :: BlockInteraction (BlockType* Block, CamType* Camera, const AllImageType& AllImage)
     {
     int null = 0;
     int two = 2;
     int three = 3;
     int four = 4;
+
+    PointType Mouse = {txMouseX(), txMouseY()};
 
     // FallingTree
     if (Block->Number == BT_FallingTree)
@@ -1736,7 +1757,7 @@ void ManType :: BlockInteraction (BlockType* Block, CamType* Camera, AllImageTyp
         {
         if (Block->Health <= 3)
         {
-        Block->Animation.yFrame = 0;
+        Block->Animation.yFrame = 1;
         if (Temperature < 10 &&
             fabs (Block->Point.x - Point.x) <= 200)
         Temperature += 0.025;
@@ -1754,7 +1775,7 @@ void ManType :: BlockInteraction (BlockType* Block, CamType* Camera, AllImageTyp
         if (Block->Health > 6 &&
             fabs (Block->Point.x - Point.x) <= 200)
         {
-        Block->Animation.yFrame = 2;
+        Block->Animation.yFrame = 0;
         if (Temperature < 36.6)
         Temperature += 0.1;
         };
@@ -1780,7 +1801,7 @@ void ManType :: BlockInteraction (BlockType* Block, CamType* Camera, AllImageTyp
 
         if (Inventory.MainNumber == IT_Wood &&
             Inventory.Wood > 0 &&
-            // ModuleDistance (Block->x + 30 - Camera->x, Block->y + 30 - Camera->y, txMouseX(), txMouseY(), 100) == true &&
+            // ModuleDistance (Block->x + 30 - Camera->Point.x, Block->y + 30 - Camera->Point.y, txMouseX(), txMouseY(), 100) == true &&
             BlockCheckClick (Block, Camera) == true &&
             Block->Health <= 6 &&
             Block->Health > 0)
@@ -1810,7 +1831,7 @@ void ManType :: BlockInteraction (BlockType* Block, CamType* Camera, AllImageTyp
         };
 
     // Year
-    if (Block->Number == BT_Dirt)
+    /*if (Block->Number == BT_Dirt)
     {
     if (Days >= 0 &&
         Days < 10)
@@ -1855,7 +1876,7 @@ void ManType :: BlockInteraction (BlockType* Block, CamType* Camera, AllImageTyp
             Block->Animation.yFrame = 0;
         else
             Block->Animation.yFrame = 1;
-        };
+        }; */
 
     // House
     /* if (fabs (Block->Point.x + 150 - Point.x) <= Man->SizeX + 40 &&
@@ -1863,8 +1884,8 @@ void ManType :: BlockInteraction (BlockType* Block, CamType* Camera, AllImageTyp
         Position != House_Position &&
         Kind == 0)
         {
-        DrawTransparentImage (&AllImage.Pause, Block->Point.x + 180, Block->Point.y + 100, &null, &two, Camera);
-        if (ModuleDistance (Block->Point.x + 180 - Camera->x, Block->Point.y + 100 - Camera->y ,
+        DrawTransparentImage (AllImage.Pause, Block->Point.x + 180, Block->Point.y + 100, &null, &two, Camera);
+        if (ModuleDistance (Block->Point.x + 180 - Camera->Point.x, Block->Point.y + 100 - Camera->Point.y ,
                             txMouseX(), txMouseY(), 50) == true &&
             GetAsyncKeyState (VK_LBUTTON))
             Position = House_Position;
@@ -1875,19 +1896,19 @@ void ManType :: BlockInteraction (BlockType* Block, CamType* Camera, AllImageTyp
         {
         Block->Animation.yFrame = 1;
 
-        DrawTransparentImage (&AllImage.Pause, Block->x + 420, Block->y + 120, &null, &three, Camera);
-        if (ModuleDistance (Block->x + 420 - Camera->x, Block->y + 120 - Camera->y ,
+        DrawTransparentImage (AllImage.Pause, Block->x + 420, Block->y + 120, &null, &three, Camera);
+        if (ModuleDistance (Block->x + 420 - Camera->Point.x, Block->y + 120 - Camera->Point.y ,
                             txMouseX(), txMouseY(), 50) == true &&
             GetAsyncKeyState (VK_LBUTTON))
             Position = Normal_Position;
 
         if (x >= Block->x + 460 &&
-            vX > 0)
-            vX = 0;
+            Speed.x > 0)
+            Speed.x = 0;
 
         if (x <= Block->x + 80 &&
-            vX < 0)
-            vX = 0;
+            Speed.x < 0)
+            Speed.x = 0;
         };
 
     if (Block->Number == BT_House &&
@@ -1944,7 +1965,7 @@ void ManType :: BlockInteraction (BlockType* Block, CamType* Camera, AllImageTyp
             {
             ArmSpeed = 0;
             Block->Health -= 10;
-            Block->Animation.yFrame += 4;
+            // Block->Animation.yFrame += 4;
             };
 
         if (Block->Health <= 12 &&
@@ -1970,9 +1991,63 @@ void ManType :: BlockInteraction (BlockType* Block, CamType* Camera, AllImageTyp
             Block->Health = 100;
         };
 
+    // Dynamite
+    if (Block->Number == BT_Dynamite)
+        {
+        // AnimationType Explosion = {};
+
+        if (Block->Health > 0 &&
+            fabs (Point.x + SizeX/2 - Block->Point.x - Block->SizeX/2) <= 500 &&
+            BlockCheckClick (Block, Camera) == true)
+            Block->Health = 80;
+
+        if (Block->Health <= 80 &&
+            Block->Health > 0)
+            {
+            Block->Health -= 5;
+            Block->Animation.yFrame = 1;
+            };
+
+        int ExplosionFrame = -Block->Health;
+
+        if (Block->Health <= 0 &&
+            Block->Health > -6)
+            {
+            DrawTransparentImage (AllImage.Explosion, Block->Point.x - 315, Block->Point.y - 315, &ExplosionFrame, &null, Camera);
+
+            Block->Health -= 1;
+            };
+        };
+
+    // Case
+    if (Block->Number == BT_Case)
+        {
+        // PointType CenterPoint = {Block->Point.x + 45, Block->Point.y + 29};
+
+        if (BlockCheckClick (Block, Camera) == true &&
+            Inventory.CraftControlSpeed == 0 &&
+            Block->Animation.yFrame == 0)
+            {
+            Block->Animation.yFrame = 1;
+            };
+
+        if (Block->Animation.yFrame == 1 &&
+            BlockCheckClick (Block, Camera) == true)
+            {
+            if (Block->Health == IT_Apple)
+                {
+                DrawTransparentImage (AllImage.Apple, Block->Point.x + 65, Block->Point.y + 86, &null, &null, Camera);
+                if (BlockCheckClick (Block, Camera) == true)
+                    {
+                    Inventory.Apple += 1;
+                    Block->Health = 1;
+                    };
+                };
+            };
+        };
     };
 
-void ManType :: BlockCollision (BlockType* Block, CamType* Camera, AllImageType AllImage)
+void ManType :: BlockCollision (BlockType* Block, CamType* Camera, const AllImageType& AllImage)
     {
     if (Block->Number == BT_Coin)
         return;
@@ -1982,7 +2057,9 @@ void ManType :: BlockCollision (BlockType* Block, CamType* Camera, AllImageType 
 
     if (Block->Number != BT_Rock &&
         Block->Number != BT_FallingTree &&
-        Block->Number != BT_Dirt)
+        Block->Number != BT_Floor &&
+        Block->Number != BT_Dirt &&
+        Block->Number != BT_Dynamite)
         return;
 
     // Physic
@@ -1997,12 +2074,12 @@ void ManType :: BlockCollision (BlockType* Block, CamType* Camera, AllImageType 
             if (GetAsyncKeyState (VK_UP) &&
                 Kind == MT_Main)
                 {
-                vY = -Man_JumpSpeed;
+                Speed.y = -Man_JumpSpeed;
                 };
 
-            if (vY > 0)
+            if (Speed.y > 0)
                 {
-                vY = 0;
+                Speed.y = 0;
                 Point.y = Block->Point.y - SizeY;
                 };
             };
@@ -2015,19 +2092,19 @@ void ManType :: BlockCollision (BlockType* Block, CamType* Camera, AllImageType 
                 Block->Point.y < Point.y + SizeY)
                 {
                 if (Block->Point.x <= Point.x + SizeX &&
-                    vX > 0)
-                        vX = 0;
+                    Speed.x > 0)
+                        Speed.x = 0;
 
                 if (Block->Point.x + Block->SizeX >= Point.x &&
-                    vX < 0)
-                        vX = 0;
+                    Speed.x < 0)
+                        Speed.x = 0;
                 }; */
             };
     };
 
 //-----------------------------------------------------------------------------
 
-void DrawLevelPeople (ManType Villagers[], CamType* Camera, AllImageType AllImage)
+void DrawLevelPeople (ManType Villagers[], CamType* Camera, const AllImageType& AllImage)
     {
     int i = 0;
 
@@ -2039,7 +2116,7 @@ void DrawLevelPeople (ManType Villagers[], CamType* Camera, AllImageType AllImag
         };
     };
 
-void CallPeoplePhysic (ManType Villagers[], CamType* Camera, AllImageType AllImage, BlockType ManyBlocks [], ManType* Man)
+void CallPeoplePhysic (ManType Villagers[], CamType* Camera, const AllImageType& AllImage, BlockType ManyBlocks [], ManType* Man)
     {
     /* int i = 0;
     int b = 0;

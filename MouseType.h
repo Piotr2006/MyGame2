@@ -10,7 +10,7 @@ struct MouseType
     {
     MouseType (int x, int y, ImageType Picture);
 
-    void DrawCursor (CamType* Camera);
+    void DrawCursor ();
 
     int x;
     int y;

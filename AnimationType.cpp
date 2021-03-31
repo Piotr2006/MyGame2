@@ -1,6 +1,6 @@
 #include "AnimationType.h"
 
-AnimationType :: AnimationType (int _xFrame, int _yFrame, ImageType* _Picture) :
+AnimationType :: AnimationType (int _xFrame, int _yFrame, const ImageType* _Picture) :
     xFrame (_xFrame),
     yFrame (_yFrame),
     Picture (_Picture)

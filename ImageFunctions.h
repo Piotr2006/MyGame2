@@ -6,6 +6,8 @@
 #include "ImageType.h"
 #include "CamType.h"
 
+extern CamType FixedCamera;
+
 void DeleteAllImage (AllImageType AllImages);
 
 void LoadGameImage (ImageType* Image, const char* Picture, int xMaxFrame, int yMaxFrame, COLORREF color,
@@ -13,7 +15,8 @@ void LoadGameImage (ImageType* Image, const char* Picture, int xMaxFrame, int yM
 
 void DrawLoading (int Procents);
 
-void DrawTransparentImage (ImageType* Image, int x, int y, int* xAnimationNumber, int* yAnimationNumber, CamType* Camera);
+void DrawTransparentImage (const ImageType& Image, int x, int y, int* xAnimationNumber, int* yAnimationNumber,
+                           CamType* Camera = &FixedCamera);
 
 void LoadAllImages (AllImageType* AllImages);
 

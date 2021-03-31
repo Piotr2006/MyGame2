@@ -7,15 +7,13 @@ MouseType :: MouseType (int _x, int _y, ImageType _Picture) :
     {};
 
 
-void MouseType :: DrawCursor (CamType* Camera)
+void MouseType :: DrawCursor ()
     {
-
-
     x = txMouseX ();
 
     y = txMouseY ();
 
     int null = 0;
 
-    DrawTransparentImage (&Picture, x, y, &null, &null, Camera);
+    DrawTransparentImage (Picture, x, y, &null, &null);
     };

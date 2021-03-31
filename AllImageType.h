@@ -70,6 +70,13 @@ struct AllImageType
     ImageType Rope;
     ImageType CraftImage;
     ImageType Fence;
+    ImageType StoneWall;
+    ImageType StoneFloor;
+    ImageType MineEntrance;
+    ImageType Dynamite;
+    ImageType Explosion;
+    ImageType BlackFrontGround;
+    ImageType HighCase;
     };
 
 #endif

@@ -12,7 +12,7 @@
 #include "ManType.h"
 #include "Levels.h"
 #include "SmallHelpFunctions.h"
-                                
+
 
 struct CamType;
 struct AllImageType;
@@ -21,7 +21,7 @@ struct ButtonType
     {
     ButtonType (int x, int y, int Number);
 
-    void DrawButton (CamType* Camera, AllImageType AllImage);
+    void DrawButton (AllImageType AllImage);
 
     int ButtonCheckClick (int x2, int y2, int DstX, int DstY);
 

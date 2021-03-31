@@ -1,6 +1,6 @@
 #include "Levels.h"
 
-void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber, ManType* Man, double* AllTemperature, CamType* Camera, CamType* FixedCamera, ManType Villagers [])
+void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber, ManType* Man, double* AllTemperature, CamType* Camera, ManType Villagers [])
     {
     int StartLevelNumber = *LevelNumber;
 
@@ -55,7 +55,7 @@ void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber,
 
         Camera->MoveCamera (Man);
 
-        // DrawTransparentImage (&AllImage.BackGround, 0, 0, &null, &null, FixedCamera);
+        // DrawTransparentImage (AllImage.BackGround, 0, 0, &null, &null, FixedCamera);
 
         // GRSetColor (RGB (143, 86, 59), 0);
         // GRSetFillColor (RGB (143, 86, 59));
@@ -63,12 +63,12 @@ void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber,
 
         GRSetColor (RGB (143, 86, 59), 1);
         GRSetFillColor (RGB (143, 86, 59));
-        GRRectangle (0 - Camera->x, 700 - Camera->y, 9999999 - Camera->x, 9000 - Camera->y);
+        GRRectangle (0 - Camera->Point.x, 700 - Camera->Point.y, 9999999 - Camera->Point.x, 9000 - Camera->Point.y);
 
         /* GRSetColor (WaterColor, 1);
         GRSetFillColor (WaterColor);
-        GRRectangle (-99999 - Camera->x, 720 - Camera->y, 0 - Camera->x, 9000 - Camera->y);
-        GRRectangle (11400*World_Size - Camera->x, 720 - Camera->y, 999999 - Camera->x, 9999 - Camera->y); */
+        GRRectangle (-99999 - Camera->Point.x, 720 - Camera->Point.y, 0 - Camera->Point.x, 9000 - Camera->Point.y);
+        GRRectangle (11400*World_Size - Camera->Point.x, 720 - Camera->Point.y, 999999 - Camera->Point.x, 9999 - Camera->Point.y); */
 
         DrawManyBlocks (ManyBlocks, Camera, AllImage);
 
@@ -77,20 +77,23 @@ void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber,
 
         Man->DrawMan (Camera, AllImage);
 
-        Man->Crafting (AllImage, FixedCamera);
-
         // Villager
         // Villager->Physic ();
         // InteractManWithBlocks (ManyBlocks, Villager, Camera, &Man->NumberCoin, LevelNumber, AllImage);
         // Villager->DrawMan (Camera, AllImage);
         // Villager->VillagerMind (Man, Camera, AllImage);
-        DrawLevelPeople (Villagers, Camera, AllImage);
 
-        Man->DrawInventory (Camera, FixedCamera, AllImage);
+        // DrawLevelPeople (Villagers, Camera, AllImage);
 
-        CallPeoplePhysic (Villagers, Camera, AllImage, ManyBlocks, Man);
+        // DrawTransparentImage (AllImage.BlackFrontGround, 0, 268 - Camera->Point.y, &null, &null);
 
-        // DrawTransparentImage (&AllImage.Coin, Sign_CoinX, Sign_CoinY, &null, &null, FixedCamera);
+        Man->Crafting (AllImage);
+
+        Man->DrawInventory (Camera, AllImage);
+
+        // CallPeoplePhysic (Villagers, Camera, AllImage, ManyBlocks, Man);
+
+        // DrawTransparentImage (AllImage.Coin, Sign_CoinX, Sign_CoinY, &null, &null, FixedCamera);
 
         Man->ManFire (Camera, AllImage);
         Man->ManHealth (Camera, AllImage);
@@ -122,17 +125,17 @@ void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber,
 
         Text (LevelPoint, Level_TextSize, Man->Days+1, "Day");
 
-        Pause.DrawButton (FixedCamera, AllImage);
-        DrawTransparentImage (&AllImage.Pause, 95, 10, &null, &six, FixedCamera);
+        Pause.DrawButton (AllImage);
+        DrawTransparentImage (AllImage.Pause, 95, 10, &null, &six);
 
-        DrawHealth (Man->Health, FixedCamera, AllImage);
+        DrawHealth (Man->Health, AllImage);
 
         Helping (&Man->HelpSystem);
 
         if (PauseNumber == Pause_Stopped)
             {
-            Man->vX = 0;
-            Man->vY = 0;
+            Man->Speed.x = 0;
+            Man->Speed.y = 0;
 
             Pause.Number = Pause_Stopped;
 
@@ -155,7 +158,7 @@ void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber,
         GRSetColor (RGB (237, 28, 36), 1);
         GRSetFillColor (RGB (237, 28, 36));
 
-        DrawTransparentImage (&AllImage.Termometer, Sign_TermometerX, Sign_TermometerY, &null, &null, FixedCamera);
+        DrawTransparentImage (AllImage.Termometer, Sign_TermometerX, Sign_TermometerY, &null, &null);
         GRRectangle (Sign_TermometerX + Sign_Term_RectLeftX, Sign_TermometerY + Sign_Term_RectDownY - Man->Temperature,
                      Sign_TermometerX + Sign_Term_RectRightX, Sign_TermometerY + Sign_Term_RectDownY);
 
@@ -166,7 +169,7 @@ void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber,
             // HelpSystem ();
             };
 
-        Mouse.DrawCursor (FixedCamera);
+        Mouse.DrawCursor ();
 
         if (StartLevelNumber != *LevelNumber)
             {
@@ -183,7 +186,7 @@ void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber,
     DeleteAllImage (AllImage);
     };
 
-void Level1 (int* LevelNumber, ManType* Man, AllImageType AllImage, CamType* Camera, CamType* FixedCamera)
+void Level1 (int* LevelNumber, ManType* Man, AllImageType AllImage, CamType* Camera)
     {
     double AllTemperature = 10;
 
@@ -1970,40 +1973,91 @@ void Level1 (int* LevelNumber, ManType* Man, AllImageType AllImage, CamType* Cam
 
     CreateBlocks (ManyBlocks, AllImage);
 
-    ManType Villagers [] = {{{0,0}, 0, {0, 0, &AllImage.Bear}, 0, 0, Man_aX, 2, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
-                            {{0,0}, 0, {0, 0, &AllImage.Bear}, 0, 0, Man_aX, 2, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
-                            {{0,0}, 0, {0, 0, &AllImage.Bear}, 0, 0, Man_aX, 2, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
-                            {{0,0}, 0, {0, 0, &AllImage.Bear}, 0, 0, Man_aX, 2, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
-                            {{0,0}, 0, {0, 0, &AllImage.Bear}, 0, 0, Man_aX, 2, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
-                            {{0,0}, 0, {0, 0, &AllImage.Bear}, 0, 0, Man_aX, 2, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
-                            {{0,0}, 0, {0, 0, &AllImage.Bear}, 0, 0, Man_aX, 2, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
-                            {{0,0}, 0, {0, 0, &AllImage.Bear}, 0, 0, Man_aX, 2, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
-                            {{0,0}, 0, {0, 0, &AllImage.Bear}, 0, 0, Man_aX, 2, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
-                            {{0,0}, 0, {0, 0, &AllImage.Bear}, 0, 0, Man_aX, 2, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
-                            {{0,0}, 0, {0, 0, &AllImage.Bear}, 0, 0, Man_aX, 2, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
-                            {{0,0}, 0, {0, 0, &AllImage.Bear}, 0, 0, Man_aX, 2, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
-                            {{0,0}, 0, {0, 0, &AllImage.Bear}, 0, 0, Man_aX, 2, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
-                            {{0,0}, 0, {0, 0, &AllImage.Bear}, 0, 0, Man_aX, 2, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
-                            {{0,0}, 0, {0, 0, &AllImage.Bear}, 0, 0, Man_aX, 2, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
-                            {{0,0}, 0, {0, 0, &AllImage.Bear}, 0, 0, Man_aX, 2, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
-                            {{0,0}, 0, {0, 0, &AllImage.Bear}, 0, 0, Man_aX, 2, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
-                            {{0,0}, 0, {0, 0, &AllImage.Bear}, 0, 0, Man_aX, 2, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
-                            {{0,0}, 0, {0, 0, &AllImage.Bear}, 0, 0, Man_aX, 2, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
-                            {{0,0}, 0, {0, 0, &AllImage.Bear}, 0, 0, Man_aX, 2, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
-                            {{0,0}, 0, {0, 0, &AllImage.Bear}, 0, 0, Man_aX, 2, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
-                            {{0,0}, 0, {0, 0, &AllImage.Bear}, 0, 0, Man_aX, 2, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
-                            {{0,0}, 0, {0, 0, &AllImage.Bear}, 0, 0, Man_aX, 2, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
-                            {{0,0}, 0, {0, 0, &AllImage.Bear}, 0, 0, Man_aX, 2, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
-                            {{0,0}, 0, {0, 0, &AllImage.Bear}, 0, 0, Man_aX, 2, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
-                            {{-1, -1}, 0, {0, 0, &AllImage.Bear}, 0, 0, Man_aX, 2, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+    ManType Villagers [] = {{{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+                            {{0,0}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
+
+                            {{-1, -1}, 0, {0, 0, &AllImage.Bear}, {0, 0}, {Man_aX, 2}, 0, 0, Man_Temperature, 0, 0, 0, "", MT_Bear, {}, 0, 0, 2125, 521, 0, 0, {}},
                             };
 
     CreateVillagers (Villagers, AllImage);
 
-    MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera, FixedCamera, Villagers);
+    MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera, Villagers);
     };
 
-void TestLevel (int* LevelNumber, ManType* Man, AllImageType AllImage, CamType* Camera, CamType* FixedCamera)
+void TestLevel (int* LevelNumber, ManType* Man, AllImageType AllImage, CamType* Camera)
     {
     double AllTemperature = 10;
 
@@ -2029,11 +2083,11 @@ void TestLevel (int* LevelNumber, ManType* Man, AllImageType AllImage, CamType* 
 
 
     ManType Villagers [] = {{{-1, -1}, 20, {0, 0, &AllImage.Boat},
-                            0, 0, Man_aX, 2,
+                            {0, 0}, {Man_aX, 2},
                             0, 0, Man_Temperature,
                             0, 0, 0, "", MT_Boat, {}, 0, 0,
                             0, 0, 0, 0, {}}};
 
-    MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera, FixedCamera, Villagers);
+    MoveGame (ManyBlocks, AllImage, LevelNumber, Man, &AllTemperature, Camera, Villagers);
     };
 

@@ -7,4 +7,10 @@ struct PointType
     double y;
     };
 
+PointType operator + (PointType Point, PointType Size);
+
+PointType operator - (PointType Point, PointType Size);
+
+void operator += (PointType& Point, PointType Speed);
+
 #endif

@@ -6,7 +6,7 @@
 
 struct AnimationType
     {
-    AnimationType (int xFrame, int yFrame, ImageType* Picture);
+    AnimationType (int xFrame, int yFrame, const ImageType* Picture);
 
     double GetFrameSizeX ();
     double GetFrameSizeY ();
@@ -14,7 +14,7 @@ struct AnimationType
     int xFrame;
     int yFrame;
 
-    ImageType* Picture;
+    const ImageType* Picture;
     };
 
 //-----------------------------------------------------------------------------

@@ -15,38 +15,36 @@ struct BlockType;
 struct ManType : BaseType
     {
     ManType (PointType Point, double _Health, AnimationType Animation,
-             double _vX, double _vY, double _aX, double _aY,
+             PointType Speed, PointType _Acceleration,
              int _Side, int _Position, double _Temperature,
              int _NumberCoin, int _xWeapon, int _ArmSpeed, char _Name [50], int _Kind, InvType _Inventory,
-             int _Time, int _Days, double _ArrowX, double _ArrowY, int _ArrowVX, int _ArrowVY, HelpType _HelpSystem);
+             int _Time, int _Days, double _ArrowX, double _ArrowY, int _ArrowVX, int _ArroeVY, HelpType _HelpSystem);
 
-    void DrawMan (CamType* Camera, AllImageType AllImage);
+    void DrawMan (CamType* Camera, const AllImageType& AllImage);
 
-    void DrawInventory (CamType* Camera, CamType* FixedCamera, AllImageType AllImage);
+    void DrawInventory (CamType* Camera, const AllImageType& AllImage);
 
-    void Crafting (AllImageType AllImage, CamType* FixedCamera);
+    void Crafting (const AllImageType& AllImage);
 
     void ManTemperature ();
 
-    void ManFire (CamType* Camera, AllImageType AllImage);
+    void ManFire (CamType* Camera, const AllImageType& AllImage);
 
-    void ManHealth (CamType* Camera, AllImageType AllImage);
+    void ManHealth (CamType* Camera, const AllImageType& AllImage);
 
-    void ControlMan (MouseType Mouse, int* t);
+    void ControlMan (const MouseType& Mouse, int* t);
 
-    void VillagerMind (ManType* Man, CamType* Camera, AllImageType AllImage);
+    void VillagerMind (ManType* Man, CamType* Camera, const AllImageType& AllImage);
 
-    void BlockCollision (BlockType* Block, CamType* Camera, AllImageType AllImage);
+    void BlockCollision (BlockType* Block, CamType* Camera, const AllImageType& AllImage);
 
-    void BlockInteraction (BlockType* Block, CamType* Camera, AllImageType AllImage);
+    void BlockInteraction (BlockType* Block, CamType* Camera, const AllImageType& AllImage);
 
     void Physic ();
 
-    double vX;
-    double vY;
+    PointType Speed;
 
-    double aX;
-    double aY;
+    PointType Acceleration;
 
     int Side;
     int Position;
@@ -73,17 +71,17 @@ struct ManType : BaseType
     double ArrowY;
 
     int ArrowVX;
-    int ArrowVY;
+    int ArroeVY;
 
     HelpType HelpSystem;
     };
 
-void DrawSlot (int Block, int x, int y, ImageType Picture, int TextX, int TextY);
+void DrawSlot (int Block, int x, int y, const ImageType& Picture, int TextX, int TextY);
 
-void CreateVillagers (ManType Villagers [], AllImageType AllImage);
+void CreateVillagers (ManType Villagers [], const AllImageType& AllImage);
 
-void DrawLevelPeople (ManType Villagers[], CamType* Camera, AllImageType AllImage);
+void DrawLevelPeople (ManType Villagers[], CamType* Camera, const AllImageType& AllImage);
 
-void CallPeoplePhysic (ManType Villagers[], CamType* Camera, AllImageType AllImage, BlockType ManyBlocks [], ManType* Man);
+void CallPeoplePhysic (ManType Villagers[], CamType* Camera, const AllImageType& AllImage, BlockType ManyBlocks [], ManType* Man);
 
 #endif

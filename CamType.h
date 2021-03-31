@@ -4,18 +4,17 @@
 #include "Enums.h"
 
 #include "BaseType.h"
+#include "PointType.h"
 
 struct CamType
     {
-    CamType (double x, double y, double vX, double vY, int Timer);
+    CamType (PointType Point, PointType Speed, int Timer);
 
     void MoveCamera (BaseType* Object);
 
-    double x;
-    double y;
+    PointType Point;
 
-    double vX;
-    double vY;
+    PointType Speed;
 
     int Timer;
     };

@@ -52,12 +52,12 @@ int ModuleDistance (PointType Point1, PointType Point2, int Distance)
     return 0;
     };
 
-void DrawHealth (int Health, CamType* Camera, AllImageType AllImage)
+void DrawHealth (int Health, AllImageType AllImage)
     {
     int null = 0;
     int one  = 1;
 
-    DrawTransparentImage (&AllImage.Coin, Sign_HealthX, Sign_HealthY, &one, &null, Camera);
+    DrawTransparentImage (AllImage.Coin, Sign_HealthX, Sign_HealthY, &one, &null);
 
     GRSetColor (TX_BLACK, 2);
     GRSetFillColor (TX_TRANSPARENT);
@@ -71,8 +71,8 @@ int BlockCheckClick (BlockType* Block, CamType* Camera)
     int xDst = GRGetExtentX (Block->Animation.Picture->Picture)/Block->Animation.Picture->xMaxAnimationNumber;
     int yDst = GRGetExtentY (Block->Animation.Picture->Picture)/Block->Animation.Picture->yMaxAnimationNumber;
 
-    if (fabs (Block->Point.x - Camera->x + xDst - GRMouseX()) <= xDst &&
-        fabs (Block->Point.y - Camera->y + yDst - GRMouseY()) <= yDst &&
+    if (fabs (Block->Point.x - Camera->Point.x + xDst - GRMouseX()) <= xDst &&
+        fabs (Block->Point.y - Camera->Point.y + yDst - GRMouseY()) <= yDst &&
         GetAsyncKeyState (VK_LBUTTON))
                 return true;
 

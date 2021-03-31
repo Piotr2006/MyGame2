@@ -1,10 +1,12 @@
 #include "ImageFunctions.h"
 
+CamType FixedCamera = {{0, 0}, {0, 0}, 0};
+
 void LoadAllImages (AllImageType* AllImages)
     {
     int Procent = 1;
 
-    LoadGameImage (&AllImages->BackGround,    "Images/ForestBackGround.bmp",       1, 2, TX_WHITE, &Procent, Number_of_Images);
+    LoadGameImage (&AllImages->BackGround,    "Images/NewForestBackGround.bmp",    1, 1, TX_WHITE, &Procent, Number_of_Images);
 
     // printf ("1:LoadAllImages(): File = %s , HDC = %d \n", AllImages->BackGround.FileName, AllImages->BackGround.Picture);
 
@@ -26,9 +28,9 @@ void LoadAllImages (AllImageType* AllImages)
 
     LoadGameImage (&AllImages->Box,           "Images/WoodBoxAnimation.bmp",       4, 3, TX_BLACK, &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->Man,           "Images/RedManAnimation.bmp",        2,10, TX_WHITE, &Procent, Number_of_Images);
+    LoadGameImage (&AllImages->Man,           "Images/NewManWithAxe.bmp",          6, 8, RGB (91, 110, 225), &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->Stairs,        "Images/Stairs.bmp",                 4, 3, TX_BLACK, &Procent, Number_of_Images);
+    LoadGameImage (&AllImages->Stairs,        "Images/WallStairs.bmp",             1, 1, TX_BLACK, &Procent, Number_of_Images);
 
     LoadGameImage (&AllImages->Fire,          "Images/FireAnimation.bmp",          5, 2, TX_BLACK, &Procent, Number_of_Images);
 
@@ -68,11 +70,11 @@ void LoadAllImages (AllImageType* AllImages)
 
     LoadGameImage (&AllImages->Gun,           "Images/Gun.bmp",                    2, 2, TX_WHITE, &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->Grass,         "Images/Grass.bmp",                  1, 4, TX_BLACK, &Procent, Number_of_Images);
+    LoadGameImage (&AllImages->Grass,         "Images/NewDirtBlock.bmp",           1, 4, TX_BLACK, &Procent, Number_of_Images);
 
     LoadGameImage (&AllImages->Knife,         "Images/Knife.bmp",                  1, 2, TX_WHITE, &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->Tree,          "Images/Tree.bmp",                   1, 8, TX_BLACK, &Procent, Number_of_Images);
+    LoadGameImage (&AllImages->Tree,          "Images/NewSmallTree.bmp",           1, 1, RGB (91, 110, 225), &Procent, Number_of_Images);
 
     LoadGameImage (&AllImages->Wood,          "Images/Wood.bmp",                   1, 2, TX_WHITE, &Procent, Number_of_Images);
 
@@ -86,7 +88,7 @@ void LoadAllImages (AllImageType* AllImages)
 
     LoadGameImage (&AllImages->Menu,          "Images/MainMenu.bmp",               1, 1, TX_BLACK, &Procent, Number_of_Images);
 
-    LoadGameImage (&AllImages->BonFire,       "Images/BonFire.bmp",                1, 3, TX_WHITE, &Procent, Number_of_Images);
+    LoadGameImage (&AllImages->BonFire,       "Images/NewFire.bmp",                8, 2, TX_WHITE, &Procent, Number_of_Images);
 
     LoadGameImage (&AllImages->Bear,          "Images/Bear.bmp",                   1, 2, TX_WHITE, &Procent, Number_of_Images);
 
@@ -133,6 +135,20 @@ void LoadAllImages (AllImageType* AllImages)
     LoadGameImage (&AllImages->CraftImage,    "Images/CraftImage.bmp",             1, 1, TX_WHITE, &Procent, Number_of_Images);
 
     LoadGameImage (&AllImages->Fence,         "Images/BigFence.bmp",               1, 1, TX_WHITE, &Procent, Number_of_Images);
+
+    LoadGameImage (&AllImages->StoneWall,     "Images/NewStoneWall.bmp",           1, 1, TX_WHITE, &Procent, Number_of_Images);
+
+    LoadGameImage (&AllImages->StoneFloor,    "Images/DarkFloor.bmp",              1, 1, TX_WHITE, &Procent, Number_of_Images);
+
+    LoadGameImage (&AllImages->MineEntrance,  "Images/DownEntrance.bmp",           1, 1, TX_WHITE, &Procent, Number_of_Images);
+
+    LoadGameImage (&AllImages->Dynamite,      "Images/TNT.bmp",                    2, 2, TX_WHITE, &Procent, Number_of_Images);
+
+    LoadGameImage (&AllImages->Explosion,     "Images/Explosion.bmp",              6, 1, RGB (91, 110, 225), &Procent, Number_of_Images);
+
+    LoadGameImage (&AllImages->BlackFrontGround,"Images/BlackBackGround.bmp",      1, 1, TX_WHITE, &Procent, Number_of_Images);
+
+    LoadGameImage (&AllImages->HighCase,      "Images/HighCase.bmp",               1, 2, TX_WHITE, &Procent, Number_of_Images);
     };
 
 
@@ -223,13 +239,13 @@ void LoadGameImage (ImageType* Image, const char* Picture, int xMaxFrame, int yM
     GRSleep (Loading_Sleep);
     };
 
-void DrawTransparentImage (ImageType* Image, int x, int y, int* xAnimationNumber, int* yAnimationNumber, CamType* Camera)
+void DrawTransparentImage (const ImageType& Image, int x, int y, int* xAnimationNumber, int* yAnimationNumber, CamType* Camera)
     {
     // printf ("DrawTransparentImage(): FileName = \"%s\", HDC = \"%p\" \n", Image.FileName, Image.Picture);
 
-    int xSize = GRGetExtentX (Image->Picture)/Image->xMaxAnimationNumber;
-    int ySize = GRGetExtentY (Image->Picture)/Image->yMaxAnimationNumber;
+    int xSize = GRGetExtentX (Image.Picture)/Image.xMaxAnimationNumber;
+    int ySize = GRGetExtentY (Image.Picture)/Image.yMaxAnimationNumber;
 
-    GRTransparentBlt (x - Camera->x, y - Camera->y, xSize, ySize, Image->Picture, *xAnimationNumber*xSize, *yAnimationNumber*ySize, Image->color);
+    GRTransparentBlt (x - Camera->Point.x, y - Camera->Point.y, xSize, ySize, Image.Picture, *xAnimationNumber*xSize, *yAnimationNumber*ySize, Image.color);
     };
 
