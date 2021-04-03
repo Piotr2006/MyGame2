@@ -28,7 +28,7 @@ void GRClear ();
 int GRMouseX();
 int GRMouseY();
 
-void GRDeleteDC (HDC Image);
+void GRDeleteDC (HDC* Image);
 
 int GRGetExtentX (HDC Image);
 int GRGetExtentY (HDC Image);

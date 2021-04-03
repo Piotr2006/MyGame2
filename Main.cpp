@@ -58,6 +58,8 @@ void Cycle ()
         if (GetAsyncKeyState (VK_ESCAPE))
             break;
         };
+
+    DeleteAllImage (&AllImage);
     };
 
 
