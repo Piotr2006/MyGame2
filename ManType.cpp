@@ -2074,7 +2074,7 @@ void ManType :: BlockCollision (BlockType* Block, CamType* Camera, const AllImag
     // CollisionDetection
 
     if (fabs (Block->Point.x + Block->SizeX/2 - Point.x - SizeX/2) <= Block->SizeX/2 &&
-        InBorders (Block->SizeY + this->SizeY - 10, Block->Point.y + Block->SizeY - Point.y, Block->SizeY + this->SizeY) == true)
+        InBorders (Block->SizeY + this->SizeY - 100, Block->Point.y + Block->SizeY - Point.y, Block->SizeY + this->SizeY) == true)
             {
             // CollisionResponse
 
