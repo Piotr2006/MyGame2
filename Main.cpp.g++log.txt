@@ -731,5 +731,5 @@ C:\Users\007\Desktop\программирование\MyGame2\Main.cpp:41:46: warning: deprecate
                   0, 0, Man_x, Man_y, 0, 0, {}};
                                               ^
 ---------------------------------------------------------------------------------------------
-[03.04.2021 16:41:44,56 C:\Users\007@LAPTOP-AETNHUR2, returned 0]
+[03.04.2021 21:20:41,39 C:\Users\007@LAPTOP-AETNHUR2, returned 0]
 C:\Users\007\Desktop\программирование\MyGame2> g++.exe -c C:\Users\007\Desktop\программирование\MyGame2\Main.cpp -o obj\Debug\Main.o -Wall -fexceptions  -g  -Wshadow -Winit-self -Wredundant-decls -Wcast-align -Wundef -Wfloat-equal -Winline -Wunreachable-code -Wmissing-declarations -Wmissing-include-dirs -Wswitch-enum -Wswitch-default -Weffc++ -Wmain -Wextra -Wall -g -pipe -fexceptions -Wcast-qual -Wconversion -Wctor-dtor-privacy -Wempty-body -Wformat-security -Wformat=2 -Wignored-qualifiers -Wlogical-op -Wmissing-field-initializers -Wnon-virtual-dtor -Woverloaded-virtual -Wpointer-arith -Wsign-promo -Wstack-usage=8192 -Wstrict-aliasing -Wstrict-null-sentinel -Wtype-limits -Wwrite-strings -D_DEBUG -D_EJUDGE_CLIENT_SIDE -D_EJC

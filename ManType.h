@@ -38,7 +38,8 @@ struct ManType : BaseType
 
     void BlockCollision (BlockType* Block, CamType* Camera, const AllImageType& AllImage);
 
-    void BlockInteraction (BlockType* Block, CamType* Camera, const AllImageType& AllImage);
+    void ManType :: BlockInteraction (void (*Function) (BlockType* Block, CamType* Camera, const AllImageType& AllImage),
+                                                    BlockType* Block, CamType* Camera, const AllImageType& AllImage)
 
     void Physic ();
 
