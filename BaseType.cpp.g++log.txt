@@ -1,0 +1,518 @@
+In file included from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:5:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:4:42: warning: redundant redeclaration of 'void GRSetColor(COLORREF, int)' in same scope [-Wredundant-decls]
+ void GRSetColor (COLORREF color, int Wide);
+                                          ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\ImageType.h:4:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:4,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:4:6: warning: previous declaration of 'void GRSetColor(COLORREF, int)' [-Wredundant-decls]
+ void GRSetColor (COLORREF color, int Wide);
+      ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:5:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:6:36: warning: redundant redeclaration of 'void GRSetFillColor(COLORREF)' in same scope [-Wredundant-decls]
+ void GRSetFillColor (COLORREF color);
+                                    ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\ImageType.h:4:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:4,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:6:6: warning: previous declaration of 'void GRSetFillColor(COLORREF)' [-Wredundant-decls]
+ void GRSetFillColor (COLORREF color);
+      ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:5:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:8:40: warning: redundant redeclaration of 'void GRCreateWindow(int, int)' in same scope [-Wredundant-decls]
+ void GRCreateWindow (int Wide, int High);
+                                        ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\ImageType.h:4:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:4,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:8:6: warning: previous declaration of 'void GRCreateWindow(int, int)' [-Wredundant-decls]
+ void GRCreateWindow (int Wide, int High);
+      ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:5:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:11:81: warning: redundant redeclaration of 'void GRTransparentBlt(double, double, double, double, HDC, double, double, COLORREF)' in same scope [-Wredundant-decls]
+                          HDC Image, double FrameX, double FrameY, COLORREF color);
+                                                                                 ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\ImageType.h:4:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:4,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:10:6: warning: previous declaration of 'void GRTransparentBlt(double, double, double, double, HDC, double, double, COLORREF)' [-Wredundant-decls]
+ void GRTransparentBlt (double x, double y, double Wide, double Heigh,
+      ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:5:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:13:15: warning: redundant redeclaration of 'void GRBegin()' in same scope [-Wredundant-decls]
+ void GRBegin ();
+               ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\ImageType.h:4:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:4,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:13:6: warning: previous declaration of 'void GRBegin()' [-Wredundant-decls]
+ void GRBegin ();
+      ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:5:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:15:13: warning: redundant redeclaration of 'void GREnd()' in same scope [-Wredundant-decls]
+ void GREnd ();
+             ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\ImageType.h:4:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:4,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:15:6: warning: previous declaration of 'void GREnd()' [-Wredundant-decls]
+ void GREnd ();
+      ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:5:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:18:79: warning: redundant redeclaration of 'void GRAlphaBlend(double, double, double, double, HDC, double, double, double)' in same scope [-Wredundant-decls]
+                          HDC Image, double FrameX, double FrameY, double Alpha);
+                                                                               ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\ImageType.h:4:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:4,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:17:6: warning: previous declaration of 'void GRAlphaBlend(double, double, double, double, HDC, double, double, double)' [-Wredundant-decls]
+ void GRAlphaBlend (double x, double y, double Wide, double Heigh,
+      ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:5:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:20:24: warning: redundant redeclaration of 'void GRSleep(int)' in same scope [-Wredundant-decls]
+ void GRSleep (int Sleep);
+                        ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\ImageType.h:4:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:4,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:20:6: warning: previous declaration of 'void GRSleep(int)' [-Wredundant-decls]
+ void GRSleep (int Sleep);
+      ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:5:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:22:49: warning: redundant redeclaration of 'void GRRectangle(int, int, int, int)' in same scope [-Wredundant-decls]
+ void GRRectangle (int x1, int y1, int x2, int y2);
+                                                 ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\ImageType.h:4:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:4,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:22:6: warning: previous declaration of 'void GRRectangle(int, int, int, int)' [-Wredundant-decls]
+ void GRRectangle (int x1, int y1, int x2, int y2);
+      ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:5:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:24:44: warning: redundant redeclaration of 'void GRLine(int, int, int, int)' in same scope [-Wredundant-decls]
+ void GRLine (int x1, int y1, int x2, int y2);
+                                            ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\ImageType.h:4:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:4,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:24:6: warning: previous declaration of 'void GRLine(int, int, int, int)' [-Wredundant-decls]
+ void GRLine (int x1, int y1, int x2, int y2);
+      ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:5:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:26:15: warning: redundant redeclaration of 'void GRClear()' in same scope [-Wredundant-decls]
+ void GRClear ();
+               ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\ImageType.h:4:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:4,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:26:6: warning: previous declaration of 'void GRClear()' [-Wredundant-decls]
+ void GRClear ();
+      ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:5:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:28:14: warning: redundant redeclaration of 'int GRMouseX()' in same scope [-Wredundant-decls]
+ int GRMouseX();
+              ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\ImageType.h:4:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:4,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:28:5: warning: previous declaration of 'int GRMouseX()' [-Wredundant-decls]
+ int GRMouseX();
+     ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:5:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:29:14: warning: redundant redeclaration of 'int GRMouseY()' in same scope [-Wredundant-decls]
+ int GRMouseY();
+              ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\ImageType.h:4:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:4,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:29:5: warning: previous declaration of 'int GRMouseY()' [-Wredundant-decls]
+ int GRMouseY();
+     ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:5:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:31:28: warning: redundant redeclaration of 'void GRDeleteDC(HDC__**)' in same scope [-Wredundant-decls]
+ void GRDeleteDC (HDC* Image);
+                            ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\ImageType.h:4:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:4,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:31:6: warning: previous declaration of 'void GRDeleteDC(HDC__**)' [-Wredundant-decls]
+ void GRDeleteDC (HDC* Image);
+      ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:5:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:33:28: warning: redundant redeclaration of 'int GRGetExtentX(HDC)' in same scope [-Wredundant-decls]
+ int GRGetExtentX (HDC Image);
+                            ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\ImageType.h:4:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:4,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:33:5: warning: previous declaration of 'int GRGetExtentX(HDC)' [-Wredundant-decls]
+ int GRGetExtentX (HDC Image);
+     ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:5:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:34:28: warning: redundant redeclaration of 'int GRGetExtentY(HDC)' in same scope [-Wredundant-decls]
+ int GRGetExtentY (HDC Image);
+                            ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\ImageType.h:4:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:4,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:34:5: warning: previous declaration of 'int GRGetExtentY(HDC)' [-Wredundant-decls]
+ int GRGetExtentY (HDC Image);
+     ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:5:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:36:18: warning: redundant redeclaration of 'void GRSetAlign()' in same scope [-Wredundant-decls]
+ void GRSetAlign ();
+                  ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\ImageType.h:4:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:4,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:36:6: warning: previous declaration of 'void GRSetAlign()' [-Wredundant-decls]
+ void GRSetAlign ();
+      ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:5:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:37:48: warning: redundant redeclaration of 'void GRSelectFont(const char*, int)' in same scope [-Wredundant-decls]
+ void GRSelectFont (const char Name [], int Size);
+                                                ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\ImageType.h:4:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:4,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:37:6: warning: previous declaration of 'void GRSelectFont(const char*, int)' [-Wredundant-decls]
+ void GRSelectFont (const char Name [], int Size);
+      ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:5:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:38:51: warning: redundant redeclaration of 'void GRTextOut(PointType, const char*)' in same scope [-Wredundant-decls]
+ void GRTextOut (PointType Point, const char Str []);
+                                                   ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\ImageType.h:4:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:4,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:38:6: warning: previous declaration of 'void GRTextOut(PointType, const char*)' [-Wredundant-decls]
+ void GRTextOut (PointType Point, const char Str []);
+      ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:5:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:40:36: warning: redundant redeclaration of 'void GRPlaySound(const char*)' in same scope [-Wredundant-decls]
+ void GRPlaySound (const char Name[]);
+                                    ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\ImageType.h:4:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:4,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:40:6: warning: previous declaration of 'void GRPlaySound(const char*)' [-Wredundant-decls]
+ void GRPlaySound (const char Name[]);
+      ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:5:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:42:37: warning: redundant redeclaration of 'HDC__* GRLoadImage(const char*)' in same scope [-Wredundant-decls]
+ HDC GRLoadImage (const char* Picture);
+                                     ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\ImageType.h:4:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:4,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:42:5: warning: previous declaration of 'HDC__* GRLoadImage(const char*)' [-Wredundant-decls]
+ HDC GRLoadImage (const char* Picture);
+     ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\ManType.h:8:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\SmallHelpFunctions.h:8,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:2:
+C:\Users\007\Desktop\программирование\MyGame2\BlockType.h:13:8: warning: base class 'struct BaseType' has a non-virtual destructor [-Weffc++]
+ struct BlockType : BaseType
+        ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\SmallHelpFunctions.h:8:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:2:
+C:\Users\007\Desktop\программирование\MyGame2\ManType.h:15:8: warning: base class 'struct BaseType' has a non-virtual destructor [-Weffc++]
+ struct ManType : BaseType
+        ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\SmallHelpFunctions.h:9:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:2:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:4:42: warning: redundant redeclaration of 'void GRSetColor(COLORREF, int)' in same scope [-Wredundant-decls]
+ void GRSetColor (COLORREF color, int Wide);
+                                          ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:5:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:4:6: warning: previous declaration of 'void GRSetColor(COLORREF, int)' [-Wredundant-decls]
+ void GRSetColor (COLORREF color, int Wide);
+      ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\SmallHelpFunctions.h:9:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:2:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:6:36: warning: redundant redeclaration of 'void GRSetFillColor(COLORREF)' in same scope [-Wredundant-decls]
+ void GRSetFillColor (COLORREF color);
+                                    ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:5:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:6:6: warning: previous declaration of 'void GRSetFillColor(COLORREF)' [-Wredundant-decls]
+ void GRSetFillColor (COLORREF color);
+      ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\SmallHelpFunctions.h:9:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:2:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:8:40: warning: redundant redeclaration of 'void GRCreateWindow(int, int)' in same scope [-Wredundant-decls]
+ void GRCreateWindow (int Wide, int High);
+                                        ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:5:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:8:6: warning: previous declaration of 'void GRCreateWindow(int, int)' [-Wredundant-decls]
+ void GRCreateWindow (int Wide, int High);
+      ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\SmallHelpFunctions.h:9:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:2:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:11:81: warning: redundant redeclaration of 'void GRTransparentBlt(double, double, double, double, HDC, double, double, COLORREF)' in same scope [-Wredundant-decls]
+                          HDC Image, double FrameX, double FrameY, COLORREF color);
+                                                                                 ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:5:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:10:6: warning: previous declaration of 'void GRTransparentBlt(double, double, double, double, HDC, double, double, COLORREF)' [-Wredundant-decls]
+ void GRTransparentBlt (double x, double y, double Wide, double Heigh,
+      ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\SmallHelpFunctions.h:9:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:2:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:13:15: warning: redundant redeclaration of 'void GRBegin()' in same scope [-Wredundant-decls]
+ void GRBegin ();
+               ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:5:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:13:6: warning: previous declaration of 'void GRBegin()' [-Wredundant-decls]
+ void GRBegin ();
+      ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\SmallHelpFunctions.h:9:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:2:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:15:13: warning: redundant redeclaration of 'void GREnd()' in same scope [-Wredundant-decls]
+ void GREnd ();
+             ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:5:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:15:6: warning: previous declaration of 'void GREnd()' [-Wredundant-decls]
+ void GREnd ();
+      ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\SmallHelpFunctions.h:9:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:2:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:18:79: warning: redundant redeclaration of 'void GRAlphaBlend(double, double, double, double, HDC, double, double, double)' in same scope [-Wredundant-decls]
+                          HDC Image, double FrameX, double FrameY, double Alpha);
+                                                                               ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:5:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:17:6: warning: previous declaration of 'void GRAlphaBlend(double, double, double, double, HDC, double, double, double)' [-Wredundant-decls]
+ void GRAlphaBlend (double x, double y, double Wide, double Heigh,
+      ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\SmallHelpFunctions.h:9:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:2:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:20:24: warning: redundant redeclaration of 'void GRSleep(int)' in same scope [-Wredundant-decls]
+ void GRSleep (int Sleep);
+                        ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:5:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:20:6: warning: previous declaration of 'void GRSleep(int)' [-Wredundant-decls]
+ void GRSleep (int Sleep);
+      ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\SmallHelpFunctions.h:9:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:2:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:22:49: warning: redundant redeclaration of 'void GRRectangle(int, int, int, int)' in same scope [-Wredundant-decls]
+ void GRRectangle (int x1, int y1, int x2, int y2);
+                                                 ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:5:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:22:6: warning: previous declaration of 'void GRRectangle(int, int, int, int)' [-Wredundant-decls]
+ void GRRectangle (int x1, int y1, int x2, int y2);
+      ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\SmallHelpFunctions.h:9:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:2:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:24:44: warning: redundant redeclaration of 'void GRLine(int, int, int, int)' in same scope [-Wredundant-decls]
+ void GRLine (int x1, int y1, int x2, int y2);
+                                            ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:5:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:24:6: warning: previous declaration of 'void GRLine(int, int, int, int)' [-Wredundant-decls]
+ void GRLine (int x1, int y1, int x2, int y2);
+      ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\SmallHelpFunctions.h:9:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:2:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:26:15: warning: redundant redeclaration of 'void GRClear()' in same scope [-Wredundant-decls]
+ void GRClear ();
+               ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:5:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:26:6: warning: previous declaration of 'void GRClear()' [-Wredundant-decls]
+ void GRClear ();
+      ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\SmallHelpFunctions.h:9:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:2:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:28:14: warning: redundant redeclaration of 'int GRMouseX()' in same scope [-Wredundant-decls]
+ int GRMouseX();
+              ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:5:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:28:5: warning: previous declaration of 'int GRMouseX()' [-Wredundant-decls]
+ int GRMouseX();
+     ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\SmallHelpFunctions.h:9:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:2:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:29:14: warning: redundant redeclaration of 'int GRMouseY()' in same scope [-Wredundant-decls]
+ int GRMouseY();
+              ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:5:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:29:5: warning: previous declaration of 'int GRMouseY()' [-Wredundant-decls]
+ int GRMouseY();
+     ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\SmallHelpFunctions.h:9:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:2:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:31:28: warning: redundant redeclaration of 'void GRDeleteDC(HDC__**)' in same scope [-Wredundant-decls]
+ void GRDeleteDC (HDC* Image);
+                            ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:5:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:31:6: warning: previous declaration of 'void GRDeleteDC(HDC__**)' [-Wredundant-decls]
+ void GRDeleteDC (HDC* Image);
+      ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\SmallHelpFunctions.h:9:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:2:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:33:28: warning: redundant redeclaration of 'int GRGetExtentX(HDC)' in same scope [-Wredundant-decls]
+ int GRGetExtentX (HDC Image);
+                            ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:5:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:33:5: warning: previous declaration of 'int GRGetExtentX(HDC)' [-Wredundant-decls]
+ int GRGetExtentX (HDC Image);
+     ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\SmallHelpFunctions.h:9:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:2:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:34:28: warning: redundant redeclaration of 'int GRGetExtentY(HDC)' in same scope [-Wredundant-decls]
+ int GRGetExtentY (HDC Image);
+                            ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:5:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:34:5: warning: previous declaration of 'int GRGetExtentY(HDC)' [-Wredundant-decls]
+ int GRGetExtentY (HDC Image);
+     ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\SmallHelpFunctions.h:9:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:2:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:36:18: warning: redundant redeclaration of 'void GRSetAlign()' in same scope [-Wredundant-decls]
+ void GRSetAlign ();
+                  ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:5:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:36:6: warning: previous declaration of 'void GRSetAlign()' [-Wredundant-decls]
+ void GRSetAlign ();
+      ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\SmallHelpFunctions.h:9:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:2:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:37:48: warning: redundant redeclaration of 'void GRSelectFont(const char*, int)' in same scope [-Wredundant-decls]
+ void GRSelectFont (const char Name [], int Size);
+                                                ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:5:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:37:6: warning: previous declaration of 'void GRSelectFont(const char*, int)' [-Wredundant-decls]
+ void GRSelectFont (const char Name [], int Size);
+      ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\SmallHelpFunctions.h:9:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:2:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:38:51: warning: redundant redeclaration of 'void GRTextOut(PointType, const char*)' in same scope [-Wredundant-decls]
+ void GRTextOut (PointType Point, const char Str []);
+                                                   ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:5:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:38:6: warning: previous declaration of 'void GRTextOut(PointType, const char*)' [-Wredundant-decls]
+ void GRTextOut (PointType Point, const char Str []);
+      ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\SmallHelpFunctions.h:9:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:2:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:40:36: warning: redundant redeclaration of 'void GRPlaySound(const char*)' in same scope [-Wredundant-decls]
+ void GRPlaySound (const char Name[]);
+                                    ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:5:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:40:6: warning: previous declaration of 'void GRPlaySound(const char*)' [-Wredundant-decls]
+ void GRPlaySound (const char Name[]);
+      ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\SmallHelpFunctions.h:9:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:2:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:42:37: warning: redundant redeclaration of 'HDC__* GRLoadImage(const char*)' in same scope [-Wredundant-decls]
+ HDC GRLoadImage (const char* Picture);
+                                     ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\AnimationType.h:5:0,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.h:5,
+                 from C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp:1:
+C:\Users\007\Desktop\программирование\MyGame2\Graphycs.h:42:5: warning: previous declaration of 'HDC__* GRLoadImage(const char*)' [-Wredundant-decls]
+ HDC GRLoadImage (const char* Picture);
+     ^
+---------------------------------------------------------------------------------------------
+[03.04.2021 16:40:54,70 C:\Users\007@LAPTOP-AETNHUR2, returned 0]
+C:\Users\007\Desktop\программирование\MyGame2> g++.exe -c C:\Users\007\Desktop\программирование\MyGame2\BaseType.cpp -o obj\Debug\BaseType.o -Wall -fexceptions  -g  -Wshadow -Winit-self -Wredundant-decls -Wcast-align -Wundef -Wfloat-equal -Winline -Wunreachable-code -Wmissing-declarations -Wmissing-include-dirs -Wswitch-enum -Wswitch-default -Weffc++ -Wmain -Wextra -Wall -g -pipe -fexceptions -Wcast-qual -Wconversion -Wctor-dtor-privacy -Wempty-body -Wformat-security -Wformat=2 -Wignored-qualifiers -Wlogical-op -Wmissing-field-initializers -Wnon-virtual-dtor -Woverloaded-virtual -Wpointer-arith -Wsign-promo -Wstack-usage=8192 -Wstrict-aliasing -Wstrict-null-sentinel -Wtype-limits -Wwrite-strings -D_DEBUG -D_EJUDGE_CLIENT_SIDE -D_EJC
