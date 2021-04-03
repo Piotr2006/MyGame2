@@ -84,4 +84,21 @@ void DrawLevelPeople (ManType Villagers[], CamType* Camera, const AllImageType& 
 
 void CallPeoplePhysic (ManType Villagers[], CamType* Camera, const AllImageType& AllImage, BlockType ManyBlocks [], ManType* Man);
 
+
+//-----------------------------------------------------------------------------
+
+void FallingTreeInteraction (BlockType* Block, CamType* Camera, const AllImageType& AllImage);
+
+void SmallStoneInteraction (BlockType* Block, CamType* Camera, const AllImageType& AllImage);
+
+void RockInteraction (BlockType* Block, CamType* Camera, const AllImageType& AllImage);
+
+void BonfireInteraction (BlockType* Block, CamType* Camera, const AllImageType& AllImage);
+
+void TreeInteraction (BlockType* Block, CamType* Camera, const AllImageType& AllImage);
+
+void DynamiteInteraction (BlockType* Block, CamType* Camera, const AllImageType& AllImage);
+
+void CaseInteraction (BlockType* Block, CamType* Camera, const AllImageType& AllImage);
+
 #endif

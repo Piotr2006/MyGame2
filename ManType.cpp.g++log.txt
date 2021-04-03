@@ -843,63 +843,56 @@ C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:1435:6: warning: unuse
  void ManType :: ControlMan (const MouseType& Mouse, int* t)
       ^
 C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:1435:6: warning: unused parameter 't' [-Wunused-parameter]
-C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp: In member function 'void ManType::BlockInteraction(BlockType*, CamType*, const AllImageType&)':
-C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:1990:30: warning: comparing floating point with == or != is unsafe [-Wfloat-equal]
-         if (Block->Health == 0)
-                              ^
-C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:2011:38: warning: conversion to 'int' from 'double' may alter its value [-Wconversion]
-         int ExplosionFrame = -Block->Health;
-                                      ^
-C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:2016:70: warning: conversion to 'int' from 'double' may alter its value [-Wconversion]
-             DrawTransparentImage (AllImage.Explosion, Block->Point.x - 315, Block->Point.y - 315, &ExplosionFrame, &null, Camera);
-                                                                      ^
-C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:2016:92: warning: conversion to 'int' from 'double' may alter its value [-Wconversion]
-             DrawTransparentImage (AllImage.Explosion, Block->Point.x - 315, Block->Point.y - 315, &ExplosionFrame, &null, Camera);
-                                                                                            ^
-C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:2043:34: warning: comparing floating point with == or != is unsafe [-Wfloat-equal]
-             if (Block->Health == IT_Apple)
-                                  ^
-C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:2045:70: warning: conversion to 'int' from 'double' may alter its value [-Wconversion]
-                 DrawTransparentImage (AllImage.Apple, Block->Point.x + 65, Block->Point.y + 86, &null, &null, Camera);
-                                                                      ^
-C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:2045:91: warning: conversion to 'int' from 'double' may alter its value [-Wconversion]
-                 DrawTransparentImage (AllImage.Apple, Block->Point.x + 65, Block->Point.y + 86, &null, &null, Camera);
-                                                                                           ^
-C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:1698:9: warning: unused variable 'two' [-Wunused-variable]
-     int two = 2;
-         ^
-C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:1699:9: warning: unused variable 'three' [-Wunused-variable]
-     int three = 3;
-         ^
-C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:1700:9: warning: unused variable 'four' [-Wunused-variable]
-     int four = 4;
-         ^
-C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:1702:15: warning: unused variable 'Mouse' [-Wunused-variable]
-     PointType Mouse = {txMouseX(), txMouseY()};
-               ^
-C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp: At global scope:
-C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:2057:6: warning: unused parameter 'Camera' [-Wunused-parameter]
+C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:1693:6: error: prototype for 'void ManType::BlockInteraction(void (*)(BlockType*, CamType*, const AllImageType&), BlockType*, CamType*, const AllImageType&)' does not match any in class 'ManType'
+ void ManType :: BlockInteraction (void (*Function) (BlockType* Block, CamType* Camera, const AllImageType& AllImage),
+      ^
+In file included from C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:1:0:
+C:\Users\007\Desktop\программирование\MyGame2\ManType.h:41:10: error: candidate is: void ManType::BlockInteraction(BlockType*, CamType*, const AllImageType&)
+     void BlockInteraction (BlockType* Block, CamType* Camera, const AllImageType& AllImage);
+          ^
+C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:1699:6: warning: unused parameter 'Camera' [-Wunused-parameter]
  void ManType :: BlockCollision (BlockType* Block, CamType* Camera, const AllImageType& AllImage)
       ^
-C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:2057:6: warning: unused parameter 'AllImage' [-Wunused-parameter]
+C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:1699:6: warning: unused parameter 'AllImage' [-Wunused-parameter]
 C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp: In function 'void DrawLevelPeople(ManType*, CamType*, const AllImageType&)':
-C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:2118:37: warning: comparing floating point with == or != is unsafe [-Wfloat-equal]
+C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:1760:37: warning: comparing floating point with == or != is unsafe [-Wfloat-equal]
      while (Villagers[i].Point.x != -1 && Villagers[i].Point.y != -1)
                                      ^
-C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:2118:67: warning: comparing floating point with == or != is unsafe [-Wfloat-equal]
+C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:1760:67: warning: comparing floating point with == or != is unsafe [-Wfloat-equal]
      while (Villagers[i].Point.x != -1 && Villagers[i].Point.y != -1)
                                                                    ^
 C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp: In function 'void CallPeoplePhysic(ManType*, CamType*, const AllImageType&, BlockType*, ManType*)':
-C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:2146:37: warning: comparing floating point with == or != is unsafe [-Wfloat-equal]
+C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:1788:37: warning: comparing floating point with == or != is unsafe [-Wfloat-equal]
      while (Villagers[i].Point.x != -1 && Villagers[i].Point.y != -1)
                                      ^
-C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:2146:67: warning: comparing floating point with == or != is unsafe [-Wfloat-equal]
+C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:1788:67: warning: comparing floating point with == or != is unsafe [-Wfloat-equal]
      while (Villagers[i].Point.x != -1 && Villagers[i].Point.y != -1)
                                                                    ^
 C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp: At global scope:
-C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:2126:6: warning: unused parameter 'ManyBlocks' [-Wunused-parameter]
+C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:1768:6: warning: unused parameter 'ManyBlocks' [-Wunused-parameter]
  void CallPeoplePhysic (ManType Villagers[], CamType* Camera, const AllImageType& AllImage, BlockType ManyBlocks [], ManType* Man)
       ^
+C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:1800:104: error: no 'void ManType::FallingTreeInteraction(BlockType*, CamType*, const AllImageType&)' member function declared in class 'ManType'
+ void ManType :: FallingTreeInteraction (BlockType* Block, CamType* Camera, const AllImageType& AllImage)
+                                                                                                        ^
+C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:1813:103: error: no 'void ManType::SmallStoneInteraction(BlockType*, CamType*, const AllImageType&)' member function declared in class 'ManType'
+ void ManType :: SmallStoneInteraction (BlockType* Block, CamType* Camera, const AllImageType& AllImage)
+                                                                                                       ^
+C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:1826:97: error: no 'void ManType::RockInteraction(BlockType*, CamType*, const AllImageType&)' member function declared in class 'ManType'
+ void ManType :: RockInteraction (BlockType* Block, CamType* Camera, const AllImageType& AllImage)
+                                                                                                 ^
+C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:1849:100: error: no 'void ManType::BonfireInteraction(BlockType*, CamType*, const AllImageType&)' member function declared in class 'ManType'
+ void ManType :: BonfireInteraction (BlockType* Block, CamType* Camera, const AllImageType& AllImage)
+                                                                                                    ^
+C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:1926:97: error: no 'void ManType::TreeInteraction(BlockType*, CamType*, const AllImageType&)' member function declared in class 'ManType'
+ void ManType :: TreeInteraction (BlockType* Block, CamType* Camera, const AllImageType& AllImage)
+                                                                                                 ^
+C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:1962:101: error: no 'void ManType::DynamiteInteraction(BlockType*, CamType*, const AllImageType&)' member function declared in class 'ManType'
+ void ManType :: DynamiteInteraction (BlockType* Block, CamType* Camera, const AllImageType& AllImage)
+                                                                                                     ^
+C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:1991:97: error: no 'void ManType::CaseInteraction(BlockType*, CamType*, const AllImageType&)' member function declared in class 'ManType'
+ void ManType :: CaseInteraction (BlockType* Block, CamType* Camera, const AllImageType& AllImage)
+                                                                                                 ^
 ---------------------------------------------------------------------------------------------
-[03.04.2021 16:44:33,12 C:\Users\007@LAPTOP-AETNHUR2, returned 0]
+[03.04.2021 21:19:59,97 C:\Users\007@LAPTOP-AETNHUR2, returned 1]
 C:\Users\007\Desktop\программирование\MyGame2> g++.exe -c C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp -o obj\Debug\ManType.o -Wall -fexceptions  -g  -Wshadow -Winit-self -Wredundant-decls -Wcast-align -Wundef -Wfloat-equal -Winline -Wunreachable-code -Wmissing-declarations -Wmissing-include-dirs -Wswitch-enum -Wswitch-default -Weffc++ -Wmain -Wextra -Wall -g -pipe -fexceptions -Wcast-qual -Wconversion -Wctor-dtor-privacy -Wempty-body -Wformat-security -Wformat=2 -Wignored-qualifiers -Wlogical-op -Wmissing-field-initializers -Wnon-virtual-dtor -Woverloaded-virtual -Wpointer-arith -Wsign-promo -Wstack-usage=8192 -Wstrict-aliasing -Wstrict-null-sentinel -Wtype-limits -Wwrite-strings -D_DEBUG -D_EJUDGE_CLIENT_SIDE -D_EJC
