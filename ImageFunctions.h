@@ -8,7 +8,7 @@
 
 extern CamType FixedCamera;
 
-void DeleteAllImage (AllImageType AllImages);
+void DeleteAllImage (AllImageType* AllImages);
 
 void LoadGameImage (ImageType* Image, const char* Picture, int xMaxFrame, int yMaxFrame, COLORREF color,
                     int* Procent, double Number);

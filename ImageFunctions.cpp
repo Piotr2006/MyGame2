@@ -152,38 +152,38 @@ void LoadAllImages (AllImageType* AllImages)
     };
 
 
-void DeleteAllImage (AllImageType AllImages)
+void DeleteAllImage (AllImageType* AllImages)
     {
-    GRDeleteDC (AllImages.BackGround.Picture);
-    GRDeleteDC (AllImages.Cursor.Picture);
-    GRDeleteDC (AllImages.Dirt.Picture);
-    GRDeleteDC (AllImages.Health.Picture);
-    GRDeleteDC (AllImages.Finish.Picture);
-    GRDeleteDC (AllImages.Start.Picture);
-    GRDeleteDC (AllImages.Pause.Picture);
-    GRDeleteDC (AllImages.Coin.Picture);
-    GRDeleteDC (AllImages.CoinAnimation.Picture);
-    GRDeleteDC (AllImages.Box.Picture);
-    GRDeleteDC (AllImages.Man.Picture);
-    GRDeleteDC (AllImages.Stairs.Picture);
-    GRDeleteDC (AllImages.Fire.Picture);
-    GRDeleteDC (AllImages.GreenFire.Picture);
-    GRDeleteDC (AllImages.Water.Picture);
-    GRDeleteDC (AllImages.Bat.Picture);
-    GRDeleteDC (AllImages.Stalactite.Picture);
-    GRDeleteDC (AllImages.GameOver.Picture);
-    GRDeleteDC (AllImages.Pickaxe.Picture);
-    GRDeleteDC (AllImages.Villager.Picture);
-    GRDeleteDC (AllImages.SaySign.Picture);
-    GRDeleteDC (AllImages.Thief.Picture);
-    GRDeleteDC (AllImages.Covboy.Picture);
-    GRDeleteDC (AllImages.Gun.Picture);
-    GRDeleteDC (AllImages.Grass.Picture);
-    GRDeleteDC (AllImages.Knife.Picture);
-    GRDeleteDC (AllImages.Wood.Picture);
-    GRDeleteDC (AllImages.House.Picture);
-    GRDeleteDC (AllImages.Snow.Picture);
-    GRDeleteDC (AllImages.Menu.Picture);
+    GRDeleteDC (&AllImages->BackGround.Picture);
+    GRDeleteDC (&AllImages->Cursor.Picture);
+    GRDeleteDC (&AllImages->Dirt.Picture);
+    GRDeleteDC (&AllImages->Health.Picture);
+    GRDeleteDC (&AllImages->Finish.Picture);
+    GRDeleteDC (&AllImages->Start.Picture);
+    GRDeleteDC (&AllImages->Pause.Picture);
+    GRDeleteDC (&AllImages->Coin.Picture);
+    GRDeleteDC (&AllImages->CoinAnimation.Picture);
+    GRDeleteDC (&AllImages->Box.Picture);
+    GRDeleteDC (&AllImages->Man.Picture);
+    GRDeleteDC (&AllImages->Stairs.Picture);
+    GRDeleteDC (&AllImages->Fire.Picture);
+    GRDeleteDC (&AllImages->GreenFire.Picture);
+    GRDeleteDC (&AllImages->Water.Picture);
+    GRDeleteDC (&AllImages->Bat.Picture);
+    GRDeleteDC (&AllImages->Stalactite.Picture);
+    GRDeleteDC (&AllImages->GameOver.Picture);
+    GRDeleteDC (&AllImages->Pickaxe.Picture);
+    GRDeleteDC (&AllImages->Villager.Picture);
+    GRDeleteDC (&AllImages->SaySign.Picture);
+    GRDeleteDC (&AllImages->Thief.Picture);
+    GRDeleteDC (&AllImages->Covboy.Picture);
+    GRDeleteDC (&AllImages->Gun.Picture);
+    GRDeleteDC (&AllImages->Grass.Picture);
+    GRDeleteDC (&AllImages->Knife.Picture);
+    GRDeleteDC (&AllImages->Wood.Picture);
+    GRDeleteDC (&AllImages->House.Picture);
+    GRDeleteDC (&AllImages->Snow.Picture);
+    GRDeleteDC (&AllImages->Menu.Picture);
     };
 
 void DrawLoading (int Procents)
