@@ -333,7 +333,28 @@ void CallLevelPhysic (BlockType ManyBlocks[], ManType* Man, CamType* Camera, int
         if (ManyBlocks[i].Health > 0)
             Man->BlockCollision (&ManyBlocks [i], Camera, AllImage);
 
-        Man->BlockInteraction (&ManyBlocks [i], Camera, AllImage);
+        // Man->BlockInteraction (&ManyBlocks [i], Camera, AllImage);
+
+        if (ManyBlocks [i].Number == BT_FallingTree)
+            Man->BlockInteraction (FallingTreeInteraction, &ManyBlocks [i], Camera, AllImage);
+
+        if (ManyBlocks [i].Number == BT_SmallStone)
+            Man->BlockInteraction (SmallStoneInteraction, &ManyBlocks [i], Camera, AllImage);
+
+        if (ManyBlocks [i].Number == BT_Rock)
+            Man->BlockInteraction (RockInteraction, &ManyBlocks [i], Camera, AllImage);
+
+        if (ManyBlocks [i].Number == BT_BonFire)
+            Man->BlockInteraction (BonFireInteraction, &ManyBlocks [i], Camera, AllImage);
+
+        if (ManyBlocks [i].Number == BT_Tree)
+            Man->BlockInteraction (TreeInteraction, &ManyBlocks [i], Camera, AllImage);
+
+        if (ManyBlocks [i].Number == BT_Dynamite)
+            Man->BlockInteraction (DynamiteInteraction, &ManyBlocks [i], Camera, AllImage);
+
+        if (ManyBlocks [i].Number == BT_Case)
+            Man->BlockInteraction (CaseInteraction, &ManyBlocks [i], Camera, AllImage);
 
         // CoinCollision (Man, &ManyBlocks [i], NumberCoin);
 
