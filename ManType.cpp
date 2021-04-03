@@ -2022,21 +2022,28 @@ void ManType :: BlockInteraction (BlockType* Block, CamType* Camera, const AllIm
     // Case
     if (Block->Number == BT_Case)
         {
-        // PointType CenterPoint = {Block->Point.x + 45, Block->Point.y + 29};
+        int MouseSpeed = 0;
+
+        if (GetAsyncKeyState (VK_LBUTTON))
+            MouseSpeed = 1;
+        else
+            MouseSpeed = 0;
 
         if (BlockCheckClick (Block, Camera) == true &&
-            Inventory.CraftControlSpeed == 0 &&
+            MouseSpeed == 0 &&
             Block->Animation.yFrame == 0)
             {
             Block->Animation.yFrame = 1;
             };
 
         if (Block->Animation.yFrame == 1 &&
-            BlockCheckClick (Block, Camera) == true)
+            BlockCheckClick (Block, Camera) == true &&
+            MouseSpeed == 0)
             {
             if (Block->Health == IT_Apple)
                 {
                 DrawTransparentImage (AllImage.Apple, Block->Point.x + 65, Block->Point.y + 86, &null, &null, Camera);
+
                 if (BlockCheckClick (Block, Camera) == true)
                     {
                     Inventory.Apple += 1;
@@ -2067,7 +2074,7 @@ void ManType :: BlockCollision (BlockType* Block, CamType* Camera, const AllImag
     // CollisionDetection
 
     if (fabs (Block->Point.x + Block->SizeX/2 - Point.x - SizeX/2) <= Block->SizeX/2 &&
-        InBorders (0, Block->Point.y + Block->SizeY - Point.y, Block->SizeY + this->SizeY) == true)
+        InBorders (Block->SizeY + this->SizeY - 10, Block->Point.y + Block->SizeY - Point.y, Block->SizeY + this->SizeY) == true)
             {
             // CollisionResponse
 
