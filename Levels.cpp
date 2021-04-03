@@ -181,9 +181,8 @@ void MoveGame (BlockType ManyBlocks [], AllImageType AllImage, int* LevelNumber,
 
         GRSleep (Main_Sleep);
         };
-    GREnd ();
 
-    DeleteAllImage (AllImage);
+    GREnd ();
     };
 
 void Level1 (int* LevelNumber, ManType* Man, AllImageType AllImage, CamType* Camera)
