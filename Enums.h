@@ -112,7 +112,7 @@ enum Inv
 enum Man
     {
     Man_x = 4000,
-    Man_y = 500,
+    Man_y = 300,
     Man_Health = 50,
     Man_Temperature = 36,
     Man_FastSpeed = 20,

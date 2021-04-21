@@ -1,0 +1,18 @@
+[core]
+	repositoryformatversion = 0
+	filemode = false
+	bare = false
+	symlinks = false
+	ignorecase = true
+	hideDotFiles = dotGitOnly
+	quotePath = false
+	pager = cat
+	editor = far.exe -e
+	autoCrLf = false
+	safeCrLf = true
+	eol = crlf
+[user]
+	name = 007
+	email = 007@LAPTOP-AETNHUR2
+[diff]
+	guiTool = kdiff3

@@ -13,14 +13,14 @@ struct ManType;
 struct BlockType : BaseType
     {
     BlockType (PointType Point, double Health, AnimationType Animation,
-               int Number);
+               int Number, void (*_Function) (ManType* Man, BlockType* Block, CamType* Camera, const AllImageType& AllImage));
 
     void DrawBlock (CamType* Camera, AllImageType AllImage);
 
     int Number;
+
+    void (*Function) (ManType* Man, BlockType* Block, CamType* Camera, const AllImageType& AllImage);
     };
-
-
 
 //-----------------------------------------------------------------------------
 
@@ -39,4 +39,21 @@ void CallLevelPhysic (BlockType ManyBlocks[], ManType* Man, CamType* Camera, int
 void BlockCalling (BlockType* Block, ManType* Man, CamType* Camera);
 
 //-----------------------------------------------------------------------------
+
+void FallingTreeInteraction (ManType* Man, BlockType* Block, CamType* Camera, const AllImageType& AllImage);
+
+void SmallStoneInteraction (ManType* Man, BlockType* Block, CamType* Camera, const AllImageType& AllImage);
+
+void RockInteraction (ManType* Man, BlockType* Block, CamType* Camera, const AllImageType& AllImage);
+
+void BonfireInteraction (ManType* Man, BlockType* Block, CamType* Camera, const AllImageType& AllImage);
+
+void TreeInteraction (ManType* Man, BlockType* Block, CamType* Camera, const AllImageType& AllImage);
+
+void DynamiteInteraction (ManType* Man, BlockType* Block, CamType* Camera, const AllImageType& AllImage);
+
+void CaseInteraction (ManType* Man, BlockType* Block, CamType* Camera, const AllImageType& AllImage);
+
+void AirInteraction (ManType* Man, BlockType* Block, CamType* Camera, const AllImageType& AllImage);
+
 #endif

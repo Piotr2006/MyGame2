@@ -1,10 +1,10 @@
 #include "BlockType.h"
 
-
 BlockType :: BlockType (PointType _Point, double _Health, AnimationType _Animation,
-               int _Number) :
+                        int _Number, void (*_Function) (ManType* Man, BlockType* Block, CamType* Camera, const AllImageType& AllImage)) :
     BaseType (_Point, _Health, _Animation),
-    Number (_Number)
+    Number (_Number),
+    Function (_Function)
     {
     };
 
@@ -241,6 +241,7 @@ void CreateBlocks (BlockType Blocks [], const AllImageType& AllImage)
             Blocks[i].Point.x = rand() % 11400*World_Size;
             Blocks[i].Point.y = 460;
             Blocks[i].Animation.Picture = &AllImage.Tree;
+            Blocks[i].Function = TreeInteraction;
             };
 
         if (i >= 211*World_Size &&
@@ -251,6 +252,7 @@ void CreateBlocks (BlockType Blocks [], const AllImageType& AllImage)
             Blocks[i].Point.x = rand() % 11400*World_Size;
             Blocks[i].Point.y = 452;
             Blocks[i].Animation.Picture = &AllImage.BonFire;
+            Blocks[i].Function = BonfireInteraction;
             };
 
         if (i >= 214*World_Size &&
@@ -261,6 +263,7 @@ void CreateBlocks (BlockType Blocks [], const AllImageType& AllImage)
             Blocks[i].Point.x = rand() % 11400*World_Size;
             Blocks[i].Point.y = 938;
             Blocks[i].Animation.Picture = &AllImage.Dynamite;
+            Blocks[i].Function = DynamiteInteraction;
             };
 
         if (i >= 218*World_Size &&
@@ -271,6 +274,7 @@ void CreateBlocks (BlockType Blocks [], const AllImageType& AllImage)
             Blocks[i].Point.x = rand() % 11400*World_Size;
             Blocks[i].Point.y = 892;
             Blocks[i].Animation.Picture = &AllImage.HighCase;
+            Blocks[i].Function = CaseInteraction;
             };
 
         if (i >= 223*World_Size)
@@ -333,28 +337,9 @@ void CallLevelPhysic (BlockType ManyBlocks[], ManType* Man, CamType* Camera, int
         if (ManyBlocks[i].Health > 0)
             Man->BlockCollision (&ManyBlocks [i], Camera, AllImage);
 
+        Man->BlockInteraction (&ManyBlocks [i], Camera, AllImage);
+
         // Man->BlockInteraction (&ManyBlocks [i], Camera, AllImage);
-
-        if (ManyBlocks [i].Number == BT_FallingTree)
-            Man->BlockInteraction (FallingTreeInteraction, &ManyBlocks [i], Camera, AllImage);
-
-        if (ManyBlocks [i].Number == BT_SmallStone)
-            Man->BlockInteraction (SmallStoneInteraction, &ManyBlocks [i], Camera, AllImage);
-
-        if (ManyBlocks [i].Number == BT_Rock)
-            Man->BlockInteraction (RockInteraction, &ManyBlocks [i], Camera, AllImage);
-
-        if (ManyBlocks [i].Number == BT_BonFire)
-            Man->BlockInteraction (BonFireInteraction, &ManyBlocks [i], Camera, AllImage);
-
-        if (ManyBlocks [i].Number == BT_Tree)
-            Man->BlockInteraction (TreeInteraction, &ManyBlocks [i], Camera, AllImage);
-
-        if (ManyBlocks [i].Number == BT_Dynamite)
-            Man->BlockInteraction (DynamiteInteraction, &ManyBlocks [i], Camera, AllImage);
-
-        if (ManyBlocks [i].Number == BT_Case)
-            Man->BlockInteraction (CaseInteraction, &ManyBlocks [i], Camera, AllImage);
 
         // CoinCollision (Man, &ManyBlocks [i], NumberCoin);
 
@@ -367,5 +352,237 @@ void BlockCalling (BlockType* Block, ManType* Man, CamType* Camera)
     // BlockCollision (Man, Block, Camera);
     };
 
+
+//=============================================================================
+
+void  FallingTreeInteraction (ManType* Man, BlockType* Block, CamType* Camera, const AllImageType& AllImage)
+    {
+    if (fabs (Block->Point.x + Block->SizeX - Man->Point.x) <= Block->SizeX + Man->SizeX + 200 &&
+        BlockCheckClick (Block, Camera) == true &&
+        Block->Health > 0)
+            {
+            Man->Inventory.Wood += 2;
+            Block->Health = 0;
+            if (Man->HelpSystem.Number == HelpFallingTree)
+                Man->HelpSystem.Number = HelpFindStone;
+            };
+    };
+
+void  SmallStoneInteraction (ManType* Man, BlockType* Block, CamType* Camera, const AllImageType& AllImage)
+    {
+    if (fabs (Block->Point.x + Block->SizeX - Man->Point.x) <= Block->SizeX + Man->SizeX + 200 &&
+        BlockCheckClick (Block, Camera) == true &&
+        Block->Health > 0)
+            {
+            Man->Inventory.Stone += 1;
+            Block->Health = 0;
+            if (Man->HelpSystem.Number == HelpFindStone)
+                Man->HelpSystem.Number = HelpCrafting;
+            };
+    };
+
+void  RockInteraction (ManType* Man, BlockType* Block, CamType* Camera, const AllImageType& AllImage)
+    {
+    if (Man->Inventory.MainNumber == IT_Axe &&
+        Man->Inventory.Axe > 0 &&
+        fabs (Block->Point.x + Block->SizeX - Man->Point.x) <= Block->SizeX + Man->SizeX + 200 &&
+        BlockCheckClick (Block, Camera) == true &&
+        Man->ArmSpeed >= 10)
+            {
+            Block->Health -= 10;
+            Block->Animation.yFrame = 1;
+            Man->ArmSpeed = 0;
+            }
+        else
+            Block->Animation.yFrame = 0;
+
+        if (Block->Health <= 20 &&
+            Block->Health > 0)
+            {
+            Man->Inventory.Stone += 3;
+            Block->Health = 0;
+            };
+    };
+
+void  BonfireInteraction (ManType* Man, BlockType* Block, CamType* Camera, const AllImageType& AllImage)
+    {
+    if (Block->Health <= 3)
+        {
+        Block->Animation.yFrame = 1;
+        if (Man->Temperature < 10 &&
+            fabs (Block->Point.x - Man->Point.x) <= 200)
+        Man->Temperature += 0.025;
+        };
+
+        if (Block->Health > 3 &&
+            Block->Health <= 6)
+            {
+        Block->Animation.yFrame = 1;
+        if (Man->Temperature < 32 &&
+            fabs (Block->Point.x - Man->Point.x) <= 200)
+        Man->Temperature += 0.05;
+        };
+
+        if (Block->Health > 6 &&
+            fabs (Block->Point.x - Man->Point.x) <= 200)
+        {
+        Block->Animation.yFrame = 0;
+        if (Man->Temperature < 36.6)
+        Man->Temperature += 0.1;
+        };
+
+        if (Block->Health >= 1)
+            {
+            if (Man->Days >= 0 &&
+                Man->Days < 10)
+                Block->Health -= 0.0025;
+
+            if (Man->Days >= 10 &&
+                Man->Days < 20)
+                Block->Health -= 0.025;
+
+            if (Man->Days >= 20 &&
+                Man->Days < 30)
+                Block->Health -= 0.0025;
+
+            if (Man->Days >= 30 &&
+                Man->Days < 40)
+                Block->Health -= 0.0012;
+            };
+
+        if (Man->Inventory.MainNumber == IT_Wood &&
+            Man->Inventory.Wood > 0 &&
+            // ModuleDistance (Block->x + 30 - Camera->Point.x, Block->y + 30 - Camera->Point.y, txMouseX(), txMouseY(), 100) == true &&
+            BlockCheckClick (Block, Camera) == true &&
+            Block->Health <= 6 &&
+            Block->Health > 0)
+            {
+            Man->Inventory.Wood -= 1;
+            Block->Health += 3;
+            if (Man->HelpSystem.Number == HelpAddWood)
+                Man->HelpSystem.Number = HelpWarmBonfire;
+            };
+
+        if (Man->Inventory.MainNumber == IT_Fish &&
+            Man->Inventory.Fish > 0 &&
+            BlockCheckClick (Block, Camera) == true &&
+            GetAsyncKeyState (VK_LBUTTON) &&
+            Block->Health >= 3)
+            {
+            Man->Inventory.Fish -= 1;
+            Man->Inventory.CookedFish += 1;
+            Block->Health -= 3;
+            };
+
+        if (fabs (Man->Point.x - Block->Point.x) <= 200)
+            {
+            if (Man->HelpSystem.Number == HelpFindBonfire)
+                Man->HelpSystem.Number = HelpAddWood;
+            };
+    };
+
+void  AirInteraction (ManType* Man, BlockType* Block, CamType* Camera, const AllImageType& AllImage)
+    {
+    };
+
+void  TreeInteraction (ManType* Man, BlockType* Block, CamType* Camera, const AllImageType& AllImage)
+    {
+        if (Man->Inventory.MainNumber == IT_Axe &&
+            Man->Inventory.Axe > 0 && fabs (Block->Point.x + Block->SizeX - Man->Point.x) <= Block->SizeX + Man->SizeX + 100 &&
+            BlockCheckClick (Block, Camera) == true &&
+            Man->ArmSpeed >= 10 &&
+            Block->Health > 2)
+            {
+            Man->ArmSpeed = 0;
+            Block->Health -= 10;
+            // Block->Animation.yFrame += 4;
+            };
+
+        if (Block->Health <= 12 &&
+            Block->Health > 0)
+            {
+            Man->Inventory.Wood += 2;
+            if (Man->Days >= 30 &&
+                Man->Days < 40)
+                Man->Inventory.Apple += 1;
+            if (Man->HelpSystem.Number == HelpDestroyTree)
+                Man->HelpSystem.Number = HelpFindBonfire;
+            Block->Health = -88;
+            };
+
+        if (Block->Health < 0 &&
+            Block->Health >= -88)
+            {
+            Block->Health += 0.5;
+            // Block->Animation.yFrame = 8;
+            };
+
+        if (Block->Health == 0)
+            Block->Health = 100;
+    };
+
+void  DynamiteInteraction (ManType* Man, BlockType* Block, CamType* Camera, const AllImageType& AllImage)
+    {
+    // AnimationType Explosion = {};
+
+    int null = 0;
+
+        if (Block->Health > 0 &&
+            fabs (Man->Point.x + Man->SizeX/2 - Block->Point.x - Block->SizeX/2) <= 500 &&
+            BlockCheckClick (Block, Camera) == true)
+            Block->Health = 80;
+
+        if (Block->Health <= 80 &&
+            Block->Health > 0)
+            {
+            Block->Health -= 5;
+            Block->Animation.yFrame = 1;
+            };
+
+        int ExplosionFrame = -Block->Health;
+
+        if (Block->Health <= 0 &&
+            Block->Health > -6)
+            {
+            DrawTransparentImage (AllImage.Explosion, Block->Point.x - 315, Block->Point.y - 315, &ExplosionFrame, &null, Camera);
+
+            Block->Health -= 1;
+            }
+    };
+
+void  CaseInteraction (ManType* Man, BlockType* Block, CamType* Camera, const AllImageType& AllImage)
+    {
+    int null = 0;
+
+    int MouseSpeed = 0;
+
+        if (GetAsyncKeyState (VK_LBUTTON))
+            MouseSpeed = 1;
+        else
+            MouseSpeed = 0;
+
+        if (BlockCheckClick (Block, Camera) == true &&
+            MouseSpeed == 0 &&
+            Block->Animation.yFrame == 0)
+            {
+            Block->Animation.yFrame = 1;
+            };
+
+        if (Block->Animation.yFrame == 1 &&
+            BlockCheckClick (Block, Camera) == true &&
+            MouseSpeed == 0)
+            {
+            if (Block->Health == IT_Apple)
+                {
+                DrawTransparentImage (AllImage.Apple, Block->Point.x + 65, Block->Point.y + 86, &null, &null, Camera);
+
+                if (BlockCheckClick (Block, Camera) == true)
+                    {
+                    Man->Inventory.Apple += 1;
+                    Block->Health = 1;
+                    };
+                };
+            };
+    };
 
 

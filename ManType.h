@@ -12,6 +12,8 @@
 
 struct BlockType;
 
+// typedef void (*FunctionType) (BlockType* Block, CamType* Camera, const AllImageType& AllImage);
+
 struct ManType : BaseType
     {
     ManType (PointType Point, double _Health, AnimationType Animation,
@@ -38,8 +40,7 @@ struct ManType : BaseType
 
     void BlockCollision (BlockType* Block, CamType* Camera, const AllImageType& AllImage);
 
-    void ManType :: BlockInteraction (void (*Function) (BlockType* Block, CamType* Camera, const AllImageType& AllImage),
-                                                    BlockType* Block, CamType* Camera, const AllImageType& AllImage)
+    void BlockInteraction (BlockType* Block, CamType* Camera, const AllImageType& AllImage);
 
     void Physic ();
 
@@ -87,19 +88,5 @@ void CallPeoplePhysic (ManType Villagers[], CamType* Camera, const AllImageType&
 
 
 //-----------------------------------------------------------------------------
-
-void FallingTreeInteraction (BlockType* Block, CamType* Camera, const AllImageType& AllImage);
-
-void SmallStoneInteraction (BlockType* Block, CamType* Camera, const AllImageType& AllImage);
-
-void RockInteraction (BlockType* Block, CamType* Camera, const AllImageType& AllImage);
-
-void BonfireInteraction (BlockType* Block, CamType* Camera, const AllImageType& AllImage);
-
-void TreeInteraction (BlockType* Block, CamType* Camera, const AllImageType& AllImage);
-
-void DynamiteInteraction (BlockType* Block, CamType* Camera, const AllImageType& AllImage);
-
-void CaseInteraction (BlockType* Block, CamType* Camera, const AllImageType& AllImage);
 
 #endif

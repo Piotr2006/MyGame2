@@ -60,9 +60,13 @@ int GRMouseY ()
     return txMouseY();
     };
 
-void GRDeleteDC (HDC Image)
+void GRDeleteDC (HDC* Image)
     {
     txDeleteDC (Image);
+
+    *Image = 0;
+
+    printf ("Image = %d \n", *Image);
     };
 
 void GRAlphaBlend (double x, double y, double Wide, double Heigh,
