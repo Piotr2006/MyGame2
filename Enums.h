@@ -2,7 +2,10 @@
 #define ENUMS_H
 
 const int NameSize = 50;
-const int World_Size = 5;   // !!! Не делать больше 10-ти !!!
+const int World_Size = 5;   // !!! РќРµ РґРµР»Р°С‚СЊ Р±РѕР»СЊС€Рµ 10-С‚Рё !!!
+
+const int Blocks_Number = 1115;
+const int Men_Number = 1;
 
 enum SelectedInvTypes
     {

@@ -12,35 +12,35 @@
 
 struct BlockType;
 
-// typedef void (*FunctionType) (BlockType* Block, CamType* Camera, const AllImageType& AllImage);
+// typedef void (*FunctionType) (BlockType* Block, CamType* Camera);
 
 struct ManType : BaseType
     {
     ManType (PointType Point, double _Health, AnimationType Animation,
              PointType Speed, PointType _Acceleration,
              int _Side, int _Position, double _Temperature,
-             int _NumberCoin, int _xWeapon, int _ArmSpeed, char _Name [50], int _Kind, InvType _Inventory,
+             int _NumberCoin, int _xWeapon, int _ArmSpeed, const char _Name [50], int _Kind, InvType _Inventory,
              int _Time, int _Days, double _ArrowX, double _ArrowY, int _ArrowVX, int _ArroeVY, HelpType _HelpSystem);
 
-    void DrawMan (CamType* Camera, const AllImageType& AllImage);
+    void DrawMan (CamType* Camera);
 
-    void DrawInventory (CamType* Camera, const AllImageType& AllImage);
+    void DrawInventory (CamType* Camera);
 
-    void Crafting (const AllImageType& AllImage);
+    void Crafting ();
 
     void ManTemperature ();
 
-    void ManFire (CamType* Camera, const AllImageType& AllImage);
+    void ManFire (CamType* Camera);
 
-    void ManHealth (CamType* Camera, const AllImageType& AllImage);
+    void ManHealth (CamType* Camera);
 
     void ControlMan (const MouseType& Mouse, int* t);
 
-    void VillagerMind (ManType* Man, CamType* Camera, const AllImageType& AllImage);
+    void VillagerMind (ManType* Man, CamType* Camera);
 
-    void BlockCollision (BlockType* Block, CamType* Camera, const AllImageType& AllImage);
+    void BlockCollision (BlockType* Block, CamType* Camera);
 
-    void BlockInteraction (BlockType* Block, CamType* Camera, const AllImageType& AllImage);
+    void BlockInteraction (BlockType* Block, CamType* Camera);
 
     void Physic ();
 
@@ -80,11 +80,11 @@ struct ManType : BaseType
 
 void DrawSlot (int Block, int x, int y, const ImageType& Picture, int TextX, int TextY);
 
-void CreateVillagers (ManType Villagers [], const AllImageType& AllImage);
+void CreateVillagers (ManType Villagers []);
 
-void DrawLevelPeople (ManType Villagers[], CamType* Camera, const AllImageType& AllImage);
+void DrawLevelPeople (ManType Villagers[], CamType* Camera);
 
-void CallPeoplePhysic (ManType Villagers[], CamType* Camera, const AllImageType& AllImage, BlockType ManyBlocks [], ManType* Man);
+void CallPeoplePhysic (ManType Villagers[], CamType* Camera, BlockType* ManyBlocks [], ManType* Man);
 
 
 //-----------------------------------------------------------------------------

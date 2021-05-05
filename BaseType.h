@@ -3,10 +3,15 @@
 
 #include "PointType.h"
 #include "AnimationType.h"
+#include "AllImageType.h"
 
 struct BaseType
     {
+    BaseType ();
+
     BaseType (PointType Point, double Health, AnimationType Animation);
+
+    virtual ~BaseType () {};
 
     PointType Point;
 

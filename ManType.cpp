@@ -3,11 +3,11 @@
 ManType :: ManType (PointType _Point, double _Health, AnimationType _Animation,
                     PointType _Speed, PointType _Acceleration,
                     int _Side, int _Position, double _Temperature,
-                    int _NumberCoin, int _xWeapon, int _ArmSpeed, char _Name [50], int _Kind, InvType _Inventory,
+                    int _NumberCoin, int _xWeapon, int _ArmSpeed, const char _Name [50], int _Kind, InvType _Inventory,
                     int _Time, int _Days, double _ArrowX, double _ArrowY, int _ArrowVX, int _ArroeVY, HelpType _HelpSystem) :
     BaseType (_Point, _Health, _Animation),
     Speed (_Speed),
-    Acceleration (_Acceleration),                                                  // & - Амперсанд (берет адрес переменной)
+    Acceleration (_Acceleration),                                                  // & - РђРјРїРµСЂСЃР°РЅРґ (Р±РµСЂРµС‚ Р°РґСЂРµСЃ РїРµСЂРµРјРµРЅРЅРѕР№)
     Side (_Side),
     Position (_Position),
     Temperature (_Temperature),
@@ -34,13 +34,13 @@ ManType :: ManType (PointType _Point, double _Health, AnimationType _Animation,
     StrCpy (Name, _Name);
     };
 
-void CreateVillagers (ManType Villagers [], const AllImageType& AllImage)
+void CreateVillagers (ManType Villagers [])
     {
-    int i = 0;
+    // int i = 0;
 
     int BearNumber = rand() % 4;
 
-    while (Villagers[i].Point.x != -1 && Villagers[i].Point.y != -1)
+    for (int i = 0; i < Men_Number; i ++)
         {
         if (i < BearNumber)
             {
@@ -50,7 +50,7 @@ void CreateVillagers (ManType Villagers [], const AllImageType& AllImage)
             Villagers[i].Inventory.Rope = 10;
             Villagers[i].Point.x = rand() % 11400*World_Size;
             Villagers[i].Point.y = -500;
-            Villagers[i].Animation.Picture = &AllImage.Bear;
+            Villagers[i].Animation.Picture = &GlobalAllImage.Bear;
             };
 
         if (i >= BearNumber &&
@@ -62,7 +62,7 @@ void CreateVillagers (ManType Villagers [], const AllImageType& AllImage)
             Villagers[i].Inventory.Rope = 13;
             Villagers[i].Point.x = rand() % 11400*World_Size;
             Villagers[i].Point.y = -500;
-            Villagers[i].Animation.Picture = &AllImage.Wolf;
+            Villagers[i].Animation.Picture = &GlobalAllImage.Wolf;
             };
 
         if (i >= 7 &&
@@ -75,7 +75,7 @@ void CreateVillagers (ManType Villagers [], const AllImageType& AllImage)
             Villagers[i].Inventory.Arrow = 34;
             Villagers[i].Point.x = rand() % 11400*World_Size;
             Villagers[i].Point.y = -500;
-            Villagers[i].Animation.Picture = &AllImage.Spider;
+            Villagers[i].Animation.Picture = &GlobalAllImage.Spider;
             };
 
         if (i >= 10 &&
@@ -89,7 +89,7 @@ void CreateVillagers (ManType Villagers [], const AllImageType& AllImage)
             Villagers[i].Inventory.Bow = rand() % 3;
             Villagers[i].Point.x = rand() % 11400*World_Size;
             Villagers[i].Point.y = -500;
-            Villagers[i].Animation.Picture = &AllImage.Villager;
+            Villagers[i].Animation.Picture = &GlobalAllImage.Villager;
             };
 
         if (i >= 13 &&
@@ -100,7 +100,7 @@ void CreateVillagers (ManType Villagers [], const AllImageType& AllImage)
             // Villagers[i].Inventory.Rope = 10;
             Villagers[i].Point.x = -rand() % 700 - 500;
             Villagers[i].Point.y = 750 + rand() % 100;
-            Villagers[i].Animation.Picture = &AllImage.Fish;
+            Villagers[i].Animation.Picture = &GlobalAllImage.Fish;
             };
 
         if (i >= 20 &&
@@ -114,7 +114,7 @@ void CreateVillagers (ManType Villagers [], const AllImageType& AllImage)
             Villagers[i].Point.x = rand() % 100;
             Villagers[i].Inventory.Arrow = -200;
             Villagers[i].Point.y = 400;
-            Villagers[i].Animation.Picture = &AllImage.Ghost;
+            Villagers[i].Animation.Picture = &GlobalAllImage.Ghost;
             };
 
         if (i >= 22)
@@ -124,7 +124,7 @@ void CreateVillagers (ManType Villagers [], const AllImageType& AllImage)
 
         // x += 1;
 
-        i += 1;
+        // i += 1;
         };
     };
 
@@ -134,17 +134,17 @@ void DrawSlot (int Block, int x, int y, const ImageType& Picture, int TextX, int
     int null = 0;
     int one = 1;
 
-    PointType TextPoint = {TextX + 38, TextY + 114};
+    PointType TextPoint = {TextX + 38, TextY + 44};
 
     if (Block > 0)
         {
-        DrawTransparentImage (Picture, x, y + 70, &null, &one);
+        DrawTransparentImage (Picture, x, y, &null, &one);
 
         Text (TextPoint, 20, Block, "");
         };
     };
 
-void ManType :: Crafting (const AllImageType& AllImage)
+void ManType :: Crafting ()
     {
     PointType Mouse = {txMouseX(), txMouseY()};
 
@@ -167,9 +167,9 @@ void ManType :: Crafting (const AllImageType& AllImage)
 
     if (Inventory.CraftNumber == 0)
         {
-        DrawTransparentImage (AllImage.CommonSlot, 15, 300, &null, &null);
+        DrawTransparentImage (GlobalAllImage.CommonSlot, 15, 300, &null, &null);
 
-        DrawTransparentImage (AllImage.CraftImage, 10, 295, &null, &null);
+        DrawTransparentImage (GlobalAllImage.CraftImage, 10, 295, &null, &null);
 
         if (ModuleDistance (CraftPoint, Mouse, 50) == true &&
             GetAsyncKeyState (VK_LBUTTON))
@@ -181,19 +181,19 @@ void ManType :: Crafting (const AllImageType& AllImage)
 
     if (Inventory.CraftNumber > 0)
     {
-    DrawTransparentImage (AllImage.CommonSlot, 15, 300, &null, &null);
+    DrawTransparentImage (GlobalAllImage.CommonSlot, 15, 300, &null, &null);
 
-    DrawTransparentImage (AllImage.Plus, 75, 304, &null, &null);
+    DrawTransparentImage (GlobalAllImage.Plus, 75, 304, &null, &null);
 
-    DrawTransparentImage (AllImage.CommonSlot, 127, 300, &null, &null);
+    DrawTransparentImage (GlobalAllImage.CommonSlot, 127, 300, &null, &null);
 
-    DrawTransparentImage (AllImage.Plus, 187, 304, &null, &one);
+    DrawTransparentImage (GlobalAllImage.Plus, 187, 304, &null, &one);
 
-    DrawTransparentImage (AllImage.Slot, 239, 300, &null, &null);
+    DrawTransparentImage (GlobalAllImage.Slot, 239, 300, &null, &null);
 
-    DrawTransparentImage (AllImage.Pause, 309, 300, &null, &four);
+    DrawTransparentImage (GlobalAllImage.Pause, 309, 300, &null, &four);
 
-    DrawTransparentImage (AllImage.Pause, 309, 370, &null, &five);
+    DrawTransparentImage (GlobalAllImage.Pause, 309, 370, &null, &five);
 
     if (ModuleDistance (CraftRight, Mouse, 50) == true &&
         GetAsyncKeyState (VK_LBUTTON) &&
@@ -217,11 +217,11 @@ void ManType :: Crafting (const AllImageType& AllImage)
 
     if (Inventory.CraftNumber == 1)
         {
-        DrawSlot (2, 15, 230, AllImage.Wood, 15, 230);
+        DrawSlot (2, 15, 230, GlobalAllImage.Wood, 15, 230);
 
-        DrawTransparentImage (AllImage.Stone, 127, 300, &null, &one);
+        DrawTransparentImage (GlobalAllImage.Stone, 127, 300, &null, &one);
 
-        DrawTransparentImage (AllImage.Axe, 240, 292, &null, &one);
+        DrawTransparentImage (GlobalAllImage.Axe, 240, 292, &null, &one);
 
         if (Inventory.Wood >= 2 &&
             Inventory.Stone >= 1 &&
@@ -241,11 +241,11 @@ void ManType :: Crafting (const AllImageType& AllImage)
 
     if (Inventory.CraftNumber == 2)
         {
-        DrawTransparentImage (AllImage.Wood, 127, 300, &null, &one);
+        DrawTransparentImage (GlobalAllImage.Wood, 127, 300, &null, &one);
 
-        DrawTransparentImage (AllImage.Stone, 15, 300, &null, &one);
+        DrawTransparentImage (GlobalAllImage.Stone, 15, 300, &null, &one);
 
-        DrawTransparentImage (AllImage.Knife, 240, 312, &null, &one);
+        DrawTransparentImage (GlobalAllImage.Knife, 240, 312, &null, &one);
 
         if (Inventory.Wood >= 1 &&
             Inventory.Stone >= 1 &&
@@ -263,11 +263,11 @@ void ManType :: Crafting (const AllImageType& AllImage)
 
     if (Inventory.CraftNumber == 3)
         {
-        DrawSlot (2, 15, 230, AllImage.Wood, 15, 230);
+        DrawSlot (2, 15, 230, GlobalAllImage.Wood, 15, 230);
 
-        DrawTransparentImage (AllImage.Rope, 127, 300, &null, &one);
+        DrawTransparentImage (GlobalAllImage.Rope, 127, 300, &null, &one);
 
-        DrawTransparentImage (AllImage.FishingSmall, 240, 292, &null, &one);
+        DrawTransparentImage (GlobalAllImage.FishingSmall, 240, 292, &null, &one);
 
         if (Inventory.Wood >= 2 &&
             Inventory.Rope >= 1 &&
@@ -285,11 +285,11 @@ void ManType :: Crafting (const AllImageType& AllImage)
 
     if (Inventory.CraftNumber == 4)
         {
-        DrawSlot (2, 127, 230, AllImage.Wood, 127, 230);
+        DrawSlot (2, 127, 230, GlobalAllImage.Wood, 127, 230);
 
-        DrawSlot (2, 15, 230, AllImage.Rope, 15, 230);
+        DrawSlot (2, 15, 230, GlobalAllImage.Rope, 15, 230);
 
-        DrawTransparentImage (AllImage.Bow, 240, 292, &null, &one);
+        DrawTransparentImage (GlobalAllImage.Bow, 240, 292, &null, &one);
 
         if (Inventory.Wood >= 2 &&
             Inventory.Rope >= 2 &&
@@ -307,11 +307,11 @@ void ManType :: Crafting (const AllImageType& AllImage)
 
     if (Inventory.CraftNumber == 5)
         {
-        DrawTransparentImage (AllImage.Wood, 127, 300, &null, &one);
+        DrawTransparentImage (GlobalAllImage.Wood, 127, 300, &null, &one);
 
-        DrawTransparentImage (AllImage.Stone, 15, 300, &null, &one);
+        DrawTransparentImage (GlobalAllImage.Stone, 15, 300, &null, &one);
 
-        DrawSlot (3, 233, 254, AllImage.Arrow, 240, 230);
+        DrawSlot (3, 233, 254, GlobalAllImage.Arrow, 240, 230);
 
         if (Inventory.Wood >= 1 &&
             Inventory.Stone >= 1 &&
@@ -330,7 +330,7 @@ void ManType :: Crafting (const AllImageType& AllImage)
 
     };
 
-void ManType :: DrawInventory (CamType* Camera, const AllImageType& AllImage)
+void ManType :: DrawInventory (CamType* Camera)
     {
     int null = 0;
 
@@ -339,7 +339,7 @@ void ManType :: DrawInventory (CamType* Camera, const AllImageType& AllImage)
 
     PointType Mouse = {txMouseX(), txMouseY()};
 
-    PointType Axe   = {350, 515};
+    /* PointType Axe   = {350, 515};
     PointType Bow   = {350, 585};
     PointType Arrow = {350, 655};
 
@@ -349,32 +349,32 @@ void ManType :: DrawInventory (CamType* Camera, const AllImageType& AllImage)
 
     PointType Apple       = {450, 515};
     PointType Fish        = {450, 585};
-    PointType CookedFish  = {450, 655};
+    PointType CookedFish  = {450, 655}; */
 
-    DrawTransparentImage (AllImage.CommonSlot, 325, 700, &null, &null);
-    DrawTransparentImage (AllImage.CommonSlot, 375, 700, &null, &null);
-    DrawTransparentImage (AllImage.CommonSlot, 425, 700, &null, &null);
+    /* DrawTransparentImage (GlobalAllImage.CommonSlot, 325 + Inventory.MainSlot*50, 700, &null, &null);
+    DrawTransparentImage (GlobalAllImage.CommonSlot, 375, 700, &null, &null);
+    DrawTransparentImage (GlobalAllImage.CommonSlot, 425, 700, &null, &null);
 
     if (Inventory.SelectedType == ST_Weapon)
         {
-        DrawTransparentImage (AllImage.CommonSlot, 325, 490, &null, &null);
-        DrawTransparentImage (AllImage.CommonSlot, 325, 560, &null, &null);
-        DrawTransparentImage (AllImage.CommonSlot, 325, 630, &null, &null);
+        DrawTransparentImage (GlobalAllImage.CommonSlot, 325, 490, &null, &null);
+        DrawTransparentImage (GlobalAllImage.CommonSlot, 325, 560, &null, &null);
+        DrawTransparentImage (GlobalAllImage.CommonSlot, 325, 630, &null, &null);
 
         if (Inventory.MainNumber == IT_Axe)
-            DrawTransparentImage (AllImage.Slot, 324, 489, &null, &null);
+            DrawTransparentImage (GlobalAllImage.Slot, 324, 489, &null, &null);
 
         if (Inventory.MainNumber == IT_Bow)
-            DrawTransparentImage (AllImage.Slot, 324, 559, &null, &null);
+            DrawTransparentImage (GlobalAllImage.Slot, 324, 559, &null, &null);
 
         if (Inventory.MainNumber == IT_Arrow)
-            DrawTransparentImage (AllImage.Slot, 324, 629, &null, &null);
+            DrawTransparentImage (GlobalAllImage.Slot, 324, 629, &null, &null);
 
-        DrawSlot (Inventory.Axe, 325, 410, AllImage.Axe, 325, 420);
+        DrawSlot (Inventory.Axe, 325, 410, GlobalAllImage.Axe, 325, 420);
 
-        DrawSlot (Inventory.Bow, 325, 480, AllImage.Bow, 325, 490);
+        DrawSlot (Inventory.Bow, 325, 480, GlobalAllImage.Bow, 325, 490);
 
-        DrawSlot (Inventory.Arrow, 312, 579, AllImage.Arrow, 325, 560);
+        DrawSlot (Inventory.Arrow, 312, 579, GlobalAllImage.Arrow, 325, 560);
 
         if (ModuleDistance (Axe, Mouse, 35) == true &&
             GetAsyncKeyState (VK_RBUTTON))
@@ -391,24 +391,24 @@ void ManType :: DrawInventory (CamType* Camera, const AllImageType& AllImage)
 
     if (Inventory.SelectedType == ST_Resourses)
         {
-        DrawTransparentImage (AllImage.CommonSlot, 375, 490, &null, &null);
-        DrawTransparentImage (AllImage.CommonSlot, 375, 560, &null, &null);
-        DrawTransparentImage (AllImage.CommonSlot, 375, 630, &null, &null);
+        DrawTransparentImage (GlobalAllImage.CommonSlot, 375, 490, &null, &null);
+        DrawTransparentImage (GlobalAllImage.CommonSlot, 375, 560, &null, &null);
+        DrawTransparentImage (GlobalAllImage.CommonSlot, 375, 630, &null, &null);
 
         if (Inventory.MainNumber == IT_Wood)
-            DrawTransparentImage (AllImage.Slot, 374, 489, &null, &null);
+            DrawTransparentImage (GlobalAllImage.Slot, 374, 489, &null, &null);
 
         if (Inventory.MainNumber == IT_Stone)
-            DrawTransparentImage (AllImage.Slot, 374, 559, &null, &null);
+            DrawTransparentImage (GlobalAllImage.Slot, 374, 559, &null, &null);
 
         if (Inventory.MainNumber == IT_Coin)
-            DrawTransparentImage (AllImage.Slot, 374, 629, &null, &null);
+            DrawTransparentImage (GlobalAllImage.Slot, 374, 629, &null, &null);
 
-        DrawSlot (Inventory.Wood,  375, 420, AllImage.Wood, 375, 420);
+        DrawSlot (Inventory.Wood,  375, 420, GlobalAllImage.Wood, 375, 420);
 
-        DrawSlot (Inventory.Stone, 375, 490, AllImage.Stone, 375, 490);
+        DrawSlot (Inventory.Stone, 375, 490, GlobalAllImage.Stone, 375, 490);
 
-        DrawSlot (Inventory.Coin,  385, 567, AllImage.Coin, 375, 560);
+        DrawSlot (Inventory.Coin,  385, 567, GlobalAllImage.Coin, 375, 560);
 
         if (ModuleDistance (Wood, Mouse, 35) == true &&
             GetAsyncKeyState (VK_RBUTTON))
@@ -425,24 +425,24 @@ void ManType :: DrawInventory (CamType* Camera, const AllImageType& AllImage)
 
     if (Inventory.SelectedType == ST_Food)
         {
-        DrawTransparentImage (AllImage.CommonSlot, 425, 490, &null, &null);
-        DrawTransparentImage (AllImage.CommonSlot, 425, 560, &null, &null);
-        DrawTransparentImage (AllImage.CommonSlot, 425, 630, &null, &null);
+        DrawTransparentImage (GlobalAllImage.CommonSlot, 425, 490, &null, &null);
+        DrawTransparentImage (GlobalAllImage.CommonSlot, 425, 560, &null, &null);
+        DrawTransparentImage (GlobalAllImage.CommonSlot, 425, 630, &null, &null);
 
         if (Inventory.MainNumber == IT_Apple)
-            DrawTransparentImage (AllImage.Slot, 424, 489, &null, &null);
+            DrawTransparentImage (GlobalAllImage.Slot, 424, 489, &null, &null);
 
         if (Inventory.MainNumber == IT_Fish)
-            DrawTransparentImage (AllImage.Slot, 424, 559, &null, &null);
+            DrawTransparentImage (GlobalAllImage.Slot, 424, 559, &null, &null);
 
         if (Inventory.MainNumber == IT_CookedFish)
-            DrawTransparentImage (AllImage.Slot, 424, 629, &null, &null);
+            DrawTransparentImage (GlobalAllImage.Slot, 424, 629, &null, &null);
 
-        DrawSlot (Inventory.Apple,  425, 420, AllImage.Apple, 375, 420);
+        DrawSlot (Inventory.Apple,  425, 420, GlobalAllImage.Apple, 375, 420);
 
-        DrawSlot (Inventory.Fish, 430, 497, AllImage.Fish, 375, 490);
+        DrawSlot (Inventory.Fish, 430, 497, GlobalAllImage.Fish, 375, 490);
 
-        DrawSlot (Inventory.CookedFish,  430, 567, AllImage.CookedFish, 375, 560);
+        DrawSlot (Inventory.CookedFish,  430, 567, GlobalAllImage.CookedFish, 375, 560);
 
         if (ModuleDistance (Apple, Mouse, 35) == true &&
             GetAsyncKeyState (VK_RBUTTON))
@@ -455,19 +455,26 @@ void ManType :: DrawInventory (CamType* Camera, const AllImageType& AllImage)
         if (ModuleDistance (CookedFish, Mouse, 35) == true &&
             GetAsyncKeyState (VK_RBUTTON))
             Inventory.MainNumber = IT_CookedFish;
-        };
+        };  */
 
-    // DrawSlot (Inventory.Apple, 475, 700, AllImage.Apple, 475, 700);
+    DrawTransparentImage (GlobalAllImage.Inventory, 375, 700, &null, &null);
+    DrawTransparentImage (GlobalAllImage.Inventory, 825, 700, &null, &null);
 
-    // DrawSlot (Inventory.Knife, 425, 720, AllImage.Knife, 425, 700);
+    DrawTransparentImage (GlobalAllImage.Slot, 375 + Inventory.MainNumber*50, 700, &null, &null);
 
-    // DrawSlot (Inventory.Fishing, 725, 700, AllImage.FishingSmall, 725, 700);
+    DrawSlot (Inventory.Axe, 375, 690, GlobalAllImage.Axe, 375, 700);
 
-    // DrawSlot (Inventory.Fish, 780, 713, AllImage.Fish, 775, 700);
+    DrawSlot (Inventory.Apple, 475, 700, GlobalAllImage.Apple, 475, 700);
 
-    // DrawSlot (Inventory.CookedFish, 825, 712, AllImage.CookedFish, 825, 700);
+    DrawSlot (Inventory.Knife, 420, 720, GlobalAllImage.Knife, 425, 700);
 
-    // DrawSlot (Inventory.Rope, 875, 700, AllImage.Rope, 875, 700);
+    DrawSlot (Inventory.Fishing, 725, 700, GlobalAllImage.FishingSmall, 725, 700);
+
+    DrawSlot (Inventory.Fish, 780, 713, GlobalAllImage.Fish, 775, 700);
+
+    DrawSlot (Inventory.CookedFish, 825, 712, GlobalAllImage.CookedFish, 825, 700);
+
+    DrawSlot (Inventory.Rope, 875, 700, GlobalAllImage.Rope, 875, 700);
 
     int X = 1;
 
@@ -480,13 +487,13 @@ void ManType :: DrawInventory (CamType* Camera, const AllImageType& AllImage)
 
     if (GetAsyncKeyState (VK_LCONTROL))
         {
-        // InvControlSpeed = -1;
+        Inventory.InvControlSpeed = -1;
         }
     else
         {
         if (GetAsyncKeyState (VK_RCONTROL))
         {
-        // InvControlSpeed = 1;
+        Inventory.InvControlSpeed = 1;
         }
         else
             Inventory.InvControlSpeed = 0;
@@ -495,22 +502,22 @@ void ManType :: DrawInventory (CamType* Camera, const AllImageType& AllImage)
     if (GetAsyncKeyState (VK_LCONTROL) &&
         Inventory.InvControlSpeed == 0)
         {
-        Inventory.SelectedType -= 1;
+        Inventory.MainNumber -= 1;
         Inventory.InvControlSpeed = -1;
         };
 
     if (GetAsyncKeyState (VK_RCONTROL) &&
         Inventory.InvControlSpeed == 0)
         {
-        Inventory.SelectedType += 1;
+        Inventory.MainNumber += 1;
         Inventory.InvControlSpeed = 1;
         };
 
-    if (Inventory.SelectedType < ST_Weapon)
-        Inventory.SelectedType = 8;
+    if (Inventory.MainNumber < 0)
+        Inventory.MainNumber = 8;
 
-    if (Inventory.SelectedType > 8)
-        Inventory.SelectedType = ST_Weapon;
+    if (Inventory.MainNumber >= 18)
+        Inventory.MainNumber = 0;
 
     // Numbers
 
@@ -594,67 +601,67 @@ void ManType :: DrawInventory (CamType* Camera, const AllImageType& AllImage)
     /* if (yFrame <= 1 &&
         Inventory.MainNumber == IT_Knife &&
         Inventory.Knife > 0)
-        DrawTransparentImage (AllImage.Knife, Point.x + 33 - yFrame*20 + xWeapon*X,
+        DrawTransparentImage (GlobalAllImage.Knife, Point.x + 33 - yFrame*20 + xWeapon*X,
                               Point.y + 112, &null, &yFrame, Camera);
 
     if (yFrame <= 1 &&
         Inventory.MainNumber == IT_Apple &&
         Inventory.Apple > 0)
-        DrawTransparentImage (AllImage.Apple, Point.x + 33 - yFrame*20 + xWeapon*X,
+        DrawTransparentImage (GlobalAllImage.Apple, Point.x + 33 - yFrame*20 + xWeapon*X,
                               Point.y + 112, &null, &yFrame, Camera);
 
     if (yFrame <= 1 &&
         Inventory.MainNumber == IT_Arrow &&
         Inventory.Arrow > 0)
-        DrawTransparentImage (AllImage.Arrow, Point.x + 33 - yFrame*20 + xWeapon*X,
+        DrawTransparentImage (GlobalAllImage.Arrow, Point.x + 33 - yFrame*20 + xWeapon*X,
                               Point.y + 112, &null, &yFrame, Camera);
 
     if (yFrame <= 1 &&
         Inventory.MainNumber == IT_Stone &&
         Inventory.Stone > 0)
-        DrawTransparentImage (AllImage.Stone, Point.x + 33 - yFrame*20 + xWeapon*X,
+        DrawTransparentImage (GlobalAllImage.Stone, Point.x + 33 - yFrame*20 + xWeapon*X,
                               Point.y + 112, &null, &yFrame, Camera);
 
     if (yFrame <= 1 &&
         Inventory.MainNumber == IT_Wood &&
         Inventory.Wood > 0)
-        DrawTransparentImage (AllImage.Wood, Point.x + 33 - yFrame*20 + xWeapon*X,
+        DrawTransparentImage (GlobalAllImage.Wood, Point.x + 33 - yFrame*20 + xWeapon*X,
                               Point.y + 70, &null, &yFrame, Camera);
 
     if (yFrame <= 1 &&
         Inventory.MainNumber == IT_Coin &&
         Inventory.Coin > 0)
-        DrawTransparentImage (AllImage.Coin, Point.x + 33 - yFrame*20 + xWeapon*X,
+        DrawTransparentImage (GlobalAllImage.Coin, Point.x + 33 - yFrame*20 + xWeapon*X,
                               Point.y + 70, &null, &yFrame, Camera);
 
     if (yFrame <= 1 &&
         Inventory.MainNumber == IT_Axe &&
         Inventory.Axe > 0)
-        DrawTransparentImage (AllImage.Axe, Point.x - 26 + yFrame*98,
+        DrawTransparentImage (GlobalAllImage.Axe, Point.x - 26 + yFrame*98,
                               Point.y + 60, &xWeapon, &yFrame, Camera);
 
     if (yFrame <= 1 &&
         Inventory.MainNumber == IT_Fishing &&
         Inventory.Fishing > 0)
-        DrawTransparentImage (AllImage.FishingBig, Point.x - 23 + yFrame*101,
+        DrawTransparentImage (GlobalAllImage.FishingBig, Point.x - 23 + yFrame*101,
                               Point.y + 60, &null, &yFrame, Camera);
 
     if (yFrame <= 1 &&
         Inventory.MainNumber == IT_Fish &&
         Inventory.Fish > 0)
-        DrawTransparentImage (AllImage.Fish, Point.x - 23 + yFrame*101,
+        DrawTransparentImage (GlobalAllImage.Fish, Point.x - 23 + yFrame*101,
                               Point.y + 110, &null, &yFrame, Camera);
 
     if (yFrame <= 1 &&
         Inventory.MainNumber == IT_CookedFish &&
         Inventory.CookedFish > 0)
-        DrawTransparentImage (AllImage.CookedFish, Point.x - 23 + yFrame*101,
+        DrawTransparentImage (GlobalAllImage.CookedFish, Point.x - 23 + yFrame*101,
                               Point.y + 110, &null, &yFrame, Camera);
 
     if (yFrame <= 1 &&
         Inventory.MainNumber == IT_Rope &&
         Inventory.Rope > 0)
-        DrawTransparentImage (AllImage.Rope, Point.x - 23 + yFrame*101,
+        DrawTransparentImage (GlobalAllImage.Rope, Point.x - 23 + yFrame*101,
                               Point.y + 110, &null, &yFrame, Camera);
 
     // Bow
@@ -663,18 +670,18 @@ void ManType :: DrawInventory (CamType* Camera, const AllImageType& AllImage)
         Inventory.MainNumber == IT_Bow &&
         Inventory.Bow > 0)
         {
-        DrawTransparentImage (AllImage.Bow, Point.x + yFrame*72,
+        DrawTransparentImage (GlobalAllImage.Bow, Point.x + yFrame*72,
                               Point.y + 70, &xWeapon, &yFrame, Camera);
 
         if (Inventory.Arrow > 0)
-            DrawTransparentImage (AllImage.Arrow, -11 + 61*yFrame + ArrowX,
+            DrawTransparentImage (GlobalAllImage.Arrow, -11 + 61*yFrame + ArrowX,
                                   ArrowY + 100, &null, &yFrame, Camera);
         };
 
     // printf ("y = %d \n", ArrowY); */
     };
 
-void ManType :: DrawMan (CamType* Camera, const AllImageType& AllImage)
+void ManType :: DrawMan (CamType* Camera)
     {
     /* if (GetAsyncKeyState (VK_LBUTTON) &&
         ArmSpeed > 0)
@@ -790,7 +797,7 @@ void ManType :: DrawMan (CamType* Camera, const AllImageType& AllImage)
         };
     };
 
-void ManType :: ManFire (CamType* Camera, const AllImageType& AllImage)
+void ManType :: ManFire (CamType* Camera)
     {
     /* BlockType Fire1 {0 - GRGetExtentX (Animation.Picture->Picture)/2 + Man_Fire1X, 0 - GRGetExtentY (Animation.Picture->Picture)/2 + Man_Fire1Y, 4, {rand() % 4, 0, &AllImage.Fire}, 0};
     BlockType Fire2 {0 - GRGetExtentX (Animation.Picture->Picture)/2 + Man_Fire2X, 0 - GRGetExtentY (Animation.Picture->Picture)/2 + Man_Fire2Y, 4, {rand() % 4, 0, &AllImage.Fire}, 0};
@@ -806,7 +813,7 @@ void ManType :: ManFire (CamType* Camera, const AllImageType& AllImage)
         }; */
     };
 
-void ManType :: ManHealth (CamType* Camera, const AllImageType& AllImage)
+void ManType :: ManHealth (CamType* Camera)
     {
     int null = 0;
 
@@ -817,7 +824,7 @@ void ManType :: ManHealth (CamType* Camera, const AllImageType& AllImage)
 
     if (Health == 0)
         {
-        DrawTransparentImage (AllImage.GameOver, Point.x, Point.y, &null, &null, Camera);
+        DrawTransparentImage (GlobalAllImage.GameOver, Point.x, Point.y, &null, &null, Camera);
         Speed.x = 0;
         Speed.y = 0;
         Position = 0;
@@ -833,7 +840,7 @@ void ManType :: ManHealth (CamType* Camera, const AllImageType& AllImage)
     //    Speed.x *= 0.1;
     };
 
-void ManType :: VillagerMind (ManType* Man, CamType* Camera, const AllImageType& AllImage)
+void ManType :: VillagerMind (ManType* Man, CamType* Camera)
     {
     PointType Mouse = {txMouseX(), txMouseY()};
 
@@ -892,11 +899,11 @@ void ManType :: VillagerMind (ManType* Man, CamType* Camera, const AllImageType&
 
         if (Inventory.Wood == 1)
             {
-            DrawTransparentImage (AllImage.CommonSlot, Point.x - 20, Point.y - 60, &null, &null, Camera);
+            DrawTransparentImage (GlobalAllImage.CommonSlot, Point.x - 20, Point.y - 60, &null, &null, Camera);
 
-            DrawTransparentImage (AllImage.CommonSlot, Point.x + 50, Point.y - 60, &null, &null, Camera);
+            DrawTransparentImage (GlobalAllImage.CommonSlot, Point.x + 50, Point.y - 60, &null, &null, Camera);
 
-            DrawTransparentImage (AllImage.CommonSlot, Point.x + 120, Point.y - 60, &null, &null, Camera);
+            DrawTransparentImage (GlobalAllImage.CommonSlot, Point.x + 120, Point.y - 60, &null, &null, Camera);
 
             PointType Slot1 = {Point.x + 5 - Camera->Point.x, Point.y - 35 - Camera->Point.y};
             PointType Slot2 = {Point.x + 75 - Camera->Point.x, Point.y - 35 - Camera->Point.y};
@@ -905,9 +912,9 @@ void ManType :: VillagerMind (ManType* Man, CamType* Camera, const AllImageType&
             // slot1
             if (Inventory.Axe == 0)
                 {
-                DrawTransparentImage (AllImage.Coin, Point.x - 10, Point.y - 53, &null, &null, Camera);
+                DrawTransparentImage (GlobalAllImage.Coin, Point.x - 10, Point.y - 53, &null, &null, Camera);
 
-                DrawTransparentImage (AllImage.SmallItems, Point.x + 10, Point.y - 33, &null, &null, Camera);
+                DrawTransparentImage (GlobalAllImage.SmallItems, Point.x + 10, Point.y - 33, &null, &null, Camera);
                 // Text (x + 8, y - 16, 20, one, "");
 
                 if (ModuleDistance (Slot1, Mouse, 50) == true &&
@@ -922,9 +929,9 @@ void ManType :: VillagerMind (ManType* Man, CamType* Camera, const AllImageType&
 
             if (Inventory.Axe == 1)
                 {
-                DrawTransparentImage (AllImage.Axe, Point.x - 20, Point.y - 60, &null, &null, Camera);
+                DrawTransparentImage (GlobalAllImage.Axe, Point.x - 20, Point.y - 60, &null, &null, Camera);
 
-                DrawTransparentImage (AllImage.SmallItems, Point.x + 10, Point.y - 33, &null, &two, Camera);
+                DrawTransparentImage (GlobalAllImage.SmallItems, Point.x + 10, Point.y - 33, &null, &two, Camera);
                 // Text (x + 8, y - 16, 20, one, "");
                 if (ModuleDistance (Slot1, Mouse, 50) == true &&
                     GetAsyncKeyState (VK_LBUTTON) &&
@@ -938,9 +945,9 @@ void ManType :: VillagerMind (ManType* Man, CamType* Camera, const AllImageType&
 
             if (Inventory.Axe == 2)
                 {
-                DrawTransparentImage (AllImage.Apple, Point.x - 20, Point.y - 60, &null, &null, Camera);
+                DrawTransparentImage (GlobalAllImage.Apple, Point.x - 20, Point.y - 60, &null, &null, Camera);
 
-                DrawTransparentImage (AllImage.SmallItems, Point.x + 10, Point.y - 33, &null, &one, Camera);
+                DrawTransparentImage (GlobalAllImage.SmallItems, Point.x + 10, Point.y - 33, &null, &one, Camera);
                 // Text (x + 8, y - 16, 20, one, "");
                 if (ModuleDistance (Slot1, Mouse, 50) == true &&
                     GetAsyncKeyState (VK_LBUTTON) &&
@@ -955,9 +962,9 @@ void ManType :: VillagerMind (ManType* Man, CamType* Camera, const AllImageType&
             // slot2
             if (Inventory.Knife == 0)
                 {
-                DrawTransparentImage (AllImage.Knife, Point.x + 50, Point.y - 40, &null, &null, Camera);
+                DrawTransparentImage (GlobalAllImage.Knife, Point.x + 50, Point.y - 40, &null, &null, Camera);
 
-                DrawTransparentImage (AllImage.SmallItems, Point.x + 80, Point.y - 33, &null, &null, Camera);
+                DrawTransparentImage (GlobalAllImage.SmallItems, Point.x + 80, Point.y - 33, &null, &null, Camera);
 
                 if (ModuleDistance (Slot2, Mouse, 50) == true &&
                     GetAsyncKeyState (VK_LBUTTON) &&
@@ -971,9 +978,9 @@ void ManType :: VillagerMind (ManType* Man, CamType* Camera, const AllImageType&
 
             if (Inventory.Knife == 1)
                 {
-                DrawTransparentImage (AllImage.Stone, Point.x + 50, Point.y - 60, &null, &null, Camera);
+                DrawTransparentImage (GlobalAllImage.Stone, Point.x + 50, Point.y - 60, &null, &null, Camera);
 
-                DrawTransparentImage (AllImage.SmallItems, Point.x + 80, Point.y - 33, &null, &one, Camera);
+                DrawTransparentImage (GlobalAllImage.SmallItems, Point.x + 80, Point.y - 33, &null, &one, Camera);
 
                 if (ModuleDistance (Slot2, Mouse, 50) == true &&
                     GetAsyncKeyState (VK_LBUTTON) &&
@@ -987,9 +994,9 @@ void ManType :: VillagerMind (ManType* Man, CamType* Camera, const AllImageType&
 
             if (Inventory.Knife == 2)
                 {
-                DrawTransparentImage (AllImage.Arrow, Point.x + 50, Point.y - 46, &null, &null, Camera);
+                DrawTransparentImage (GlobalAllImage.Arrow, Point.x + 50, Point.y - 46, &null, &null, Camera);
 
-                DrawTransparentImage (AllImage.SmallItems, Point.x + 80, Point.y - 33, &null, &two, Camera);
+                DrawTransparentImage (GlobalAllImage.SmallItems, Point.x + 80, Point.y - 33, &null, &two, Camera);
 
                 if (ModuleDistance (Slot2, Mouse, 50) == true &&
                     GetAsyncKeyState (VK_LBUTTON) &&
@@ -1004,9 +1011,9 @@ void ManType :: VillagerMind (ManType* Man, CamType* Camera, const AllImageType&
             // slot3
             if (Inventory.Bow == 0)
                 {
-                DrawTransparentImage (AllImage.Bow, Point.x + 120, Point.y - 70, &null, &null, Camera);
+                DrawTransparentImage (GlobalAllImage.Bow, Point.x + 120, Point.y - 70, &null, &null, Camera);
 
-                DrawTransparentImage (AllImage.SmallItems, Point.x + 150, Point.y - 33, &null, &one, Camera);
+                DrawTransparentImage (GlobalAllImage.SmallItems, Point.x + 150, Point.y - 33, &null, &one, Camera);
 
                 if (ModuleDistance (Slot3, Mouse, 50) == true &&
                     GetAsyncKeyState (VK_LBUTTON) &&
@@ -1020,9 +1027,9 @@ void ManType :: VillagerMind (ManType* Man, CamType* Camera, const AllImageType&
 
             if (Inventory.Bow == 1)
                 {
-                DrawTransparentImage (AllImage.Apple, Point.x + 120, Point.y - 60, &null, &null, Camera);
+                DrawTransparentImage (GlobalAllImage.Apple, Point.x + 120, Point.y - 60, &null, &null, Camera);
 
-                DrawTransparentImage (AllImage.SmallItems, Point.x + 150, Point.y - 33, &null, &two, Camera);
+                DrawTransparentImage (GlobalAllImage.SmallItems, Point.x + 150, Point.y - 33, &null, &two, Camera);
 
                 if (ModuleDistance (Slot3, Mouse, 50) == true &&
                     GetAsyncKeyState (VK_LBUTTON) &&
@@ -1036,9 +1043,9 @@ void ManType :: VillagerMind (ManType* Man, CamType* Camera, const AllImageType&
 
             if (Inventory.Bow == 2)
                 {
-                DrawTransparentImage (AllImage.Coin, Point.x + 130, Point.y - 53, &null, &null, Camera);
+                DrawTransparentImage (GlobalAllImage.Coin, Point.x + 130, Point.y - 53, &null, &null, Camera);
 
-                DrawTransparentImage (AllImage.SmallItems, Point.x + 150, Point.y - 33, &null, &null, Camera);
+                DrawTransparentImage (GlobalAllImage.SmallItems, Point.x + 150, Point.y - 33, &null, &null, Camera);
 
                 if (ModuleDistance (Slot3, Mouse, 50) == true &&
                     GetAsyncKeyState (VK_LBUTTON) &&
@@ -1060,9 +1067,9 @@ void ManType :: VillagerMind (ManType* Man, CamType* Camera, const AllImageType&
     /* if (Inventory.Knife == 2)
         {
         if (Side == 1)
-        DrawTransparentImage (AllImage.Gun, x + 74, y + 93, &null, &null, Camera);
+        DrawTransparentImage (GlobalAllImage.Gun, x + 74, y + 93, &null, &null, Camera);
         if (Side == 0)
-        DrawTransparentImage (AllImage.Gun, x + 44, y + 93, &one, &null, Camera);
+        DrawTransparentImage (GlobalAllImage.Gun, x + 44, y + 93, &one, &null, Camera);
         Position += 1;
         if (Position >= 10)
             {
@@ -1076,9 +1083,9 @@ void ManType :: VillagerMind (ManType* Man, CamType* Camera, const AllImageType&
             int null = 0;
             int one = 1;
             if (Speed.x > 0)
-                DrawTransparentImage (AllImage.Gun, x, y + 88, &null, &one, Camera);
+                DrawTransparentImage (GlobalAllImage.Gun, x, y + 88, &null, &one, Camera);
             if (Speed.x < 0)
-                DrawTransparentImage (AllImage.Gun, x, y + 88, &one, &one, Camera);
+                DrawTransparentImage (GlobalAllImage.Gun, x, y + 88, &one, &one, Camera);
             if (ModuleDistance (Man->Point.x + 47, Man->Point.y + 84, x,  y + 88, 30) == true)
                 {
                 Position = 0;
@@ -1220,7 +1227,7 @@ void ManType :: VillagerMind (ManType* Man, CamType* Camera, const AllImageType&
 
         int null = 0;
 
-        DrawTransparentImage (AllImage.Bullet, -11 + 61*Animation.yFrame + ArrowX,
+        DrawTransparentImage (GlobalAllImage.Bullet, -11 + 61*Animation.yFrame + ArrowX,
                               ArrowY + 60, &null, &Animation.yFrame, Camera);
 
         if (ArmSpeed >= 80)
@@ -1690,12 +1697,13 @@ void ManType :: Physic ()
         };
     };
 
-void ManType :: BlockInteraction (BlockType* Block, CamType* Camera, const AllImageType& AllImage)
+void ManType :: BlockInteraction (BlockType* Block, CamType* Camera)
     {
-    Block->Function (this, Block, Camera, AllImage);
+    if (Block->Number != BT_BlackSpace)
+        Block->Interaction (this, Block, Camera);
     };
 
-void ManType :: BlockCollision (BlockType* Block, CamType* Camera, const AllImageType& AllImage)
+void ManType :: BlockCollision (BlockType* Block, CamType* Camera)
     {
     if (Block->Number == BT_Coin)
         return;
@@ -1752,24 +1760,24 @@ void ManType :: BlockCollision (BlockType* Block, CamType* Camera, const AllImag
 
 //-----------------------------------------------------------------------------
 
-void DrawLevelPeople (ManType Villagers[], CamType* Camera, const AllImageType& AllImage)
+void DrawLevelPeople (ManType Villagers[], CamType* Camera)
     {
-    int i = 0;
+    // int i = 0;
 
-    while (Villagers[i].Point.x != -1 && Villagers[i].Point.y != -1)
+    for (int i = 0; i < Men_Number; i ++)
         {
-        Villagers [i].DrawMan (Camera, AllImage);
+        Villagers [i].DrawMan (Camera);
 
-        i += 1;
+        // i += 1;
         };
     };
 
-void CallPeoplePhysic (ManType Villagers[], CamType* Camera, const AllImageType& AllImage, BlockType ManyBlocks [], ManType* Man)
+void CallPeoplePhysic (ManType Villagers[], CamType* Camera, BlockType* ManyBlocks [], ManType* Man)
     {
     /* int i = 0;
     int b = 0;
     AllImageType AllImage1 = AllImage;
-    while (ManyBlocks[i].x != -1 && ManyBlocks[i].y != -1)
+    while (ManyBlocks[i]->x != -1 && ManyBlocks[i]->y != -1)
         {
         Villagers[i].BlockCollision (&ManyBlocks[b], Camera, AllImage);
         Villagers[i].VillagerMind (Man, Camera, AllImage);
@@ -1784,9 +1792,9 @@ void CallPeoplePhysic (ManType Villagers[], CamType* Camera, const AllImageType&
 
     int i = 0;
 
-    while (Villagers[i].Point.x != -1 && Villagers[i].Point.y != -1)
+    for (int i = 0; i < Men_Number; i ++)
         {
-        Villagers[i].VillagerMind (Man, Camera, AllImage);
+        Villagers[i].VillagerMind (Man, Camera);
         Villagers[i].Physic ();
 
         i += 1;

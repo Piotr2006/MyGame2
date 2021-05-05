@@ -8,3 +8,11 @@ BaseType :: BaseType (PointType _Point, double _Health, AnimationType _Animation
     Health (_Health),
     Animation (_Animation)
     {};
+
+BaseType :: BaseType () :
+    Point (),
+    SizeX (0),
+    SizeY (0),
+    Health (0),
+    Animation (0, 0, &GlobalAllImage.Dirt)
+    {};

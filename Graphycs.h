@@ -1,3 +1,6 @@
+#ifndef GRAPHYCS_H
+#define GRAPHYCS_H
+
 #include "TXLib.h"
 #include "PointType.h"
 
@@ -40,3 +43,5 @@ void GRTextOut (PointType Point, const char Str []);
 void GRPlaySound (const char Name[]);
 
 HDC GRLoadImage (const char* Picture);
+
+#endif

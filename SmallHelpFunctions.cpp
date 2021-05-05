@@ -1,10 +1,10 @@
 #include "SmallHelpFunctions.h"
 
-void StrCpy (char Name [], char _Name [])
+void StrCpy (char ToName [], const char FromName [])
     {
     for (int i = 0; i < NameSize; i += 1)
         {
-        Name [i] = _Name [i];
+        ToName [i] = FromName [i];
         };
     };
 
@@ -20,11 +20,11 @@ void HelpSystem ()
     {
     txSetColor (TX_WHITE);
     txSelectFont ("Comic Sans MS", Text1_Size);
-    txTextOut (Text1_X, Text1_Y, "Äëÿ ïåðåäâèæåíèÿ íàæìèòå êëàâèøè âïðàâî è âëåâî, äëÿ óñêîðåíèÿ íàæìèòå Shift");
+    txTextOut (Text1_X, Text1_Y, "Ð”Ð»Ñ Ð¿ÐµÑ€ÐµÐ´Ð²Ð¸Ð¶ÐµÐ½Ð¸Ñ Ð½Ð°Ð¶Ð¼Ð¸Ñ‚Ðµ ÐºÐ»Ð°Ð²Ð¸ÑˆÐ¸ Ð²Ð¿Ñ€Ð°Ð²Ð¾ Ð¸ Ð²Ð»ÐµÐ²Ð¾, Ð´Ð»Ñ ÑƒÑÐºÐ¾Ñ€ÐµÐ½Ð¸Ñ Ð½Ð°Ð¶Ð¼Ð¸Ñ‚Ðµ Shift");
 
     txSetColor (TX_WHITE);
     txSelectFont ("Comic Sans MS", Text2_Size);
-    txTextOut (Text2_X, Text2_Y, "Óäà÷íîé èãðû!");
+    txTextOut (Text2_X, Text2_Y, "Ð£Ð´Ð°Ñ‡Ð½Ð¾Ð¹ Ð¸Ð³Ñ€Ñ‹!");
     };
 
 void Text (PointType Point, int Size, int Number, char Name [])
@@ -52,12 +52,12 @@ int ModuleDistance (PointType Point1, PointType Point2, int Distance)
     return 0;
     };
 
-void DrawHealth (int Health, AllImageType AllImage)
+void DrawHealth (int Health)
     {
     int null = 0;
     int one  = 1;
 
-    DrawTransparentImage (AllImage.Coin, Sign_HealthX, Sign_HealthY, &one, &null);
+    DrawTransparentImage (GlobalAllImage.Coin, Sign_HealthX, Sign_HealthY, &one, &null);
 
     GRSetColor (TX_BLACK, 2);
     GRSetFillColor (TX_TRANSPARENT);

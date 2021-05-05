@@ -6,6 +6,12 @@ AnimationType :: AnimationType (int _xFrame, int _yFrame, const ImageType* _Pict
     Picture (_Picture)
     {};
 
+AnimationType :: AnimationType () :
+    xFrame (0),
+    yFrame (0),
+    Picture (&GlobalAllImage.Dirt)
+    {};
+
 double AnimationType :: GetFrameSizeX ()
     {
     return GRGetExtentX (Picture->Picture) / Picture->xMaxAnimationNumber;

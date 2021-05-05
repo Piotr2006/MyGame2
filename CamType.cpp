@@ -35,8 +35,8 @@ void CamType :: MoveCamera (BaseType* Object)
     else
         txClearConsole (); */
 
-    int xDst = fabs (fabs (Point.x - Object->Point.x) - Screen_xCenter);
-    int yDst = fabs (fabs (Point.y - Object->Point.y) - Screen_yCenter);
+    // double xDst = fabs (fabs (Point.x - Object->Point.x) - Screen_xCenter);
+    // double yDst = fabs (fabs (Point.y - Object->Point.y) - Screen_yCenter);
 
     /* if (xDst >= 500)
         Speed.x = 0.02;

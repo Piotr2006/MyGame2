@@ -8,11 +8,11 @@ ButtonType :: ButtonType (int _x, int _y, int _Number) :
     Number (_Number)
     {};
 
-void ButtonType :: DrawButton (AllImageType AllImage)
+void ButtonType :: DrawButton ()
     {
     int null = 0;
 
-    DrawTransparentImage (AllImage.Pause, x, y, &null, &Number);
+    DrawTransparentImage (GlobalAllImage.Pause, x, y, &null, &Number);
     };
 
 int ButtonType :: ButtonCheckClick (int x2, int y2, int DstX, int DstY)

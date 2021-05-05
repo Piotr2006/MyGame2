@@ -21,7 +21,7 @@ struct ButtonType
     {
     ButtonType (int x, int y, int Number);
 
-    void DrawButton (AllImageType AllImage);
+    void DrawButton ();
 
     int ButtonCheckClick (int x2, int y2, int DstX, int DstY);
 

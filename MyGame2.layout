@@ -1,101 +1,85 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
-	<File name="Main.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1448" topLine="42" />
-		</Cursor>
-		<Folding>
-			<Collapse line="16" />
-			<Collapse line="53" />
-		</Folding>
-	</File>
-	<File name="CamType.cpp" open="1" top="0" tabpos="21" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="222" topLine="11" />
-		</Cursor>
-		<Folding>
-			<Collapse line="40" />
-		</Folding>
-	</File>
-	<File name="AnimationType.cpp" open="1" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="104" topLine="0" />
-		</Cursor>
-	</File>
 	<File name="Enums.h" open="1" top="0" tabpos="29" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="166" topLine="8" />
+			<Cursor1 position="228" topLine="11" />
 		</Cursor>
 		<Folding>
-			<Collapse line="228" />
+			<Collapse line="17" />
+			<Collapse line="33" />
+			<Collapse line="40" />
+			<Collapse line="83" />
+			<Collapse line="88" />
+			<Collapse line="164" />
+			<Collapse line="175" />
+			<Collapse line="231" />
 		</Folding>
 	</File>
-	<File name="AllImageType.h" open="1" top="0" tabpos="14" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1772" topLine="0" />
-		</Cursor>
-		<Folding>
-			<Collapse line="0" />
-			<Collapse line="7" />
-		</Folding>
-	</File>
-	<File name="MouseType.cpp" open="1" top="0" tabpos="26" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="287" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="PointType.cpp" open="1" top="0" tabpos="28" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="524" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="ImageFunctions.h" open="1" top="0" tabpos="23" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="214" topLine="0" />
-		</Cursor>
-		<Folding>
-			<Collapse line="0" />
-		</Folding>
-	</File>
-	<File name="CamType.h" open="1" top="0" tabpos="24" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="107" topLine="0" />
-		</Cursor>
-		<Folding>
-			<Collapse line="0" />
-			<Collapse line="9" />
-		</Folding>
-	</File>
-	<File name="BlockType.h" open="1" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2143" topLine="0" />
-		</Cursor>
-		<Folding>
-			<Collapse line="0" />
-			<Collapse line="13" />
-		</Folding>
-	</File>
-	<File name="HelpSystem.cpp" open="1" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="HelpSystem.cpp" open="1" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="227" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="ManType.h" open="1" top="1" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="AnimationType.cpp" open="1" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1411" topLine="33" />
+			<Cursor1 position="270" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="MouseType.h" open="1" top="0" tabpos="27" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="BaseType.cpp" open="1" top="0" tabpos="18" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="211" topLine="0" />
+			<Cursor1 position="401" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="ButtonType.h" open="1" top="0" tabpos="25" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="376" topLine="0" />
 		</Cursor>
 		<Folding>
 			<Collapse line="0" />
-			<Collapse line="9" />
+			<Collapse line="20" />
 		</Folding>
 	</File>
-	<File name="HelpSystem.h" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="CamType.cpp" open="1" top="0" tabpos="21" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="222" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="Graphycs.cpp" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1163" topLine="30" />
+		</Cursor>
+		<Folding>
+			<Collapse line="63" />
+		</Folding>
+	</File>
+	<File name="SmallHelpFunctions.cpp" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1348" topLine="0" />
+		</Cursor>
+		<Folding>
+			<Collapse line="3" />
+			<Collapse line="5" />
+			<Collapse line="55" />
+		</Folding>
+	</File>
+	<File name="SmallHelpFunctions.h" open="1" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="424" topLine="0" />
+		</Cursor>
+		<Folding>
+			<Collapse line="0" />
+		</Folding>
+	</File>
+	<File name="Graphycs.h" open="1" top="0" tabpos="31" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="42" topLine="0" />
+		</Cursor>
+		<Folding>
+			<Collapse line="0" />
+		</Folding>
+	</File>
+	<File name="HelpSystem.h" open="1" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="278" topLine="7" />
 		</Cursor>
@@ -103,123 +87,67 @@
 			<Collapse line="4" />
 		</Folding>
 	</File>
+	<File name="ImageFunctions.cpp" open="1" top="0" tabpos="22" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="12760" topLine="22" />
+		</Cursor>
+		<Folding>
+			<Collapse line="212" />
+			<Collapse line="232" />
+		</Folding>
+	</File>
+	<File name="PointType.h" open="1" top="0" tabpos="20" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="62" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="AllImageType.h" open="1" top="0" tabpos="14" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1784" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="Main.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="270" topLine="0" />
+		</Cursor>
+		<Folding>
+			<Collapse line="27" />
+			<Collapse line="36" />
+			<Collapse line="43" />
+			<Collapse line="47" />
+			<Collapse line="53" />
+		</Folding>
+	</File>
 	<File name="Levels.cpp" open="1" top="0" tabpos="30" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="183467" topLine="307" />
+			<Cursor1 position="6636" topLine="212" />
 		</Cursor>
 		<Folding>
 			<Collapse line="67" />
-			<Collapse line="207" />
-			<Collapse line="2079" />
-		</Folding>
-	</File>
-	<File name="AnimationType.h" open="1" top="0" tabpos="15" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="189" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="ButtonType.h" open="1" top="0" tabpos="25" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="450" topLine="0" />
-		</Cursor>
-		<Folding>
-			<Collapse line="0" />
-			<Collapse line="20" />
-		</Folding>
-	</File>
-	<File name="BaseType.cpp" open="1" top="0" tabpos="18" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="306" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="ImageFunctions.cpp" open="1" top="0" tabpos="22" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="9705" topLine="0" />
-		</Cursor>
-		<Folding>
-			<Collapse line="5" />
-			<Collapse line="155" />
-			<Collapse line="189" />
-			<Collapse line="212" />
-			<Collapse line="232" />
-			<Collapse line="242" />
-		</Folding>
-	</File>
-	<File name="BaseType.h" open="1" top="0" tabpos="17" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="64" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="ImageType.h" open="1" top="0" tabpos="16" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="142" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="BlockType.cpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="879" topLine="28" />
-		</Cursor>
-		<Folding>
-			<Collapse line="7" />
-			<Collapse line="11" />
-			<Collapse line="170" />
-			<Collapse line="183" />
-			<Collapse line="190" />
-			<Collapse line="195" />
-			<Collapse line="206" />
-			<Collapse line="211" />
-			<Collapse line="216" />
-			<Collapse line="227" />
-			<Collapse line="237" />
-			<Collapse line="248" />
-			<Collapse line="259" />
-			<Collapse line="270" />
-			<Collapse line="301" />
-			<Collapse line="306" />
-			<Collapse line="309" />
-			<Collapse line="310" />
-			<Collapse line="331" />
-			<Collapse line="335" />
-			<Collapse line="377" />
-			<Collapse line="381" />
-			<Collapse line="390" />
-			<Collapse line="394" />
-			<Collapse line="403" />
-			<Collapse line="409" />
-			<Collapse line="419" />
-			<Collapse line="426" />
-			<Collapse line="428" />
-			<Collapse line="437" />
-			<Collapse line="446" />
-			<Collapse line="453" />
-			<Collapse line="477" />
-			<Collapse line="489" />
-			<Collapse line="496" />
-			<Collapse line="503" />
-			<Collapse line="507" />
-			<Collapse line="513" />
-			<Collapse line="521" />
-			<Collapse line="533" />
-			<Collapse line="543" />
-			<Collapse line="555" />
-			<Collapse line="564" />
-			<Collapse line="572" />
-			<Collapse line="585" />
-			<Collapse line="592" />
-			<Collapse line="594" />
-			<Collapse line="598" />
+			<Collapse line="174" />
+			<Collapse line="226" />
+			<Collapse line="240" />
+			<Collapse line="260" />
+			<Collapse line="269" />
+			<Collapse line="276" />
 		</Folding>
 	</File>
 	<File name="ManType.cpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="26612" topLine="493" />
+			<Cursor1 position="52099" topLine="947" />
 		</Cursor>
 		<Folding>
 			<Collapse line="25" />
 			<Collapse line="26" />
+			<Collapse line="43" />
+			<Collapse line="45" />
+			<Collapse line="57" />
+			<Collapse line="69" />
+			<Collapse line="82" />
 			<Collapse line="96" />
 			<Collapse line="107" />
 			<Collapse line="120" />
+			<Collapse line="132" />
 			<Collapse line="139" />
 			<Collapse line="182" />
 			<Collapse line="201" />
@@ -234,118 +162,200 @@
 			<Collapse line="298" />
 			<Collapse line="308" />
 			<Collapse line="320" />
-			<Collapse line="481" />
-			<Collapse line="542" />
-			<Collapse line="547" />
-			<Collapse line="552" />
-			<Collapse line="557" />
-			<Collapse line="562" />
-			<Collapse line="567" />
-			<Collapse line="572" />
-			<Collapse line="593" />
-			<Collapse line="678" />
-			<Collapse line="697" />
-			<Collapse line="699" />
-			<Collapse line="722" />
-			<Collapse line="749" />
-			<Collapse line="751" />
+			<Collapse line="488" />
+			<Collapse line="492" />
+			<Collapse line="494" />
+			<Collapse line="503" />
+			<Collapse line="510" />
+			<Collapse line="549" />
+			<Collapse line="554" />
+			<Collapse line="559" />
+			<Collapse line="564" />
+			<Collapse line="569" />
+			<Collapse line="574" />
+			<Collapse line="579" />
+			<Collapse line="600" />
+			<Collapse line="685" />
+			<Collapse line="704" />
+			<Collapse line="706" />
+			<Collapse line="729" />
 			<Collapse line="756" />
-			<Collapse line="783" />
-			<Collapse line="794" />
-			<Collapse line="866" />
-			<Collapse line="876" />
-			<Collapse line="881" />
-			<Collapse line="886" />
+			<Collapse line="758" />
+			<Collapse line="763" />
+			<Collapse line="790" />
+			<Collapse line="800" />
+			<Collapse line="801" />
+			<Collapse line="825" />
+			<Collapse line="873" />
+			<Collapse line="883" />
+			<Collapse line="888" />
 			<Collapse line="893" />
-			<Collapse line="906" />
-			<Collapse line="915" />
-			<Collapse line="923" />
-			<Collapse line="931" />
-			<Collapse line="939" />
-			<Collapse line="947" />
-			<Collapse line="956" />
-			<Collapse line="964" />
-			<Collapse line="972" />
-			<Collapse line="980" />
-			<Collapse line="988" />
-			<Collapse line="996" />
-			<Collapse line="1005" />
-			<Collapse line="1013" />
-			<Collapse line="1021" />
-			<Collapse line="1029" />
-			<Collapse line="1037" />
-			<Collapse line="1045" />
-			<Collapse line="1059" />
-			<Collapse line="1127" />
-			<Collapse line="1152" />
+			<Collapse line="900" />
+			<Collapse line="913" />
+			<Collapse line="922" />
+			<Collapse line="930" />
+			<Collapse line="938" />
+			<Collapse line="946" />
+			<Collapse line="954" />
+			<Collapse line="963" />
+			<Collapse line="971" />
+			<Collapse line="979" />
+			<Collapse line="987" />
+			<Collapse line="995" />
+			<Collapse line="1003" />
+			<Collapse line="1012" />
+			<Collapse line="1020" />
+			<Collapse line="1028" />
+			<Collapse line="1036" />
+			<Collapse line="1044" />
+			<Collapse line="1052" />
+			<Collapse line="1066" />
+			<Collapse line="1134" />
 			<Collapse line="1159" />
-			<Collapse line="1169" />
-			<Collapse line="1181" />
-			<Collapse line="1261" />
+			<Collapse line="1166" />
+			<Collapse line="1176" />
+			<Collapse line="1188" />
 			<Collapse line="1268" />
-			<Collapse line="1333" />
-			<Collapse line="1348" />
-			<Collapse line="1357" />
-			<Collapse line="1366" />
-			<Collapse line="1374" />
-			<Collapse line="1379" />
-			<Collapse line="1391" />
-			<Collapse line="1397" />
-			<Collapse line="1450" />
-			<Collapse line="1590" />
-			<Collapse line="1686" />
-			<Collapse line="1736" />
-			<Collapse line="1737" />
-			<Collapse line="1759" />
-			<Collapse line="1768" />
+			<Collapse line="1275" />
+			<Collapse line="1340" />
+			<Collapse line="1355" />
+			<Collapse line="1364" />
+			<Collapse line="1373" />
+			<Collapse line="1381" />
+			<Collapse line="1386" />
+			<Collapse line="1398" />
+			<Collapse line="1404" />
+			<Collapse line="1457" />
+			<Collapse line="1597" />
+			<Collapse line="1693" />
+			<Collapse line="1700" />
+			<Collapse line="1744" />
+			<Collapse line="1745" />
+			<Collapse line="1763" />
+			<Collapse line="1767" />
+			<Collapse line="1775" />
+			<Collapse line="1776" />
+			<Collapse line="1795" />
 		</Folding>
 	</File>
-	<File name="PointType.h" open="1" top="0" tabpos="20" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="MouseType.cpp" open="1" top="0" tabpos="26" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="62" topLine="0" />
+			<Cursor1 position="287" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="BaseType.h" open="1" top="0" tabpos="17" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="140" topLine="0" />
 		</Cursor>
 		<Folding>
 			<Collapse line="0" />
-			<Collapse line="4" />
+			<Collapse line="8" />
 		</Folding>
 	</File>
-	<File name="SmallHelpFunctions.cpp" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="ManType.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1148" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="SmallHelpFunctions.h" open="1" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="424" topLine="0" />
+			<Cursor1 position="349" topLine="0" />
 		</Cursor>
 		<Folding>
 			<Collapse line="0" />
+			<Collapse line="17" />
 		</Folding>
 	</File>
-	<File name="Graphycs.cpp" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="BlockType.cpp" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1163" topLine="30" />
+			<Cursor1 position="6737" topLine="69" />
 		</Cursor>
 		<Folding>
-			<Collapse line="63" />
+			<Collapse line="14" />
+			<Collapse line="23" />
+			<Collapse line="59" />
+			<Collapse line="195" />
+			<Collapse line="220" />
+			<Collapse line="231" />
+			<Collapse line="236" />
+			<Collapse line="241" />
+			<Collapse line="252" />
+			<Collapse line="262" />
+			<Collapse line="284" />
+			<Collapse line="295" />
+			<Collapse line="325" />
+			<Collapse line="330" />
+			<Collapse line="333" />
+			<Collapse line="334" />
+			<Collapse line="361" />
+			<Collapse line="365" />
+			<Collapse line="382" />
+			<Collapse line="386" />
+			<Collapse line="395" />
+			<Collapse line="399" />
+			<Collapse line="408" />
+			<Collapse line="414" />
+			<Collapse line="424" />
+			<Collapse line="431" />
+			<Collapse line="433" />
+			<Collapse line="442" />
+			<Collapse line="451" />
+			<Collapse line="458" />
+			<Collapse line="482" />
+			<Collapse line="494" />
+			<Collapse line="501" />
+			<Collapse line="508" />
+			<Collapse line="512" />
+			<Collapse line="518" />
+			<Collapse line="526" />
+			<Collapse line="538" />
+			<Collapse line="548" />
+			<Collapse line="560" />
+			<Collapse line="569" />
+			<Collapse line="577" />
+			<Collapse line="590" />
+			<Collapse line="597" />
+			<Collapse line="599" />
+			<Collapse line="603" />
+		</Folding>
+	</File>
+	<File name="InvType.h" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="116" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="BlockType.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="693" topLine="0" />
+		</Cursor>
+		<Folding>
+			<Collapse line="0" />
+			<Collapse line="14" />
+			<Collapse line="29" />
+			<Collapse line="51" />
+			<Collapse line="56" />
 		</Folding>
 	</File>
 	<File name="Levels.h" open="1" top="0" tabpos="19" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="590" topLine="0" />
+			<Cursor1 position="505" topLine="0" />
 		</Cursor>
 		<Folding>
 			<Collapse line="0" />
 		</Folding>
 	</File>
-	<File name="Graphycs.h" open="1" top="0" tabpos="31" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="ImageType.h" open="1" top="0" tabpos="16" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="979" topLine="24" />
+			<Cursor1 position="142" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="ButtonType.cpp" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="MouseType.h" open="1" top="0" tabpos="27" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="309" topLine="0" />
+			<Cursor1 position="211" topLine="0" />
+		</Cursor>
+		<Folding>
+			<Collapse line="0" />
+			<Collapse line="9" />
+		</Folding>
+	</File>
+	<File name="ButtonType.cpp" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="25" topLine="0" />
 		</Cursor>
 		<Folding>
 			<Collapse line="11" />
@@ -353,13 +363,28 @@
 			<Collapse line="22" />
 		</Folding>
 	</File>
-	<File name="InvType.h" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="ImageFunctions.h" open="1" top="0" tabpos="23" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="212" topLine="0" />
+			<Cursor1 position="583" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="AnimationType.h" open="1" top="0" tabpos="15" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="99" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="CamType.h" open="1" top="0" tabpos="24" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="107" topLine="0" />
 		</Cursor>
 		<Folding>
 			<Collapse line="0" />
-			<Collapse line="4" />
+			<Collapse line="9" />
 		</Folding>
+	</File>
+	<File name="PointType.cpp" open="1" top="0" tabpos="28" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="524" topLine="0" />
+		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

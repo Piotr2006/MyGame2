@@ -16,13 +16,13 @@ int ModuleDistance (PointType Point1, PointType Point2, int Distance);
 
 int Distance (int a, int b, int Distance);
 
-void DrawHealth (int Health, AllImageType AllImage);
+void DrawHealth (int Health);
 
 void Text (PointType Point, int Size, int Number, char Name []);
 
 void HelpSystem ();
 
-void StrCpy (char Name [], char _Name []);
+void StrCpy (char ToName [], const char FromName []);
 
 int BlockCheckClick (BlockType* Block, CamType* Camera);
 

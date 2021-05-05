@@ -1,6 +1,7 @@
 #ifndef BLOCKTYPE_H
 #define BLOCKTYPE_H
 
+// #include "ManType.h"
 #include "AllImageType.h"
 #include "Enums.h"
 #include "BaseType.h"
@@ -12,48 +13,69 @@ struct ManType;
 
 struct BlockType : BaseType
     {
-    BlockType (PointType Point, double Health, AnimationType Animation,
-               int Number, void (*_Function) (ManType* Man, BlockType* Block, CamType* Camera, const AllImageType& AllImage));
+    BlockType ();
 
-    void DrawBlock (CamType* Camera, AllImageType AllImage);
+    BlockType (PointType Point, double Health, AnimationType Animation,
+               int Number, void (*_Function) (ManType* Man, BlockType* Block, CamType* Camera));
+
+
+
+    void DrawBlock (CamType* Camera);
 
     int Number;
 
-    void (*Function) (ManType* Man, BlockType* Block, CamType* Camera, const AllImageType& AllImage);
+    void (*Function) (ManType* Man, BlockType* Block, CamType* Camera);
+
+    virtual void Interaction (ManType* Man, BlockType* Block, CamType* Camera)
+        {
+        Function (Man, Block, Camera);
+        };
+    };
+
+void FallingTreeInteraction (ManType* Man, BlockType* Block, CamType* Camera);
+
+void SmallStoneInteraction (ManType* Man, BlockType* Block, CamType* Camera);
+
+void RockInteraction (ManType* Man, BlockType* Block, CamType* Camera);
+
+void BonfireInteraction (ManType* Man, BlockType* Block, CamType* Camera);
+
+void TreeInteraction (ManType* Man, BlockType* Block, CamType* Camera);
+
+void DynamiteInteraction (ManType* Man, BlockType* Block, CamType* Camera);
+
+void CaseInteraction (ManType* Man, BlockType* Block, CamType* Camera);
+
+void AirInteraction (ManType* Man, BlockType* Block, CamType* Camera);
+
+struct TreeType : BlockType
+    {
+    TreeType (PointType Point, double Health, AnimationType Animation,
+               int Number, void (*_Function) (ManType* Man, BlockType* Block, CamType* Camera));
+
+    virtual void Interaction (ManType* Man, BlockType* Block, CamType* Camera)
+        {
+        TreeInteraction (Man, Block, Camera);
+        };
+
     };
 
 //-----------------------------------------------------------------------------
 
-void DrawLevelBlocks (BlockType ManyBlocks[], CamType* Camera, const AllImageType& AllImage);
+void DrawLevelBlocks (BlockType* ManyBlocks[], CamType* Camera);
 
-void CoinCollision (ManType* Man, BlockType* Coin, int* NumberCoin);
+void CoinCollision (BlockType* Coin);
 
-void CreateBlocks (BlockType Blocks [], const AllImageType& AllImage);
+void CreateBlocks (BlockType* Blocks []);
 
-void DrawManyBlocks (BlockType ManyBlocks [], CamType* Camera, const AllImageType& AllImage);
+void BlockFunction (BlockType* Blocks [], int Time);
 
-void InteractManWithBlocks (BlockType ManyBlocks [], ManType* Man, CamType* Camera, int* NumberCoin, int* LevelNumber, const AllImageType& AllImage);
+void DrawManyBlocks (BlockType* ManyBlocks [], CamType* Camera);
 
-void CallLevelPhysic (BlockType ManyBlocks[], ManType* Man, CamType* Camera, int* NumberCoin, const AllImageType& AllImage);
+void InteractManWithBlocks (BlockType* ManyBlocks [], ManType* Man, CamType* Camera, int* NumberCoin);
 
-void BlockCalling (BlockType* Block, ManType* Man, CamType* Camera);
+void CallLevelPhysic (BlockType* ManyBlocks[], ManType* Man, CamType* Camera);
 
 //-----------------------------------------------------------------------------
-
-void FallingTreeInteraction (ManType* Man, BlockType* Block, CamType* Camera, const AllImageType& AllImage);
-
-void SmallStoneInteraction (ManType* Man, BlockType* Block, CamType* Camera, const AllImageType& AllImage);
-
-void RockInteraction (ManType* Man, BlockType* Block, CamType* Camera, const AllImageType& AllImage);
-
-void BonfireInteraction (ManType* Man, BlockType* Block, CamType* Camera, const AllImageType& AllImage);
-
-void TreeInteraction (ManType* Man, BlockType* Block, CamType* Camera, const AllImageType& AllImage);
-
-void DynamiteInteraction (ManType* Man, BlockType* Block, CamType* Camera, const AllImageType& AllImage);
-
-void CaseInteraction (ManType* Man, BlockType* Block, CamType* Camera, const AllImageType& AllImage);
-
-void AirInteraction (ManType* Man, BlockType* Block, CamType* Camera, const AllImageType& AllImage);
 
 #endif

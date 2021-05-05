@@ -79,4 +79,6 @@ struct AllImageType
     ImageType HighCase;
     };
 
+extern AllImageType GlobalAllImage;
+
 #endif
