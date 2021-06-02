@@ -19,7 +19,7 @@ int ButtonType :: ButtonCheckClick (int x2, int y2, int DstX, int DstY)
     {
     if (fabs (x - x2) <= DstX)
         if (fabs (y - y2) <= DstY)
-            if (GetAsyncKeyState (VK_LBUTTON))
+            if (GetAsyncKeyState (VK_RBUTTON))
                 {
                 return 1;
                 };

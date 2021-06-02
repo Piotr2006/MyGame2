@@ -28,7 +28,7 @@ void LoadAllImages ()
 
     LoadGameImage (&GlobalAllImage.Box,           "Images/WoodBoxAnimation.bmp",       4, 3, TX_BLACK, &Procent, Number_of_Images);
 
-    LoadGameImage (&GlobalAllImage.Man,           "Images/NewManWithAxe.bmp",          6, 8, RGB (91, 110, 225), &Procent, Number_of_Images);
+    LoadGameImage (&GlobalAllImage.Man,           "Images/NewMan.bmp",                 6, 8, RGB (91, 110, 225), &Procent, Number_of_Images);
 
     LoadGameImage (&GlobalAllImage.Stairs,        "Images/WallStairs.bmp",             1, 1, TX_BLACK, &Procent, Number_of_Images);
 
@@ -68,7 +68,7 @@ void LoadAllImages ()
 
     LoadGameImage (&GlobalAllImage.Lock,          "Images/Lock.bmp",                   1, 1, TX_WHITE, &Procent, Number_of_Images);
 
-    LoadGameImage (&GlobalAllImage.Gun,           "Images/Gun.bmp",                    2, 2, TX_WHITE, &Procent, Number_of_Images);
+    LoadGameImage (&GlobalAllImage.Gun,           "Images/Gun.bmp",                    1, 2, TX_WHITE, &Procent, Number_of_Images);
 
     LoadGameImage (&GlobalAllImage.Grass,         "Images/NewDirtBlock.bmp",           1, 4, TX_BLACK, &Procent, Number_of_Images);
 
@@ -149,8 +149,32 @@ void LoadAllImages ()
     LoadGameImage (&GlobalAllImage.BlackFrontGround,"Images/BlackBackGround.bmp",      1, 1, TX_WHITE, &Procent, Number_of_Images);
 
     LoadGameImage (&GlobalAllImage.HighCase,      "Images/HighCase.bmp",               1, 2, TX_WHITE, &Procent, Number_of_Images);
-    };
 
+    LoadGameImage (&GlobalAllImage.Take_close,    "Images/Take_Close.bmp",             1, 3, TX_WHITE, &Procent, Number_of_Images);
+
+    LoadGameImage (&GlobalAllImage.Up_down,       "Images/Up_Down.bmp",                1, 2, TX_WHITE, &Procent, Number_of_Images);
+
+    LoadGameImage (&GlobalAllImage.LoadQuestion,  "Images/LoadQuestion.bmp",           1, 1, TX_WHITE, &Procent, Number_of_Images);
+
+    LoadGameImage (&GlobalAllImage.ManWithAxe,    "Images/NewManWithAxe.bmp",          6, 8, RGB (91, 110, 225), &Procent, Number_of_Images);
+
+    LoadGameImage (&GlobalAllImage.ManWithGuns,   "Images/NewManWithGuns.bmp",         6, 8, RGB (91, 110, 225), &Procent, Number_of_Images);
+
+    LoadGameImage (&GlobalAllImage.BigDirt,       "Images/NewBigDirt.bmp",             1, 1, RGB (91, 110, 225), &Procent, Number_of_Images);
+
+    // Rooms :
+    LoadGameImage (&GlobalAllImage.Kitchen,       "Images/Kitchen.bmp",                1, 1, RGB (91, 110, 225), &Procent, Number_of_Images);
+
+    LoadGameImage (&GlobalAllImage.Room1,         "Images/Room1.bmp",                  1, 1, RGB (91, 110, 225), &Procent, Number_of_Images);
+
+    LoadGameImage (&GlobalAllImage.Room2,         "Images/Room2.bmp",                  1, 1, RGB (91, 110, 225), &Procent, Number_of_Images);
+
+    LoadGameImage (&GlobalAllImage.Room3,         "Images/Room3.bmp",                  1, 1, RGB (91, 110, 225), &Procent, Number_of_Images);
+
+    LoadGameImage (&GlobalAllImage.Room4,         "Images/Room4.bmp",                  1, 1, RGB (91, 110, 225), &Procent, Number_of_Images);
+
+    LoadGameImage (&GlobalAllImage.Room5,         "Images/Room5.bmp",                  1, 1, RGB (91, 110, 225), &Procent, Number_of_Images);
+    };
 
 void DeleteAllImage ()
     {

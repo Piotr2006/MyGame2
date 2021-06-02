@@ -128,7 +128,6 @@ void CreateVillagers (ManType Villagers [])
         };
     };
 
-
 void DrawSlot (int Block, int x, int y, const ImageType& Picture, int TextX, int TextY)
     {
     int null = 0;
@@ -332,6 +331,8 @@ void ManType :: Crafting ()
 
 void ManType :: DrawInventory (CamType* Camera)
     {
+    // Inventory.MainNumber += 1;
+
     int null = 0;
 
     int one = 1;
@@ -464,9 +465,17 @@ void ManType :: DrawInventory (CamType* Camera)
 
     DrawSlot (Inventory.Axe, 375, 690, GlobalAllImage.Axe, 375, 700);
 
+    DrawSlot (Inventory.Wood, 425, 700, GlobalAllImage.Wood, 425, 700);
+
     DrawSlot (Inventory.Apple, 475, 700, GlobalAllImage.Apple, 475, 700);
 
-    DrawSlot (Inventory.Knife, 420, 720, GlobalAllImage.Knife, 425, 700);
+    DrawSlot (Inventory.Knife, 520, 720, GlobalAllImage.Knife, 525, 700);
+
+    DrawSlot (Inventory.Stone, 575, 700, GlobalAllImage.Stone, 575, 700);
+
+    DrawSlot (Inventory.Bow, 630, 691, GlobalAllImage.Bow, 625, 700);
+
+    DrawSlot (Inventory.Arrow, 662, 719, GlobalAllImage.Arrow, 675, 700);
 
     DrawSlot (Inventory.Fishing, 725, 700, GlobalAllImage.FishingSmall, 725, 700);
 
@@ -475,6 +484,8 @@ void ManType :: DrawInventory (CamType* Camera)
     DrawSlot (Inventory.CookedFish, 825, 712, GlobalAllImage.CookedFish, 825, 700);
 
     DrawSlot (Inventory.Rope, 875, 700, GlobalAllImage.Rope, 875, 700);
+
+    DrawSlot (Inventory.Gun, 925, 700, GlobalAllImage.Gun, 925, 700);
 
     int X = 1;
 
@@ -485,19 +496,64 @@ void ManType :: DrawInventory (CamType* Camera)
 
     // Controlling
 
-    if (GetAsyncKeyState (VK_LCONTROL))
-        {
-        Inventory.InvControlSpeed = -1;
-        }
-    else
-        {
-        if (GetAsyncKeyState (VK_RCONTROL))
-        {
-        Inventory.InvControlSpeed = 1;
-        }
-        else
-            Inventory.InvControlSpeed = 0;
-        };
+    if (RectCheckClick (375, 700, 425, 750, &FixedCamera) == true)
+        Inventory.MainNumber = 0;
+
+    if (RectCheckClick (425, 700, 475, 750, &FixedCamera) == true)
+        Inventory.MainNumber = 1;
+
+    if (RectCheckClick (475, 700, 525, 750, &FixedCamera) == true)
+        Inventory.MainNumber = 2;
+
+    if (RectCheckClick (525, 700, 575, 750, &FixedCamera) == true)
+        Inventory.MainNumber = 3;
+
+    if (RectCheckClick (575, 700, 625, 750, &FixedCamera) == true)
+        Inventory.MainNumber = 4;
+
+    if (RectCheckClick (625, 700, 675, 750, &FixedCamera) == true)
+        Inventory.MainNumber = 5;
+
+    if (RectCheckClick (675, 700, 725, 750, &FixedCamera) == true)
+        Inventory.MainNumber = 6;
+
+    if (RectCheckClick (725, 700, 775, 750, &FixedCamera) == true)
+        Inventory.MainNumber = 7;
+
+    if (RectCheckClick (775, 700, 825, 750, &FixedCamera) == true)
+        Inventory.MainNumber = 8;
+
+    if (RectCheckClick (825, 700, 875, 750, &FixedCamera) == true)
+        Inventory.MainNumber = 9;
+
+    if (RectCheckClick (875, 700, 925, 750, &FixedCamera) == true)
+        Inventory.MainNumber = 10;
+
+    if (RectCheckClick (925, 700, 975, 750, &FixedCamera) == true)
+        Inventory.MainNumber = 11;
+
+    if (RectCheckClick (975, 700, 1025, 750, &FixedCamera) == true)
+        Inventory.MainNumber = 12;
+
+    if (RectCheckClick (1025, 700, 1075, 750, &FixedCamera) == true)
+        Inventory.MainNumber = 13;
+
+    if (RectCheckClick (1075, 700, 1125, 750, &FixedCamera) == true)
+        Inventory.MainNumber = 14;
+
+    if (RectCheckClick (1125, 700, 1175, 750, &FixedCamera) == true)
+        Inventory.MainNumber = 15;
+
+    if (RectCheckClick (1175, 700, 1225, 750, &FixedCamera) == true)
+        Inventory.MainNumber = 16;
+
+    if (RectCheckClick (1225, 700, 1275, 750, &FixedCamera) == true)
+        Inventory.MainNumber = 17;
+
+    /* if (!GetAsyncKeyState (VK_LCONTROL) &&
+        !GetAsyncKeyState (VK_RCONTROL))
+            Inventory.InvControlSpeed = -1;
+
 
     if (GetAsyncKeyState (VK_LCONTROL) &&
         Inventory.InvControlSpeed == 0)
@@ -511,17 +567,17 @@ void ManType :: DrawInventory (CamType* Camera)
         {
         Inventory.MainNumber += 1;
         Inventory.InvControlSpeed = 1;
-        };
+        };    */
 
     if (Inventory.MainNumber < 0)
-        Inventory.MainNumber = 8;
+        Inventory.MainNumber = 17;
 
-    if (Inventory.MainNumber >= 18)
+    if (Inventory.MainNumber >= 17)
         Inventory.MainNumber = 0;
 
     // Numbers
 
-    if (Inventory.MainNumber == IT_Axe)
+  /*  if (Inventory.MainNumber == IT_Axe)
         {
         Inventory.MainSlot = Inventory.Axe;
         };
@@ -579,7 +635,7 @@ void ManType :: DrawInventory (CamType* Camera)
     if (Inventory.MainNumber == IT_Rope)
         {
         Inventory.MainSlot = Inventory.Rope;
-        };
+        }; */
 
     int yFrame = 0;
 
@@ -596,6 +652,16 @@ void ManType :: DrawInventory (CamType* Camera)
         Animation.yFrame != 5 &&
         Animation.yFrame != 6)
         yFrame= 2;
+
+
+    if (Inventory.MainNumber == IT_Gun &&
+        HaveInventory (Inventory.MainNumber, IT_Gun, Inventory.Gun, 1) == true)
+        Animation.Picture = &GlobalAllImage.ManWithGuns;
+    else if (Inventory.MainNumber == IT_Axe &&
+             HaveInventory (Inventory.MainNumber, IT_Axe, Inventory.Axe, 1) == true)
+        Animation.Picture = &GlobalAllImage.ManWithAxe;
+    else
+        Animation.Picture = &GlobalAllImage.Man;
 
     // ManArm
     /* if (yFrame <= 1 &&
@@ -683,6 +749,16 @@ void ManType :: DrawInventory (CamType* Camera)
 
 void ManType :: DrawMan (CamType* Camera)
     {
+    int null = 0;
+
+    /* int HaveWeapon = true;
+
+    if (Inventory.MainNumber != IT_Axe &&
+        HaveInventory (Inventory.MainNumber, IT_Axe, Inventory.Axe, 1) == true &&
+        Inventory.MainNumber != IT_Gun &&
+        HaveInventory (Inventory.MainNumber, IT_Gun, Inventory.Gun, 1) == true)
+        HaveWeapon = false;   */
+
     /* if (GetAsyncKeyState (VK_LBUTTON) &&
         ArmSpeed > 0)
         {
@@ -712,11 +788,13 @@ void ManType :: DrawMan (CamType* Camera)
             Animation.yFrame = 3;
 
         if (GetAsyncKeyState (VK_LBUTTON) &&
+            Animation.Picture != &GlobalAllImage.Man &&
             Speed.y >= 0)
             Animation.yFrame = 1;
 
         if (Speed.y >= 0 &&
             !GetAsyncKeyState (VK_LBUTTON) &&
+            Animation.Picture != &GlobalAllImage.Man &&
             Speed.x < 0)
             Animation.yFrame = 2;
 
@@ -735,11 +813,13 @@ void ManType :: DrawMan (CamType* Camera)
             Animation.yFrame = 7;
 
         if (GetAsyncKeyState (VK_LBUTTON) &&
+            Animation.Picture != &GlobalAllImage.Man &&
             Speed.y >= 0)
             Animation.yFrame = 5;
 
         if (Speed.y >= 0 &&
             !GetAsyncKeyState (VK_LBUTTON) &&
+            Animation.Picture != &GlobalAllImage.Man &&
             Speed.x > 0)
             Animation.yFrame = 6;
 
@@ -776,7 +856,26 @@ void ManType :: DrawMan (CamType* Camera)
         Health > 0)
         DrawTransparentImage (*Animation.Picture, Point.x, Point.y, &Animation.xFrame, &Animation.yFrame, Camera);
 
-    int null = 0;
+    if (RectAiming (Point.x, Point.y, Point.x + SizeX,
+            Point.y + SizeY, Camera) == true)
+                {
+                int TermX = Point.x - 17 - Camera->Point.x;
+                int TermY = Point.y - Camera->Point.y;
+
+                DrawHealth ({Point.x + SizeX/2 - Camera->Point.x,
+                             Point.y - 25 - Camera->Point.y}, Health);
+
+                GRSetColor (RGB (237, 28, 36), 1);
+                GRSetFillColor (RGB (237, 28, 36));
+
+                DrawTransparentImage (GlobalAllImage.Termometer, TermX, TermY, &null, &null);
+
+                GRRectangle (TermX + Sign_Term_RectLeftX, TermY + Sign_Term_RectDownY - Temperature,
+                             TermX + Sign_Term_RectRightX, TermY + Sign_Term_RectDownY);
+                };
+
+
+    // int null = 0;
 
     // PointType TextPoint = {Point.x - Camera->Point.x + 50, Point.y - Camera->Point.y};
 
@@ -1502,14 +1601,14 @@ void ManType :: ControlMan (const MouseType& Mouse, int* t)
         xWeapon <= 3)
         {
         xWeapon += 1;
-        ArmSpeed = 0;
+        // ArmSpeed = 0;
         }
     else
         if (Inventory.MainNumber == 0 &&
             Inventory.MainSlot > 0)
         {
         xWeapon -= 1;
-        ArmSpeed = 10;
+        // ArmSpeed = 10;
         };
 
 
@@ -1603,11 +1702,11 @@ void ManType :: Physic ()
         !GetAsyncKeyState (VK_RIGHT))
         Speed.x = 0;
 
-    if (Point.x < 1000 &&
+    if (Point.x < 2000 &&
         Speed.x < 0)
         Speed.x = 0;
 
-    if (Point.x > 11400*World_Size - 730 &&
+    if (Point.x > 11400*World_Size - 1730 &&
         Speed.x > 0)
         Speed.x = 0;
 
@@ -1700,12 +1799,12 @@ void ManType :: Physic ()
 void ManType :: BlockInteraction (BlockType* Block, CamType* Camera)
     {
     if (Block->Number != BT_BlackSpace)
-        Block->Interaction (this, Block, Camera);
+        Block->Interaction (this, Camera);
     };
 
 void ManType :: BlockCollision (BlockType* Block, CamType* Camera)
     {
-    if (Block->Number == BT_Coin)
+    /* if (Block->Number == BT_Coin)
         return;
 
     if (Block->Health < 1)
@@ -1716,7 +1815,7 @@ void ManType :: BlockCollision (BlockType* Block, CamType* Camera)
         Block->Number != BT_Floor &&
         Block->Number != BT_Dirt &&
         Block->Number != BT_Dynamite)
-        return;
+        return; */
 
     // Physic
 

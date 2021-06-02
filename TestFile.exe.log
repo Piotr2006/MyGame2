@@ -1,0 +1,104 @@
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x774BB5CC в функции ungetwc(). Попытка прочесть данные по адресу 0x00000061 в модуле C:\WINDOWS\System32\msvcrt.dll. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400], Instance: 0x00506304 (32-bit), Flags: Cmdre0, Thread: 0x2E08 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x774BB5CC in C:\WINDOWS\System32\msvcrt.dll: ungetwc()
+# 1 0x774B4D0B in C:\WINDOWS\System32\msvcrt.dll: printf()
+
+# 2 0x0042C8D2 in C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe: GetNumberOfStr() at C:/Users/007/Desktop/программирование/MyGame2/TestFile.cpp (49):
+
+     47:     while (Allstr [Position] != 0)
+     48:         {
+=>   49:         printf ("Position = %d, Allstr [Position] = %s, Smallstr [Position] = %s \n", Position, Allstr [Position], Smallstr [Position]);
+     50: 
+     51:         if (Allstr [Position]     == Smallstr [Position] &&
+
+# 3 0x0042C826 in C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/TestFile.cpp (19):
+
+     17:     // printf ("x = %d, Myfscanf = %d \n", x, nParams);
+     18: 
+=>   19:     printf ("GetNumberOfStr = %d \n ", GetNumberOfStr ("a = %*", "%*"));
+     20: 
+     21:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\007\desktop\codebl~1\mingw\include\txlib.h
+Compiled:	May 29 2021 15:16:39, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	May 29 2021 15:16:44
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x774BB5CC в функции ungetwc(). Попытка прочесть данные по адресу 0x00000061 в модуле C:\WINDOWS\System32\msvcrt.dll. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400], Instance: 0x00506304 (32-bit), Flags: Cmdre0, Thread: 0x2E08 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x774BB5CC in C:\WINDOWS\System32\msvcrt.dll: ungetwc()
+# 1 0x774B4D0B in C:\WINDOWS\System32\msvcrt.dll: printf()
+
+# 2 0x0042C8D2 in C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe: GetNumberOfStr() at C:/Users/007/Desktop/программирование/MyGame2/TestFile.cpp (49):
+
+     47:     while (Allstr [Position] != 0)
+     48:         {
+=>   49:         printf ("Position = %d, Allstr [Position] = %s, Smallstr [Position] = %s \n", Position, Allstr [Position], Smallstr [Position]);
+     50: 
+     51:         if (Allstr [Position]     == Smallstr [Position] &&
+
+# 3 0x0042C826 in C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/TestFile.cpp (19):
+
+     17:     // printf ("x = %d, Myfscanf = %d \n", x, nParams);
+     18: 
+=>   19:     printf ("GetNumberOfStr = %d \n ", GetNumberOfStr ("a = %*", "%*"));
+     20: 
+     21:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\007\desktop\codebl~1\mingw\include\txlib.h
+Compiled:	May 29 2021 15:16:39, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	May 29 2021 15:16:44
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------

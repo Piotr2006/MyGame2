@@ -1,45 +1,48 @@
-C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp: In function 'void MoveGame(BlockType**, int*, ManType*, double*, CamType*, ManType*)':
-C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:66:24: warning: conversion to 'int' from 'double' may alter its value [-Wconversion]
+C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp: In function 'int MoveGame(BlockType**, int*, ManType*, double*, CamType*, ManType*)':
+C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:181:24: warning: conversion to 'int' from 'double' may alter its value [-Wconversion]
          GRRectangle (0 - Camera->Point.x, 700 - Camera->Point.y, 9999999 - Camera->Point.x, 9000 - Camera->Point.y);
                         ^
-C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:66:47: warning: conversion to 'int' from 'double' may alter its value [-Wconversion]
+C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:181:47: warning: conversion to 'int' from 'double' may alter its value [-Wconversion]
          GRRectangle (0 - Camera->Point.x, 700 - Camera->Point.y, 9999999 - Camera->Point.x, 9000 - Camera->Point.y);
                                                ^
-C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:66:74: warning: conversion to 'int' from 'double' may alter its value [-Wconversion]
+C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:181:74: warning: conversion to 'int' from 'double' may alter its value [-Wconversion]
          GRRectangle (0 - Camera->Point.x, 700 - Camera->Point.y, 9999999 - Camera->Point.x, 9000 - Camera->Point.y);
                                                                           ^
-C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:66:98: warning: conversion to 'int' from 'double' may alter its value [-Wconversion]
+C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:181:98: warning: conversion to 'int' from 'double' may alter its value [-Wconversion]
          GRRectangle (0 - Camera->Point.x, 700 - Camera->Point.y, 9999999 - Camera->Point.x, 9000 - Camera->Point.y);
                                                                                                   ^
-C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:126:61: warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]
+C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:220:61: warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]
          Text (LevelPoint, Level_TextSize, Man->Days+1, "Day");
                                                              ^
-C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:131:32: warning: conversion to 'int' from 'double' may alter its value [-Wconversion]
-         DrawHealth (Man->Health);
-                                ^
-C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:162:101: warning: conversion to 'int' from 'double' may alter its value [-Wconversion]
-         GRRectangle (Sign_TermometerX + Sign_Term_RectLeftX, Sign_TermometerY + Sign_Term_RectDownY - Man->Temperature,
-                                                                                                     ^
-C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:7:9: warning: unused variable 'NumberPicture' [-Wunused-variable]
+C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:126:9: warning: unused variable 'NumberPicture' [-Wunused-variable]
      int NumberPicture = 0;
          ^
-C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:18:9: warning: variable 'NumberLevel' set but not used [-Wunused-but-set-variable]
+C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:137:9: warning: variable 'NumberLevel' set but not used [-Wunused-but-set-variable]
      int NumberLevel = *LevelNumber;
          ^
-C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:23:14: warning: variable 'WaterColor' set but not used [-Wunused-but-set-variable]
+C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:139:9: warning: variable 'PauseNumber' set but not used [-Wunused-but-set-variable]
+     int PauseNumber = Pause_Active;
+         ^
+C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:142:14: warning: variable 'WaterColor' set but not used [-Wunused-but-set-variable]
      COLORREF WaterColor = RGB(255, 255, 255);
               ^
 C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp: At global scope:
-C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:3:6: warning: unused parameter 'Villagers' [-Wunused-parameter]
- void MoveGame (BlockType* ManyBlocks [], int* LevelNumber, ManType* Man, double* AllTemperature, CamType* Camera, ManType Villagers [])
-      ^
-C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp: In function 'void Level1(int*, ManType*, CamType*)':
-C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:208:14: warning: unused variable 'Trees' [-Wunused-variable]
-     TreeType Trees [1] = {{{1, 1}, 1, {0, 0, &GlobalAllImage.Finish}, BT_Finish, AirInteraction}};
-              ^
-C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:238:5: warning: stack usage is 85584 bytes [-Wstack-usage=]
-     };
+C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:122:5: warning: unused parameter 'Villagers' [-Wunused-parameter]
+ int MoveGame (BlockType* ManyBlocks [], int* LevelNumber, ManType* Man, double* AllTemperature, CamType* Camera, ManType Villagers [])
      ^
+C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp: In function 'void TestLevel(int*, ManType*, CamType*, BlockType**)':
+C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:329:12: warning: variable 'AllTemperature' set but not used [-Wunused-but-set-variable]
+     double AllTemperature = 10;
+            ^
+C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:362:13: warning: unused variable 'Villagers' [-Wunused-variable]
+     ManType Villagers [] = {{{0, 0}, 20, {0, 0, &GlobalAllImage.Boat},
+             ^
+C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp: At global scope:
+C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:327:6: warning: unused parameter 'LevelNumber' [-Wunused-parameter]
+ void TestLevel (int* LevelNumber, ManType* Man, CamType* Camera, BlockType* Blocks[])
+      ^
+C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:327:6: warning: unused parameter 'Camera' [-Wunused-parameter]
+C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp:327:6: warning: unused parameter 'Blocks' [-Wunused-parameter]
 ---------------------------------------------------------------------------------------------
-[02.05.2021 13:57:14,04 C:\Users\007@LAPTOP-AETNHUR2, returned 0]
+[02.06.2021 15:38:25,53 C:\Users\007@LAPTOP-AETNHUR2, returned 0]
 C:\Users\007\Desktop\программирование\MyGame2> g++.exe -c C:\Users\007\Desktop\программирование\MyGame2\Levels.cpp -o obj\Debug\Levels.o -Wall -fexceptions  -g  -Wshadow -Winit-self -Wredundant-decls -Wcast-align -Wundef -Wfloat-equal -Winline -Wunreachable-code -Wmissing-declarations -Wmissing-include-dirs -Wswitch-enum -Wswitch-default -Weffc++ -Wmain -Wextra -Wall -g -pipe -fexceptions -Wcast-qual -Wconversion -Wctor-dtor-privacy -Wempty-body -Wformat-security -Wformat=2 -Wignored-qualifiers -Wlogical-op -Wmissing-field-initializers -Wnon-virtual-dtor -Woverloaded-virtual -Wpointer-arith -Wsign-promo -Wstack-usage=8192 -Wstrict-aliasing -Wstrict-null-sentinel -Wtype-limits -Wwrite-strings -D_DEBUG -D_EJUDGE_CLIENT_SIDE -D_EJC

@@ -4,7 +4,11 @@
 const int NameSize = 50;
 const int World_Size = 5;   // !!! Не делать больше 10-ти !!!
 
-const int Blocks_Number = 1115;
+const int Exit = 1;
+const int Continue = 0;
+
+const int Blocks_Number = 1200;
+const int Rooms_Number = 1200;
 const int Men_Number = 1;
 
 enum SelectedInvTypes
@@ -23,11 +27,12 @@ enum InventoryNumbers
     IT_Stone      = 4,
     IT_Bow        = 5,
     IT_Arrow      = 6,
-    IT_Coin       = 7,
-    IT_Fishing    = 8,
-    IT_Fish       = 9,
-    IT_CookedFish = 10,
-    IT_Rope       = 11
+    // IT_Coin       = 7,
+    IT_Fishing    = 7,
+    IT_Fish       = 8,
+    IT_CookedFish = 9,
+    IT_Rope       = 10,
+    IT_Gun        = 11
     };
 
 enum
@@ -57,7 +62,8 @@ enum BlockNumbers
     BT_SmallStone = 14,
     BT_Floor      = 15,
     BT_Dynamite   = 16,
-    BT_Case       = 17,
+    BT_Close_Case = 17,
+    BT_Opened_Case= 18,
     BT_Berries    = 21,
     BT_Wall       = 22,
     BT_Air        = 50,
@@ -115,14 +121,14 @@ enum Inv
 enum Man
     {
     Man_x = 4000,
-    Man_y = 300,
-    Man_Health = 50,
+    Man_y = 570,
+    Man_Health = 100,
     Man_Temperature = 36,
     Man_FastSpeed = 20,
     Man_SlowSpeed = 7,
     Man_DrawingX = 0,
     Man_DrawingY = -48,
-    Man_MaxHealth = 50,
+    Man_MaxHealth = 100,
     Man_MaxTemperature = 90,
     Man_LeftSide = 1,
     Man_RightSide = 2,
@@ -177,7 +183,7 @@ enum
     Sign_PauseX = 45,
     Sign_PauseY = 35,
     Sign_Pause_Radius = 25,
-    Pause_Active = 2,
+    Pause_Active = 0,
     Pause_Stopped = 1,
 
     Sign_CoinX = 20,

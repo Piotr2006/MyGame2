@@ -77,6 +77,19 @@ struct AllImageType
     ImageType Explosion;
     ImageType BlackFrontGround;
     ImageType HighCase;
+    ImageType Take_close;
+    ImageType Up_down;
+    ImageType LoadQuestion;
+    ImageType ManWithAxe;
+    ImageType ManWithGuns;
+    ImageType BigDirt;
+    // Rooms :
+    ImageType Kitchen;
+    ImageType Room1;
+    ImageType Room2;
+    ImageType Room3;
+    ImageType Room4;
+    ImageType Room5;
     };
 
 extern AllImageType GlobalAllImage;

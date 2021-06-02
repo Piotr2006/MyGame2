@@ -6040,3 +6040,2019 @@ Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
 Directory:	C:\Users\007\Desktop\программирование\MyGame2
 
 --------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042C8B9 в функции IncreaseAnimationNumber() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 27. Попытка прочесть данные по адресу 0x00000030 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400], Instance: 0x00ADD7C4 (32-bit), Flags: Cmdre0, Thread: 0x3668 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042C8B9 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: IncreaseAnimationNumber() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (27):
+
+     25: void IncreaseAnimationNumber (AnimationType* Animation)
+     26:     {
+=>   27:     Animation->xFrame += 1;
+     28: 
+     29:     if (Animation->xFrame >= Animation->Picture->xMaxAnimationNumber)
+
+# 1 0x004B2CF8 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawBlock() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (22):
+
+     20: void BlockType :: DrawBlock (CamType* Camera)
+     21:     {
+=>   22:     IncreaseAnimationNumber (&Animation);
+     23: 
+     24:     if (Health > 0 &&
+
+# 2 0x004B37F6 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawLevelBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (218):
+
+    216:         // printf ("DrawLevelBlocks() : i = %d , Number = %d \n", i, ManyBlocks[i]->Number);
+    217: 
+=>  218:         ManyBlocks [i]->DrawBlock (Camera);
+    219: 
+    220:         // i = i + 1;
+
+# 3 0x004B3793 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawManyBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (183):
+
+    181: void DrawManyBlocks (BlockType* ManyBlocks [], CamType* Camera)
+    182:     {
+=>  183:     DrawLevelBlocks (ManyBlocks, Camera);
+    184: 
+    185:     // DrawLevelPeople (Villagers, Camera, AllImage);
+
+# 4 0x005C08B9 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/Levels.cpp (73):
+
+     71:         GRRectangle (11400*World_Size - Camera->Point.x, 720 - Camera->Point.y, 999999 - Camera->Point.x, 9999 - Camera->Point.y); */
+     72: 
+=>   73:         DrawManyBlocks (ManyBlocks, Camera);
+     74: 
+     75:         // GRSetColor (GR_RED, 10);
+
+# 5 0x005C1320 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: TestLevel() at C:/Users/007/Desktop/программирование/MyGame2/Levels.cpp (275):
+
+    273:                             0, 0, 0, 0, {}}};
+    274: 
+=>  275:     MoveGame (ManyBlocks, LevelNumber, Man, &AllTemperature, Camera, Villagers);
+    276:     };
+    277: 
+
+# 6 0x005EDE38 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (52):
+
+     50:         if (LevelNumber == 0)
+     51:             {
+=>   52:             TestLevel (&LevelNumber, &Man, &Camera);
+     53:             };
+     54: 
+
+# 7 0x005EDAFB in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (22):
+
+     20:     GRCreateWindow (1550, 850);
+     21: 
+=>   22:     Cycle ();
+     23: 
+     24:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\007\desktop\codebl~1\mingw\include\txlib.h
+Compiled:	May 19 2021 18:30:38, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	May 19 2021 18:34:47
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042C8B9 в функции IncreaseAnimationNumber() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 27. Попытка прочесть данные по адресу 0x00000030 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400], Instance: 0x00ADD7C4 (32-bit), Flags: Cmdre0, Thread: 0x3668 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042C8B9 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: IncreaseAnimationNumber() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (27):
+
+     25: void IncreaseAnimationNumber (AnimationType* Animation)
+     26:     {
+=>   27:     Animation->xFrame += 1;
+     28: 
+     29:     if (Animation->xFrame >= Animation->Picture->xMaxAnimationNumber)
+
+# 1 0x004B2CF8 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawBlock() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (22):
+
+     20: void BlockType :: DrawBlock (CamType* Camera)
+     21:     {
+=>   22:     IncreaseAnimationNumber (&Animation);
+     23: 
+     24:     if (Health > 0 &&
+
+# 2 0x004B37F6 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawLevelBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (218):
+
+    216:         // printf ("DrawLevelBlocks() : i = %d , Number = %d \n", i, ManyBlocks[i]->Number);
+    217: 
+=>  218:         ManyBlocks [i]->DrawBlock (Camera);
+    219: 
+    220:         // i = i + 1;
+
+# 3 0x004B3793 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawManyBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (183):
+
+    181: void DrawManyBlocks (BlockType* ManyBlocks [], CamType* Camera)
+    182:     {
+=>  183:     DrawLevelBlocks (ManyBlocks, Camera);
+    184: 
+    185:     // DrawLevelPeople (Villagers, Camera, AllImage);
+
+# 4 0x005C08B9 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/Levels.cpp (73):
+
+     71:         GRRectangle (11400*World_Size - Camera->Point.x, 720 - Camera->Point.y, 999999 - Camera->Point.x, 9999 - Camera->Point.y); */
+     72: 
+=>   73:         DrawManyBlocks (ManyBlocks, Camera);
+     74: 
+     75:         // GRSetColor (GR_RED, 10);
+
+# 5 0x005C1320 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: TestLevel() at C:/Users/007/Desktop/программирование/MyGame2/Levels.cpp (275):
+
+    273:                             0, 0, 0, 0, {}}};
+    274: 
+=>  275:     MoveGame (ManyBlocks, LevelNumber, Man, &AllTemperature, Camera, Villagers);
+    276:     };
+    277: 
+
+# 6 0x005EDE38 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (52):
+
+     50:         if (LevelNumber == 0)
+     51:             {
+=>   52:             TestLevel (&LevelNumber, &Man, &Camera);
+     53:             };
+     54: 
+
+# 7 0x005EDAFB in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (22):
+
+     20:     GRCreateWindow (1550, 850);
+     21: 
+=>   22:     Cycle ();
+     23: 
+     24:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\007\desktop\codebl~1\mingw\include\txlib.h
+Compiled:	May 19 2021 18:30:38, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	May 19 2021 18:34:47
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042C8B9 в функции IncreaseAnimationNumber() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 27. Попытка прочесть данные по адресу 0x00000030 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400], Instance: 0x00ADD7C4 (32-bit), Flags: Cmdre0, Thread: 0x24E0 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042C8B9 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: IncreaseAnimationNumber() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (27):
+
+     25: void IncreaseAnimationNumber (AnimationType* Animation)
+     26:     {
+=>   27:     Animation->xFrame += 1;
+     28: 
+     29:     if (Animation->xFrame >= Animation->Picture->xMaxAnimationNumber)
+
+# 1 0x004B2CF8 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawBlock() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (22):
+
+     20: void BlockType :: DrawBlock (CamType* Camera)
+     21:     {
+=>   22:     IncreaseAnimationNumber (&Animation);
+     23: 
+     24:     if (Health > 0 &&
+
+# 2 0x004B37F6 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawLevelBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (218):
+
+    216:         // printf ("DrawLevelBlocks() : i = %d , Number = %d \n", i, ManyBlocks[i]->Number);
+    217: 
+=>  218:         ManyBlocks [i]->DrawBlock (Camera);
+    219: 
+    220:         // i = i + 1;
+
+# 3 0x004B3793 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawManyBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (183):
+
+    181: void DrawManyBlocks (BlockType* ManyBlocks [], CamType* Camera)
+    182:     {
+=>  183:     DrawLevelBlocks (ManyBlocks, Camera);
+    184: 
+    185:     // DrawLevelPeople (Villagers, Camera, AllImage);
+
+# 4 0x005C08B9 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/Levels.cpp (73):
+
+     71:         GRRectangle (11400*World_Size - Camera->Point.x, 720 - Camera->Point.y, 999999 - Camera->Point.x, 9999 - Camera->Point.y); */
+     72: 
+=>   73:         DrawManyBlocks (ManyBlocks, Camera);
+     74: 
+     75:         // GRSetColor (GR_RED, 10);
+
+# 5 0x005C1320 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: TestLevel() at C:/Users/007/Desktop/программирование/MyGame2/Levels.cpp (275):
+
+    273:                             0, 0, 0, 0, {}}};
+    274: 
+=>  275:     MoveGame (ManyBlocks, LevelNumber, Man, &AllTemperature, Camera, Villagers);
+    276:     };
+    277: 
+
+# 6 0x005EDE38 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (52):
+
+     50:         if (LevelNumber == 0)
+     51:             {
+=>   52:             TestLevel (&LevelNumber, &Man, &Camera);
+     53:             };
+     54: 
+
+# 7 0x005EDAFB in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (22):
+
+     20:     GRCreateWindow (1550, 850);
+     21: 
+=>   22:     Cycle ();
+     23: 
+     24:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\007\desktop\codebl~1\mingw\include\txlib.h
+Compiled:	May 19 2021 18:30:38, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	May 19 2021 18:35:19
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042C8B9 в функции IncreaseAnimationNumber() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 27. Попытка прочесть данные по адресу 0x00000030 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400], Instance: 0x00ADD7C4 (32-bit), Flags: Cmdre0, Thread: 0x24E0 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042C8B9 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: IncreaseAnimationNumber() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (27):
+
+     25: void IncreaseAnimationNumber (AnimationType* Animation)
+     26:     {
+=>   27:     Animation->xFrame += 1;
+     28: 
+     29:     if (Animation->xFrame >= Animation->Picture->xMaxAnimationNumber)
+
+# 1 0x004B2CF8 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawBlock() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (22):
+
+     20: void BlockType :: DrawBlock (CamType* Camera)
+     21:     {
+=>   22:     IncreaseAnimationNumber (&Animation);
+     23: 
+     24:     if (Health > 0 &&
+
+# 2 0x004B37F6 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawLevelBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (218):
+
+    216:         // printf ("DrawLevelBlocks() : i = %d , Number = %d \n", i, ManyBlocks[i]->Number);
+    217: 
+=>  218:         ManyBlocks [i]->DrawBlock (Camera);
+    219: 
+    220:         // i = i + 1;
+
+# 3 0x004B3793 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawManyBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (183):
+
+    181: void DrawManyBlocks (BlockType* ManyBlocks [], CamType* Camera)
+    182:     {
+=>  183:     DrawLevelBlocks (ManyBlocks, Camera);
+    184: 
+    185:     // DrawLevelPeople (Villagers, Camera, AllImage);
+
+# 4 0x005C08B9 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/Levels.cpp (73):
+
+     71:         GRRectangle (11400*World_Size - Camera->Point.x, 720 - Camera->Point.y, 999999 - Camera->Point.x, 9999 - Camera->Point.y); */
+     72: 
+=>   73:         DrawManyBlocks (ManyBlocks, Camera);
+     74: 
+     75:         // GRSetColor (GR_RED, 10);
+
+# 5 0x005C1320 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: TestLevel() at C:/Users/007/Desktop/программирование/MyGame2/Levels.cpp (275):
+
+    273:                             0, 0, 0, 0, {}}};
+    274: 
+=>  275:     MoveGame (ManyBlocks, LevelNumber, Man, &AllTemperature, Camera, Villagers);
+    276:     };
+    277: 
+
+# 6 0x005EDE38 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (52):
+
+     50:         if (LevelNumber == 0)
+     51:             {
+=>   52:             TestLevel (&LevelNumber, &Man, &Camera);
+     53:             };
+     54: 
+
+# 7 0x005EDAFB in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (22):
+
+     20:     GRCreateWindow (1550, 850);
+     21: 
+=>   22:     Cycle ();
+     23: 
+     24:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\007\desktop\codebl~1\mingw\include\txlib.h
+Compiled:	May 19 2021 18:30:38, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	May 19 2021 18:35:19
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042C8B9 в функции IncreaseAnimationNumber() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 27. Попытка прочесть данные по адресу 0x00000030 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400], Instance: 0x00ADD7C4 (32-bit), Flags: Cmdre0, Thread: 0x1E78 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042C8B9 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: IncreaseAnimationNumber() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (27):
+
+     25: void IncreaseAnimationNumber (AnimationType* Animation)
+     26:     {
+=>   27:     Animation->xFrame += 1;
+     28: 
+     29:     if (Animation->xFrame >= Animation->Picture->xMaxAnimationNumber)
+
+# 1 0x004B2CF8 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawBlock() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (22):
+
+     20: void BlockType :: DrawBlock (CamType* Camera)
+     21:     {
+=>   22:     IncreaseAnimationNumber (&Animation);
+     23: 
+     24:     if (Health > 0 &&
+
+# 2 0x004B37F6 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawLevelBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (218):
+
+    216:         // printf ("DrawLevelBlocks() : i = %d , Number = %d \n", i, ManyBlocks[i]->Number);
+    217: 
+=>  218:         ManyBlocks [i]->DrawBlock (Camera);
+    219: 
+    220:         // i = i + 1;
+
+# 3 0x004B3793 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawManyBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (183):
+
+    181: void DrawManyBlocks (BlockType* ManyBlocks [], CamType* Camera)
+    182:     {
+=>  183:     DrawLevelBlocks (ManyBlocks, Camera);
+    184: 
+    185:     // DrawLevelPeople (Villagers, Camera, AllImage);
+
+# 4 0x005C08B9 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/Levels.cpp (73):
+
+     71:         GRRectangle (11400*World_Size - Camera->Point.x, 720 - Camera->Point.y, 999999 - Camera->Point.x, 9999 - Camera->Point.y); */
+     72: 
+=>   73:         DrawManyBlocks (ManyBlocks, Camera);
+     74: 
+     75:         // GRSetColor (GR_RED, 10);
+
+# 5 0x005C1358 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: TestLevel() at C:/Users/007/Desktop/программирование/MyGame2/Levels.cpp (277):
+
+    275:                             0, 0, 0, 0, {}}};
+    276: 
+=>  277:     MoveGame (ManyBlocks, LevelNumber, Man, &AllTemperature, Camera, Villagers);
+    278:     };
+    279: 
+
+# 6 0x005EDE70 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (52):
+
+     50:         if (LevelNumber == 0)
+     51:             {
+=>   52:             TestLevel (&LevelNumber, &Man, &Camera);
+     53:             };
+     54: 
+
+# 7 0x005EDB33 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (22):
+
+     20:     GRCreateWindow (1550, 850);
+     21: 
+=>   22:     Cycle ();
+     23: 
+     24:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\007\desktop\codebl~1\mingw\include\txlib.h
+Compiled:	May 19 2021 18:30:38, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	May 19 2021 18:39:22
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042C8B9 в функции IncreaseAnimationNumber() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 27. Попытка прочесть данные по адресу 0x00000030 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400], Instance: 0x00ADD7C4 (32-bit), Flags: Cmdre0, Thread: 0x1E78 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042C8B9 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: IncreaseAnimationNumber() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (27):
+
+     25: void IncreaseAnimationNumber (AnimationType* Animation)
+     26:     {
+=>   27:     Animation->xFrame += 1;
+     28: 
+     29:     if (Animation->xFrame >= Animation->Picture->xMaxAnimationNumber)
+
+# 1 0x004B2CF8 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawBlock() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (22):
+
+     20: void BlockType :: DrawBlock (CamType* Camera)
+     21:     {
+=>   22:     IncreaseAnimationNumber (&Animation);
+     23: 
+     24:     if (Health > 0 &&
+
+# 2 0x004B37F6 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawLevelBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (218):
+
+    216:         // printf ("DrawLevelBlocks() : i = %d , Number = %d \n", i, ManyBlocks[i]->Number);
+    217: 
+=>  218:         ManyBlocks [i]->DrawBlock (Camera);
+    219: 
+    220:         // i = i + 1;
+
+# 3 0x004B3793 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawManyBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (183):
+
+    181: void DrawManyBlocks (BlockType* ManyBlocks [], CamType* Camera)
+    182:     {
+=>  183:     DrawLevelBlocks (ManyBlocks, Camera);
+    184: 
+    185:     // DrawLevelPeople (Villagers, Camera, AllImage);
+
+# 4 0x005C08B9 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/Levels.cpp (73):
+
+     71:         GRRectangle (11400*World_Size - Camera->Point.x, 720 - Camera->Point.y, 999999 - Camera->Point.x, 9999 - Camera->Point.y); */
+     72: 
+=>   73:         DrawManyBlocks (ManyBlocks, Camera);
+     74: 
+     75:         // GRSetColor (GR_RED, 10);
+
+# 5 0x005C1358 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: TestLevel() at C:/Users/007/Desktop/программирование/MyGame2/Levels.cpp (277):
+
+    275:                             0, 0, 0, 0, {}}};
+    276: 
+=>  277:     MoveGame (ManyBlocks, LevelNumber, Man, &AllTemperature, Camera, Villagers);
+    278:     };
+    279: 
+
+# 6 0x005EDE70 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (52):
+
+     50:         if (LevelNumber == 0)
+     51:             {
+=>   52:             TestLevel (&LevelNumber, &Man, &Camera);
+     53:             };
+     54: 
+
+# 7 0x005EDB33 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (22):
+
+     20:     GRCreateWindow (1550, 850);
+     21: 
+=>   22:     Cycle ();
+     23: 
+     24:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\007\desktop\codebl~1\mingw\include\txlib.h
+Compiled:	May 19 2021 18:30:38, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	May 19 2021 18:39:22
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042C8B9 в функции IncreaseAnimationNumber() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 27. Попытка прочесть данные по адресу 0x00000030 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400], Instance: 0x00ADD7C4 (32-bit), Flags: Cmdre0, Thread: 0x3A2C (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042C8B9 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: IncreaseAnimationNumber() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (27):
+
+     25: void IncreaseAnimationNumber (AnimationType* Animation)
+     26:     {
+=>   27:     Animation->xFrame += 1;
+     28: 
+     29:     if (Animation->xFrame >= Animation->Picture->xMaxAnimationNumber)
+
+# 1 0x004B2CF8 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawBlock() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (22):
+
+     20: void BlockType :: DrawBlock (CamType* Camera)
+     21:     {
+=>   22:     IncreaseAnimationNumber (&Animation);
+     23: 
+     24:     if (Health > 0 &&
+
+# 2 0x004B3809 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawLevelBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (218):
+
+    216:         printf ("DrawLevelBlocks() : i = %d\n", i);
+    217: 
+=>  218:         ManyBlocks [i]->DrawBlock (Camera);
+    219: 
+    220:         // i = i + 1;
+
+# 3 0x004B3793 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawManyBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (183):
+
+    181: void DrawManyBlocks (BlockType* ManyBlocks [], CamType* Camera)
+    182:     {
+=>  183:     DrawLevelBlocks (ManyBlocks, Camera);
+    184: 
+    185:     // DrawLevelPeople (Villagers, Camera, AllImage);
+
+# 4 0x005C08CD in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/Levels.cpp (73):
+
+     71:         GRRectangle (11400*World_Size - Camera->Point.x, 720 - Camera->Point.y, 999999 - Camera->Point.x, 9999 - Camera->Point.y); */
+     72: 
+=>   73:         DrawManyBlocks (ManyBlocks, Camera);
+     74: 
+     75:         // GRSetColor (GR_RED, 10);
+
+# 5 0x005C136C in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: TestLevel() at C:/Users/007/Desktop/программирование/MyGame2/Levels.cpp (277):
+
+    275:                             0, 0, 0, 0, {}}};
+    276: 
+=>  277:     MoveGame (ManyBlocks, LevelNumber, Man, &AllTemperature, Camera, Villagers);
+    278:     };
+    279: 
+
+# 6 0x005EDE84 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (52):
+
+     50:         if (LevelNumber == 0)
+     51:             {
+=>   52:             TestLevel (&LevelNumber, &Man, &Camera);
+     53:             };
+     54: 
+
+# 7 0x005EDB47 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (22):
+
+     20:     GRCreateWindow (1550, 850);
+     21: 
+=>   22:     Cycle ();
+     23: 
+     24:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\007\desktop\codebl~1\mingw\include\txlib.h
+Compiled:	May 19 2021 18:30:38, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	May 19 2021 18:43:03
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042C8B9 в функции IncreaseAnimationNumber() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 27. Попытка прочесть данные по адресу 0x00000030 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400], Instance: 0x00ADD7C4 (32-bit), Flags: Cmdre0, Thread: 0x3A2C (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042C8B9 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: IncreaseAnimationNumber() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (27):
+
+     25: void IncreaseAnimationNumber (AnimationType* Animation)
+     26:     {
+=>   27:     Animation->xFrame += 1;
+     28: 
+     29:     if (Animation->xFrame >= Animation->Picture->xMaxAnimationNumber)
+
+# 1 0x004B2CF8 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawBlock() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (22):
+
+     20: void BlockType :: DrawBlock (CamType* Camera)
+     21:     {
+=>   22:     IncreaseAnimationNumber (&Animation);
+     23: 
+     24:     if (Health > 0 &&
+
+# 2 0x004B3809 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawLevelBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (218):
+
+    216:         printf ("DrawLevelBlocks() : i = %d\n", i);
+    217: 
+=>  218:         ManyBlocks [i]->DrawBlock (Camera);
+    219: 
+    220:         // i = i + 1;
+
+# 3 0x004B3793 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawManyBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (183):
+
+    181: void DrawManyBlocks (BlockType* ManyBlocks [], CamType* Camera)
+    182:     {
+=>  183:     DrawLevelBlocks (ManyBlocks, Camera);
+    184: 
+    185:     // DrawLevelPeople (Villagers, Camera, AllImage);
+
+# 4 0x005C08CD in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/Levels.cpp (73):
+
+     71:         GRRectangle (11400*World_Size - Camera->Point.x, 720 - Camera->Point.y, 999999 - Camera->Point.x, 9999 - Camera->Point.y); */
+     72: 
+=>   73:         DrawManyBlocks (ManyBlocks, Camera);
+     74: 
+     75:         // GRSetColor (GR_RED, 10);
+
+# 5 0x005C136C in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: TestLevel() at C:/Users/007/Desktop/программирование/MyGame2/Levels.cpp (277):
+
+    275:                             0, 0, 0, 0, {}}};
+    276: 
+=>  277:     MoveGame (ManyBlocks, LevelNumber, Man, &AllTemperature, Camera, Villagers);
+    278:     };
+    279: 
+
+# 6 0x005EDE84 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (52):
+
+     50:         if (LevelNumber == 0)
+     51:             {
+=>   52:             TestLevel (&LevelNumber, &Man, &Camera);
+     53:             };
+     54: 
+
+# 7 0x005EDB47 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (22):
+
+     20:     GRCreateWindow (1550, 850);
+     21: 
+=>   22:     Cycle ();
+     23: 
+     24:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\007\desktop\codebl~1\mingw\include\txlib.h
+Compiled:	May 19 2021 18:30:38, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	May 19 2021 18:43:02
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042C8B9 в функции IncreaseAnimationNumber() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 27. Попытка прочесть данные по адресу 0x00000030 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400], Instance: 0x00ADD7C4 (32-bit), Flags: Cmdre0, Thread: 0x3B40 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042C8B9 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: IncreaseAnimationNumber() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (27):
+
+     25: void IncreaseAnimationNumber (AnimationType* Animation)
+     26:     {
+=>   27:     Animation->xFrame += 1;
+     28: 
+     29:     if (Animation->xFrame >= Animation->Picture->xMaxAnimationNumber)
+
+# 1 0x004B2CF8 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawBlock() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (22):
+
+     20: void BlockType :: DrawBlock (CamType* Camera)
+     21:     {
+=>   22:     IncreaseAnimationNumber (&Animation);
+     23: 
+     24:     if (Health > 0 &&
+
+# 2 0x004B3809 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawLevelBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (218):
+
+    216:         printf ("DrawLevelBlocks() : i = %d\n", i);
+    217: 
+=>  218:         ManyBlocks [i]->DrawBlock (Camera);
+    219: 
+    220:         // i = i + 1;
+
+# 3 0x004B3793 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawManyBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (183):
+
+    181: void DrawManyBlocks (BlockType* ManyBlocks [], CamType* Camera)
+    182:     {
+=>  183:     DrawLevelBlocks (ManyBlocks, Camera);
+    184: 
+    185:     // DrawLevelPeople (Villagers, Camera, AllImage);
+
+# 4 0x005C08CD in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/Levels.cpp (73):
+
+     71:         GRRectangle (11400*World_Size - Camera->Point.x, 720 - Camera->Point.y, 999999 - Camera->Point.x, 9999 - Camera->Point.y); */
+     72: 
+=>   73:         DrawManyBlocks (ManyBlocks, Camera);
+     74: 
+     75:         // GRSetColor (GR_RED, 10);
+
+# 5 0x005C136C in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: TestLevel() at C:/Users/007/Desktop/программирование/MyGame2/Levels.cpp (277):
+
+    275:                             0, 0, 0, 0, {}}};
+    276: 
+=>  277:     MoveGame (ManyBlocks, LevelNumber, Man, &AllTemperature, Camera, Villagers);
+    278:     };
+    279: 
+
+# 6 0x005EDE84 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (52):
+
+     50:         if (LevelNumber == 0)
+     51:             {
+=>   52:             TestLevel (&LevelNumber, &Man, &Camera);
+     53:             };
+     54: 
+
+# 7 0x005EDB47 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (22):
+
+     20:     GRCreateWindow (1550, 850);
+     21: 
+=>   22:     Cycle ();
+     23: 
+     24:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\007\desktop\codebl~1\mingw\include\txlib.h
+Compiled:	May 19 2021 18:30:38, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	May 19 2021 18:45:09
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042C8B9 в функции IncreaseAnimationNumber() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 27. Попытка прочесть данные по адресу 0x00000030 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400], Instance: 0x00ADD7C4 (32-bit), Flags: Cmdre0, Thread: 0x3B40 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042C8B9 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: IncreaseAnimationNumber() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (27):
+
+     25: void IncreaseAnimationNumber (AnimationType* Animation)
+     26:     {
+=>   27:     Animation->xFrame += 1;
+     28: 
+     29:     if (Animation->xFrame >= Animation->Picture->xMaxAnimationNumber)
+
+# 1 0x004B2CF8 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawBlock() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (22):
+
+     20: void BlockType :: DrawBlock (CamType* Camera)
+     21:     {
+=>   22:     IncreaseAnimationNumber (&Animation);
+     23: 
+     24:     if (Health > 0 &&
+
+# 2 0x004B3809 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawLevelBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (218):
+
+    216:         printf ("DrawLevelBlocks() : i = %d\n", i);
+    217: 
+=>  218:         ManyBlocks [i]->DrawBlock (Camera);
+    219: 
+    220:         // i = i + 1;
+
+# 3 0x004B3793 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawManyBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (183):
+
+    181: void DrawManyBlocks (BlockType* ManyBlocks [], CamType* Camera)
+    182:     {
+=>  183:     DrawLevelBlocks (ManyBlocks, Camera);
+    184: 
+    185:     // DrawLevelPeople (Villagers, Camera, AllImage);
+
+# 4 0x005C08CD in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/Levels.cpp (73):
+
+     71:         GRRectangle (11400*World_Size - Camera->Point.x, 720 - Camera->Point.y, 999999 - Camera->Point.x, 9999 - Camera->Point.y); */
+     72: 
+=>   73:         DrawManyBlocks (ManyBlocks, Camera);
+     74: 
+     75:         // GRSetColor (GR_RED, 10);
+
+# 5 0x005C136C in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: TestLevel() at C:/Users/007/Desktop/программирование/MyGame2/Levels.cpp (277):
+
+    275:                             0, 0, 0, 0, {}}};
+    276: 
+=>  277:     MoveGame (ManyBlocks, LevelNumber, Man, &AllTemperature, Camera, Villagers);
+    278:     };
+    279: 
+
+# 6 0x005EDE84 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (52):
+
+     50:         if (LevelNumber == 0)
+     51:             {
+=>   52:             TestLevel (&LevelNumber, &Man, &Camera);
+     53:             };
+     54: 
+
+# 7 0x005EDB47 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (22):
+
+     20:     GRCreateWindow (1550, 850);
+     21: 
+=>   22:     Cycle ();
+     23: 
+     24:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\007\desktop\codebl~1\mingw\include\txlib.h
+Compiled:	May 19 2021 18:30:38, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	May 19 2021 18:45:10
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042C8B9 в функции IncreaseAnimationNumber() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 27. Попытка прочесть данные по адресу 0x00000030 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400], Instance: 0x00ADD7C4 (32-bit), Flags: Cmdre0, Thread: 0x129C (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042C8B9 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: IncreaseAnimationNumber() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (27):
+
+     25: void IncreaseAnimationNumber (AnimationType* Animation)
+     26:     {
+=>   27:     Animation->xFrame += 1;
+     28: 
+     29:     if (Animation->xFrame >= Animation->Picture->xMaxAnimationNumber)
+
+# 1 0x004B2CF8 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawBlock() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (22):
+
+     20: void BlockType :: DrawBlock (CamType* Camera)
+     21:     {
+=>   22:     IncreaseAnimationNumber (&Animation);
+     23: 
+     24:     if (Health > 0 &&
+
+# 2 0x004B3809 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawLevelBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (218):
+
+    216:         printf ("DrawLevelBlocks() : i = %d\n", i);
+    217: 
+=>  218:         ManyBlocks [i]->DrawBlock (Camera);
+    219: 
+    220:         // i = i + 1;
+
+# 3 0x004B3793 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawManyBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (183):
+
+    181: void DrawManyBlocks (BlockType* ManyBlocks [], CamType* Camera)
+    182:     {
+=>  183:     DrawLevelBlocks (ManyBlocks, Camera);
+    184: 
+    185:     // DrawLevelPeople (Villagers, Camera, AllImage);
+
+# 4 0x005C08CD in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/Levels.cpp (73):
+
+     71:         GRRectangle (11400*World_Size - Camera->Point.x, 720 - Camera->Point.y, 999999 - Camera->Point.x, 9999 - Camera->Point.y); */
+     72: 
+=>   73:         DrawManyBlocks (ManyBlocks, Camera);
+     74: 
+     75:         // GRSetColor (GR_RED, 10);
+
+# 5 0x005C136C in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: TestLevel() at C:/Users/007/Desktop/программирование/MyGame2/Levels.cpp (277):
+
+    275:                             0, 0, 0, 0, {}}};
+    276: 
+=>  277:     MoveGame (ManyBlocks, LevelNumber, Man, &AllTemperature, Camera, Villagers);
+    278:     };
+    279: 
+
+# 6 0x005EDE84 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (52):
+
+     50:         if (LevelNumber == 0)
+     51:             {
+=>   52:             TestLevel (&LevelNumber, &Man, &Camera);
+     53:             };
+     54: 
+
+# 7 0x005EDB47 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (22):
+
+     20:     GRCreateWindow (1550, 850);
+     21: 
+=>   22:     Cycle ();
+     23: 
+     24:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\007\desktop\codebl~1\mingw\include\txlib.h
+Compiled:	May 19 2021 18:30:38, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	May 19 2021 18:48:08
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042C8B9 в функции IncreaseAnimationNumber() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 27. Попытка прочесть данные по адресу 0x00000030 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400], Instance: 0x00ADD7C4 (32-bit), Flags: Cmdre0, Thread: 0x129C (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042C8B9 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: IncreaseAnimationNumber() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (27):
+
+     25: void IncreaseAnimationNumber (AnimationType* Animation)
+     26:     {
+=>   27:     Animation->xFrame += 1;
+     28: 
+     29:     if (Animation->xFrame >= Animation->Picture->xMaxAnimationNumber)
+
+# 1 0x004B2CF8 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawBlock() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (22):
+
+     20: void BlockType :: DrawBlock (CamType* Camera)
+     21:     {
+=>   22:     IncreaseAnimationNumber (&Animation);
+     23: 
+     24:     if (Health > 0 &&
+
+# 2 0x004B3809 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawLevelBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (218):
+
+    216:         printf ("DrawLevelBlocks() : i = %d\n", i);
+    217: 
+=>  218:         ManyBlocks [i]->DrawBlock (Camera);
+    219: 
+    220:         // i = i + 1;
+
+# 3 0x004B3793 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawManyBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (183):
+
+    181: void DrawManyBlocks (BlockType* ManyBlocks [], CamType* Camera)
+    182:     {
+=>  183:     DrawLevelBlocks (ManyBlocks, Camera);
+    184: 
+    185:     // DrawLevelPeople (Villagers, Camera, AllImage);
+
+# 4 0x005C08CD in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/Levels.cpp (73):
+
+     71:         GRRectangle (11400*World_Size - Camera->Point.x, 720 - Camera->Point.y, 999999 - Camera->Point.x, 9999 - Camera->Point.y); */
+     72: 
+=>   73:         DrawManyBlocks (ManyBlocks, Camera);
+     74: 
+     75:         // GRSetColor (GR_RED, 10);
+
+# 5 0x005C136C in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: TestLevel() at C:/Users/007/Desktop/программирование/MyGame2/Levels.cpp (277):
+
+    275:                             0, 0, 0, 0, {}}};
+    276: 
+=>  277:     MoveGame (ManyBlocks, LevelNumber, Man, &AllTemperature, Camera, Villagers);
+    278:     };
+    279: 
+
+# 6 0x005EDE84 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (52):
+
+     50:         if (LevelNumber == 0)
+     51:             {
+=>   52:             TestLevel (&LevelNumber, &Man, &Camera);
+     53:             };
+     54: 
+
+# 7 0x005EDB47 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (22):
+
+     20:     GRCreateWindow (1550, 850);
+     21: 
+=>   22:     Cycle ();
+     23: 
+     24:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\007\desktop\codebl~1\mingw\include\txlib.h
+Compiled:	May 19 2021 18:30:38, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	May 19 2021 18:48:08
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042C8B9 в функции IncreaseAnimationNumber() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 27. Попытка прочесть данные по адресу 0x00000030 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400], Instance: 0x00ADD7C4 (32-bit), Flags: Cmdre0, Thread: 0x42C4 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042C8B9 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: IncreaseAnimationNumber() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (27):
+
+     25: void IncreaseAnimationNumber (AnimationType* Animation)
+     26:     {
+=>   27:     Animation->xFrame += 1;
+     28: 
+     29:     if (Animation->xFrame >= Animation->Picture->xMaxAnimationNumber)
+
+# 1 0x004B2CF8 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawBlock() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (22):
+
+     20: void BlockType :: DrawBlock (CamType* Camera)
+     21:     {
+=>   22:     IncreaseAnimationNumber (&Animation);
+     23: 
+     24:     if (Health > 0 &&
+
+# 2 0x004B3809 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawLevelBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (218):
+
+    216:         printf ("DrawLevelBlocks() : i = %d\n", i);
+    217: 
+=>  218:         ManyBlocks [i]->DrawBlock (Camera);
+    219: 
+    220:         // i = i + 1;
+
+# 3 0x004B3793 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawManyBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (183):
+
+    181: void DrawManyBlocks (BlockType* ManyBlocks [], CamType* Camera)
+    182:     {
+=>  183:     DrawLevelBlocks (ManyBlocks, Camera);
+    184: 
+    185:     // DrawLevelPeople (Villagers, Camera, AllImage);
+
+# 4 0x005C08CD in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/Levels.cpp (73):
+
+     71:         GRRectangle (11400*World_Size - Camera->Point.x, 720 - Camera->Point.y, 999999 - Camera->Point.x, 9999 - Camera->Point.y); */
+     72: 
+=>   73:         DrawManyBlocks (ManyBlocks, Camera);
+     74: 
+     75:         // GRSetColor (GR_RED, 10);
+
+# 5 0x005C136C in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: TestLevel() at C:/Users/007/Desktop/программирование/MyGame2/Levels.cpp (277):
+
+    275:                             0, 0, 0, 0, {}}};
+    276: 
+=>  277:     MoveGame (ManyBlocks, LevelNumber, Man, &AllTemperature, Camera, Villagers);
+    278:     };
+    279: 
+
+# 6 0x005EDE84 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (52):
+
+     50:         if (LevelNumber == 0)
+     51:             {
+=>   52:             TestLevel (&LevelNumber, &Man, &Camera);
+     53:             };
+     54: 
+
+# 7 0x005EDB47 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (22):
+
+     20:     GRCreateWindow (1550, 850);
+     21: 
+=>   22:     Cycle ();
+     23: 
+     24:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\007\desktop\codebl~1\mingw\include\txlib.h
+Compiled:	May 19 2021 18:30:38, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	May 19 2021 18:49:51
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042C8B9 в функции IncreaseAnimationNumber() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 27. Попытка прочесть данные по адресу 0x00000030 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400], Instance: 0x00ADD7C4 (32-bit), Flags: Cmdre0, Thread: 0x42C4 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042C8B9 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: IncreaseAnimationNumber() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (27):
+
+     25: void IncreaseAnimationNumber (AnimationType* Animation)
+     26:     {
+=>   27:     Animation->xFrame += 1;
+     28: 
+     29:     if (Animation->xFrame >= Animation->Picture->xMaxAnimationNumber)
+
+# 1 0x004B2CF8 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawBlock() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (22):
+
+     20: void BlockType :: DrawBlock (CamType* Camera)
+     21:     {
+=>   22:     IncreaseAnimationNumber (&Animation);
+     23: 
+     24:     if (Health > 0 &&
+
+# 2 0x004B3809 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawLevelBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (218):
+
+    216:         printf ("DrawLevelBlocks() : i = %d\n", i);
+    217: 
+=>  218:         ManyBlocks [i]->DrawBlock (Camera);
+    219: 
+    220:         // i = i + 1;
+
+# 3 0x004B3793 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawManyBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (183):
+
+    181: void DrawManyBlocks (BlockType* ManyBlocks [], CamType* Camera)
+    182:     {
+=>  183:     DrawLevelBlocks (ManyBlocks, Camera);
+    184: 
+    185:     // DrawLevelPeople (Villagers, Camera, AllImage);
+
+# 4 0x005C08CD in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/Levels.cpp (73):
+
+     71:         GRRectangle (11400*World_Size - Camera->Point.x, 720 - Camera->Point.y, 999999 - Camera->Point.x, 9999 - Camera->Point.y); */
+     72: 
+=>   73:         DrawManyBlocks (ManyBlocks, Camera);
+     74: 
+     75:         // GRSetColor (GR_RED, 10);
+
+# 5 0x005C136C in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: TestLevel() at C:/Users/007/Desktop/программирование/MyGame2/Levels.cpp (277):
+
+    275:                             0, 0, 0, 0, {}}};
+    276: 
+=>  277:     MoveGame (ManyBlocks, LevelNumber, Man, &AllTemperature, Camera, Villagers);
+    278:     };
+    279: 
+
+# 6 0x005EDE84 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (52):
+
+     50:         if (LevelNumber == 0)
+     51:             {
+=>   52:             TestLevel (&LevelNumber, &Man, &Camera);
+     53:             };
+     54: 
+
+# 7 0x005EDB47 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (22):
+
+     20:     GRCreateWindow (1550, 850);
+     21: 
+=>   22:     Cycle ();
+     23: 
+     24:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\007\desktop\codebl~1\mingw\include\txlib.h
+Compiled:	May 19 2021 18:30:38, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	May 19 2021 18:49:52
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x75DA2C57 в функции $I10_OUTPUT(). Попытка записать данные по адресу NULL в модуле C:\windows\System32\msvcrt.dll. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400], Instance: 0x00ADE7C4 (32-bit), Flags: Cmdre0, Thread: 0x640 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x75DA2C57 in C:\windows\System32\msvcrt.dll: $I10_OUTPUT()
+# 1 0x75D9024E in C:\windows\System32\msvcrt.dll: ungetwc()
+# 2 0x75D83EC0 in C:\windows\System32\msvcrt.dll: fscanf_s()
+# 3 0x75D83D9B in C:\windows\System32\msvcrt.dll: fscanf()
+
+# 4 0x0061B07A in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: ManReading() at C:/Users/007/Desktop/программирование/MyGame2/ManType.cpp (137):
+
+    135:     if (readingfile != 0)
+    136:         {
+=>  137:         fscanf (readingfile, "Man->Point.x = %lf Man->Point.y = %lf", Man->Point.x, Man->Point.y);
+    138:         fscanf (readingfile, "Man->Health = %lf", Man->Health);
+    139:         fscanf (readingfile, "Man->Days = %d", Man->Days);
+
+# 5 0x005EDEB7 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (43):
+
+     41:                  0, 0, Man_x, Man_y, 0, 0, {}};
+     42: 
+=>   43:     ManReading (&Man);
+     44: 
+     45:     while (true)
+
+# 6 0x005EDBCB in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (22):
+
+     20:     GRCreateWindow (1550, 850);
+     21: 
+=>   22:     Cycle ();
+     23: 
+     24:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\007\desktop\codebl~1\mingw\include\txlib.h
+Compiled:	May 20 2021 16:54:06, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	May 20 2021 16:55:05
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x75DA2C57 в функции $I10_OUTPUT(). Попытка записать данные по адресу NULL в модуле C:\windows\System32\msvcrt.dll. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400], Instance: 0x00ADE7C4 (32-bit), Flags: Cmdre0, Thread: 0x640 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x75DA2C57 in C:\windows\System32\msvcrt.dll: $I10_OUTPUT()
+# 1 0x75D9024E in C:\windows\System32\msvcrt.dll: ungetwc()
+# 2 0x75D83EC0 in C:\windows\System32\msvcrt.dll: fscanf_s()
+# 3 0x75D83D9B in C:\windows\System32\msvcrt.dll: fscanf()
+
+# 4 0x0061B07A in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: ManReading() at C:/Users/007/Desktop/программирование/MyGame2/ManType.cpp (137):
+
+    135:     if (readingfile != 0)
+    136:         {
+=>  137:         fscanf (readingfile, "Man->Point.x = %lf Man->Point.y = %lf", Man->Point.x, Man->Point.y);
+    138:         fscanf (readingfile, "Man->Health = %lf", Man->Health);
+    139:         fscanf (readingfile, "Man->Days = %d", Man->Days);
+
+# 5 0x005EDEB7 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (43):
+
+     41:                  0, 0, Man_x, Man_y, 0, 0, {}};
+     42: 
+=>   43:     ManReading (&Man);
+     44: 
+     45:     while (true)
+
+# 6 0x005EDBCB in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (22):
+
+     20:     GRCreateWindow (1550, 850);
+     21: 
+=>   22:     Cycle ();
+     23: 
+     24:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\007\desktop\codebl~1\mingw\include\txlib.h
+Compiled:	May 20 2021 16:54:06, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	May 20 2021 16:55:06
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x75DA2C57 в функции $I10_OUTPUT(). Попытка записать данные по адресу NULL в модуле C:\windows\System32\msvcrt.dll. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400], Instance: 0x00ADE7C4 (32-bit), Flags: Cmdre0, Thread: 0x900 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x75DA2C57 in C:\windows\System32\msvcrt.dll: $I10_OUTPUT()
+# 1 0x75D9024E in C:\windows\System32\msvcrt.dll: ungetwc()
+# 2 0x75D83EC0 in C:\windows\System32\msvcrt.dll: fscanf_s()
+# 3 0x75D83D9B in C:\windows\System32\msvcrt.dll: fscanf()
+
+# 4 0x0061B07A in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: ManReading() at C:/Users/007/Desktop/программирование/MyGame2/ManType.cpp (137):
+
+    135:     if (readingfile != 0)
+    136:         {
+=>  137:         fscanf (readingfile, "Man->Point.x = %lf Man->Point.y = %lf", Man->Point.x, Man->Point.y);
+    138:         fscanf (readingfile, "Man->Health = %lf", Man->Health);
+    139:         fscanf (readingfile, "Man->Days = %d", Man->Days);
+
+# 5 0x005EDEB7 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (43):
+
+     41:                  0, 0, Man_x, Man_y, 0, 0, {}};
+     42: 
+=>   43:     ManReading (&Man);
+     44: 
+     45:     while (true)
+
+# 6 0x005EDBCB in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (22):
+
+     20:     GRCreateWindow (1550, 850);
+     21: 
+=>   22:     Cycle ();
+     23: 
+     24:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\007\desktop\codebl~1\mingw\include\txlib.h
+Compiled:	May 20 2021 16:54:06, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	May 20 2021 16:56:16
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x75DA2C57 в функции $I10_OUTPUT(). Попытка записать данные по адресу NULL в модуле C:\windows\System32\msvcrt.dll. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400], Instance: 0x00ADE7C4 (32-bit), Flags: Cmdre0, Thread: 0x900 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x75DA2C57 in C:\windows\System32\msvcrt.dll: $I10_OUTPUT()
+# 1 0x75D9024E in C:\windows\System32\msvcrt.dll: ungetwc()
+# 2 0x75D83EC0 in C:\windows\System32\msvcrt.dll: fscanf_s()
+# 3 0x75D83D9B in C:\windows\System32\msvcrt.dll: fscanf()
+
+# 4 0x0061B07A in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: ManReading() at C:/Users/007/Desktop/программирование/MyGame2/ManType.cpp (137):
+
+    135:     if (readingfile != 0)
+    136:         {
+=>  137:         fscanf (readingfile, "Man->Point.x = %lf Man->Point.y = %lf", Man->Point.x, Man->Point.y);
+    138:         fscanf (readingfile, "Man->Health = %lf", Man->Health);
+    139:         fscanf (readingfile, "Man->Days = %d", Man->Days);
+
+# 5 0x005EDEB7 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (43):
+
+     41:                  0, 0, Man_x, Man_y, 0, 0, {}};
+     42: 
+=>   43:     ManReading (&Man);
+     44: 
+     45:     while (true)
+
+# 6 0x005EDBCB in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (22):
+
+     20:     GRCreateWindow (1550, 850);
+     21: 
+=>   22:     Cycle ();
+     23: 
+     24:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\007\desktop\codebl~1\mingw\include\txlib.h
+Compiled:	May 20 2021 16:54:06, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	May 20 2021 16:56:16
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x004B32AD в функции CreateBlocks() в файле C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp на строке 65. Попытка записать данные по адресу 0x00000004 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400], Instance: 0x00ADF8E4 (32-bit), Flags: Cmdre0, Thread: 0x32D0 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x004B32AD in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (65):
+
+     63:         //     {
+     64:         // RoomPicture :
+=>   65:         Blocks [i] = new AirType ();
+     66:         Blocks [i]->Point.x = X;
+     67:         Blocks [i]->Point.y = 816;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\007\desktop\codebl~1\mingw\include\txlib.h
+Compiled:	Jun  2 2021 15:38:27, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 02 2021 15:38:36
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x004B32AD в функции CreateBlocks() в файле C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp на строке 65. Попытка записать данные по адресу 0x00000004 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400], Instance: 0x00ADF8E4 (32-bit), Flags: Cmdre0, Thread: 0x32D0 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x004B32AD in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (65):
+
+     63:         //     {
+     64:         // RoomPicture :
+=>   65:         Blocks [i] = new AirType ();
+     66:         Blocks [i]->Point.x = X;
+     67:         Blocks [i]->Point.y = 816;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\007\desktop\codebl~1\mingw\include\txlib.h
+Compiled:	Jun  2 2021 15:38:27, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 02 2021 15:38:36
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x004B32C0 в функции CreateBlocks() в файле C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp на строке 66. Попытка записать данные по адресу 0x00000002 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400], Instance: 0x00ADF8E4 (32-bit), Flags: Cmdre0, Thread: 0x29EC (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x004B32C0 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (66):
+
+     64:         //     {
+     65:         // RoomPicture :
+=>   66:         Blocks [i] = new AirType ();
+     67:         Blocks [i]->Point.x = X;
+     68:         Blocks [i]->Point.y = 816;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\007\desktop\codebl~1\mingw\include\txlib.h
+Compiled:	Jun  2 2021 15:38:27, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 02 2021 15:40:26
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x004B32C0 в функции CreateBlocks() в файле C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp на строке 66. Попытка записать данные по адресу 0x00000002 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400], Instance: 0x00ADF8E4 (32-bit), Flags: Cmdre0, Thread: 0x29EC (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x004B32C0 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (66):
+
+     64:         //     {
+     65:         // RoomPicture :
+=>   66:         Blocks [i] = new AirType ();
+     67:         Blocks [i]->Point.x = X;
+     68:         Blocks [i]->Point.y = 816;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\007\desktop\codebl~1\mingw\include\txlib.h
+Compiled:	Jun  2 2021 15:38:27, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 02 2021 15:40:26
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x004B32C0 в функции CreateBlocks() в файле C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp на строке 66. Попытка записать данные по адресу 0x00000001 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400], Instance: 0x00ADF8E4 (32-bit), Flags: Cmdre0, Thread: 0x293C (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x004B32C0 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (66):
+
+     64:         //     {
+     65:         // RoomPicture :
+=>   66:         Blocks [i] = new AirType ();
+     67:         Blocks [i]->Point.x = X;
+     68:         Blocks [i]->Point.y = 816;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\007\desktop\codebl~1\mingw\include\txlib.h
+Compiled:	Jun  2 2021 15:38:27, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 02 2021 15:43:10
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x004B32C0 в функции CreateBlocks() в файле C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp на строке 66. Попытка записать данные по адресу 0x00000001 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400], Instance: 0x00ADF8E4 (32-bit), Flags: Cmdre0, Thread: 0x293C (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x004B32C0 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (66):
+
+     64:         //     {
+     65:         // RoomPicture :
+=>   66:         Blocks [i] = new AirType ();
+     67:         Blocks [i]->Point.x = X;
+     68:         Blocks [i]->Point.y = 816;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\007\desktop\codebl~1\mingw\include\txlib.h
+Compiled:	Jun  2 2021 15:38:27, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 02 2021 15:43:10
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x004B32C0 в функции CreateBlocks() в файле C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp на строке 66. Попытка записать данные по адресу 0x00000003 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400], Instance: 0x00ADF8E4 (32-bit), Flags: Cmdre0, Thread: 0x2C1C (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x004B32C0 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (66):
+
+     64:         //     {
+     65:         // RoomPicture :
+=>   66:         Blocks [i] = new AirType ();
+     67:         Blocks [i]->Point.x = X;
+     68:         Blocks [i]->Point.y = 816;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\007\desktop\codebl~1\mingw\include\txlib.h
+Compiled:	Jun  2 2021 15:38:27, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 02 2021 15:52:26
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x004B32C0 в функции CreateBlocks() в файле C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp на строке 66. Попытка записать данные по адресу 0x00000003 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400], Instance: 0x00ADF8E4 (32-bit), Flags: Cmdre0, Thread: 0x2C1C (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x004B32C0 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (66):
+
+     64:         //     {
+     65:         // RoomPicture :
+=>   66:         Blocks [i] = new AirType ();
+     67:         Blocks [i]->Point.x = X;
+     68:         Blocks [i]->Point.y = 816;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\007\desktop\codebl~1\mingw\include\txlib.h
+Compiled:	Jun  2 2021 15:38:27, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 02 2021 15:52:26
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x004B32D3 в функции CreateBlocks() в файле C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp на строке 66. Попытка записать данные по адресу 0x00000003 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400], Instance: 0x00ADF8E4 (32-bit), Flags: Cmdre0, Thread: 0x3114 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x004B32D3 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (66):
+
+     64:         //     {
+     65:         // RoomPicture :
+=>   66:         Blocks [i] = new AirType ();
+     67:         Blocks [i]->Point.x = X;
+     68:         Blocks [i]->Point.y = 816;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\007\desktop\codebl~1\mingw\include\txlib.h
+Compiled:	Jun  2 2021 15:38:27, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 02 2021 15:54:54
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x004B32D3 в функции CreateBlocks() в файле C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp на строке 66. Попытка записать данные по адресу 0x00000003 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400], Instance: 0x00ADF8E4 (32-bit), Flags: Cmdre0, Thread: 0x3114 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x004B32D3 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (66):
+
+     64:         //     {
+     65:         // RoomPicture :
+=>   66:         Blocks [i] = new AirType ();
+     67:         Blocks [i]->Point.x = X;
+     68:         Blocks [i]->Point.y = 816;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\007\desktop\codebl~1\mingw\include\txlib.h
+Compiled:	Jun  2 2021 15:38:27, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 02 2021 15:54:54
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------

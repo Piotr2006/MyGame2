@@ -8,6 +8,74 @@ void StrCpy (char ToName [], const char FromName [])
         };
     };
 
+int GetNumberOfSymbols (const char str[], const char Symbol)
+    {
+    int Number = 0;
+
+    int Position = 0;
+
+    while (str [Position] != 0)
+        {
+        if (str [Position] == Symbol)
+            Number += 1;
+
+        Position += 1;
+        };
+
+    return Number;
+    };
+
+int GetNumberOfStr (const char Allstr[], const char Smallstr [2])
+    {
+    int Number = 0;
+
+    int Position = 0;
+
+    while (Allstr [Position] != 0)
+        {
+        if (Allstr [Position]     == Smallstr [0] &&
+            Allstr [Position + 1] == Smallstr [1])
+            Number += 1;
+
+        Position += 1;
+        };
+
+    return Number;
+    };
+
+int Myfscanf (FILE* file, const char str [], ...)
+    {
+    va_list Arg {};
+
+    va_start (Arg, str);
+
+    int NumberOfArg = GetNumberOfSymbols (str, '%') - 2 * GetNumberOfStr (str, "%%") -
+                                                          GetNumberOfStr (str, "%*");
+
+                            // Man->Point.x = 10%
+    // Myfscanf (readingfile, "Man->Point.x = %d %% ", &Man->Point.x);
+
+    // Myfscanf (readingfile, "Man->Point.x = %d %*d ", &Man->Point.x, &Man->Point.y);
+
+
+    // Myfscanf (readingfile, "Man->Health = %% ", &Man->Health);
+    // Myfscanf (readingfile, "Man->Point.y = %d ", &Man->Point.y);
+
+    int OK = 0;
+
+    if (vfscanf (file, str, Arg) < NumberOfArg)
+        OK = false;
+    else
+        OK = true;
+
+    va_end (Arg);
+
+    if (OK == true)
+        return true;
+    else
+        return false;
+    };
+
 int Distance (int a, int b, int Dst)
     {
     if (fabs (a - b) <= Dst)
@@ -52,18 +120,18 @@ int ModuleDistance (PointType Point1, PointType Point2, int Distance)
     return 0;
     };
 
-void DrawHealth (int Health)
+void DrawHealth (PointType Point, int Health)
     {
     int null = 0;
     int one  = 1;
 
-    DrawTransparentImage (GlobalAllImage.Coin, Sign_HealthX, Sign_HealthY, &one, &null);
+    DrawTransparentImage (GlobalAllImage.Coin, Point.x - 71, Point.y - 27, &one, &null);
 
     GRSetColor (TX_BLACK, 2);
     GRSetFillColor (TX_TRANSPARENT);
-    GRRectangle (60, 120, 160, 140);
+    GRRectangle (Point.x - 30, Point.y - 20, Point.x + 70, Point.y);
     GRSetFillColor (RGB (237, 28, 36));
-    GRRectangle (60, 120, 60+(Health*5), 140);
+    GRRectangle (Point.x - 30, Point.y - 20, Point.x - 30 + Health, Point.y);
     };
 
 int BlockCheckClick (BlockType* Block, CamType* Camera)
@@ -84,6 +152,40 @@ int InBorders (double smaller, double x, double bigger)
     if (smaller <= x &&
                    x <= bigger)
                    return true;
+
+    return false;
+    };
+
+int RectAiming (double x1, double y1, double x2, double y2, CamType* Camera)
+    {
+    double xDst = x2 - x1;
+    double yDst = y2 - y1;
+
+    if (fabs (x1 + xDst - Camera->Point.x - GRMouseX()) <= xDst &&
+        fabs (y1 + yDst - Camera->Point.y - GRMouseY()) <= yDst)
+                return true;
+
+    return false;
+    };
+
+int RectCheckClick (double x1, double y1, double x2, double y2, CamType* Camera)
+    {
+    double xDst = x2 - x1;
+    double yDst = y2 - y1;
+
+    if (fabs (x1 + xDst - Camera->Point.x - GRMouseX()) <= xDst &&
+        fabs (y1 + yDst - Camera->Point.y - GRMouseY()) <= yDst &&
+        GetAsyncKeyState (VK_LBUTTON))
+                return true;
+
+    return false;
+    };
+
+bool HaveInventory (int Selected, int Type, int HaveNumber, int MinNumber)
+    {
+    if (Selected == Type &&
+        HaveNumber >= MinNumber)
+        return true;
 
     return false;
     };

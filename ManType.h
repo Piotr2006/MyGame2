@@ -86,6 +86,9 @@ void DrawLevelPeople (ManType Villagers[], CamType* Camera);
 
 void CallPeoplePhysic (ManType Villagers[], CamType* Camera, BlockType* ManyBlocks [], ManType* Man);
 
+// void ManReading (ManType* Man);
+
+// void ManSaving (ManType* Man);
 
 //-----------------------------------------------------------------------------
 

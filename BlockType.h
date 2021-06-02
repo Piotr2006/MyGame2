@@ -16,7 +16,7 @@ struct BlockType : BaseType
     BlockType ();
 
     BlockType (PointType Point, double Health, AnimationType Animation,
-               int Number, void (*_Function) (ManType* Man, BlockType* Block, CamType* Camera));
+               int Number);
 
 
 
@@ -24,43 +24,118 @@ struct BlockType : BaseType
 
     int Number;
 
-    void (*Function) (ManType* Man, BlockType* Block, CamType* Camera);
+    virtual bool Detection (ManType* Man, CamType* Camera);
 
-    virtual void Interaction (ManType* Man, BlockType* Block, CamType* Camera)
-        {
-        Function (Man, Block, Camera);
-        };
-    };
-
-void FallingTreeInteraction (ManType* Man, BlockType* Block, CamType* Camera);
-
-void SmallStoneInteraction (ManType* Man, BlockType* Block, CamType* Camera);
-
-void RockInteraction (ManType* Man, BlockType* Block, CamType* Camera);
-
-void BonfireInteraction (ManType* Man, BlockType* Block, CamType* Camera);
-
-void TreeInteraction (ManType* Man, BlockType* Block, CamType* Camera);
-
-void DynamiteInteraction (ManType* Man, BlockType* Block, CamType* Camera);
-
-void CaseInteraction (ManType* Man, BlockType* Block, CamType* Camera);
-
-void AirInteraction (ManType* Man, BlockType* Block, CamType* Camera);
-
-struct TreeType : BlockType
-    {
-    TreeType (PointType Point, double Health, AnimationType Animation,
-               int Number, void (*_Function) (ManType* Man, BlockType* Block, CamType* Camera));
-
-    virtual void Interaction (ManType* Man, BlockType* Block, CamType* Camera)
-        {
-        TreeInteraction (Man, Block, Camera);
-        };
-
+    virtual void Interaction (ManType* Man, CamType* Camera) = 0;
     };
 
 //-----------------------------------------------------------------------------
+
+struct DirtType : BlockType
+    {
+    using BlockType :: BlockType;
+
+    virtual void Interaction (ManType* Man, CamType* Camera) override;
+    };
+
+//-----------------------------------------------------------------------------
+
+struct TreeType : BlockType
+    {
+    using BlockType :: BlockType;
+
+    virtual bool Detection (ManType* Man, CamType* Camera) override;
+
+    virtual void Interaction (ManType* Man, CamType* Camera) override;
+    };
+
+//-----------------------------------------------------------------------------
+
+struct FallingTreeType : BlockType
+    {
+    using BlockType :: BlockType;
+
+    virtual bool Detection  (ManType* Man, CamType* Camera) override;
+
+    virtual void Interaction (ManType* Man, CamType* Camera) override;
+    };
+
+//-----------------------------------------------------------------------------
+
+struct SmallStoneType : BlockType
+    {
+    using BlockType :: BlockType;
+
+    // virtual bool Detection  (ManType* Man, CamType* Camera) override;
+
+    virtual void Interaction (ManType* Man, CamType* Camera) override;
+    };
+
+//-----------------------------------------------------------------------------
+
+struct RockType : BlockType
+    {
+    using BlockType :: BlockType;
+
+    virtual bool Detection  (ManType* Man, CamType* Camera) override;
+
+    virtual void Interaction (ManType* Man, CamType* Camera) override;
+    };
+
+//-----------------------------------------------------------------------------
+
+struct BonfireType : BlockType
+    {
+    using BlockType :: BlockType;
+
+    virtual bool Detection  (ManType* Man, CamType* Camera) override;
+
+    virtual void Interaction (ManType* Man, CamType* Camera) override;
+    };
+
+//-----------------------------------------------------------------------------
+
+struct DynamiteType : BlockType
+    {
+    using BlockType :: BlockType;
+
+    virtual void Interaction (ManType* Man, CamType* Camera) override;
+    };
+
+//-----------------------------------------------------------------------------
+
+struct CaseType : BlockType
+    {
+    using BlockType :: BlockType;
+
+    virtual void Interaction (ManType* Man, CamType* Camera) override;
+    };
+
+//-----------------------------------------------------------------------------
+
+struct AirType : BlockType
+    {
+    using BlockType :: BlockType;
+
+    virtual bool Detection  (ManType* Man, CamType* Camera) override;
+
+    virtual void Interaction (ManType* Man, CamType* Camera) override;
+    };
+
+//-----------------------------------------------------------------------------
+
+struct StairsType : BlockType
+    {
+    using BlockType :: BlockType;
+
+    virtual bool Detection  (ManType* Man, CamType* Camera) override;
+
+    virtual void Interaction (ManType* Man, CamType* Camera) override;
+    };
+
+//-----------------------------------------------------------------------------
+
+// void BlocksSaving (BlockType* Blocks []);
 
 void DrawLevelBlocks (BlockType* ManyBlocks[], CamType* Camera);
 

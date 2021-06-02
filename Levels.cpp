@@ -1,6 +1,125 @@
 #include "Levels.h"
 
-void MoveGame (BlockType* ManyBlocks [], int* LevelNumber, ManType* Man, double* AllTemperature, CamType* Camera, ManType Villagers [])
+void Reading (ManType* Man, BlockType* Blocks[])
+    {
+    FILE* readingfile = fopen ("Saving.txt", "r");
+
+    int OK = true;
+
+    if (readingfile == 0)
+        {
+        txMessageBox ("файл Saving.txt нельзя прочитать");
+        return;
+        };
+
+    // txMessageBox ("Man is reading...");
+
+    OK &= Myfscanf (readingfile, "Man->Point.x = %lf ",             &Man->Point.x);
+    OK &= Myfscanf (readingfile, "Man->Point.y = %lf ",             &Man->Point.y);
+    OK &= Myfscanf (readingfile, "Man->Health = %lf%% ",            &Man->Health);
+    OK &= Myfscanf (readingfile, "Man->Days = %d ",                 &Man->Days);
+    OK &= Myfscanf (readingfile, "Man->Inventory.Axe = %d ",        &Man->Inventory.Axe);
+    OK &= Myfscanf (readingfile, "Man->Inventory.Wood = %d ",       &Man->Inventory.Wood);
+    OK &= Myfscanf (readingfile, "Man->Inventory.Apple = %d ",      &Man->Inventory.Apple);
+    OK &= Myfscanf (readingfile, "Man->Inventory.Knife = %d ",      &Man->Inventory.Knife);
+    OK &= Myfscanf (readingfile, "Man->Inventory.Stone = %d ",      &Man->Inventory.Stone);
+    OK &= Myfscanf (readingfile, "Man->Inventory.Bow = %d ",        &Man->Inventory.Bow);
+    OK &= Myfscanf (readingfile, "Man->Inventory.Arrow = %d ",      &Man->Inventory.Arrow);
+    OK &= Myfscanf (readingfile, "Man->Inventory.Coin = %d ",       &Man->Inventory.Coin);
+    OK &= Myfscanf (readingfile, "Man->Inventory.Fishing = %d ",    &Man->Inventory.Fishing);
+    OK &= Myfscanf (readingfile, "Man->Inventory.Fish = %d ",       &Man->Inventory.Fish);
+    OK &= Myfscanf (readingfile, "Man->Inventory.CookedFish = %d ", &Man->Inventory.CookedFish);
+    OK &= Myfscanf (readingfile, "Man->Inventory.Rope = %d ",       &Man->Inventory.Rope);
+    OK &= Myfscanf (readingfile, "Man->Inventory.Gun = %d ",        &Man->Inventory.Gun);
+
+    if (!OK)
+        TX_ERROR ("Прoчитаны не все данные человека, выход из цикла");
+
+    // txMessageBox ("Blocks are reading");
+
+    int BlockOK = true;
+
+    for (int i = 0; i < Blocks_Number; i ++)
+        {
+        int BlockNumber = 0;
+
+        double x = 0;
+        double y = 0;
+        double Health = 0;
+
+        BlockOK &= Myfscanf (readingfile, "Block [%d] : x = %lf, y = %lf, Health = %lf ",
+                                           &BlockNumber, &x, &y, &Health);
+
+        if (!BlockOK)
+            {
+            TX_ERROR ("Прoчитаны не все данные блоков, выход из цикла, BlockNumber = %d", BlockNumber);
+            };
+
+        if (0 <= BlockNumber &&
+                 BlockNumber < Blocks_Number)
+            {
+            Blocks[BlockNumber]->Point.x = x;
+            Blocks[BlockNumber]->Point.y = y;
+            Blocks[BlockNumber]->Health = Health;
+            }
+        else
+            TX_ERROR ("Hеверный BlockNumber %d \n", BlockNumber);
+        };
+
+    // printf ("NumberOfParameters = %d \n", NumberOfParameters);
+
+    //-----------------------------------------------------------------------------
+
+    fclose (readingfile);
+    };
+
+void Saving (ManType* Man, BlockType* Blocks[])
+    {
+    txMessageBox ("Man is saving...");
+
+    FILE* file = fopen ("Saving.txt", "w");
+
+    if (file == NULL)
+        {
+        txMessageBox ("файл не может сохраниться");
+        return;
+        };
+
+    fprintf (file, "Man->Point.x = %lf \n",             Man->Point.x);
+    fprintf (file, "Man->Point.y = %lf \n",             Man->Point.y);
+    fprintf (file, "Man->Health = %lf%% \n",            Man->Health);
+    fprintf (file, "Man->Days = %d \n",                 Man->Days);
+    fprintf (file, "Man->Inventory.Axe = %d \n",        Man->Inventory.Axe);
+    fprintf (file, "Man->Inventory.Wood = %d \n",       Man->Inventory.Wood);
+    fprintf (file, "Man->Inventory.Apple = %d \n",      Man->Inventory.Apple);
+    fprintf (file, "Man->Inventory.Knife = %d \n",      Man->Inventory.Knife);
+    fprintf (file, "Man->Inventory.Stone = %d \n",      Man->Inventory.Stone);
+    fprintf (file, "Man->Inventory.Bow = %d \n",        Man->Inventory.Bow);
+    fprintf (file, "Man->Inventory.Arrow = %d \n",      Man->Inventory.Arrow);
+    fprintf (file, "Man->Inventory.Coin = %d \n",       Man->Inventory.Coin);
+    fprintf (file, "Man->Inventory.Fishing = %d \n",    Man->Inventory.Fishing);
+    fprintf (file, "Man->Inventory.Fish = %d \n",       Man->Inventory.Fish);
+    fprintf (file, "Man->Inventory.CookedFish = %d \n", Man->Inventory.CookedFish);
+    fprintf (file, "Man->Inventory.Rope = %d \n",       Man->Inventory.Rope);
+    fprintf (file, "Man->Inventory.Gun = %d \n\n",      Man->Inventory.Gun);
+
+    //-----------------------------------------------------------------------------
+
+    // txMessageBox ("Blocks are saving...");
+
+    // FILE* file = fopen ("Saving.txt", "w");
+
+    for (int i = 0; i < Blocks_Number; i ++)
+        {
+        fprintf (file, "Block[%d] : x = %lf, y = %lf, Health = %lf \n", i, Blocks[i]->Point.x, Blocks[i]->Point.y, Blocks[i]->Health);
+        };
+
+    fclose (file);
+    };
+
+//-----------------------------------------------------------------------------
+
+int MoveGame (BlockType* ManyBlocks [], int* LevelNumber, ManType* Man, double* AllTemperature, CamType* Camera, ManType Villagers [])
     {
     int StartLevelNumber = *LevelNumber;
 
@@ -25,6 +144,8 @@ void MoveGame (BlockType* ManyBlocks [], int* LevelNumber, ManType* Man, double*
     // CreateBlocks (ManyBlocks, AllImage);
 
     HDC Light = txLoadImage ("Images/Light2.bmp");
+
+    int RunStatus = Continue;
 
     GRBegin ();
 
@@ -55,51 +176,24 @@ void MoveGame (BlockType* ManyBlocks [], int* LevelNumber, ManType* Man, double*
 
         Camera->MoveCamera (Man);
 
-        // DrawTransparentImage (GlobalAllImage.BackGround, 0, 0, &null, &null, FixedCamera);
-
-        // GRSetColor (RGB (143, 86, 59), 0);
-        // GRSetFillColor (RGB (143, 86, 59));
-        // GRRectangle (130, 700, 2410, 700);
-
-        GRSetColor (RGB (143, 86, 59), 1);
-        GRSetFillColor (RGB (143, 86, 59));
+        GRSetColor (RGB (40, 39, 37), 1);
+        GRSetFillColor (RGB (40, 39, 37));
         GRRectangle (0 - Camera->Point.x, 700 - Camera->Point.y, 9999999 - Camera->Point.x, 9000 - Camera->Point.y);
 
-        /* GRSetColor (WaterColor, 1);
-        GRSetFillColor (WaterColor);
-        GRRectangle (-99999 - Camera->Point.x, 720 - Camera->Point.y, 0 - Camera->Point.x, 9000 - Camera->Point.y);
-        GRRectangle (11400*World_Size - Camera->Point.x, 720 - Camera->Point.y, 999999 - Camera->Point.x, 9999 - Camera->Point.y); */
-
         DrawManyBlocks (ManyBlocks, Camera);
-
-        // GRSetColor (GR_RED, 10);
-        // GRLine (-1000000, 10000, 1000000, 10000);
-
-        Man->DrawMan (Camera);
-
-        // Villager
-        // Villager->Physic ();
-        // InteractManWithBlocks (ManyBlocks, Villager, Camera, &Man->NumberCoin, LevelNumber, AllImage);
-        // Villager->DrawMan (Camera, AllImage);
-        // Villager->VillagerMind (Man, Camera, AllImage);
-
-        // DrawLevelPeople (Villagers, Camera, AllImage);
-
-        // DrawTransparentImage (GlobalAllImage.BlackFrontGround, 0, 268 - Camera->Point.y, &null, &null);
-
-        Man->Crafting ();
-
-        Man->DrawInventory (Camera);
-
-        // CallPeoplePhysic (Villagers, Camera, AllImage, ManyBlocks, Man);
-
-        // DrawTransparentImage (GlobalAllImage.Coin, Sign_CoinX, Sign_CoinY, &null, &null, FixedCamera);
+        // DrawManyRooms (Rooms, Camera);
 
         Man->ManFire (Camera);
         Man->ManHealth (Camera);
         Man->ManTemperature ();
 
         InteractManWithBlocks (ManyBlocks, Man, Camera, &Man->NumberCoin);
+
+        Man->DrawMan (Camera);
+
+        Man->Crafting ();
+
+        Man->DrawInventory (Camera);
 
         Man->Physic ();
 
@@ -128,11 +222,10 @@ void MoveGame (BlockType* ManyBlocks [], int* LevelNumber, ManType* Man, double*
         Pause.DrawButton ();
         DrawTransparentImage (GlobalAllImage.Pause, 95, 10, &null, &six);
 
-        DrawHealth (Man->Health);
 
         Helping (&Man->HelpSystem);
 
-        if (PauseNumber == Pause_Stopped)
+        /* if (PauseNumber == Pause_Stopped)
             {
             Man->Speed.x = 0;
             Man->Speed.y = 0;
@@ -143,7 +236,7 @@ void MoveGame (BlockType* ManyBlocks [], int* LevelNumber, ManType* Man, double*
                 PauseNumber = Pause_Active;
             }
         else
-            Pause.Number = 0;
+            Pause.Number = 0; */
 
         if (Man->Temperature > *AllTemperature)
             {
@@ -154,13 +247,6 @@ void MoveGame (BlockType* ManyBlocks [], int* LevelNumber, ManType* Man, double*
             {
             Man->Temperature += (*AllTemperature - Man->Temperature)*0.001;
             };
-
-        GRSetColor (RGB (237, 28, 36), 1);
-        GRSetFillColor (RGB (237, 28, 36));
-
-        DrawTransparentImage (GlobalAllImage.Termometer, Sign_TermometerX, Sign_TermometerY, &null, &null);
-        GRRectangle (Sign_TermometerX + Sign_Term_RectLeftX, Sign_TermometerY + Sign_Term_RectDownY - Man->Temperature,
-                     Sign_TermometerX + Sign_Term_RectRightX, Sign_TermometerY + Sign_Term_RectDownY);
 
         GRAlphaBlend (Man->Point.x, Man->Point.y, 50, 50, Light, 0, 0, 1);
 
@@ -177,15 +263,22 @@ void MoveGame (BlockType* ManyBlocks [], int* LevelNumber, ManType* Man, double*
             };
 
         if (GetAsyncKeyState (VK_ESCAPE))
+            {
+            RunStatus = Exit;
             break;
+            };
 
         GRSleep (Main_Sleep);
         };
 
+    // txMessageBox ("выход из функции MoveGame");
+
     GREnd ();
+
+    return RunStatus;
     };
 
-void Level1 (int* LevelNumber, ManType* Man, CamType* Camera)
+int Level1 (int* LevelNumber, ManType* Man, CamType* Camera, BlockType* Blocks[])
     {
     double AllTemperature = 10;
 
@@ -205,22 +298,16 @@ void Level1 (int* LevelNumber, ManType* Man, CamType* Camera)
         Man->Days < 40)
             AllTemperature = 40;
 
-    TreeType Trees [1] = {{{1, 1}, 1, {0, 0, &GlobalAllImage.Finish}, BT_Finish, AirInteraction}};
-
-    BlockType Blocks [Blocks_Number] = {{{1, 1}, 1, {0, 0, &GlobalAllImage.Finish}, BT_Finish, AirInteraction}};
-
     // Blocks [Blocks_Number - 1]       = {{-1, -1}, 1, {0, 0, &AllImage.Finish}, BT_Finish, AirInteraction};
 
-    BlockType* ManyBlocks [Blocks_Number] = {};
+    /* BlockType* ManyBlocks [Blocks_Number] = {};
 
     for (int i = 0; i < Blocks_Number; i += 1)
         {
-        ManyBlocks [i] = &Blocks [i];
+        ManyBlocks [i] = new TreeType ();
         };
 
-
-
-    CreateBlocks (ManyBlocks);
+    CreateBlocks (ManyBlocks); */
 
     // BlockFunction (ManyBlocks, -1);
 
@@ -234,10 +321,10 @@ void Level1 (int* LevelNumber, ManType* Man, CamType* Camera)
 
     CreateVillagers (Villagers);
 
-    MoveGame (ManyBlocks, LevelNumber, Man, &AllTemperature, Camera, Villagers);
+    return MoveGame (Blocks, LevelNumber, Man, &AllTemperature, Camera, Villagers);
     };
 
-void TestLevel (int* LevelNumber, ManType* Man, CamType* Camera)
+void TestLevel (int* LevelNumber, ManType* Man, CamType* Camera, BlockType* Blocks[])
     {
     double AllTemperature = 10;
 
@@ -258,20 +345,18 @@ void TestLevel (int* LevelNumber, ManType* Man, CamType* Camera)
         Man->Days < 40)
             AllTemperature = 40;
 
-    BlockType Blocks [] = {{{ -75,  675}, 6,   {0, 0, &GlobalAllImage.Dirt}, BT_Dirt, AirInteraction},
-                            {{0, 0}, 1, {0, 0, &GlobalAllImage.Finish}, BT_Finish, AirInteraction}
-                            };
+    // BlockType Blocks [] = {};
 
-    BlockType* ManyBlocks [] = {};
+    // BlockType* ManyBlocks [] = {};
 
     // int i = 0;
 
-    for (int i = 0; i < Blocks_Number; i ++)
+    /* for (int i = 0; i < Blocks_Number; i ++)
         {
-        ManyBlocks [i] = &Blocks [i];
+        ManyBlocks [i] = new TreeType ();
 
         // i += 1;
-        };
+        }; */
 
 
     ManType Villagers [] = {{{0, 0}, 20, {0, 0, &GlobalAllImage.Boat},
@@ -280,6 +365,6 @@ void TestLevel (int* LevelNumber, ManType* Man, CamType* Camera)
                             0, 0, 0, "", MT_Boat, {}, 0, 0,
                             0, 0, 0, 0, {}}};
 
-    MoveGame (ManyBlocks, LevelNumber, Man, &AllTemperature, Camera, Villagers);
+    // MoveGame (Blocks, LevelNumber, Man, &AllTemperature, Camera, Villagers);
     };
 

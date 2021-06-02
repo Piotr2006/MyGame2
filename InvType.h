@@ -21,6 +21,7 @@ struct InvType
     int Fish;
     int CookedFish;
     int Rope;
+    int Gun;
     };
 
 #endif

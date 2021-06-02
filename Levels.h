@@ -10,12 +10,17 @@
 #include "CamType.h"
 #include "ManType.h"
 #include "ButtonType.h"
+#include "BlockType.h"
 
-void MoveGame (BlockType* ManyBlocks [], int* LevelNumber, ManType* Man, double* AllTemperature, CamType* Camera, ManType Villagers []);
+void Reading (ManType* Man, BlockType* Blocks[]);
 
-void Level1 (int* LevelNumber, ManType* Man, CamType* Camera);
+void Saving (ManType* Man, BlockType* Blocks[]);
 
-void TestLevel (int* LevelNumber, ManType* Man, CamType* Camera);
+int MoveGame (BlockType* ManyBlocks [], int* LevelNumber, ManType* Man, double* AllTemperature, CamType* Camera, ManType Villagers []);
+
+int Level1 (int* LevelNumber, ManType* Man, CamType* Camera, BlockType* Blocks[]);
+
+void TestLevel (int* LevelNumber, ManType* Man, CamType* Camera, BlockType* Blocks[]);
 
 //-----------------------------------------------------------------------------
 

@@ -1,91 +1,100 @@
 C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp: In function 'void DrawSlot(int, int, int, const ImageType&, int, int)':
-C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:137:34: warning: narrowing conversion of '(TextX + 38)' from 'int' to 'double' inside { } [-Wnarrowing]
+C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:136:34: warning: narrowing conversion of '(TextX + 38)' from 'int' to 'double' inside { } [-Wnarrowing]
      PointType TextPoint = {TextX + 38, TextY + 44};
                                   ^
-C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:137:46: warning: narrowing conversion of '(TextY + 44)' from 'int' to 'double' inside { } [-Wnarrowing]
+C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:136:46: warning: narrowing conversion of '(TextY + 44)' from 'int' to 'double' inside { } [-Wnarrowing]
      PointType TextPoint = {TextX + 38, TextY + 44};
                                               ^
-C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:143:39: warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]
+C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:142:39: warning: deprecated conversion from string constant to 'char*' [-Wwrite-strings]
          Text (TextPoint, 20, Block, "");
                                        ^
 C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp: In member function 'void ManType::DrawInventory(CamType*)':
-C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:337:9: warning: unused variable 'one' [-Wunused-variable]
+C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:338:9: warning: unused variable 'one' [-Wunused-variable]
      int one = 1;
          ^
-C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:338:9: warning: unused variable 'two' [-Wunused-variable]
+C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:339:9: warning: unused variable 'two' [-Wunused-variable]
      int two = 2;
          ^
-C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:340:15: warning: unused variable 'Mouse' [-Wunused-variable]
+C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:341:15: warning: unused variable 'Mouse' [-Wunused-variable]
      PointType Mouse = {txMouseX(), txMouseY()};
                ^
-C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:479:9: warning: variable 'X' set but not used [-Wunused-but-set-variable]
+C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:490:9: warning: variable 'X' set but not used [-Wunused-but-set-variable]
      int X = 1;
          ^
-C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:584:9: warning: variable 'yFrame' set but not used [-Wunused-but-set-variable]
+C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:640:9: warning: variable 'yFrame' set but not used [-Wunused-but-set-variable]
      int yFrame = 0;
          ^
 C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp: At global scope:
-C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:333:6: warning: unused parameter 'Camera' [-Wunused-parameter]
+C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:332:6: warning: unused parameter 'Camera' [-Wunused-parameter]
  void ManType :: DrawInventory (CamType* Camera)
       ^
 C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp: In member function 'void ManType::DrawMan(CamType*)':
-C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:723:24: warning: comparing floating point with == or != is unsafe [-Wfloat-equal]
+C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:801:24: warning: comparing floating point with == or != is unsafe [-Wfloat-equal]
          if (Speed.x == 0 &&
                         ^
-C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:746:23: warning: comparing floating point with == or != is unsafe [-Wfloat-equal]
+C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:826:23: warning: comparing floating point with == or != is unsafe [-Wfloat-equal]
         if (Speed.x == 0 &&
                        ^
-C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:701:9: warning: unused variable 'nine' [-Wunused-variable]
+C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:862:42: warning: conversion to 'int' from 'double' may alter its value [-Wconversion]
+                 int TermX = Point.x - 17 - Camera->Point.x;
+                                          ^
+C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:863:37: warning: conversion to 'int' from 'double' may alter its value [-Wconversion]
+                 int TermY = Point.y - Camera->Point.y;
+                                     ^
+C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:866:69: warning: conversion to 'int' from 'double' may alter its value [-Wconversion]
+                              Point.y - 25 - Camera->Point.y}, Health);
+                                                                     ^
+C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:873:87: warning: conversion to 'int' from 'double' may alter its value [-Wconversion]
+                 GRRectangle (TermX + Sign_Term_RectLeftX, TermY + Sign_Term_RectDownY - Temperature,
+                                                                                       ^
+C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:777:9: warning: unused variable 'nine' [-Wunused-variable]
      int nine = 9;
          ^
-C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:779:9: warning: unused variable 'null' [-Wunused-variable]
-     int null = 0;
-         ^
 C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp: At global scope:
-C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:800:6: warning: unused parameter 'Camera' [-Wunused-parameter]
+C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:899:6: warning: unused parameter 'Camera' [-Wunused-parameter]
  void ManType :: ManFire (CamType* Camera)
       ^
 C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp: In member function 'void ManType::ManHealth(CamType*)':
-C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:825:19: warning: comparing floating point with == or != is unsafe [-Wfloat-equal]
+C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:924:19: warning: comparing floating point with == or != is unsafe [-Wfloat-equal]
      if (Health == 0)
                    ^
 C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp: In member function 'void ManType::VillagerMind(ManType*, CamType*)':
-C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:862:9: warning: declaration of 'Side' shadows a member of 'this' [-Wshadow]
+C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:961:9: warning: declaration of 'Side' shadows a member of 'this' [-Wshadow]
      int Side = 1;
          ^
-C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:862:9: warning: variable 'Side' set but not used [-Wunused-but-set-variable]
-C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:850:9: warning: unused variable 'a' [-Wunused-variable]
+C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:961:9: warning: variable 'Side' set but not used [-Wunused-but-set-variable]
+C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:949:9: warning: unused variable 'a' [-Wunused-variable]
      int a = 0;
          ^
-C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:851:9: warning: unused variable 'three' [-Wunused-variable]
+C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:950:9: warning: unused variable 'three' [-Wunused-variable]
      int three = 3;
          ^
-C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:852:9: warning: unused variable 'four' [-Wunused-variable]
+C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:951:9: warning: unused variable 'four' [-Wunused-variable]
      int four = 4;
          ^
-C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:1185:24: warning: comparing floating point with == or != is unsafe [-Wfloat-equal]
+C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:1284:24: warning: comparing floating point with == or != is unsafe [-Wfloat-equal]
              Speed.x == 0 &&
                         ^
 C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp: At global scope:
-C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:1442:6: warning: unused parameter 'Mouse' [-Wunused-parameter]
+C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:1541:6: warning: unused parameter 'Mouse' [-Wunused-parameter]
  void ManType :: ControlMan (const MouseType& Mouse, int* t)
       ^
-C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:1442:6: warning: unused parameter 't' [-Wunused-parameter]
-C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:1706:6: warning: unused parameter 'Camera' [-Wunused-parameter]
+C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:1541:6: warning: unused parameter 't' [-Wunused-parameter]
+C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:1805:6: warning: unused parameter 'Camera' [-Wunused-parameter]
  void ManType :: BlockCollision (BlockType* Block, CamType* Camera)
       ^
 C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp: In function 'void CallPeoplePhysic(ManType*, CamType*, BlockType**, ManType*)':
-C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:1795:14: warning: declaration of 'i' shadows a previous local [-Wshadow]
+C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:1894:14: warning: declaration of 'i' shadows a previous local [-Wshadow]
      for (int i = 0; i < Men_Number; i ++)
               ^
-C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:1793:9: warning: shadowed declaration is here [-Wshadow]
+C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:1892:9: warning: shadowed declaration is here [-Wshadow]
      int i = 0;
          ^
-C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:1793:9: warning: unused variable 'i' [-Wunused-variable]
+C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:1892:9: warning: unused variable 'i' [-Wunused-variable]
 C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp: At global scope:
-C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:1775:6: warning: unused parameter 'ManyBlocks' [-Wunused-parameter]
+C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp:1874:6: warning: unused parameter 'ManyBlocks' [-Wunused-parameter]
  void CallPeoplePhysic (ManType Villagers[], CamType* Camera, BlockType* ManyBlocks [], ManType* Man)
       ^
 ---------------------------------------------------------------------------------------------
-[02.05.2021 14:25:37,15 C:\Users\007@LAPTOP-AETNHUR2, returned 0]
+[02.06.2021 15:38:27,26 C:\Users\007@LAPTOP-AETNHUR2, returned 0]
 C:\Users\007\Desktop\программирование\MyGame2> g++.exe -c C:\Users\007\Desktop\программирование\MyGame2\ManType.cpp -o obj\Debug\ManType.o -Wall -fexceptions  -g  -Wshadow -Winit-self -Wredundant-decls -Wcast-align -Wundef -Wfloat-equal -Winline -Wunreachable-code -Wmissing-declarations -Wmissing-include-dirs -Wswitch-enum -Wswitch-default -Weffc++ -Wmain -Wextra -Wall -g -pipe -fexceptions -Wcast-qual -Wconversion -Wctor-dtor-privacy -Wempty-body -Wformat-security -Wformat=2 -Wignored-qualifiers -Wlogical-op -Wmissing-field-initializers -Wnon-virtual-dtor -Woverloaded-virtual -Wpointer-arith -Wsign-promo -Wstack-usage=8192 -Wstrict-aliasing -Wstrict-null-sentinel -Wtype-limits -Wwrite-strings -D_DEBUG -D_EJUDGE_CLIENT_SIDE -D_EJC

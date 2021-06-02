@@ -12,6 +12,12 @@ struct BlockType;
 
 // int Collision (BlockType* Block, ManType* Man);
 
+int GetNumberOfSymbols (const char str[], const char Symbol);
+
+int GetNumberOfStr (const char Allstr[], const char Smallstr [2]);
+
+int Myfscanf (FILE* file, const char str [], ...);
+
 int ModuleDistance (PointType Point1, PointType Point2, int Distance);
 
 int Distance (int a, int b, int Distance);
@@ -27,6 +33,14 @@ void StrCpy (char ToName [], const char FromName []);
 int BlockCheckClick (BlockType* Block, CamType* Camera);
 
 int InBorders (double smaller, double x, double bigger);
+
+bool HaveInventory (int Selected, int Type, int HaveNumber, int MinNumber);
+
+int RectAiming (double x1, double y1, double x2, double y2, CamType* Camera);
+
+int RectCheckClick (double x1, double y1, double x2, double y2, CamType* Camera);
+
+void DrawHealth (PointType Point, int Health);
 
 //-----------------------------------------------------------------------------
 

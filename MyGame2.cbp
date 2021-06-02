@@ -37,6 +37,7 @@
 		<Unit filename="AnimationType.h" />
 		<Unit filename="BaseType.cpp" />
 		<Unit filename="BaseType.h" />
+		<Unit filename="BlockFunctions.cpp" />
 		<Unit filename="BlockType.cpp" />
 		<Unit filename="BlockType.h" />
 		<Unit filename="ButtonType.cpp" />
