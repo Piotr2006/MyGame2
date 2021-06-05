@@ -17,6 +17,7 @@ void Reading (ManType* Man, BlockType* Blocks[])
     OK &= Myfscanf (readingfile, "Man->Point.x = %lf ",             &Man->Point.x);
     OK &= Myfscanf (readingfile, "Man->Point.y = %lf ",             &Man->Point.y);
     OK &= Myfscanf (readingfile, "Man->Health = %lf%% ",            &Man->Health);
+    OK &= Myfscanf (readingfile, "Man->Energy = %lf%% ",            &Man->Energy);
     OK &= Myfscanf (readingfile, "Man->Days = %d ",                 &Man->Days);
     OK &= Myfscanf (readingfile, "Man->Inventory.Axe = %d ",        &Man->Inventory.Axe);
     OK &= Myfscanf (readingfile, "Man->Inventory.Wood = %d ",       &Man->Inventory.Wood);
@@ -88,6 +89,7 @@ void Saving (ManType* Man, BlockType* Blocks[])
     fprintf (file, "Man->Point.x = %lf \n",             Man->Point.x);
     fprintf (file, "Man->Point.y = %lf \n",             Man->Point.y);
     fprintf (file, "Man->Health = %lf%% \n",            Man->Health);
+    fprintf (file, "Man->Energy = %lf%% \n",            Man->Energy);
     fprintf (file, "Man->Days = %d \n",                 Man->Days);
     fprintf (file, "Man->Inventory.Axe = %d \n",        Man->Inventory.Axe);
     fprintf (file, "Man->Inventory.Wood = %d \n",       Man->Inventory.Wood);
@@ -176,9 +178,9 @@ int MoveGame (BlockType* ManyBlocks [], int* LevelNumber, ManType* Man, double* 
 
         Camera->MoveCamera (Man);
 
-        GRSetColor (RGB (40, 39, 37), 1);
-        GRSetFillColor (RGB (40, 39, 37));
-        GRRectangle (0 - Camera->Point.x, 700 - Camera->Point.y, 9999999 - Camera->Point.x, 9000 - Camera->Point.y);
+        GRSetColor (RGB (5, 14, 12), 1);
+        GRSetFillColor (RGB (5, 14, 12));
+        GRRectangle (0, 0, 2000, 1000);
 
         DrawManyBlocks (ManyBlocks, Camera);
         // DrawManyRooms (Rooms, Camera);
@@ -312,7 +314,7 @@ int Level1 (int* LevelNumber, ManType* Man, CamType* Camera, BlockType* Blocks[]
     // BlockFunction (ManyBlocks, -1);
 
     ManType Villagers [1] = {{{0, 0}, 20, {0, 0, &GlobalAllImage.Boat},
-                            {0, 0}, {Man_aX, 2},
+                            {0, 0}, {Man_aX, 2}, 100,
                             0, 0, Man_Temperature,
                             0, 0, 0, "", MT_Boat, {}, 0, 0,
                             0, 0, 0, 0, {}}};
@@ -360,7 +362,7 @@ void TestLevel (int* LevelNumber, ManType* Man, CamType* Camera, BlockType* Bloc
 
 
     ManType Villagers [] = {{{0, 0}, 20, {0, 0, &GlobalAllImage.Boat},
-                            {0, 0}, {Man_aX, 2},
+                            {0, 0}, {Man_aX, 2}, 100,
                             0, 0, Man_Temperature,
                             0, 0, 0, "", MT_Boat, {}, 0, 0,
                             0, 0, 0, 0, {}}};

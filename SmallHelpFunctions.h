@@ -14,6 +14,8 @@ struct BlockType;
 
 int GetNumberOfSymbols (const char str[], const char Symbol);
 
+int NewGetNumberOfStr (const char Allstr[], const char Smallstr []);
+
 int GetNumberOfStr (const char Allstr[], const char Smallstr [2]);
 
 int Myfscanf (FILE* file, const char str [], ...);
@@ -25,6 +27,8 @@ int Distance (int a, int b, int Distance);
 void DrawHealth (int Health);
 
 void Text (PointType Point, int Size, int Number, char Name []);
+
+void TextWithEnd (PointType Point, int Size, int Number, char Text1 [], char Text2 []);
 
 void HelpSystem ();
 

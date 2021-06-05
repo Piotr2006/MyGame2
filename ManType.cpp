@@ -1,13 +1,14 @@
 #include "ManType.h"
 
 ManType :: ManType (PointType _Point, double _Health, AnimationType _Animation,
-                    PointType _Speed, PointType _Acceleration,
+                    PointType _Speed, PointType _Acceleration, double _Energy,
                     int _Side, int _Position, double _Temperature,
                     int _NumberCoin, int _xWeapon, int _ArmSpeed, const char _Name [50], int _Kind, InvType _Inventory,
                     int _Time, int _Days, double _ArrowX, double _ArrowY, int _ArrowVX, int _ArroeVY, HelpType _HelpSystem) :
     BaseType (_Point, _Health, _Animation),
     Speed (_Speed),
-    Acceleration (_Acceleration),                                                  // & - РђРјРїРµСЂСЃР°РЅРґ (Р±РµСЂРµС‚ Р°РґСЂРµСЃ РїРµСЂРµРјРµРЅРЅРѕР№)
+    Acceleration (_Acceleration),
+    Energy (_Energy),                                                  // & - РђРјРїРµСЂСЃР°РЅРґ (Р±РµСЂРµС‚ Р°РґСЂРµСЃ РїРµСЂРµРјРµРЅРЅРѕР№)
     Side (_Side),
     Position (_Position),
     Temperature (_Temperature),
@@ -751,6 +752,8 @@ void ManType :: DrawMan (CamType* Camera)
     {
     int null = 0;
 
+    printf ("Position = %d, \r", Position);
+
     /* int HaveWeapon = true;
 
     if (Inventory.MainNumber != IT_Axe &&
@@ -849,6 +852,24 @@ void ManType :: DrawMan (CamType* Camera)
     // if (Health <= 0)
     //        Animation.yFrame = 2;
 
+    if (Position == Climbing_Position)
+        {
+        Animation.Picture = &GlobalAllImage.ClimbingMan;
+        Animation.yFrame = 0;
+        Speed.y = -5;
+        };
+
+    if (Position == ClimbDown_Position)
+        {
+        Animation.Picture = &GlobalAllImage.ClimbingMan;
+        Animation.yFrame = 0;
+        Speed.y = 5;
+        };
+
+    /* if (Position == Climbing_Position &&
+        !GetAsyncKeyState (VK_UP))
+            Position = Normal_Position; */
+
     if (Kind == 0)
         DrawTransparentImage (*Animation.Picture, Point.x, Point.y, &Animation.xFrame, &Animation.yFrame, Camera);
 
@@ -859,7 +880,7 @@ void ManType :: DrawMan (CamType* Camera)
     if (RectAiming (Point.x, Point.y, Point.x + SizeX,
             Point.y + SizeY, Camera) == true)
                 {
-                int TermX = Point.x - 17 - Camera->Point.x;
+                /* int TermX = Point.x - 17 - Camera->Point.x;
                 int TermY = Point.y - Camera->Point.y;
 
                 DrawHealth ({Point.x + SizeX/2 - Camera->Point.x,
@@ -871,7 +892,9 @@ void ManType :: DrawMan (CamType* Camera)
                 DrawTransparentImage (GlobalAllImage.Termometer, TermX, TermY, &null, &null);
 
                 GRRectangle (TermX + Sign_Term_RectLeftX, TermY + Sign_Term_RectDownY - Temperature,
-                             TermX + Sign_Term_RectRightX, TermY + Sign_Term_RectDownY);
+                             TermX + Sign_Term_RectRightX, TermY + Sign_Term_RectDownY); */
+
+                DrawManParameters (Camera);
                 };
 
 
@@ -886,14 +909,14 @@ void ManType :: DrawMan (CamType* Camera)
         GRTextOut (Point - Camera->Point + PointType {50, 0}, Name);
         };
 
-    if (Position == Ghost_Position)
+    /* if (Position == Ghost_Position)
         {
         if (Animation.yFrame <= 4)
             Animation.yFrame = 4;
 
         if (Animation.yFrame >= 5)
             Animation.yFrame = 9;
-        };
+        }; */
     };
 
 void ManType :: ManFire (CamType* Camera)
@@ -910,6 +933,18 @@ void ManType :: ManFire (CamType* Camera)
         Fire2.DrawBlock (Camera, AllImage);
         Fire3.DrawBlock (Camera, AllImage);
         }; */
+    };
+
+void ManType :: DrawManParameters (CamType* Camera)
+    {
+    GRSetColor (RGB (237, 28, 36), 1);
+    TextWithEnd ({Point.x + SizeX + 25 - Camera->Point.x, Point.y + 30 - Camera->Point.y}, 20, Health, "Health = ", "%");
+
+    GRSetColor (RGB (91, 110, 225), 1);
+    TextWithEnd ({Point.x + SizeX + 25 - Camera->Point.x, Point.y + 45 - Camera->Point.y}, 20, Energy, "Energy = ", "%");
+
+    GRSetColor (RGB (127, 127, 127), 1);
+    TextWithEnd ({Point.x + SizeX + 25 - Camera->Point.x, Point.y + 60 - Camera->Point.y}, 20, Temperature, "Temper = ", "'C");
     };
 
 void ManType :: ManHealth (CamType* Camera)
@@ -1710,6 +1745,17 @@ void ManType :: Physic ()
         Speed.x > 0)
         Speed.x = 0;
 
+    if (Point.y >= 1052 &&
+        Speed.y > 0)
+        {
+        Speed.y = 0;
+        Point.y = 1052;
+        };
+
+    if (Point.y == 1052 &&
+        GetAsyncKeyState (VK_UP))
+        Speed.y = -Man_JumpSpeed;
+
     Point += Speed;
 
     Speed += Acceleration;
@@ -1798,8 +1844,7 @@ void ManType :: Physic ()
 
 void ManType :: BlockInteraction (BlockType* Block, CamType* Camera)
     {
-    if (Block->Number != BT_BlackSpace)
-        Block->Interaction (this, Camera);
+    Block->Interaction (this, Camera);
     };
 
 void ManType :: BlockCollision (BlockType* Block, CamType* Camera)

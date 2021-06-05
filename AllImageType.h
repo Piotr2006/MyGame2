@@ -82,9 +82,18 @@ struct AllImageType
     ImageType LoadQuestion;
     ImageType ManWithAxe;
     ImageType ManWithGuns;
+    ImageType ClimbingMan;
     ImageType BigDirt;
+    ImageType BlueDoor;
+    ImageType EmptyRoom;
+    ImageType OrangeButton;
+    ImageType Fridge;
+    ImageType InvisibleDirt;
     // Rooms :
+    ImageType Bedroom;
+    ImageType SmallBedroom;
     ImageType Kitchen;
+    ImageType SmallKitchen;
     ImageType Room1;
     ImageType Room2;
     ImageType Room3;

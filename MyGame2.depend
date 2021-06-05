@@ -16,7 +16,7 @@
 
 1616825954 c:\users\007\desktop\программирование\mygame2\pointtype.h
 
-1622636887 c:\users\007\desktop\программирование\mygame2\allimagetype.h
+1622824516 c:\users\007\desktop\программирование\mygame2\allimagetype.h
 	"ImageType.h"
 
 1619851606 source:c:\users\007\desktop\программирование\mygame2\basetype.cpp
@@ -28,7 +28,7 @@
 	"AnimationType.h"
 	"AllImageType.h"
 
-1622293209 c:\users\007\desktop\программирование\mygame2\smallhelpfunctions.h
+1622875379 c:\users\007\desktop\программирование\mygame2\smallhelpfunctions.h
 	"AllImageType.h"
 	"Enums.h"
 	"ImageType.h"
@@ -36,14 +36,14 @@
 	"ManType.h"
 	"Graphycs.h"
 
-1622631226 c:\users\007\desktop\программирование\mygame2\enums.h
+1622869954 c:\users\007\desktop\программирование\mygame2\enums.h
 
 1616776755 c:\users\007\desktop\программирование\mygame2\camtype.h
 	"Enums.h"
 	"BaseType.h"
 	"PointType.h"
 
-1622632550 c:\users\007\desktop\программирование\mygame2\mantype.h
+1622739416 c:\users\007\desktop\программирование\mygame2\mantype.h
 	"HelpSystem.h"
 	"BaseType.h"
 	"CamType.h"
@@ -55,7 +55,7 @@
 
 1615390581 c:\users\007\desktop\программирование\mygame2\helpsystem.h
 
-1622204334 c:\users\007\desktop\программирование\mygame2\blocktype.h
+1622735777 c:\users\007\desktop\программирование\mygame2\blocktype.h
 	"AllImageType.h"
 	"Enums.h"
 	"BaseType.h"
@@ -74,10 +74,10 @@
 1616600505 c:\users\007\desktop\программирование\mygame2\mousetype.h
 	"ImageFunctions.h"
 
-1622630960 source:c:\users\007\desktop\программирование\mygame2\blockfunctions.cpp
+1622821399 source:c:\users\007\desktop\программирование\mygame2\blockfunctions.cpp
 	"BlockType.h"
 
-1622637615 source:c:\users\007\desktop\программирование\mygame2\blocktype.cpp
+1622870482 source:c:\users\007\desktop\программирование\mygame2\blocktype.cpp
 	"BlockType.h"
 
 1622542342 source:c:\users\007\desktop\программирование\mygame2\buttontype.cpp
@@ -120,25 +120,13 @@
 	"HelpSystem.h"
 	"Graphycs.h"
 
-1622636940 source:c:\users\007\desktop\программирование\mygame2\imagefunctions.cpp
+1622824558 source:c:\users\007\desktop\программирование\mygame2\imagefunctions.cpp
 	"ImageFunctions.h"
 
-1616836348 source:c:\users\007\desktop\программирование\mygame2\mousetype.cpp
-	"MouseType.h"
-
-1616825938 source:c:\users\007\desktop\программирование\mygame2\pointtype.cpp
-	"PointType.h"
-
-1622293201 source:c:\users\007\desktop\программирование\mygame2\smallhelpfunctions.cpp
-	"SmallHelpFunctions.h"
-
-1622541499 source:c:\users\007\desktop\программирование\mygame2\mantype.cpp
-	"ManType.h"
-
-1622632736 source:c:\users\007\desktop\программирование\mygame2\levels.cpp
+1622739629 source:c:\users\007\desktop\программирование\mygame2\levels.cpp
 	"Levels.h"
 
-1622637777 source:c:\users\007\desktop\программирование\mygame2\main.cpp
+1622875424 source:c:\users\007\desktop\программирование\mygame2\main.cpp
 	"Graphycs.h"
 	"HelpSystem.h"
 	"AnimationType.h"
@@ -149,5 +137,17 @@
 	"ManType.h"
 	"BlockType.h"
 	"Levels.h"
+	"SmallHelpFunctions.h"
+
+1622870061 source:c:\users\007\desktop\программирование\mygame2\mantype.cpp
+	"ManType.h"
+
+1616836348 source:c:\users\007\desktop\программирование\mygame2\mousetype.cpp
+	"MouseType.h"
+
+1616825938 source:c:\users\007\desktop\программирование\mygame2\pointtype.cpp
+	"PointType.h"
+
+1622875398 source:c:\users\007\desktop\программирование\mygame2\smallhelpfunctions.cpp
 	"SmallHelpFunctions.h"
 

@@ -347,7 +347,7 @@ void DirtType :: Interaction (ManType* Man, CamType* Camera)
 
 bool StairsType :: Detection (ManType* Man, CamType* Camera)
     {
-    if (fabs (Man->Point.x + Man->SizeX/2 - Point.x - SizeX/2) < Man->SizeX/2 + SizeX/2)
+    if (fabs (Man->Point.x + Man->SizeX/2 - Point.x - SizeX/2) < Man->SizeX + SizeX)
         return true;
 
     return false;
@@ -361,22 +361,102 @@ void StairsType :: Interaction (ManType* Man, CamType* Camera)
     int one  = 1;
 
     if (Detection (Man, Camera) == true &&
-        Man->Point.y < Point.y)
+        Man->Point.y < Point.y &&
+        Man->Position != Climbing_Position &&
+        Man->Position != ClimbDown_Position)
         {
-        DrawTransparentImage (GlobalAllImage.Up_down, this->Point.x + 100, this->Point.y - 100, &null, &one, Camera);
+        /* DrawTransparentImage (GlobalAllImage.Up_down, this->Point.x + 35, this->Point.y - 100, &null, &one, Camera);
 
-        if (RectCheckClick (this->Point.x + 100, this->Point.y - 100, this->Point.x + 200, this->Point.y + 32, Camera) == true)
-            Man->Point.y = Point.y + 60;
+        if (RectCheckClick (this->Point.x + 35, this->Point.y - 100, this->Point.x + 135, this->Point.y + 32, Camera) == true)
+            Man->Point.y = Point.y + 60; */
+
+        if (GetAsyncKeyState (VK_DOWN))
+            {
+            Man->Point.y = Point.y - 70;
+            Man->Position = ClimbDown_Position;
+            };
         };
 
     if (Detection (Man, Camera) == true &&
-        Man->Point.y > Point.y)
+        Man->Point.y > Point.y &&
+        Man->Position != Climbing_Position &&
+        Man->Position != ClimbDown_Position)
         {
-        DrawTransparentImage (GlobalAllImage.Up_down, this->Point.x + 100, this->Point.y + 100, &null, &null, Camera);
+        // DrawTransparentImage (GlobalAllImage.Up_down, this->Point.x + 35, this->Point.y + 200, &null, &null, Camera);
 
-        if (RectCheckClick (this->Point.x + 100, this->Point.y + 100, this->Point.x + 200, this->Point.y + 232, Camera) == true)
-            Man->Point.y = Point.y - 240;
+        /* if (RectCheckClick (this->Point.x + 35, this->Point.y + 200, this->Point.x + 135, this->Point.y + 332, Camera) == true)
+            {
+            Man->Position = Climbing_Position;
+            };
+            //Man->Point.y = Point.y - 240; */
+
+        if (GetAsyncKeyState (VK_UP))
+            Man->Position = Climbing_Position;
         };
+
+    if (Detection (Man, Camera) == true &&
+        Man->Position == Climbing_Position)
+            {
+            Man->Speed.x = 0;
+            Man->Point.x = Point.x + 30;
+
+            if (Man->Point.y < Point.y - 200)
+                Man->Position = Normal_Position;
+            };
+
+    if (Detection (Man, Camera) == true &&
+        Man->Position == ClimbDown_Position)
+            {
+            Man->Speed.x = 0;
+            Man->Point.x = Point.x + 30;
+
+            if (Man->Point.y > Point.y + 200)
+                Man->Position = Normal_Position;
+            };
+
+    /* if (Detection (Man, Camera) == true &&
+        Man->Point.y < Point.y)
+        {
+        DrawTransparentImage (GlobalAllImage.Up_down, this->Point.x + 35, this->Point.y - 100, &null, &one, Camera);
+
+        if (RectCheckClick (this->Point.x + 35, this->Point.y - 100, this->Point.x + 135, this->Point.y + 32, Camera) == true)
+            Man->Point.y = Point.y + 60;
+        };
+
+    int xCollision = 0;
+    int yCollision = 0;
+
+    if (Detection (Man, Camera) == true)
+        xCollision = true;
+    else
+        xCollision = false;
+
+    if (Man->Point.y + Man->SizeY > Point.y &&
+        Man->Point.y > Point.y)
+        yCollision = true;
+    else
+        yCollision = false;
+
+    if (xCollision == true &&
+        yCollision == true)
+        {
+        DrawTransparentImage (GlobalAllImage.Up_down, this->Point.x + 35, this->Point.y + 200, &null, &null, Camera);
+
+        // if (RectCheckClick (this->Point.x + 35, this->Point.y + 200, this->Point.x + 135, this->Point.y + 332, Camera) == true)
+        //     Man->Position = Climbing_Position;
+            //Man->Point.y = Point.y - 240;
+
+        if (GetAsyncKeyState (VK_UP))
+            Man->Position = Climbing_Position;
+        };
+
+    if (xCollision != yCollision &&
+        Man->Position == Climbing_Position)
+        Man->Position = Normal_Position;
+
+    // else if (Man->Position == Climbing_Position)
+    //          Man->Position = Normal_Position; */
+
 
     /* if (Man->Point.y < Point.y &&
         Detection(Man, Camera) == true &&
@@ -391,4 +471,97 @@ void StairsType :: Interaction (ManType* Man, CamType* Camera)
 
 //-----------------------------------------------------------------------------
 
+bool DoorType :: Detection (ManType* Man, CamType* Camera)
+    {
+    if (BlockCheckClick (this, Camera) == true)
+        return true;
+
+    return false;
+    };
+
+void DoorType :: Interaction (ManType* Man, CamType* Camera)
+    {
+    // Man->BlockCollision (this, Camera);
+
+    int null = 0;
+    int one  = 1;
+
+    /* if (Detection (Man, Camera) == true &&
+        Health > 10)
+        Health -= 10;
+    else if (Health < 50)
+             Health += 1;
+
+    if (Health >= 10 &&
+        Health < 20)
+        Animation.yFrame = 3;
+
+    if (Health >= 20 &&
+        Health < 30)
+        Animation.yFrame = 2;
+
+    if (Health >= 30 &&
+        Health < 40)
+        Animation.yFrame = 1;
+
+    if (Health >= 40 &&
+        Health <= 50)
+        Animation.yFrame = 0;  */
+
+    if (Health >= 30 &&
+        Man->Point.y > 700)
+        {
+        /* // Man more left than door :
+        if (Man->Point.x + Man->SizeX >= Point.x - 50 &&
+            Man->Point.x + Man->SizeX <= Point.x + 50 &&
+            Man->Speed.x > 0)
+            {
+            Man->Speed.x = 0;
+            Man->Point.x = Point.x - Man->SizeX;
+            };
+
+        // Man more right than door :
+        if (Man->Point.x - 50 >= Point.x + SizeX &&
+            Man->Point.x + 50 <= Point.x + SizeX &&
+            Man->Speed.x < 0)
+            {
+            Man->Speed.x = 0;
+            Man->Point.x = Point.x + SizeX;
+            };   */
+
+        /* if (InBorders (-50, Point.x - Man->Point.x - Man->SizeX, 0) == true &&
+            Man->Speed.x > 0)
+                {
+                Man->Speed.x = 0;
+                Man->Point.x = Point.x - Man->SizeX;
+                }; */
+        };
+    };
+
+
+//-----------------------------------------------------------------------------
+
+bool RoomType :: Detection (ManType* Man, CamType* Camera)
+    {
+    if (BlockCheckClick (this, Camera) == true)
+        return true;
+
+    return false;
+    };
+
+void RoomType :: Interaction (ManType* Man, CamType* Camera)
+    {
+    // Man->BlockCollision (this, Camera);
+
+    int null = 0;
+    int one  = 1;
+
+    if (Health == 1 &&
+        RectAiming (Point.x, Point.y, Point.x + SizeX, Point.y + SizeY, Camera) == true)
+        {
+        // DrawTransparentImage (&GlobalAllImage.OrangeButton, Point.x + 265, Point.y + 45, &null, &null, Camera);
+        };
+
+    // if (Detection ()
+    };
 

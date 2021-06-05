@@ -17,7 +17,7 @@ struct BlockType;
 struct ManType : BaseType
     {
     ManType (PointType Point, double _Health, AnimationType Animation,
-             PointType Speed, PointType _Acceleration,
+             PointType Speed, PointType _Acceleration, double _Energy,
              int _Side, int _Position, double _Temperature,
              int _NumberCoin, int _xWeapon, int _ArmSpeed, const char _Name [50], int _Kind, InvType _Inventory,
              int _Time, int _Days, double _ArrowX, double _ArrowY, int _ArrowVX, int _ArroeVY, HelpType _HelpSystem);
@@ -25,6 +25,8 @@ struct ManType : BaseType
     void DrawMan (CamType* Camera);
 
     void DrawInventory (CamType* Camera);
+
+    void DrawManParameters (CamType* Camera);
 
     void Crafting ();
 
@@ -47,6 +49,8 @@ struct ManType : BaseType
     PointType Speed;
 
     PointType Acceleration;
+
+    double Energy;
 
     int Side;
     int Position;

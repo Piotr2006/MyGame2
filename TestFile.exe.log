@@ -102,3 +102,533 @@ Run file:	C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe
 Directory:	C:\Users\007\Desktop\программирование\MyGame2
 
 --------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe, файл: C:\Users\007\Desktop\программирование\MyGame2\TestFile.cpp, строка: 76, функция: int GetNumberOfStr(const char*, const char*),
+
+Сообщение: неправильная длина маленькой строки! 
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400], Instance: 0x00506304 (32-bit), Flags: Cmdre0, Thread: 0x19B0 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CB20 in C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe: GetNumberOfStr() at C:/Users/007/Desktop/программирование/MyGame2/TestFile.cpp (76):
+
+     74:     {
+     75:     if (strlen (Smallstr) != 2)
+=>   76:         TX_ERROR ("неправильная длина маленькой строки! ");
+     77: 
+     78:     assert (strlen (Smallstr) == 2);
+
+# 1 0x0042C935 in C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe: GetNumberOfStr_Test() at C:/Users/007/Desktop/программирование/MyGame2/TestFile.cpp (63):
+
+     61:         const char smallstr[] = "%";
+     62: 
+=>   63:         int result = GetNumberOfStr (str, smallstr);
+     64: 
+     65:         if (result != 2)
+
+# 2 0x0042C83A in C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/TestFile.cpp (22):
+
+     20:     printf ("x = %d%%, Myfscanf = %d \n", x, nParams); */
+     21: 
+=>   22:     GetNumberOfStr_Test ();
+     23: 
+     24:     // printf ("GetNumberOfStr = %d \n ", GetNumberOfStr ("a = %*", "%*"));
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\007\desktop\codebl~1\mingw\include\txlib.h
+Compiled:	Jun  2 2021 18:39:43, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 02 2021 18:39:46
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe, файл: C:\Users\007\Desktop\программирование\MyGame2\TestFile.cpp, строка: 78, функция: int GetNumberOfStr(const char*, const char*),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "strlen (Smallstr) == 2".
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400], Instance: 0x00506304 (32-bit), Flags: Cmdre0, Thread: 0x19B0 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CB64 in C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe: GetNumberOfStr() at C:/Users/007/Desktop/программирование/MyGame2/TestFile.cpp (78):
+
+     76:         TX_ERROR ("неправильная длина маленькой строки! ");
+     77: 
+=>   78:     assert (strlen (Smallstr) == 2);
+     79: 
+     80:     int Number = 0;
+
+# 1 0x0042C935 in C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe: GetNumberOfStr_Test() at C:/Users/007/Desktop/программирование/MyGame2/TestFile.cpp (63):
+
+     61:         const char smallstr[] = "%";
+     62: 
+=>   63:         int result = GetNumberOfStr (str, smallstr);
+     64: 
+     65:         if (result != 2)
+
+# 2 0x0042C83A in C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/TestFile.cpp (22):
+
+     20:     printf ("x = %d%%, Myfscanf = %d \n", x, nParams); */
+     21: 
+=>   22:     GetNumberOfStr_Test ();
+     23: 
+     24:     // printf ("GetNumberOfStr = %d \n ", GetNumberOfStr ("a = %*", "%*"));
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\007\desktop\codebl~1\mingw\include\txlib.h
+Compiled:	Jun  2 2021 18:39:43, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 02 2021 18:39:46
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe, файл: C:\Users\007\Desktop\программирование\MyGame2\TestFile.cpp, строка: 79, функция: int GetNumberOfStr(const char*, const char*),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "strlen (Smallstr) == 2".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400], Instance: 0x00506304 (32-bit), Flags: Cmdre0, Thread: 0x2FCC (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CEB4 in C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe: GetNumberOfStr() at C:/Users/007/Desktop/программирование/MyGame2/TestFile.cpp (79):
+
+     77: 
+     78:     assert (strlen (Allstr)   >= 2);
+=>   79:     assert (strlen (Smallstr) == 2);
+     80: 
+     81:     int Number = 0;
+
+# 1 0x0042CC49 in C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe: GetNumberOfStr_Test() at C:/Users/007/Desktop/программирование/MyGame2/TestFile.cpp (63):
+
+     61:         const char smallstr[] = "%";
+     62: 
+=>   63:         int result = GetNumberOfStr (str, smallstr);
+     64: 
+     65:         if (result != 2)
+
+# 2 0x0042CB4E in C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/TestFile.cpp (22):
+
+     20:     printf ("x = %d%%, Myfscanf = %d \n", x, nParams); */
+     21: 
+=>   22:     GetNumberOfStr_Test ();
+     23: 
+     24:     // printf ("GetNumberOfStr = %d \n ", GetNumberOfStr ("a = %*", "%*"));
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Desktop\TX\TXLib.h
+Compiled:	Jun  2 2021 18:56:37, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 02 2021 18:56:40
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe, файл: C:\Users\007\Desktop\программирование\MyGame2\TestFile.cpp, строка: 80, функция: int GetNumberOfStr(const char*, const char*),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "strlen (Smallstr) == 2".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400], Instance: 0x00506304 (32-bit), Flags: Cmdre0, Thread: 0x32FC (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042D01A in C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe: GetNumberOfStr() at C:/Users/007/Desktop/программирование/MyGame2/TestFile.cpp (80):
+
+     78: 
+     79:     assert (strlen (Allstr)   >= 2);
+=>   80:     assert (strlen (Smallstr) == 2);
+     81: 
+     82:     int Number = 0;
+
+# 1 0x0042CC49 in C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe: GetNumberOfStr_Test() at C:/Users/007/Desktop/программирование/MyGame2/TestFile.cpp (63):
+
+     61:         const char smallstr[] = "%";
+     62: 
+=>   63:         int result = GetNumberOfStr (str, smallstr);
+     64: 
+     65:         if (result != 2)
+
+# 2 0x0042CB4E in C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/TestFile.cpp (22):
+
+     20:     printf ("x = %d%%, Myfscanf = %d \n", x, nParams); */
+     21: 
+=>   22:     GetNumberOfStr_Test ();
+     23: 
+     24:     // printf ("GetNumberOfStr = %d \n ", GetNumberOfStr ("a = %*", "%*"));
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Desktop\TX\TXLib.h
+Compiled:	Jun  2 2021 18:57:27, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 02 2021 18:57:30
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe, файл: C:\Users\007\Desktop\программирование\MyGame2\TestFile.cpp, строка: 80, функция: int GetNumberOfStr(const char*, const char*),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "strlen (Smallstr) == 2".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400], Instance: 0x00506304 (32-bit), Flags: Cmdre0, Thread: 0x35E8 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042D01A in C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe: GetNumberOfStr() at C:/Users/007/Desktop/программирование/MyGame2/TestFile.cpp (80):
+
+     78: 
+     79:     assert (strlen (Allstr)   >= 2);
+=>   80:     assert (strlen (Smallstr) == 2);
+     81: 
+     82:     int Number = 0;
+
+# 1 0x0042CC49 in C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe: GetNumberOfStr_Test() at C:/Users/007/Desktop/программирование/MyGame2/TestFile.cpp (63):
+
+     61:         const char smallstr[] = "%";
+     62: 
+=>   63:         int result = GetNumberOfStr (str, smallstr);
+     64: 
+     65:         if (result != 2)
+
+# 2 0x0042CB4E in C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/TestFile.cpp (22):
+
+     20:     printf ("x = %d%%, Myfscanf = %d \n", x, nParams); */
+     21: 
+=>   22:     GetNumberOfStr_Test ();
+     23: 
+     24:     // printf ("GetNumberOfStr = %d \n ", GetNumberOfStr ("a = %*", "%*"));
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Desktop\TX\TXLib.h
+Compiled:	Jun  2 2021 18:58:02, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 02 2021 18:58:05
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe, файл: C:\Users\007\Desktop\программирование\MyGame2\TestFile.cpp, строка: 80, функция: int GetNumberOfStr(const char*, const char*),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "strlen (Smallstr) == 2".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400], Instance: 0x00506304 (32-bit), Flags: Cmdre0, Thread: 0x2888 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042D01A in C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe: GetNumberOfStr() at C:/Users/007/Desktop/программирование/MyGame2/TestFile.cpp (80):
+
+     78: 
+     79:     assert (strlen (Allstr)   >= 2);
+=>   80:     assert (strlen (Smallstr) == 2);
+     81: 
+     82:     int Number = 0;
+
+# 1 0x0042CC49 in C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe: GetNumberOfStr_Test() at C:/Users/007/Desktop/программирование/MyGame2/TestFile.cpp (63):
+
+     61:         const char smallstr[] = "%";
+     62: 
+=>   63:         int result = GetNumberOfStr (str, smallstr);
+     64: 
+     65:         if (result != 2)
+
+# 2 0x0042CB4E in C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/TestFile.cpp (22):
+
+     20:     printf ("x = %d%%, Myfscanf = %d \n", x, nParams); */
+     21: 
+=>   22:     GetNumberOfStr_Test ();
+     23: 
+     24:     // printf ("GetNumberOfStr = %d \n ", GetNumberOfStr ("a = %*", "%*"));
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Desktop\TX\TXLib.h
+Compiled:	Jun  2 2021 18:59:01, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 02 2021 18:59:04
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe, файл: C:\Users\007\Desktop\программирование\MyGame2\TestFile.cpp, строка: 82, функция: int GetNumberOfStr(const char*, const char*),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "strlen (Smallstr) == 2".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400], Instance: 0x00506304 (32-bit), Flags: Cmdre0, Thread: 0x2D30 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042D20B in C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe: GetNumberOfStr() at C:/Users/007/Desktop/программирование/MyGame2/TestFile.cpp (82):
+
+     80: 
+     81:     assert (strlen (Allstr)   >= 2);
+=>   82:     assert (strlen (Smallstr) == 2);
+     83: 
+     84:     int Number = 0;
+
+# 1 0x0042CCEF in C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe: GetNumberOfStr_Test() at C:/Users/007/Desktop/программирование/MyGame2/TestFile.cpp (71):
+
+     69: 
+     70:     $unittest (GetNumberOfStr ("Man->Point.x = %d %%", "%%"), 2);
+=>   71:     $unittest (GetNumberOfStr ("x = %d, y = %s", "%"), 2);
+     72:     $unittest (GetNumberOfStr ("x = %d, y = %d", "%d"), 2);
+     73:     $unittest (GetNumberOfStr ("%", "%%"), 2);
+
+# 2 0x0042CB4E in C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/TestFile.cpp (22):
+
+     20:     printf ("x = %d%%, Myfscanf = %d \n", x, nParams); */
+     21: 
+=>   22:     GetNumberOfStr_Test ();
+     23: 
+     24:     // printf ("GetNumberOfStr = %d \n ", GetNumberOfStr ("a = %*", "%*"));
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Desktop\TX\TXLib.h
+Compiled:	Jun  2 2021 19:03:50, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 02 2021 19:03:54
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe, файл: C:\Users\007\Desktop\программирование\MyGame2\TestFile.cpp, строка: 81, функция: int GetNumberOfStr(const char*, const char*),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "strlen (Allstr) >= 2".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400], Instance: 0x00506304 (32-bit), Flags: Cmdre0, Thread: 0x3ED4 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042D194 in C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe: GetNumberOfStr() at C:/Users/007/Desktop/программирование/MyGame2/TestFile.cpp (81):
+
+     79:     //     TX_ERROR ("неправильная длина маленькой строки! ");
+     80: 
+=>   81:     assert (strlen (Allstr)   >= 2);
+     82:     assert (strlen (Smallstr) == 2);
+     83: 
+
+# 1 0x0042CF5B in C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe: GetNumberOfStr_Test() at C:/Users/007/Desktop/программирование/MyGame2/TestFile.cpp (73):
+
+     71:     $unittest (GetNumberOfStr ("x = %d, y = %s", "%s"), 1);
+     72:     $unittest (GetNumberOfStr ("x = %d, y = %d", "%d"), 2);
+=>   73:     $unittest (GetNumberOfStr ("%", "%%"), 2);
+     74:     };
+     75: 
+
+# 2 0x0042CB4E in C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/TestFile.cpp (22):
+
+     20:     printf ("x = %d%%, Myfscanf = %d \n", x, nParams); */
+     21: 
+=>   22:     GetNumberOfStr_Test ();
+     23: 
+     24:     // printf ("GetNumberOfStr = %d \n ", GetNumberOfStr ("a = %*", "%*"));
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Desktop\TX\TXLib.h
+Compiled:	Jun  2 2021 19:04:38, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 02 2021 19:04:41
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe, файл: C:\Users\007\Desktop\программирование\MyGame2\TestFile.cpp, строка: 85, функция: int NewGetNumberOfStr(const char*, const char*),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "strlen (Allstr) >= strlen (Smallstr)".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400], Instance: 0x00506304 (32-bit), Flags: Cmdre0, Thread: 0x874 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042D30A in C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe: NewGetNumberOfStr() at C:/Users/007/Desktop/программирование/MyGame2/TestFile.cpp (85):
+
+     83: int NewGetNumberOfStr (const char Allstr[], const char Smallstr [])
+     84:     {
+=>   85:     assert (strlen (Allstr) >= strlen (Smallstr));
+     86: 
+     87:     int Number = 0;
+
+# 1 0x0042D094 in C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe: GetNumberOfStr_Test() at C:/Users/007/Desktop/программирование/MyGame2/TestFile.cpp (80):
+
+     78:     $unittest (NewGetNumberOfStr ("% # 2 !%  %", "%"), 3);
+     79:     $unittest (NewGetNumberOfStr ("Man->Point.x = %d %%", "%%"), 1);
+=>   80:     $unittest (NewGetNumberOfStr ("%", "%%"), 0);
+     81:     };
+     82: 
+
+# 2 0x0042CB4E in C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/TestFile.cpp (24):
+
+     22:     printf ("x = %d%%, Myfscanf = %d \n", x, nParams); */
+     23: 
+=>   24:     GetNumberOfStr_Test ();
+     25: 
+     26:     // printf ("GetNumberOfStr = %d \n ", GetNumberOfStr ("a = %*", "%*"));
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Desktop\TX\TXLib.h
+Compiled:	Jun  4 2021 18:00:29, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 04 2021 18:00:32
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe, файл: C:\Users\007\Desktop\программирование\MyGame2\TestFile.cpp, строка: 107, функция: int NewGetNumberOfStr(const char*, const char*),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "strlen (Allstr) >= strlen (Smallstr)".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400], Instance: 0x00507304 (32-bit), Flags: Cmdre0, Thread: 0x39A0 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042DAFE in C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe: NewGetNumberOfStr() at C:/Users/007/Desktop/программирование/MyGame2/TestFile.cpp (107):
+
+    105: int NewGetNumberOfStr (const char Allstr[], const char Smallstr [])
+    106:     {
+=>  107:     assert (strlen (Allstr) >= strlen (Smallstr));
+    108: 
+    109:     int Number = 0;
+
+# 1 0x0042D0F4 in C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe: GetNumberOfStr_Test() at C:/Users/007/Desktop/программирование/MyGame2/TestFile.cpp (82):
+
+     80:     $unittest (NewGetNumberOfStr ("% # 2 !%  %", "%"), 3);
+     81:     $unittest (NewGetNumberOfStr ("Man->Point.x = %d %%", "%%"), 1);
+=>   82:     $unittest (NewGetNumberOfStr ("%", "%%"), 0);
+     83: 
+     84:     $unittest (MyStrLen ("%"), 1);
+
+# 2 0x0042CB4E in C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/TestFile.cpp (26):
+
+     24:     printf ("x = %d%%, Myfscanf = %d \n", x, nParams); */
+     25: 
+=>   26:     GetNumberOfStr_Test ();
+     27: 
+     28:     // printf ("GetNumberOfStr = %d \n ", GetNumberOfStr ("a = %*", "%*"));
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Desktop\TX\TXLib.h
+Compiled:	Jun  5 2021 09:09:02, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 05 2021 09:09:05
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\TestFile.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------

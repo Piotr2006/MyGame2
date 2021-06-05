@@ -7,8 +7,8 @@ const int World_Size = 5;   // !!! Не делать больше 10-ти !!!
 const int Exit = 1;
 const int Continue = 0;
 
-const int Blocks_Number = 1200;
-const int Rooms_Number = 1200;
+const int Blocks_Number = 402*World_Size + 12*World_Size; // (11400*World_Size)/1024
+const int Rooms_Number = 67*World_Size;
 const int Men_Number = 1;
 
 enum SelectedInvTypes
@@ -121,9 +121,10 @@ enum Inv
 enum Man
     {
     Man_x = 4000,
-    Man_y = 570,
+    Man_y = 500,
     Man_Health = 100,
     Man_Temperature = 36,
+    Man_Energy = 100,
     Man_FastSpeed = 20,
     Man_SlowSpeed = 7,
     Man_DrawingX = 0,
@@ -155,6 +156,8 @@ enum Man
     OutSide_Position = 4,
     Boat_Position = 5,
     Ghost_Position = 6,
+    Climbing_Position = 7,
+    ClimbDown_Position = 8,
 
     // Damage
 

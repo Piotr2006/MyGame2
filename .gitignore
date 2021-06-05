@@ -31,3 +31,7 @@
 *.out
 *.app
 *.save
+.dmp
+.dmp
+*.dmp
+.git-auto/COMMIT_EDITMSG

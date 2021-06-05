@@ -8056,3 +8056,4143 @@ Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
 Directory:	C:\Users\007\Desktop\программирование\MyGame2
 
 --------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x004B32D3 в функции CreateBlocks() в файле C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp на строке 66. Попытка записать данные по адресу 0x00000002 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400], Instance: 0x00ADF8E4 (32-bit), Flags: Cmdre0, Thread: 0x270C (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x004B32D3 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (66):
+
+     64:         //     {
+     65:         // RoomPicture :
+=>   66:         Blocks [i] = new AirType ();
+     67:         Blocks [i]->Point.x = X;
+     68:         Blocks [i]->Point.y = 816;
+
+# 1 0x005EE583 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (66):
+
+     64:     CreateRooms (Rooms);    */
+     65: 
+=>   66:     CreateBlocks (ManyBlocks);
+     67: 
+     68:     /* while (true)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\007\desktop\codebl~1\mingw\include\txlib.h
+Compiled:	Jun  2 2021 15:38:27, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 02 2021 17:13:01
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x004B32D3 в функции CreateBlocks() в файле C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp на строке 66. Попытка записать данные по адресу 0x00000002 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400], Instance: 0x00ADF8E4 (32-bit), Flags: Cmdre0, Thread: 0x270C (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x004B32D3 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (66):
+
+     64:         //     {
+     65:         // RoomPicture :
+=>   66:         Blocks [i] = new AirType ();
+     67:         Blocks [i]->Point.x = X;
+     68:         Blocks [i]->Point.y = 816;
+
+# 1 0x005EE583 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (66):
+
+     64:     CreateRooms (Rooms);    */
+     65: 
+=>   66:     CreateBlocks (ManyBlocks);
+     67: 
+     68:     /* while (true)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\007\desktop\codebl~1\mingw\include\txlib.h
+Compiled:	Jun  2 2021 15:38:27, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 02 2021 17:13:01
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x004B32D3 в функции CreateBlocks() в файле C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp на строке 66. Попытка записать данные по адресу 0x00000004 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400], Instance: 0x00ADF8E4 (32-bit), Flags: Cmdre0, Thread: 0x28EC (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x004B32D3 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (66):
+
+     64:         //     {
+     65:         // RoomPicture :
+=>   66:         Blocks [i] = new AirType ();
+     67:         Blocks [i]->Point.x = X;
+     68:         Blocks [i]->Point.y = 816;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\007\desktop\codebl~1\mingw\include\txlib.h
+Compiled:	Jun  2 2021 15:38:27, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 02 2021 17:13:18
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x004B32D3 в функции CreateBlocks() в файле C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp на строке 66. Попытка записать данные по адресу 0x00000004 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400], Instance: 0x00ADF8E4 (32-bit), Flags: Cmdre0, Thread: 0x28EC (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x004B32D3 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (66):
+
+     64:         //     {
+     65:         // RoomPicture :
+=>   66:         Blocks [i] = new AirType ();
+     67:         Blocks [i]->Point.x = X;
+     68:         Blocks [i]->Point.y = 816;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\007\desktop\codebl~1\mingw\include\txlib.h
+Compiled:	Jun  2 2021 15:38:27, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 02 2021 17:13:18
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x004B32D3 в функции CreateBlocks() в файле C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp на строке 66. Попытка записать данные по адресу 0x00000002 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400], Instance: 0x00ADF8E4 (32-bit), Flags: Cmdre0, Thread: 0x3468 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x004B32D3 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (66):
+
+     64:         //     {
+     65:         // RoomPicture :
+=>   66:         Blocks [i] = new AirType ();
+     67:         Blocks [i]->Point.x = X;
+     68:         Blocks [i]->Point.y = 816;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\007\desktop\codebl~1\mingw\include\txlib.h
+Compiled:	Jun  2 2021 15:38:27, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 02 2021 17:13:30
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x004B32D3 в функции CreateBlocks() в файле C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp на строке 66. Попытка записать данные по адресу 0x00000002 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400], Instance: 0x00ADF8E4 (32-bit), Flags: Cmdre0, Thread: 0x3468 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x004B32D3 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (66):
+
+     64:         //     {
+     65:         // RoomPicture :
+=>   66:         Blocks [i] = new AirType ();
+     67:         Blocks [i]->Point.x = X;
+     68:         Blocks [i]->Point.y = 816;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\007\desktop\codebl~1\mingw\include\txlib.h
+Compiled:	Jun  2 2021 15:38:27, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 02 2021 17:13:30
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x004B32D3 в функции CreateBlocks() в файле C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp на строке 66. Попытка записать данные по адресу 0x00000003 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400], Instance: 0x00ADF8E4 (32-bit), Flags: Cmdre0, Thread: 0x20E4 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x004B32D3 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (66):
+
+     64:         //     {
+     65:         // RoomPicture :
+=>   66:         Blocks [i] = new AirType ();
+     67:         Blocks [i]->Point.x = X;
+     68:         Blocks [i]->Point.y = 816;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\007\desktop\codebl~1\mingw\include\txlib.h
+Compiled:	Jun  2 2021 15:38:27, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 02 2021 17:15:58
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x004B32D3 в функции CreateBlocks() в файле C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp на строке 66. Попытка записать данные по адресу 0x00000003 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400], Instance: 0x00ADF8E4 (32-bit), Flags: Cmdre0, Thread: 0x20E4 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x004B32D3 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (66):
+
+     64:         //     {
+     65:         // RoomPicture :
+=>   66:         Blocks [i] = new AirType ();
+     67:         Blocks [i]->Point.x = X;
+     68:         Blocks [i]->Point.y = 816;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\007\desktop\codebl~1\mingw\include\txlib.h
+Compiled:	Jun  2 2021 15:38:27, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 02 2021 17:15:58
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x00000004. Попытка прочесть данные по адресу 0x00000004. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400], Instance: 0x00ADF8E4 (32-bit), Flags: Cmdre0, Thread: 0xAE0 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0065F973 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: _txOnExceptionSEH() at c:/users/007/desktop/codebl~1/mingw/include/txlib.h (11438)
+# 1 0x0065F185 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: _txUnhandledExceptionFilter() at c:/users/007/desktop/codebl~1/mingw/include/txlib.h (11343)
+# 2 0x7697DDC2 in C:\WINDOWS\System32\KERNELBASE.dll: UnhandledExceptionFilter()
+# 3 0x77C94883 in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlCaptureStackContext()
+# 4 0x77C57A4E in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetAppContainerNamedObjectPath()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\007\desktop\codebl~1\mingw\include\txlib.h
+Compiled:	Jun  2 2021 15:38:27, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 02 2021 17:16:36
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x00000004. Попытка прочесть данные по адресу 0x00000004. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400], Instance: 0x00ADF8E4 (32-bit), Flags: Cmdre0, Thread: 0xAE0 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0065E89E in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: _txOnSignal() at c:/users/007/desktop/codebl~1/mingw/include/txlib.h (10965)
+# 1 0x004010F9 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: _gnu_exception_handler@4()
+# 2 0x7697DDC2 in C:\WINDOWS\System32\KERNELBASE.dll: UnhandledExceptionFilter()
+# 3 0x77C94883 in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlCaptureStackContext()
+# 4 0x77C57A4E in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetAppContainerNamedObjectPath()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\007\desktop\codebl~1\mingw\include\txlib.h
+Compiled:	Jun  2 2021 15:38:27, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 02 2021 17:16:36
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x004B32D3 в функции CreateBlocks() в файле C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp на строке 66. Попытка записать данные по адресу 0x00000003 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400], Instance: 0x00ADF8E4 (32-bit), Flags: Cmdre0, Thread: 0x3CF8 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x004B32D3 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (66):
+
+     64:         //     {
+     65:         // RoomPicture :
+=>   66:         Blocks [i] = new DirtType ();
+     67:         Blocks [i]->Point.x = X;
+     68:         Blocks [i]->Point.y = 816;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\007\desktop\codebl~1\mingw\include\txlib.h
+Compiled:	Jun  2 2021 17:17:47, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 02 2021 17:17:53
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x004B32D3 в функции CreateBlocks() в файле C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp на строке 66. Попытка записать данные по адресу 0x00000003 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400], Instance: 0x00ADF8E4 (32-bit), Flags: Cmdre0, Thread: 0x3CF8 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x004B32D3 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (66):
+
+     64:         //     {
+     65:         // RoomPicture :
+=>   66:         Blocks [i] = new DirtType ();
+     67:         Blocks [i]->Point.x = X;
+     68:         Blocks [i]->Point.y = 816;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\007\desktop\codebl~1\mingw\include\txlib.h
+Compiled:	Jun  2 2021 17:17:47, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 02 2021 17:17:53
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042C8B9 в функции IncreaseAnimationNumber() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 27. Попытка прочесть данные по адресу 0x00000030 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400], Instance: 0x00ADF8E4 (32-bit), Flags: Cmdre0, Thread: 0x7D8 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042C8B9 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: IncreaseAnimationNumber() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (27):
+
+     25: void IncreaseAnimationNumber (AnimationType* Animation)
+     26:     {
+=>   27:     Animation->xFrame += 1;
+     28: 
+     29:     if (Animation->xFrame >= Animation->Picture->xMaxAnimationNumber)
+
+# 1 0x004B3128 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawBlock() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (22):
+
+     20: void BlockType :: DrawBlock (CamType* Camera)
+     21:     {
+=>   22:     IncreaseAnimationNumber (&Animation);
+     23: 
+     24:     if (Health > 0 &&
+
+# 2 0x004B3755 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawLevelBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (296):
+
+    294:         // printf ("DrawLevelBlocks() : i = %d\n", i);
+    295: 
+=>  296:         ManyBlocks [i]->DrawBlock (Camera);
+    297: 
+    298:         // i = i + 1;
+
+# 3 0x004B36F2 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawManyBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (261):
+
+    259: void DrawManyBlocks (BlockType* ManyBlocks [], CamType* Camera)
+    260:     {
+=>  261:     DrawLevelBlocks (ManyBlocks, Camera);
+    262: 
+    263:     // DrawLevelPeople (Villagers, Camera, AllImage);
+
+# 4 0x005C1243 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/Levels.cpp (183):
+
+    181:         GRRectangle (0 - Camera->Point.x, 700 - Camera->Point.y, 9999999 - Camera->Point.x, 9000 - Camera->Point.y);
+    182: 
+=>  183:         DrawManyBlocks (ManyBlocks, Camera);
+    184:         // DrawManyRooms (Rooms, Camera);
+    185: 
+
+# 5 0x005C17DF in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Level1() at C:/Users/007/Desktop/программирование/MyGame2/Levels.cpp (324):
+
+    322:     CreateVillagers (Villagers);
+    323: 
+=>  324:     return MoveGame (Blocks, LevelNumber, Man, &AllTemperature, Camera, Villagers);
+    325:     };
+    326: 
+
+# 6 0x005EE5FC in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (91):
+
+     89:         GRClear ();
+     90: 
+=>   91:         if (Level1 (&LevelNumber, &Man, &Camera, ManyBlocks) == Exit)
+     92:             {
+     93:             // txMessageBox ("выход из функции Cycle");
+
+# 7 0x005EE26F in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (25):
+
+     23:     GRCreateWindow (1550, 850);
+     24: 
+=>   25:     Cycle ();
+     26: 
+     27:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\007\desktop\codebl~1\mingw\include\txlib.h
+Compiled:	Jun  2 2021 17:17:47, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 02 2021 17:18:41
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042C8B9 в функции IncreaseAnimationNumber() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 27. Попытка прочесть данные по адресу 0x00000030 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400], Instance: 0x00ADF8E4 (32-bit), Flags: Cmdre0, Thread: 0x7D8 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042C8B9 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: IncreaseAnimationNumber() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (27):
+
+     25: void IncreaseAnimationNumber (AnimationType* Animation)
+     26:     {
+=>   27:     Animation->xFrame += 1;
+     28: 
+     29:     if (Animation->xFrame >= Animation->Picture->xMaxAnimationNumber)
+
+# 1 0x004B3128 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawBlock() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (22):
+
+     20: void BlockType :: DrawBlock (CamType* Camera)
+     21:     {
+=>   22:     IncreaseAnimationNumber (&Animation);
+     23: 
+     24:     if (Health > 0 &&
+
+# 2 0x004B3755 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawLevelBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (296):
+
+    294:         // printf ("DrawLevelBlocks() : i = %d\n", i);
+    295: 
+=>  296:         ManyBlocks [i]->DrawBlock (Camera);
+    297: 
+    298:         // i = i + 1;
+
+# 3 0x004B36F2 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawManyBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (261):
+
+    259: void DrawManyBlocks (BlockType* ManyBlocks [], CamType* Camera)
+    260:     {
+=>  261:     DrawLevelBlocks (ManyBlocks, Camera);
+    262: 
+    263:     // DrawLevelPeople (Villagers, Camera, AllImage);
+
+# 4 0x005C1243 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/Levels.cpp (183):
+
+    181:         GRRectangle (0 - Camera->Point.x, 700 - Camera->Point.y, 9999999 - Camera->Point.x, 9000 - Camera->Point.y);
+    182: 
+=>  183:         DrawManyBlocks (ManyBlocks, Camera);
+    184:         // DrawManyRooms (Rooms, Camera);
+    185: 
+
+# 5 0x005C17DF in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Level1() at C:/Users/007/Desktop/программирование/MyGame2/Levels.cpp (324):
+
+    322:     CreateVillagers (Villagers);
+    323: 
+=>  324:     return MoveGame (Blocks, LevelNumber, Man, &AllTemperature, Camera, Villagers);
+    325:     };
+    326: 
+
+# 6 0x005EE5FC in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (91):
+
+     89:         GRClear ();
+     90: 
+=>   91:         if (Level1 (&LevelNumber, &Man, &Camera, ManyBlocks) == Exit)
+     92:             {
+     93:             // txMessageBox ("выход из функции Cycle");
+
+# 7 0x005EE26F in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (25):
+
+     23:     GRCreateWindow (1550, 850);
+     24: 
+=>   25:     Cycle ();
+     26: 
+     27:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\007\desktop\codebl~1\mingw\include\txlib.h
+Compiled:	Jun  2 2021 17:17:47, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 02 2021 17:18:40
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042C8B9 в функции IncreaseAnimationNumber() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 27. Попытка прочесть данные по адресу 0x00000030 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400], Instance: 0x00ADF8E4 (32-bit), Flags: Cmdre0, Thread: 0x3FA8 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042C8B9 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: IncreaseAnimationNumber() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (27):
+
+     25: void IncreaseAnimationNumber (AnimationType* Animation)
+     26:     {
+=>   27:     Animation->xFrame += 1;
+     28: 
+     29:     if (Animation->xFrame >= Animation->Picture->xMaxAnimationNumber)
+
+# 1 0x004B3128 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawBlock() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (22):
+
+     20: void BlockType :: DrawBlock (CamType* Camera)
+     21:     {
+=>   22:     IncreaseAnimationNumber (&Animation);
+     23: 
+     24:     if (Health > 0 &&
+
+# 2 0x004B3755 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawLevelBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (296):
+
+    294:         // printf ("DrawLevelBlocks() : i = %d\n", i);
+    295: 
+=>  296:         ManyBlocks [i]->DrawBlock (Camera);
+    297: 
+    298:         // i = i + 1;
+
+# 3 0x004B36F2 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawManyBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (261):
+
+    259: void DrawManyBlocks (BlockType* ManyBlocks [], CamType* Camera)
+    260:     {
+=>  261:     DrawLevelBlocks (ManyBlocks, Camera);
+    262: 
+    263:     // DrawLevelPeople (Villagers, Camera, AllImage);
+
+# 4 0x005C1243 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/Levels.cpp (183):
+
+    181:         GRRectangle (0 - Camera->Point.x, 700 - Camera->Point.y, 9999999 - Camera->Point.x, 9000 - Camera->Point.y);
+    182: 
+=>  183:         DrawManyBlocks (ManyBlocks, Camera);
+    184:         // DrawManyRooms (Rooms, Camera);
+    185: 
+
+# 5 0x005C17DF in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Level1() at C:/Users/007/Desktop/программирование/MyGame2/Levels.cpp (324):
+
+    322:     CreateVillagers (Villagers);
+    323: 
+=>  324:     return MoveGame (Blocks, LevelNumber, Man, &AllTemperature, Camera, Villagers);
+    325:     };
+    326: 
+
+# 6 0x005EE5FC in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (91):
+
+     89:         GRClear ();
+     90: 
+=>   91:         if (Level1 (&LevelNumber, &Man, &Camera, ManyBlocks) == Exit)
+     92:             {
+     93:             // txMessageBox ("выход из функции Cycle");
+
+# 7 0x005EE26F in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (25):
+
+     23:     GRCreateWindow (1550, 850);
+     24: 
+=>   25:     Cycle ();
+     26: 
+     27:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\007\desktop\codebl~1\mingw\include\txlib.h
+Compiled:	Jun  2 2021 17:17:47, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 02 2021 17:19:54
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042C8B9 в функции IncreaseAnimationNumber() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 27. Попытка прочесть данные по адресу 0x00000030 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400], Instance: 0x00ADF8E4 (32-bit), Flags: Cmdre0, Thread: 0x3FA8 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042C8B9 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: IncreaseAnimationNumber() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (27):
+
+     25: void IncreaseAnimationNumber (AnimationType* Animation)
+     26:     {
+=>   27:     Animation->xFrame += 1;
+     28: 
+     29:     if (Animation->xFrame >= Animation->Picture->xMaxAnimationNumber)
+
+# 1 0x004B3128 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawBlock() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (22):
+
+     20: void BlockType :: DrawBlock (CamType* Camera)
+     21:     {
+=>   22:     IncreaseAnimationNumber (&Animation);
+     23: 
+     24:     if (Health > 0 &&
+
+# 2 0x004B3755 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawLevelBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (296):
+
+    294:         // printf ("DrawLevelBlocks() : i = %d\n", i);
+    295: 
+=>  296:         ManyBlocks [i]->DrawBlock (Camera);
+    297: 
+    298:         // i = i + 1;
+
+# 3 0x004B36F2 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawManyBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (261):
+
+    259: void DrawManyBlocks (BlockType* ManyBlocks [], CamType* Camera)
+    260:     {
+=>  261:     DrawLevelBlocks (ManyBlocks, Camera);
+    262: 
+    263:     // DrawLevelPeople (Villagers, Camera, AllImage);
+
+# 4 0x005C1243 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/Levels.cpp (183):
+
+    181:         GRRectangle (0 - Camera->Point.x, 700 - Camera->Point.y, 9999999 - Camera->Point.x, 9000 - Camera->Point.y);
+    182: 
+=>  183:         DrawManyBlocks (ManyBlocks, Camera);
+    184:         // DrawManyRooms (Rooms, Camera);
+    185: 
+
+# 5 0x005C17DF in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Level1() at C:/Users/007/Desktop/программирование/MyGame2/Levels.cpp (324):
+
+    322:     CreateVillagers (Villagers);
+    323: 
+=>  324:     return MoveGame (Blocks, LevelNumber, Man, &AllTemperature, Camera, Villagers);
+    325:     };
+    326: 
+
+# 6 0x005EE5FC in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (91):
+
+     89:         GRClear ();
+     90: 
+=>   91:         if (Level1 (&LevelNumber, &Man, &Camera, ManyBlocks) == Exit)
+     92:             {
+     93:             // txMessageBox ("выход из функции Cycle");
+
+# 7 0x005EE26F in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (25):
+
+     23:     GRCreateWindow (1550, 850);
+     24: 
+=>   25:     Cycle ();
+     26: 
+     27:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\007\desktop\codebl~1\mingw\include\txlib.h
+Compiled:	Jun  2 2021 17:17:47, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 02 2021 17:19:53
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042C8B9 в функции IncreaseAnimationNumber() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 27. Попытка прочесть данные по адресу 0x00000030 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400], Instance: 0x00ADF8E4 (32-bit), Flags: Cmdre0, Thread: 0x25E0 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042C8B9 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: IncreaseAnimationNumber() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (27):
+
+     25: void IncreaseAnimationNumber (AnimationType* Animation)
+     26:     {
+=>   27:     Animation->xFrame += 1;
+     28: 
+     29:     if (Animation->xFrame >= Animation->Picture->xMaxAnimationNumber)
+
+# 1 0x004B3128 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawBlock() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (22):
+
+     20: void BlockType :: DrawBlock (CamType* Camera)
+     21:     {
+=>   22:     IncreaseAnimationNumber (&Animation);
+     23: 
+     24:     if (Health > 0 &&
+
+# 2 0x004B3755 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawLevelBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (296):
+
+    294:         // printf ("DrawLevelBlocks() : i = %d\n", i);
+    295: 
+=>  296:         ManyBlocks [i]->DrawBlock (Camera);
+    297: 
+    298:         // i = i + 1;
+
+# 3 0x004B36F2 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawManyBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (261):
+
+    259: void DrawManyBlocks (BlockType* ManyBlocks [], CamType* Camera)
+    260:     {
+=>  261:     DrawLevelBlocks (ManyBlocks, Camera);
+    262: 
+    263:     // DrawLevelPeople (Villagers, Camera, AllImage);
+
+# 4 0x005C1243 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/Levels.cpp (183):
+
+    181:         GRRectangle (0 - Camera->Point.x, 700 - Camera->Point.y, 9999999 - Camera->Point.x, 9000 - Camera->Point.y);
+    182: 
+=>  183:         DrawManyBlocks (ManyBlocks, Camera);
+    184:         // DrawManyRooms (Rooms, Camera);
+    185: 
+
+# 5 0x005C17DF in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Level1() at C:/Users/007/Desktop/программирование/MyGame2/Levels.cpp (324):
+
+    322:     CreateVillagers (Villagers);
+    323: 
+=>  324:     return MoveGame (Blocks, LevelNumber, Man, &AllTemperature, Camera, Villagers);
+    325:     };
+    326: 
+
+# 6 0x005EE5FC in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (91):
+
+     89:         GRClear ();
+     90: 
+=>   91:         if (Level1 (&LevelNumber, &Man, &Camera, ManyBlocks) == Exit)
+     92:             {
+     93:             // txMessageBox ("выход из функции Cycle");
+
+# 7 0x005EE26F in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (25):
+
+     23:     GRCreateWindow (1550, 850);
+     24: 
+=>   25:     Cycle ();
+     26: 
+     27:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\007\desktop\codebl~1\mingw\include\txlib.h
+Compiled:	Jun  2 2021 17:17:47, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 02 2021 17:21:16
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042C8B9 в функции IncreaseAnimationNumber() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 27. Попытка прочесть данные по адресу 0x00000030 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400], Instance: 0x00ADF8E4 (32-bit), Flags: Cmdre0, Thread: 0x25E0 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042C8B9 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: IncreaseAnimationNumber() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (27):
+
+     25: void IncreaseAnimationNumber (AnimationType* Animation)
+     26:     {
+=>   27:     Animation->xFrame += 1;
+     28: 
+     29:     if (Animation->xFrame >= Animation->Picture->xMaxAnimationNumber)
+
+# 1 0x004B3128 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawBlock() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (22):
+
+     20: void BlockType :: DrawBlock (CamType* Camera)
+     21:     {
+=>   22:     IncreaseAnimationNumber (&Animation);
+     23: 
+     24:     if (Health > 0 &&
+
+# 2 0x004B3755 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawLevelBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (296):
+
+    294:         // printf ("DrawLevelBlocks() : i = %d\n", i);
+    295: 
+=>  296:         ManyBlocks [i]->DrawBlock (Camera);
+    297: 
+    298:         // i = i + 1;
+
+# 3 0x004B36F2 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawManyBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (261):
+
+    259: void DrawManyBlocks (BlockType* ManyBlocks [], CamType* Camera)
+    260:     {
+=>  261:     DrawLevelBlocks (ManyBlocks, Camera);
+    262: 
+    263:     // DrawLevelPeople (Villagers, Camera, AllImage);
+
+# 4 0x005C1243 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/Levels.cpp (183):
+
+    181:         GRRectangle (0 - Camera->Point.x, 700 - Camera->Point.y, 9999999 - Camera->Point.x, 9000 - Camera->Point.y);
+    182: 
+=>  183:         DrawManyBlocks (ManyBlocks, Camera);
+    184:         // DrawManyRooms (Rooms, Camera);
+    185: 
+
+# 5 0x005C17DF in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Level1() at C:/Users/007/Desktop/программирование/MyGame2/Levels.cpp (324):
+
+    322:     CreateVillagers (Villagers);
+    323: 
+=>  324:     return MoveGame (Blocks, LevelNumber, Man, &AllTemperature, Camera, Villagers);
+    325:     };
+    326: 
+
+# 6 0x005EE5FC in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (91):
+
+     89:         GRClear ();
+     90: 
+=>   91:         if (Level1 (&LevelNumber, &Man, &Camera, ManyBlocks) == Exit)
+     92:             {
+     93:             // txMessageBox ("выход из функции Cycle");
+
+# 7 0x005EE26F in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (25):
+
+     23:     GRCreateWindow (1550, 850);
+     24: 
+=>   25:     Cycle ();
+     26: 
+     27:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-05-25 03:35:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\007\desktop\codebl~1\mingw\include\txlib.h
+Compiled:	Jun  2 2021 17:17:47, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 02 2021 17:21:15
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CB6D в функции GetFrameSizeX() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 17. Попытка прочесть данные по адресу 0x00000038 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400], Instance: 0x00AE2904 (32-bit), Flags: Cmdre0, Thread: 0x36D8 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CB6D in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: GetFrameSizeX() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (17):
+
+     15: double AnimationType :: GetFrameSizeX ()
+     16:     {
+=>   17:     return GRGetExtentX (Picture->Picture) / Picture->xMaxAnimationNumber;
+     18:     };
+     19: 
+
+# 1 0x004B4795 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (137):
+
+    135:         X += 704;
+    136: 
+=>  137:         Blocks[i]->SizeX = Blocks[i]->Animation.GetFrameSizeX();
+    138:         Blocks[i]->SizeY = Blocks[i]->Animation.GetFrameSizeY();
+    139: 
+
+# 2 0x005F09E0 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (66):
+
+     64:     CreateRooms (Rooms);    */
+     65: 
+=>   66:     CreateBlocks (ManyBlocks);
+     67: 
+     68:     /* while (true)
+
+# 3 0x005F0687 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (25):
+
+     23:     GRCreateWindow (1550, 850);
+     24: 
+=>   25:     Cycle ();
+     26: 
+     27:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Desktop\TX\TXLib.h
+Compiled:	Jun  3 2021 08:18:20, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 03 2021 08:18:31
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CB6D в функции GetFrameSizeX() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 17. Попытка прочесть данные по адресу 0x00000038 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400], Instance: 0x00AE2904 (32-bit), Flags: Cmdre0, Thread: 0x36D8 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CB6D in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: GetFrameSizeX() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (17):
+
+     15: double AnimationType :: GetFrameSizeX ()
+     16:     {
+=>   17:     return GRGetExtentX (Picture->Picture) / Picture->xMaxAnimationNumber;
+     18:     };
+     19: 
+
+# 1 0x004B4795 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (137):
+
+    135:         X += 704;
+    136: 
+=>  137:         Blocks[i]->SizeX = Blocks[i]->Animation.GetFrameSizeX();
+    138:         Blocks[i]->SizeY = Blocks[i]->Animation.GetFrameSizeY();
+    139: 
+
+# 2 0x005F09E0 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (66):
+
+     64:     CreateRooms (Rooms);    */
+     65: 
+=>   66:     CreateBlocks (ManyBlocks);
+     67: 
+     68:     /* while (true)
+
+# 3 0x005F0687 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (25):
+
+     23:     GRCreateWindow (1550, 850);
+     24: 
+=>   25:     Cycle ();
+     26: 
+     27:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Desktop\TX\TXLib.h
+Compiled:	Jun  3 2021 08:18:20, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 03 2021 08:18:30
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CB6D в функции GetFrameSizeX() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 17. Попытка прочесть данные по адресу 0x00000038 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400], Instance: 0x00AE2904 (32-bit), Flags: Cmdre0, Thread: 0xFF0 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CB6D in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: GetFrameSizeX() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (17):
+
+     15: double AnimationType :: GetFrameSizeX ()
+     16:     {
+=>   17:     return GRGetExtentX (Picture->Picture) / Picture->xMaxAnimationNumber;
+     18:     };
+     19: 
+
+# 1 0x004B4795 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (137):
+
+    135:         X += 704;
+    136: 
+=>  137:         Blocks[i]->SizeX = Blocks[i]->Animation.GetFrameSizeX();
+    138:         Blocks[i]->SizeY = Blocks[i]->Animation.GetFrameSizeY();
+    139: 
+
+# 2 0x005F09E0 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (66):
+
+     64:     CreateRooms (Rooms);    */
+     65: 
+=>   66:     CreateBlocks (ManyBlocks);
+     67: 
+     68:     /* while (true)
+
+# 3 0x005F0687 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (25):
+
+     23:     GRCreateWindow (1550, 850);
+     24: 
+=>   25:     Cycle ();
+     26: 
+     27:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Desktop\TX\TXLib.h
+Compiled:	Jun  3 2021 08:18:20, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 03 2021 08:19:48
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CB6D в функции GetFrameSizeX() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 17. Попытка прочесть данные по адресу 0x00000038 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400], Instance: 0x00AE2904 (32-bit), Flags: Cmdre0, Thread: 0xFF0 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CB6D in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: GetFrameSizeX() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (17):
+
+     15: double AnimationType :: GetFrameSizeX ()
+     16:     {
+=>   17:     return GRGetExtentX (Picture->Picture) / Picture->xMaxAnimationNumber;
+     18:     };
+     19: 
+
+# 1 0x004B4795 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (137):
+
+    135:         X += 704;
+    136: 
+=>  137:         Blocks[i]->SizeX = Blocks[i]->Animation.GetFrameSizeX();
+    138:         Blocks[i]->SizeY = Blocks[i]->Animation.GetFrameSizeY();
+    139: 
+
+# 2 0x005F09E0 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (66):
+
+     64:     CreateRooms (Rooms);    */
+     65: 
+=>   66:     CreateBlocks (ManyBlocks);
+     67: 
+     68:     /* while (true)
+
+# 3 0x005F0687 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (25):
+
+     23:     GRCreateWindow (1550, 850);
+     24: 
+=>   25:     Cycle ();
+     26: 
+     27:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Desktop\TX\TXLib.h
+Compiled:	Jun  3 2021 08:18:20, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 03 2021 08:19:48
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CB6D в функции GetFrameSizeX() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 17. Попытка прочесть данные по адресу 0x00000038 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400], Instance: 0x00AE2904 (32-bit), Flags: Cmdre0, Thread: 0x3E58 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CB6D in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: GetFrameSizeX() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (17):
+
+     15: double AnimationType :: GetFrameSizeX ()
+     16:     {
+=>   17:     return GRGetExtentX (Picture->Picture) / Picture->xMaxAnimationNumber;
+     18:     };
+     19: 
+
+# 1 0x004B4795 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (137):
+
+    135:         X += 704;
+    136: 
+=>  137:         Blocks[i]->SizeX = Blocks[i]->Animation.GetFrameSizeX();
+    138:         Blocks[i]->SizeY = Blocks[i]->Animation.GetFrameSizeY();
+    139: 
+
+# 2 0x005F0A4C in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (66):
+
+     64:     CreateRooms (Rooms);    */
+     65: 
+=>   66:     CreateBlocks (ManyBlocks);
+     67: 
+     68:     /* while (true)
+
+# 3 0x005F06F3 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (25):
+
+     23:     GRCreateWindow (1550, 850);
+     24: 
+=>   25:     Cycle ();
+     26: 
+     27:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Desktop\TX\TXLib.h
+Compiled:	Jun  3 2021 08:18:20, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 03 2021 08:21:44
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CB6D в функции GetFrameSizeX() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 17. Попытка прочесть данные по адресу 0x00000038 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400], Instance: 0x00AE2904 (32-bit), Flags: Cmdre0, Thread: 0x3E58 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CB6D in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: GetFrameSizeX() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (17):
+
+     15: double AnimationType :: GetFrameSizeX ()
+     16:     {
+=>   17:     return GRGetExtentX (Picture->Picture) / Picture->xMaxAnimationNumber;
+     18:     };
+     19: 
+
+# 1 0x004B4795 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (137):
+
+    135:         X += 704;
+    136: 
+=>  137:         Blocks[i]->SizeX = Blocks[i]->Animation.GetFrameSizeX();
+    138:         Blocks[i]->SizeY = Blocks[i]->Animation.GetFrameSizeY();
+    139: 
+
+# 2 0x005F0A4C in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (66):
+
+     64:     CreateRooms (Rooms);    */
+     65: 
+=>   66:     CreateBlocks (ManyBlocks);
+     67: 
+     68:     /* while (true)
+
+# 3 0x005F06F3 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (25):
+
+     23:     GRCreateWindow (1550, 850);
+     24: 
+=>   25:     Cycle ();
+     26: 
+     27:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Desktop\TX\TXLib.h
+Compiled:	Jun  3 2021 08:18:20, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 03 2021 08:21:44
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CB6D в функции GetFrameSizeX() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 17. Попытка прочесть данные по адресу 0x00000038 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400], Instance: 0x00AE2904 (32-bit), Flags: Cmdre0, Thread: 0x31F4 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CB6D in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: GetFrameSizeX() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (17):
+
+     15: double AnimationType :: GetFrameSizeX ()
+     16:     {
+=>   17:     return GRGetExtentX (Picture->Picture) / Picture->xMaxAnimationNumber;
+     18:     };
+     19: 
+
+# 1 0x004B4795 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (137):
+
+    135:         X += 704;
+    136: 
+=>  137:         Blocks[i]->SizeX = Blocks[i]->Animation.GetFrameSizeX();
+    138:         Blocks[i]->SizeY = Blocks[i]->Animation.GetFrameSizeY();
+    139: 
+
+# 2 0x005F0A4C in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (66):
+
+     64:     CreateRooms (Rooms);    */
+     65: 
+=>   66:     CreateBlocks (ManyBlocks);
+     67: 
+     68:     /* while (true)
+
+# 3 0x005F06F3 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (25):
+
+     23:     GRCreateWindow (1550, 850);
+     24: 
+=>   25:     Cycle ();
+     26: 
+     27:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Desktop\TX\TXLib.h
+Compiled:	Jun  3 2021 08:18:20, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 03 2021 08:22:20
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CB6D в функции GetFrameSizeX() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 17. Попытка прочесть данные по адресу 0x00000038 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400], Instance: 0x00AE2904 (32-bit), Flags: Cmdre0, Thread: 0x31F4 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CB6D in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: GetFrameSizeX() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (17):
+
+     15: double AnimationType :: GetFrameSizeX ()
+     16:     {
+=>   17:     return GRGetExtentX (Picture->Picture) / Picture->xMaxAnimationNumber;
+     18:     };
+     19: 
+
+# 1 0x004B4795 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (137):
+
+    135:         X += 704;
+    136: 
+=>  137:         Blocks[i]->SizeX = Blocks[i]->Animation.GetFrameSizeX();
+    138:         Blocks[i]->SizeY = Blocks[i]->Animation.GetFrameSizeY();
+    139: 
+
+# 2 0x005F0A4C in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (66):
+
+     64:     CreateRooms (Rooms);    */
+     65: 
+=>   66:     CreateBlocks (ManyBlocks);
+     67: 
+     68:     /* while (true)
+
+# 3 0x005F06F3 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (25):
+
+     23:     GRCreateWindow (1550, 850);
+     24: 
+=>   25:     Cycle ();
+     26: 
+     27:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Desktop\TX\TXLib.h
+Compiled:	Jun  3 2021 08:18:20, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 03 2021 08:22:20
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CB6D в функции GetFrameSizeX() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 17. Попытка прочесть данные по адресу 0x00000038 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400], Instance: 0x00AE2904 (32-bit), Flags: Cmdre0, Thread: 0x1C90 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CB6D in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: GetFrameSizeX() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (17):
+
+     15: double AnimationType :: GetFrameSizeX ()
+     16:     {
+=>   17:     return GRGetExtentX (Picture->Picture) / Picture->xMaxAnimationNumber;
+     18:     };
+     19: 
+
+# 1 0x004B47B6 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (139):
+
+    137:         printf ("Blocks [i] = %d \n", Blocks [i]);
+    138: 
+=>  139:         Blocks[i]->SizeX = Blocks[i]->Animation.GetFrameSizeX();
+    140:         Blocks[i]->SizeY = Blocks[i]->Animation.GetFrameSizeY();
+    141: 
+
+# 2 0x005F0A6C in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (66):
+
+     64:     CreateRooms (Rooms);    */
+     65: 
+=>   66:     CreateBlocks (ManyBlocks);
+     67: 
+     68:     /* while (true)
+
+# 3 0x005F0713 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (25):
+
+     23:     GRCreateWindow (1550, 850);
+     24: 
+=>   25:     Cycle ();
+     26: 
+     27:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Desktop\TX\TXLib.h
+Compiled:	Jun  3 2021 08:18:20, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 03 2021 08:23:28
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CB6D в функции GetFrameSizeX() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 17. Попытка прочесть данные по адресу 0x00000038 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400], Instance: 0x00AE2904 (32-bit), Flags: Cmdre0, Thread: 0x1C90 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CB6D in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: GetFrameSizeX() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (17):
+
+     15: double AnimationType :: GetFrameSizeX ()
+     16:     {
+=>   17:     return GRGetExtentX (Picture->Picture) / Picture->xMaxAnimationNumber;
+     18:     };
+     19: 
+
+# 1 0x004B47B6 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (139):
+
+    137:         printf ("Blocks [i] = %d \n", Blocks [i]);
+    138: 
+=>  139:         Blocks[i]->SizeX = Blocks[i]->Animation.GetFrameSizeX();
+    140:         Blocks[i]->SizeY = Blocks[i]->Animation.GetFrameSizeY();
+    141: 
+
+# 2 0x005F0A6C in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (66):
+
+     64:     CreateRooms (Rooms);    */
+     65: 
+=>   66:     CreateBlocks (ManyBlocks);
+     67: 
+     68:     /* while (true)
+
+# 3 0x005F0713 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (25):
+
+     23:     GRCreateWindow (1550, 850);
+     24: 
+=>   25:     Cycle ();
+     26: 
+     27:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Desktop\TX\TXLib.h
+Compiled:	Jun  3 2021 08:18:20, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 03 2021 08:23:28
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CB6D в функции GetFrameSizeX() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 17. Попытка прочесть данные по адресу 0x00000038 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400], Instance: 0x00AE2904 (32-bit), Flags: Cmdre0, Thread: 0x1578 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CB6D in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: GetFrameSizeX() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (17):
+
+     15: double AnimationType :: GetFrameSizeX ()
+     16:     {
+=>   17:     return GRGetExtentX (Picture->Picture) / Picture->xMaxAnimationNumber;
+     18:     };
+     19: 
+
+# 1 0x004B47A8 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (139):
+
+    137:         printf ("i = %d \n", i);
+    138: 
+=>  139:         Blocks[i]->SizeX = Blocks[i]->Animation.GetFrameSizeX();
+    140:         Blocks[i]->SizeY = Blocks[i]->Animation.GetFrameSizeY();
+    141: 
+
+# 2 0x005F0A5C in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (66):
+
+     64:     CreateRooms (Rooms);    */
+     65: 
+=>   66:     CreateBlocks (ManyBlocks);
+     67: 
+     68:     /* while (true)
+
+# 3 0x005F0703 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (25):
+
+     23:     GRCreateWindow (1550, 850);
+     24: 
+=>   25:     Cycle ();
+     26: 
+     27:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Desktop\TX\TXLib.h
+Compiled:	Jun  3 2021 08:18:20, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 03 2021 08:24:05
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CB6D в функции GetFrameSizeX() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 17. Попытка прочесть данные по адресу 0x00000038 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400], Instance: 0x00AE2904 (32-bit), Flags: Cmdre0, Thread: 0x1578 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CB6D in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: GetFrameSizeX() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (17):
+
+     15: double AnimationType :: GetFrameSizeX ()
+     16:     {
+=>   17:     return GRGetExtentX (Picture->Picture) / Picture->xMaxAnimationNumber;
+     18:     };
+     19: 
+
+# 1 0x004B47A8 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (139):
+
+    137:         printf ("i = %d \n", i);
+    138: 
+=>  139:         Blocks[i]->SizeX = Blocks[i]->Animation.GetFrameSizeX();
+    140:         Blocks[i]->SizeY = Blocks[i]->Animation.GetFrameSizeY();
+    141: 
+
+# 2 0x005F0A5C in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (66):
+
+     64:     CreateRooms (Rooms);    */
+     65: 
+=>   66:     CreateBlocks (ManyBlocks);
+     67: 
+     68:     /* while (true)
+
+# 3 0x005F0703 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (25):
+
+     23:     GRCreateWindow (1550, 850);
+     24: 
+=>   25:     Cycle ();
+     26: 
+     27:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Desktop\TX\TXLib.h
+Compiled:	Jun  3 2021 08:18:20, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 03 2021 08:24:05
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CB6D в функции GetFrameSizeX() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 17. Попытка прочесть данные по адресу 0x00000038 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400], Instance: 0x00AE2904 (32-bit), Flags: Cmdre0, Thread: 0x1860 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CB6D in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: GetFrameSizeX() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (17):
+
+     15: double AnimationType :: GetFrameSizeX ()
+     16:     {
+=>   17:     return GRGetExtentX (Picture->Picture) / Picture->xMaxAnimationNumber;
+     18:     };
+     19: 
+
+# 1 0x004B47A3 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (139):
+
+    137:         printf ("i = %d \n", i);
+    138: 
+=>  139:         Blocks[i]->SizeX = Blocks[i]->Animation.GetFrameSizeX();
+    140:         Blocks[i]->SizeY = Blocks[i]->Animation.GetFrameSizeY();
+    141: 
+
+# 2 0x005F0A58 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (66):
+
+     64:     CreateRooms (Rooms);    */
+     65: 
+=>   66:     CreateBlocks (ManyBlocks);
+     67: 
+     68:     /* while (true)
+
+# 3 0x005F06FF in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (25):
+
+     23:     GRCreateWindow (1550, 850);
+     24: 
+=>   25:     Cycle ();
+     26: 
+     27:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Desktop\TX\TXLib.h
+Compiled:	Jun  3 2021 08:18:20, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 03 2021 08:25:22
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CB6D в функции GetFrameSizeX() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 17. Попытка прочесть данные по адресу 0x00000038 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400], Instance: 0x00AE2904 (32-bit), Flags: Cmdre0, Thread: 0x1860 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CB6D in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: GetFrameSizeX() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (17):
+
+     15: double AnimationType :: GetFrameSizeX ()
+     16:     {
+=>   17:     return GRGetExtentX (Picture->Picture) / Picture->xMaxAnimationNumber;
+     18:     };
+     19: 
+
+# 1 0x004B47A3 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (139):
+
+    137:         printf ("i = %d \n", i);
+    138: 
+=>  139:         Blocks[i]->SizeX = Blocks[i]->Animation.GetFrameSizeX();
+    140:         Blocks[i]->SizeY = Blocks[i]->Animation.GetFrameSizeY();
+    141: 
+
+# 2 0x005F0A58 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (66):
+
+     64:     CreateRooms (Rooms);    */
+     65: 
+=>   66:     CreateBlocks (ManyBlocks);
+     67: 
+     68:     /* while (true)
+
+# 3 0x005F06FF in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (25):
+
+     23:     GRCreateWindow (1550, 850);
+     24: 
+=>   25:     Cycle ();
+     26: 
+     27:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Desktop\TX\TXLib.h
+Compiled:	Jun  3 2021 08:18:20, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 03 2021 08:25:22
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CB6D в функции GetFrameSizeX() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 17. Попытка прочесть данные по адресу 0x00000038 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400], Instance: 0x00AE2904 (32-bit), Flags: Cmdre0, Thread: 0x146C (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CB6D in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: GetFrameSizeX() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (17):
+
+     15: double AnimationType :: GetFrameSizeX ()
+     16:     {
+=>   17:     return GRGetExtentX (Picture->Picture) / Picture->xMaxAnimationNumber;
+     18:     };
+     19: 
+
+# 1 0x004B47A1 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (139):
+
+    137:         printf ("i = %d \n", i);
+    138: 
+=>  139:         Blocks[i]->SizeX = Blocks[i]->Animation.GetFrameSizeX();
+    140:         Blocks[i]->SizeY = Blocks[i]->Animation.GetFrameSizeY();
+    141: 
+
+# 2 0x005F0A54 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (66):
+
+     64:     CreateRooms (Rooms);    */
+     65: 
+=>   66:     CreateBlocks (ManyBlocks);
+     67: 
+     68:     /* while (true)
+
+# 3 0x005F06FB in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (25):
+
+     23:     GRCreateWindow (1550, 850);
+     24: 
+=>   25:     Cycle ();
+     26: 
+     27:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Desktop\TX\TXLib.h
+Compiled:	Jun  3 2021 08:46:33, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 03 2021 08:48:59
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CB6D в функции GetFrameSizeX() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 17. Попытка прочесть данные по адресу 0x00000038 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400], Instance: 0x00AE2904 (32-bit), Flags: Cmdre0, Thread: 0x146C (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CB6D in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: GetFrameSizeX() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (17):
+
+     15: double AnimationType :: GetFrameSizeX ()
+     16:     {
+=>   17:     return GRGetExtentX (Picture->Picture) / Picture->xMaxAnimationNumber;
+     18:     };
+     19: 
+
+# 1 0x004B47A1 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (139):
+
+    137:         printf ("i = %d \n", i);
+    138: 
+=>  139:         Blocks[i]->SizeX = Blocks[i]->Animation.GetFrameSizeX();
+    140:         Blocks[i]->SizeY = Blocks[i]->Animation.GetFrameSizeY();
+    141: 
+
+# 2 0x005F0A54 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (66):
+
+     64:     CreateRooms (Rooms);    */
+     65: 
+=>   66:     CreateBlocks (ManyBlocks);
+     67: 
+     68:     /* while (true)
+
+# 3 0x005F06FB in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (25):
+
+     23:     GRCreateWindow (1550, 850);
+     24: 
+=>   25:     Cycle ();
+     26: 
+     27:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Desktop\TX\TXLib.h
+Compiled:	Jun  3 2021 08:46:33, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 03 2021 08:48:59
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CB6D в функции GetFrameSizeX() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 17. Попытка прочесть данные по адресу 0x00000038 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400], Instance: 0x00AE2904 (32-bit), Flags: Cmdre0, Thread: 0x24F8 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CB6D in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: GetFrameSizeX() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (17):
+
+     15: double AnimationType :: GetFrameSizeX ()
+     16:     {
+=>   17:     return GRGetExtentX (Picture->Picture) / Picture->xMaxAnimationNumber;
+     18:     };
+     19: 
+
+# 1 0x004B48CE in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (157):
+
+    155:         printf ("i = %d \n", i);
+    156: 
+=>  157:         Blocks[i]->SizeX = Blocks[i]->Animation.GetFrameSizeX();
+    158:         Blocks[i]->SizeY = Blocks[i]->Animation.GetFrameSizeY();
+    159: 
+
+# 2 0x005F0A54 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (66):
+
+     64:     CreateRooms (Rooms);    */
+     65: 
+=>   66:     CreateBlocks (ManyBlocks);
+     67: 
+     68:     /* while (true)
+
+# 3 0x005F06FB in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (25):
+
+     23:     GRCreateWindow (1550, 850);
+     24: 
+=>   25:     Cycle ();
+     26: 
+     27:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Desktop\TX\TXLib.h
+Compiled:	Jun  3 2021 08:46:33, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 03 2021 08:49:56
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CB6D в функции GetFrameSizeX() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 17. Попытка прочесть данные по адресу 0x00000038 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400], Instance: 0x00AE2904 (32-bit), Flags: Cmdre0, Thread: 0x24F8 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CB6D in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: GetFrameSizeX() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (17):
+
+     15: double AnimationType :: GetFrameSizeX ()
+     16:     {
+=>   17:     return GRGetExtentX (Picture->Picture) / Picture->xMaxAnimationNumber;
+     18:     };
+     19: 
+
+# 1 0x004B48CE in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (157):
+
+    155:         printf ("i = %d \n", i);
+    156: 
+=>  157:         Blocks[i]->SizeX = Blocks[i]->Animation.GetFrameSizeX();
+    158:         Blocks[i]->SizeY = Blocks[i]->Animation.GetFrameSizeY();
+    159: 
+
+# 2 0x005F0A54 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (66):
+
+     64:     CreateRooms (Rooms);    */
+     65: 
+=>   66:     CreateBlocks (ManyBlocks);
+     67: 
+     68:     /* while (true)
+
+# 3 0x005F06FB in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (25):
+
+     23:     GRCreateWindow (1550, 850);
+     24: 
+=>   25:     Cycle ();
+     26: 
+     27:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Desktop\TX\TXLib.h
+Compiled:	Jun  3 2021 08:46:33, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 03 2021 08:49:56
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CB6D в функции GetFrameSizeX() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 17. Попытка прочесть данные по адресу 0x00000038 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400], Instance: 0x00AE2904 (32-bit), Flags: Cmdre0, Thread: 0x1F50 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CB6D in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: GetFrameSizeX() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (17):
+
+     15: double AnimationType :: GetFrameSizeX ()
+     16:     {
+=>   17:     return GRGetExtentX (Picture->Picture) / Picture->xMaxAnimationNumber;
+     18:     };
+     19: 
+
+# 1 0x004B48CE in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (157):
+
+    155:         printf ("i = %d \n", i);
+    156: 
+=>  157:         Blocks[i]->SizeX = Blocks[i]->Animation.GetFrameSizeX();
+    158:         Blocks[i]->SizeY = Blocks[i]->Animation.GetFrameSizeY();
+    159: 
+
+# 2 0x005F0A54 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (66):
+
+     64:     CreateRooms (Rooms);    */
+     65: 
+=>   66:     CreateBlocks (ManyBlocks);
+     67: 
+     68:     /* while (true)
+
+# 3 0x005F06FB in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (25):
+
+     23:     GRCreateWindow (1550, 850);
+     24: 
+=>   25:     Cycle ();
+     26: 
+     27:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Desktop\TX\TXLib.h
+Compiled:	Jun  3 2021 08:51:38, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 03 2021 08:51:46
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CB6D в функции GetFrameSizeX() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 17. Попытка прочесть данные по адресу 0x00000038 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400], Instance: 0x00AE2904 (32-bit), Flags: Cmdre0, Thread: 0x1F50 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CB6D in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: GetFrameSizeX() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (17):
+
+     15: double AnimationType :: GetFrameSizeX ()
+     16:     {
+=>   17:     return GRGetExtentX (Picture->Picture) / Picture->xMaxAnimationNumber;
+     18:     };
+     19: 
+
+# 1 0x004B48CE in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (157):
+
+    155:         printf ("i = %d \n", i);
+    156: 
+=>  157:         Blocks[i]->SizeX = Blocks[i]->Animation.GetFrameSizeX();
+    158:         Blocks[i]->SizeY = Blocks[i]->Animation.GetFrameSizeY();
+    159: 
+
+# 2 0x005F0A54 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (66):
+
+     64:     CreateRooms (Rooms);    */
+     65: 
+=>   66:     CreateBlocks (ManyBlocks);
+     67: 
+     68:     /* while (true)
+
+# 3 0x005F06FB in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (25):
+
+     23:     GRCreateWindow (1550, 850);
+     24: 
+=>   25:     Cycle ();
+     26: 
+     27:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Desktop\TX\TXLib.h
+Compiled:	Jun  3 2021 08:51:38, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 03 2021 08:51:46
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CB6D в функции GetFrameSizeX() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 17. Попытка прочесть данные по адресу 0x00000038 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400], Instance: 0x00AE2904 (32-bit), Flags: Cmdre0, Thread: 0x27CC (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CB6D in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: GetFrameSizeX() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (17):
+
+     15: double AnimationType :: GetFrameSizeX ()
+     16:     {
+=>   17:     return GRGetExtentX (Picture->Picture) / Picture->xMaxAnimationNumber;
+     18:     };
+     19: 
+
+# 1 0x004B48E3 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (157):
+
+    155:         printf ("i = %d, Blocks [i] = %d \n", i, Blocks [i]);
+    156: 
+=>  157:         Blocks[i]->SizeX = Blocks[i]->Animation.GetFrameSizeX();
+    158:         Blocks[i]->SizeY = Blocks[i]->Animation.GetFrameSizeY();
+    159: 
+
+# 2 0x005F0A68 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (66):
+
+     64:     CreateRooms (Rooms);    */
+     65: 
+=>   66:     CreateBlocks (ManyBlocks);
+     67: 
+     68:     /* while (true)
+
+# 3 0x005F070F in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (25):
+
+     23:     GRCreateWindow (1550, 850);
+     24: 
+=>   25:     Cycle ();
+     26: 
+     27:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Desktop\TX\TXLib.h
+Compiled:	Jun  3 2021 08:51:38, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 03 2021 08:53:40
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CB6D в функции GetFrameSizeX() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 17. Попытка прочесть данные по адресу 0x00000038 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400], Instance: 0x00AE2904 (32-bit), Flags: Cmdre0, Thread: 0x27CC (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CB6D in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: GetFrameSizeX() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (17):
+
+     15: double AnimationType :: GetFrameSizeX ()
+     16:     {
+=>   17:     return GRGetExtentX (Picture->Picture) / Picture->xMaxAnimationNumber;
+     18:     };
+     19: 
+
+# 1 0x004B48E3 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (157):
+
+    155:         printf ("i = %d, Blocks [i] = %d \n", i, Blocks [i]);
+    156: 
+=>  157:         Blocks[i]->SizeX = Blocks[i]->Animation.GetFrameSizeX();
+    158:         Blocks[i]->SizeY = Blocks[i]->Animation.GetFrameSizeY();
+    159: 
+
+# 2 0x005F0A68 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (66):
+
+     64:     CreateRooms (Rooms);    */
+     65: 
+=>   66:     CreateBlocks (ManyBlocks);
+     67: 
+     68:     /* while (true)
+
+# 3 0x005F070F in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (25):
+
+     23:     GRCreateWindow (1550, 850);
+     24: 
+=>   25:     Cycle ();
+     26: 
+     27:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Desktop\TX\TXLib.h
+Compiled:	Jun  3 2021 08:51:38, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 03 2021 08:53:41
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CB6D в функции GetFrameSizeX() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 17. Попытка прочесть данные по адресу 0x00000038 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400], Instance: 0x00AE2904 (32-bit), Flags: Cmdre0, Thread: 0x2678 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CB6D in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: GetFrameSizeX() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (17):
+
+     15: double AnimationType :: GetFrameSizeX ()
+     16:     {
+=>   17:     return GRGetExtentX (Picture->Picture) / Picture->xMaxAnimationNumber;
+     18:     };
+     19: 
+
+# 1 0x004B48E3 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (157):
+
+    155:         printf ("i = %d, Blocks [i] = %d \n", i, Blocks [i]);
+    156: 
+=>  157:         Blocks[i]->SizeX = Blocks[i]->Animation.GetFrameSizeX();
+    158:         Blocks[i]->SizeY = Blocks[i]->Animation.GetFrameSizeY();
+    159: 
+
+# 2 0x005F0A68 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (66):
+
+     64:     CreateRooms (Rooms);    */
+     65: 
+=>   66:     CreateBlocks (ManyBlocks);
+     67: 
+     68:     /* while (true)
+
+# 3 0x005F070F in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (25):
+
+     23:     GRCreateWindow (1550, 850);
+     24: 
+=>   25:     Cycle ();
+     26: 
+     27:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Desktop\TX\TXLib.h
+Compiled:	Jun  3 2021 08:51:38, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 03 2021 08:55:36
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CB6D в функции GetFrameSizeX() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 17. Попытка прочесть данные по адресу 0x00000038 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400], Instance: 0x00AE2904 (32-bit), Flags: Cmdre0, Thread: 0x2678 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CB6D in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: GetFrameSizeX() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (17):
+
+     15: double AnimationType :: GetFrameSizeX ()
+     16:     {
+=>   17:     return GRGetExtentX (Picture->Picture) / Picture->xMaxAnimationNumber;
+     18:     };
+     19: 
+
+# 1 0x004B48E3 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (157):
+
+    155:         printf ("i = %d, Blocks [i] = %d \n", i, Blocks [i]);
+    156: 
+=>  157:         Blocks[i]->SizeX = Blocks[i]->Animation.GetFrameSizeX();
+    158:         Blocks[i]->SizeY = Blocks[i]->Animation.GetFrameSizeY();
+    159: 
+
+# 2 0x005F0A68 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (66):
+
+     64:     CreateRooms (Rooms);    */
+     65: 
+=>   66:     CreateBlocks (ManyBlocks);
+     67: 
+     68:     /* while (true)
+
+# 3 0x005F070F in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (25):
+
+     23:     GRCreateWindow (1550, 850);
+     24: 
+=>   25:     Cycle ();
+     26: 
+     27:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Desktop\TX\TXLib.h
+Compiled:	Jun  3 2021 08:51:38, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 03 2021 08:55:35
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CB6D в функции GetFrameSizeX() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 17. Попытка прочесть данные по адресу 0x00000038 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400], Instance: 0x00AE2904 (32-bit), Flags: Cmdre0, Thread: 0x2B88 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CB6D in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: GetFrameSizeX() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (17):
+
+     15: double AnimationType :: GetFrameSizeX ()
+     16:     {
+=>   17:     return GRGetExtentX (Picture->Picture) / Picture->xMaxAnimationNumber;
+     18:     };
+     19: 
+
+# 1 0x004B48E3 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (157):
+
+    155:         printf ("i = %d, Blocks [i] = %d \n", i, Blocks [i]);
+    156: 
+=>  157:         Blocks[i]->SizeX = Blocks[i]->Animation.GetFrameSizeX();
+    158:         Blocks[i]->SizeY = Blocks[i]->Animation.GetFrameSizeY();
+    159: 
+
+# 2 0x005F09D0 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (66):
+
+     64:     CreateRooms (Rooms);    */
+     65: 
+=>   66:     CreateBlocks (ManyBlocks);
+     67: 
+     68:     /* while (true)
+
+# 3 0x005F0677 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (25):
+
+     23:     GRCreateWindow (1550, 850);
+     24: 
+=>   25:     Cycle ();
+     26: 
+     27:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Desktop\TX\TXLib.h
+Compiled:	Jun  3 2021 08:51:38, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 03 2021 14:18:45
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CB6D в функции GetFrameSizeX() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 17. Попытка прочесть данные по адресу 0x00000038 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400], Instance: 0x00AE2904 (32-bit), Flags: Cmdre0, Thread: 0x2B88 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CB6D in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: GetFrameSizeX() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (17):
+
+     15: double AnimationType :: GetFrameSizeX ()
+     16:     {
+=>   17:     return GRGetExtentX (Picture->Picture) / Picture->xMaxAnimationNumber;
+     18:     };
+     19: 
+
+# 1 0x004B48E3 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (157):
+
+    155:         printf ("i = %d, Blocks [i] = %d \n", i, Blocks [i]);
+    156: 
+=>  157:         Blocks[i]->SizeX = Blocks[i]->Animation.GetFrameSizeX();
+    158:         Blocks[i]->SizeY = Blocks[i]->Animation.GetFrameSizeY();
+    159: 
+
+# 2 0x005F09D0 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (66):
+
+     64:     CreateRooms (Rooms);    */
+     65: 
+=>   66:     CreateBlocks (ManyBlocks);
+     67: 
+     68:     /* while (true)
+
+# 3 0x005F0677 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (25):
+
+     23:     GRCreateWindow (1550, 850);
+     24: 
+=>   25:     Cycle ();
+     26: 
+     27:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Desktop\TX\TXLib.h
+Compiled:	Jun  3 2021 08:51:38, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 03 2021 14:18:45
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CB6D в функции GetFrameSizeX() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 17. Попытка прочесть данные по адресу 0x00000038 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400], Instance: 0x00AE2904 (32-bit), Flags: Cmdre0, Thread: 0x3B8C (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CB6D in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: GetFrameSizeX() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (17):
+
+     15: double AnimationType :: GetFrameSizeX ()
+     16:     {
+=>   17:     return GRGetExtentX (Picture->Picture) / Picture->xMaxAnimationNumber;
+     18:     };
+     19: 
+
+# 1 0x004B48E3 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (157):
+
+    155:         printf ("i = %d, Blocks [i] = %d \n", i, Blocks [i]);
+    156: 
+=>  157:         Blocks[i]->SizeX = Blocks[i]->Animation.GetFrameSizeX();
+    158:         Blocks[i]->SizeY = Blocks[i]->Animation.GetFrameSizeY();
+    159: 
+
+# 2 0x005F09D0 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (66):
+
+     64:     CreateRooms (Rooms);    */
+     65: 
+=>   66:     CreateBlocks (ManyBlocks);
+     67: 
+     68:     /* while (true)
+
+# 3 0x005F0677 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (25):
+
+     23:     GRCreateWindow (1550, 850);
+     24: 
+=>   25:     Cycle ();
+     26: 
+     27:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Desktop\TX\TXLib.h
+Compiled:	Jun  3 2021 08:51:38, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 03 2021 14:19:17
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CB6D в функции GetFrameSizeX() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 17. Попытка прочесть данные по адресу 0x00000038 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400], Instance: 0x00AE2904 (32-bit), Flags: Cmdre0, Thread: 0x3B8C (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CB6D in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: GetFrameSizeX() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (17):
+
+     15: double AnimationType :: GetFrameSizeX ()
+     16:     {
+=>   17:     return GRGetExtentX (Picture->Picture) / Picture->xMaxAnimationNumber;
+     18:     };
+     19: 
+
+# 1 0x004B48E3 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (157):
+
+    155:         printf ("i = %d, Blocks [i] = %d \n", i, Blocks [i]);
+    156: 
+=>  157:         Blocks[i]->SizeX = Blocks[i]->Animation.GetFrameSizeX();
+    158:         Blocks[i]->SizeY = Blocks[i]->Animation.GetFrameSizeY();
+    159: 
+
+# 2 0x005F09D0 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (66):
+
+     64:     CreateRooms (Rooms);    */
+     65: 
+=>   66:     CreateBlocks (ManyBlocks);
+     67: 
+     68:     /* while (true)
+
+# 3 0x005F0677 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (25):
+
+     23:     GRCreateWindow (1550, 850);
+     24: 
+=>   25:     Cycle ();
+     26: 
+     27:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Desktop\TX\TXLib.h
+Compiled:	Jun  3 2021 08:51:38, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 03 2021 14:19:17
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CB6D в функции GetFrameSizeX() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 17. Попытка прочесть данные по адресу 0x00000038 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400], Instance: 0x00AE2904 (32-bit), Flags: Cmdre0, Thread: 0x2D30 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CB6D in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: GetFrameSizeX() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (17):
+
+     15: double AnimationType :: GetFrameSizeX ()
+     16:     {
+=>   17:     return GRGetExtentX (Picture->Picture) / Picture->xMaxAnimationNumber;
+     18:     };
+     19: 
+
+# 1 0x004B48E3 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (157):
+
+    155:         printf ("i = %d, Blocks [i] = %d \n", i, Blocks [i]);
+    156: 
+=>  157:         Blocks[i]->SizeX = Blocks[i]->Animation.GetFrameSizeX();
+    158:         Blocks[i]->SizeY = Blocks[i]->Animation.GetFrameSizeY();
+    159: 
+
+# 2 0x005F09D0 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (66):
+
+     64:     CreateRooms (Rooms);    */
+     65: 
+=>   66:     CreateBlocks (ManyBlocks);
+     67: 
+     68:     /* while (true)
+
+# 3 0x005F0677 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (25):
+
+     23:     GRCreateWindow (1550, 850);
+     24: 
+=>   25:     Cycle ();
+     26: 
+     27:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Desktop\TX\TXLib.h
+Compiled:	Jun  3 2021 08:51:38, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 03 2021 15:00:48
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CB6D в функции GetFrameSizeX() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 17. Попытка прочесть данные по адресу 0x00000038 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400], Instance: 0x00AE2904 (32-bit), Flags: Cmdre0, Thread: 0x2D30 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CB6D in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: GetFrameSizeX() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (17):
+
+     15: double AnimationType :: GetFrameSizeX ()
+     16:     {
+=>   17:     return GRGetExtentX (Picture->Picture) / Picture->xMaxAnimationNumber;
+     18:     };
+     19: 
+
+# 1 0x004B48E3 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (157):
+
+    155:         printf ("i = %d, Blocks [i] = %d \n", i, Blocks [i]);
+    156: 
+=>  157:         Blocks[i]->SizeX = Blocks[i]->Animation.GetFrameSizeX();
+    158:         Blocks[i]->SizeY = Blocks[i]->Animation.GetFrameSizeY();
+    159: 
+
+# 2 0x005F09D0 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (66):
+
+     64:     CreateRooms (Rooms);    */
+     65: 
+=>   66:     CreateBlocks (ManyBlocks);
+     67: 
+     68:     /* while (true)
+
+# 3 0x005F0677 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (25):
+
+     23:     GRCreateWindow (1550, 850);
+     24: 
+=>   25:     Cycle ();
+     26: 
+     27:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Desktop\TX\TXLib.h
+Compiled:	Jun  3 2021 08:51:38, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 03 2021 15:00:49
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CB6D в функции GetFrameSizeX() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 17. Попытка прочесть данные по адресу 0x00000038 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400], Instance: 0x00AE2904 (32-bit), Flags: Cmdre0, Thread: 0x3EFC (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CB6D in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: GetFrameSizeX() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (17):
+
+     15: double AnimationType :: GetFrameSizeX ()
+     16:     {
+=>   17:     return GRGetExtentX (Picture->Picture) / Picture->xMaxAnimationNumber;
+     18:     };
+     19: 
+
+# 1 0x004B48E3 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (157):
+
+    155:         printf ("i = %d, Blocks [i] = %d \n", i, Blocks [i]);
+    156: 
+=>  157:         Blocks[i]->SizeX = Blocks[i]->Animation.GetFrameSizeX();
+    158:         Blocks[i]->SizeY = Blocks[i]->Animation.GetFrameSizeY();
+    159: 
+
+# 2 0x005F09D0 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (66):
+
+     64:     CreateRooms (Rooms);    */
+     65: 
+=>   66:     CreateBlocks (ManyBlocks);
+     67: 
+     68:     /* while (true)
+
+# 3 0x005F0677 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (25):
+
+     23:     GRCreateWindow (1550, 850);
+     24: 
+=>   25:     Cycle ();
+     26: 
+     27:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Desktop\TX\TXLib.h
+Compiled:	Jun  3 2021 08:51:38, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 03 2021 15:01:31
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CB6D в функции GetFrameSizeX() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 17. Попытка прочесть данные по адресу 0x00000038 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400], Instance: 0x00AE2904 (32-bit), Flags: Cmdre0, Thread: 0x3EFC (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CB6D in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: GetFrameSizeX() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (17):
+
+     15: double AnimationType :: GetFrameSizeX ()
+     16:     {
+=>   17:     return GRGetExtentX (Picture->Picture) / Picture->xMaxAnimationNumber;
+     18:     };
+     19: 
+
+# 1 0x004B48E3 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (157):
+
+    155:         printf ("i = %d, Blocks [i] = %d \n", i, Blocks [i]);
+    156: 
+=>  157:         Blocks[i]->SizeX = Blocks[i]->Animation.GetFrameSizeX();
+    158:         Blocks[i]->SizeY = Blocks[i]->Animation.GetFrameSizeY();
+    159: 
+
+# 2 0x005F09D0 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (66):
+
+     64:     CreateRooms (Rooms);    */
+     65: 
+=>   66:     CreateBlocks (ManyBlocks);
+     67: 
+     68:     /* while (true)
+
+# 3 0x005F0677 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (25):
+
+     23:     GRCreateWindow (1550, 850);
+     24: 
+=>   25:     Cycle ();
+     26: 
+     27:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Desktop\TX\TXLib.h
+Compiled:	Jun  3 2021 08:51:38, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 03 2021 15:01:30
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CB6D в функции GetFrameSizeX() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 17. Попытка прочесть данные по адресу 0x00000038 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400], Instance: 0x00AE2904 (32-bit), Flags: Cmdre0, Thread: 0x3534 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CB6D in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: GetFrameSizeX() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (17):
+
+     15: double AnimationType :: GetFrameSizeX ()
+     16:     {
+=>   17:     return GRGetExtentX (Picture->Picture) / Picture->xMaxAnimationNumber;
+     18:     };
+     19: 
+
+# 1 0x004B4903 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (156):
+
+    154:         printf ("Rooms [i/6] = %d, i = %d, Blocks [i] = %d \n", Rooms [i/6], i, Blocks [i]);
+    155: 
+=>  156:         Blocks[i]->SizeX = Blocks[i]->Animation.GetFrameSizeX();
+    157:         Blocks[i]->SizeY = Blocks[i]->Animation.GetFrameSizeY();
+    158: 
+
+# 2 0x005F09F0 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (66):
+
+     64:     CreateRooms (Rooms);    */
+     65: 
+=>   66:     CreateBlocks (ManyBlocks);
+     67: 
+     68:     /* while (true)
+
+# 3 0x005F0697 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (25):
+
+     23:     GRCreateWindow (1550, 850);
+     24: 
+=>   25:     Cycle ();
+     26: 
+     27:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Desktop\TX\TXLib.h
+Compiled:	Jun  3 2021 08:51:38, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 03 2021 16:33:30
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CB6D в функции GetFrameSizeX() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 17. Попытка прочесть данные по адресу 0x00000038 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400], Instance: 0x00AE2904 (32-bit), Flags: Cmdre0, Thread: 0x3534 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CB6D in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: GetFrameSizeX() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (17):
+
+     15: double AnimationType :: GetFrameSizeX ()
+     16:     {
+=>   17:     return GRGetExtentX (Picture->Picture) / Picture->xMaxAnimationNumber;
+     18:     };
+     19: 
+
+# 1 0x004B4903 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (156):
+
+    154:         printf ("Rooms [i/6] = %d, i = %d, Blocks [i] = %d \n", Rooms [i/6], i, Blocks [i]);
+    155: 
+=>  156:         Blocks[i]->SizeX = Blocks[i]->Animation.GetFrameSizeX();
+    157:         Blocks[i]->SizeY = Blocks[i]->Animation.GetFrameSizeY();
+    158: 
+
+# 2 0x005F09F0 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (66):
+
+     64:     CreateRooms (Rooms);    */
+     65: 
+=>   66:     CreateBlocks (ManyBlocks);
+     67: 
+     68:     /* while (true)
+
+# 3 0x005F0697 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (25):
+
+     23:     GRCreateWindow (1550, 850);
+     24: 
+=>   25:     Cycle ();
+     26: 
+     27:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Desktop\TX\TXLib.h
+Compiled:	Jun  3 2021 08:51:38, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 03 2021 16:33:29
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CB6D в функции GetFrameSizeX() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 17. Попытка прочесть данные по адресу 0x00000038 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400], Instance: 0x00AE1924 (32-bit), Flags: Cmdre0, Thread: 0x5EC (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CB6D in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: GetFrameSizeX() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (17):
+
+     15: double AnimationType :: GetFrameSizeX ()
+     16:     {
+=>   17:     return GRGetExtentX (Picture->Picture) / Picture->xMaxAnimationNumber;
+     18:     };
+     19: 
+
+# 1 0x004B46AF in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (133):
+
+    131:         printf ("Rooms [i/6] = %d, i = %d, Blocks [i] = %d \n", Rooms [i/6], i, Blocks [i]);
+    132: 
+=>  133:         Blocks[i]->SizeX = Blocks[i]->Animation.GetFrameSizeX();
+    134:         Blocks[i]->SizeY = Blocks[i]->Animation.GetFrameSizeY();
+    135: 
+
+# 2 0x005F07AC in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (66):
+
+     64:     CreateRooms (Rooms);    */
+     65: 
+=>   66:     CreateBlocks (ManyBlocks);
+     67: 
+     68:     /* while (true)
+
+# 3 0x005F0453 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (25):
+
+     23:     GRCreateWindow (1550, 850);
+     24: 
+=>   25:     Cycle ();
+     26: 
+     27:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Desktop\TX\TXLib.h
+Compiled:	Jun  3 2021 16:49:37, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 03 2021 16:49:50
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CB6D в функции GetFrameSizeX() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 17. Попытка прочесть данные по адресу 0x00000038 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400], Instance: 0x00AE1924 (32-bit), Flags: Cmdre0, Thread: 0x5EC (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CB6D in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: GetFrameSizeX() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (17):
+
+     15: double AnimationType :: GetFrameSizeX ()
+     16:     {
+=>   17:     return GRGetExtentX (Picture->Picture) / Picture->xMaxAnimationNumber;
+     18:     };
+     19: 
+
+# 1 0x004B46AF in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (133):
+
+    131:         printf ("Rooms [i/6] = %d, i = %d, Blocks [i] = %d \n", Rooms [i/6], i, Blocks [i]);
+    132: 
+=>  133:         Blocks[i]->SizeX = Blocks[i]->Animation.GetFrameSizeX();
+    134:         Blocks[i]->SizeY = Blocks[i]->Animation.GetFrameSizeY();
+    135: 
+
+# 2 0x005F07AC in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (66):
+
+     64:     CreateRooms (Rooms);    */
+     65: 
+=>   66:     CreateBlocks (ManyBlocks);
+     67: 
+     68:     /* while (true)
+
+# 3 0x005F0453 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (25):
+
+     23:     GRCreateWindow (1550, 850);
+     24: 
+=>   25:     Cycle ();
+     26: 
+     27:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Desktop\TX\TXLib.h
+Compiled:	Jun  3 2021 16:49:37, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 03 2021 16:49:49
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CB6D в функции GetFrameSizeX() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 17. Попытка прочесть данные по адресу 0x00000038 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400], Instance: 0x00AE2984 (32-bit), Flags: Cmdre0, Thread: 0x1CD0 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CB6D in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: GetFrameSizeX() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (17):
+
+     15: double AnimationType :: GetFrameSizeX ()
+     16:     {
+=>   17:     return GRGetExtentX (Picture->Picture) / Picture->xMaxAnimationNumber;
+     18:     };
+     19: 
+
+# 1 0x004B4F7C in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (285):
+
+    283:                 Blocks [i+2]->Point.y = -1000;
+    284:                 Blocks [i+2]->Animation.Picture = &GlobalAllImage.HighCase;
+=>  285:                 Blocks [i+2]->SizeX = Blocks[i+3]->Animation.GetFrameSizeX();
+    286:                 Blocks [i+2]->SizeY = Blocks[i+3]->Animation.GetFrameSizeY();
+    287:                 nI += 1;
+
+# 2 0x005F1302 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (66):
+
+     64:     CreateRooms (Rooms);    */
+     65: 
+=>   66:     CreateBlocks (ManyBlocks);
+     67: 
+     68:     /* while (true)
+
+# 3 0x005F0F9F in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (25):
+
+     23:     GRCreateWindow (1550, 850);
+     24: 
+=>   25:     Cycle ();
+     26: 
+     27:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Desktop\TX\TXLib.h
+Compiled:	Jun  4 2021 15:23:45, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 04 2021 15:23:51
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CB6D в функции GetFrameSizeX() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 17. Попытка прочесть данные по адресу 0x00000038 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400], Instance: 0x00AE2984 (32-bit), Flags: Cmdre0, Thread: 0x1CD0 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CB6D in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: GetFrameSizeX() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (17):
+
+     15: double AnimationType :: GetFrameSizeX ()
+     16:     {
+=>   17:     return GRGetExtentX (Picture->Picture) / Picture->xMaxAnimationNumber;
+     18:     };
+     19: 
+
+# 1 0x004B4F7C in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (285):
+
+    283:                 Blocks [i+2]->Point.y = -1000;
+    284:                 Blocks [i+2]->Animation.Picture = &GlobalAllImage.HighCase;
+=>  285:                 Blocks [i+2]->SizeX = Blocks[i+3]->Animation.GetFrameSizeX();
+    286:                 Blocks [i+2]->SizeY = Blocks[i+3]->Animation.GetFrameSizeY();
+    287:                 nI += 1;
+
+# 2 0x005F1302 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (66):
+
+     64:     CreateRooms (Rooms);    */
+     65: 
+=>   66:     CreateBlocks (ManyBlocks);
+     67: 
+     68:     /* while (true)
+
+# 3 0x005F0F9F in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (25):
+
+     23:     GRCreateWindow (1550, 850);
+     24: 
+=>   25:     Cycle ();
+     26: 
+     27:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Desktop\TX\TXLib.h
+Compiled:	Jun  4 2021 15:23:45, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 04 2021 15:23:51
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CB6D в функции GetFrameSizeX() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 17. Попытка прочесть данные по адресу 0x00000038 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400], Instance: 0x00AE2984 (32-bit), Flags: Cmdre0, Thread: 0x20B8 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CB6D in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: GetFrameSizeX() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (17):
+
+     15: double AnimationType :: GetFrameSizeX ()
+     16:     {
+=>   17:     return GRGetExtentX (Picture->Picture) / Picture->xMaxAnimationNumber;
+     18:     };
+     19: 
+
+# 1 0x004B533F in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (326):
+
+    324:             Blocks [i+d]->Health = 10;
+    325:             Blocks [i+d]->Animation.Picture = &GlobalAllImage.BigDirt;
+=>  326:             Blocks [i+d]->SizeX = Blocks[i+1]->Animation.GetFrameSizeX();
+    327:             Blocks [i+d]->SizeY = Blocks[i+1]->Animation.GetFrameSizeY();
+    328:             nI += 1;
+
+# 2 0x005F1472 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (66):
+
+     64:     CreateRooms (Rooms);    */
+     65: 
+=>   66:     CreateBlocks (ManyBlocks);
+     67: 
+     68:     /* while (true)
+
+# 3 0x005F110F in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (25):
+
+     23:     GRCreateWindow (1550, 850);
+     24: 
+=>   25:     Cycle ();
+     26: 
+     27:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Desktop\TX\TXLib.h
+Compiled:	Jun  4 2021 15:23:45, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 04 2021 15:46:30
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CB6D в функции GetFrameSizeX() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 17. Попытка прочесть данные по адресу 0x00000038 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400], Instance: 0x00AE2984 (32-bit), Flags: Cmdre0, Thread: 0x20B8 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CB6D in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: GetFrameSizeX() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (17):
+
+     15: double AnimationType :: GetFrameSizeX ()
+     16:     {
+=>   17:     return GRGetExtentX (Picture->Picture) / Picture->xMaxAnimationNumber;
+     18:     };
+     19: 
+
+# 1 0x004B533F in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (326):
+
+    324:             Blocks [i+d]->Health = 10;
+    325:             Blocks [i+d]->Animation.Picture = &GlobalAllImage.BigDirt;
+=>  326:             Blocks [i+d]->SizeX = Blocks[i+1]->Animation.GetFrameSizeX();
+    327:             Blocks [i+d]->SizeY = Blocks[i+1]->Animation.GetFrameSizeY();
+    328:             nI += 1;
+
+# 2 0x005F1472 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (66):
+
+     64:     CreateRooms (Rooms);    */
+     65: 
+=>   66:     CreateBlocks (ManyBlocks);
+     67: 
+     68:     /* while (true)
+
+# 3 0x005F110F in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (25):
+
+     23:     GRCreateWindow (1550, 850);
+     24: 
+=>   25:     Cycle ();
+     26: 
+     27:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Desktop\TX\TXLib.h
+Compiled:	Jun  4 2021 15:23:45, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 04 2021 15:46:30
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CBCD в функции IncreaseAnimationNumber() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 27. Попытка прочесть данные по адресу 0x00000030 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400], Instance: 0x00AE2984 (32-bit), Flags: Cmdre0, Thread: 0x39D4 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CBCD in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: IncreaseAnimationNumber() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (27):
+
+     25: void IncreaseAnimationNumber (AnimationType* Animation)
+     26:     {
+=>   27:     Animation->xFrame += 1;
+     28: 
+     29:     if (Animation->xFrame >= Animation->Picture->xMaxAnimationNumber)
+
+# 1 0x004B3E8C in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawBlock() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (22):
+
+     20: void BlockType :: DrawBlock (CamType* Camera)
+     21:     {
+=>   22:     IncreaseAnimationNumber (&Animation);
+     23: 
+     24:     if (Health > 0)
+
+# 2 0x004B53FF in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawLevelBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (472):
+
+    470:         // printf ("DrawLevelBlocks() : i = %d\n", i);
+    471: 
+=>  472:         ManyBlocks [i]->DrawBlock (Camera);
+    473: 
+    474:         // i = i + 1;
+
+# 3 0x004B539C in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawManyBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (437):
+
+    435: void DrawManyBlocks (BlockType* ManyBlocks [], CamType* Camera)
+    436:     {
+=>  437:     DrawLevelBlocks (ManyBlocks, Camera);
+    438: 
+    439:     // DrawLevelPeople (Villagers, Camera, AllImage);
+
+# 4 0x005C3CC8 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/Levels.cpp (185):
+
+    183:         GRRectangle (0, 0, 2000, 1000);
+    184: 
+=>  185:         DrawManyBlocks (ManyBlocks, Camera);
+    186:         // DrawManyRooms (Rooms, Camera);
+    187: 
+
+# 5 0x005C426E in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Level1() at C:/Users/007/Desktop/программирование/MyGame2/Levels.cpp (326):
+
+    324:     CreateVillagers (Villagers);
+    325: 
+=>  326:     return MoveGame (Blocks, LevelNumber, Man, &AllTemperature, Camera, Villagers);
+    327:     };
+    328: 
+
+# 6 0x005F13BB in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (91):
+
+     89:         GRClear ();
+     90: 
+=>   91:         if (Level1 (&LevelNumber, &Man, &Camera, ManyBlocks) == Exit)
+     92:             {
+     93:             // txMessageBox ("выход из функции Cycle");
+
+# 7 0x005F101B in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (25):
+
+     23:     GRCreateWindow (1550, 850);
+     24: 
+=>   25:     Cycle ();
+     26: 
+     27:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Desktop\TX\TXLib.h
+Compiled:	Jun  4 2021 18:17:52, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 04 2021 18:50:56
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CBCD в функции IncreaseAnimationNumber() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 27. Попытка прочесть данные по адресу 0x00000030 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400], Instance: 0x00AE2984 (32-bit), Flags: Cmdre0, Thread: 0x39D4 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CBCD in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: IncreaseAnimationNumber() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (27):
+
+     25: void IncreaseAnimationNumber (AnimationType* Animation)
+     26:     {
+=>   27:     Animation->xFrame += 1;
+     28: 
+     29:     if (Animation->xFrame >= Animation->Picture->xMaxAnimationNumber)
+
+# 1 0x004B3E8C in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawBlock() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (22):
+
+     20: void BlockType :: DrawBlock (CamType* Camera)
+     21:     {
+=>   22:     IncreaseAnimationNumber (&Animation);
+     23: 
+     24:     if (Health > 0)
+
+# 2 0x004B53FF in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawLevelBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (472):
+
+    470:         // printf ("DrawLevelBlocks() : i = %d\n", i);
+    471: 
+=>  472:         ManyBlocks [i]->DrawBlock (Camera);
+    473: 
+    474:         // i = i + 1;
+
+# 3 0x004B539C in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: DrawManyBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (437):
+
+    435: void DrawManyBlocks (BlockType* ManyBlocks [], CamType* Camera)
+    436:     {
+=>  437:     DrawLevelBlocks (ManyBlocks, Camera);
+    438: 
+    439:     // DrawLevelPeople (Villagers, Camera, AllImage);
+
+# 4 0x005C3CC8 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: MoveGame() at C:/Users/007/Desktop/программирование/MyGame2/Levels.cpp (185):
+
+    183:         GRRectangle (0, 0, 2000, 1000);
+    184: 
+=>  185:         DrawManyBlocks (ManyBlocks, Camera);
+    186:         // DrawManyRooms (Rooms, Camera);
+    187: 
+
+# 5 0x005C426E in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Level1() at C:/Users/007/Desktop/программирование/MyGame2/Levels.cpp (326):
+
+    324:     CreateVillagers (Villagers);
+    325: 
+=>  326:     return MoveGame (Blocks, LevelNumber, Man, &AllTemperature, Camera, Villagers);
+    327:     };
+    328: 
+
+# 6 0x005F13BB in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (91):
+
+     89:         GRClear ();
+     90: 
+=>   91:         if (Level1 (&LevelNumber, &Man, &Camera, ManyBlocks) == Exit)
+     92:             {
+     93:             // txMessageBox ("выход из функции Cycle");
+
+# 7 0x005F101B in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (25):
+
+     23:     GRCreateWindow (1550, 850);
+     24: 
+=>   25:     Cycle ();
+     26: 
+     27:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Desktop\TX\TXLib.h
+Compiled:	Jun  4 2021 18:17:52, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 04 2021 18:50:55
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CB6D в функции GetFrameSizeX() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 17. Попытка прочесть данные по адресу 0x00000038 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400], Instance: 0x00AE2984 (32-bit), Flags: Cmdre0, Thread: 0x1914 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CB6D in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: GetFrameSizeX() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (17):
+
+     15: double AnimationType :: GetFrameSizeX ()
+     16:     {
+=>   17:     return GRGetExtentX (Picture->Picture) / Picture->xMaxAnimationNumber;
+     18:     };
+     19: 
+
+# 1 0x004B50AC in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (235):
+
+    233:                     Blocks [i+3]->Health = 1;
+    234:                     Blocks [i+3]->Animation.Picture = &GlobalAllImage.SmallBedroom;
+=>  235:                     Blocks [i+3]->SizeX = Blocks[i+4]->Animation.GetFrameSizeX();
+    236:                     Blocks [i+3]->SizeY = Blocks[i+4]->Animation.GetFrameSizeY();
+    237:                     nI += 1;
+
+# 2 0x005F137E in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (66):
+
+     64:     CreateRooms (Rooms);    */
+     65: 
+=>   66:     CreateBlocks (ManyBlocks);
+     67: 
+     68:     /* while (true)
+
+# 3 0x005F101B in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (25):
+
+     23:     GRCreateWindow (1550, 850);
+     24: 
+=>   25:     Cycle ();
+     26: 
+     27:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Desktop\TX\TXLib.h
+Compiled:	Jun  4 2021 18:17:52, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 04 2021 18:51:44
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CB6D в функции GetFrameSizeX() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 17. Попытка прочесть данные по адресу 0x00000038 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400], Instance: 0x00AE2984 (32-bit), Flags: Cmdre0, Thread: 0x1914 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CB6D in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: GetFrameSizeX() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (17):
+
+     15: double AnimationType :: GetFrameSizeX ()
+     16:     {
+=>   17:     return GRGetExtentX (Picture->Picture) / Picture->xMaxAnimationNumber;
+     18:     };
+     19: 
+
+# 1 0x004B50AC in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (235):
+
+    233:                     Blocks [i+3]->Health = 1;
+    234:                     Blocks [i+3]->Animation.Picture = &GlobalAllImage.SmallBedroom;
+=>  235:                     Blocks [i+3]->SizeX = Blocks[i+4]->Animation.GetFrameSizeX();
+    236:                     Blocks [i+3]->SizeY = Blocks[i+4]->Animation.GetFrameSizeY();
+    237:                     nI += 1;
+
+# 2 0x005F137E in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (66):
+
+     64:     CreateRooms (Rooms);    */
+     65: 
+=>   66:     CreateBlocks (ManyBlocks);
+     67: 
+     68:     /* while (true)
+
+# 3 0x005F101B in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (25):
+
+     23:     GRCreateWindow (1550, 850);
+     24: 
+=>   25:     Cycle ();
+     26: 
+     27:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Desktop\TX\TXLib.h
+Compiled:	Jun  4 2021 18:17:52, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 04 2021 18:51:45
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CB6D в функции GetFrameSizeX() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 17. Попытка прочесть данные по адресу 0x00000038 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400], Instance: 0x00AE39A4 (32-bit), Flags: Cmdre0, Thread: 0x4710 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CB6D in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: GetFrameSizeX() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (17):
+
+     15: double AnimationType :: GetFrameSizeX ()
+     16:     {
+=>   17:     return GRGetExtentX (Picture->Picture) / Picture->xMaxAnimationNumber;
+     18:     };
+     19: 
+
+# 1 0x004B5464 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (287):
+
+    285:             Blocks [i]->Health = 10;
+    286:             Blocks [i]->Animation.Picture = &GlobalAllImage.BigDirt;
+=>  287:             Blocks [i]->SizeX = Blocks[i+d]->Animation.GetFrameSizeX();
+    288:             Blocks [i]->SizeY = Blocks[i+d]->Animation.GetFrameSizeY();
+    289:             i += 1;
+
+# 2 0x005F162E in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (66):
+
+     64:     CreateRooms (Rooms);    */
+     65: 
+=>   66:     CreateBlocks (ManyBlocks);
+     67: 
+     68:     /* while (true)
+
+# 3 0x005F12CB in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (25):
+
+     23:     GRCreateWindow (1550, 850);
+     24: 
+=>   25:     Cycle ();
+     26: 
+     27:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Desktop\TX\TXLib.h
+Compiled:	Jun  5 2021 08:13:12, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 05 2021 08:21:01
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0042CB6D в функции GetFrameSizeX() в файле C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp на строке 17. Попытка прочесть данные по адресу 0x00000038 в модуле C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400], Instance: 0x00AE39A4 (32-bit), Flags: Cmdre0, Thread: 0x4710 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042CB6D in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: GetFrameSizeX() at C:/Users/007/Desktop/программирование/MyGame2/AnimationType.cpp (17):
+
+     15: double AnimationType :: GetFrameSizeX ()
+     16:     {
+=>   17:     return GRGetExtentX (Picture->Picture) / Picture->xMaxAnimationNumber;
+     18:     };
+     19: 
+
+# 1 0x004B5464 in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: CreateBlocks() at C:/Users/007/Desktop/программирование/MyGame2/BlockType.cpp (287):
+
+    285:             Blocks [i]->Health = 10;
+    286:             Blocks [i]->Animation.Picture = &GlobalAllImage.BigDirt;
+=>  287:             Blocks [i]->SizeX = Blocks[i+d]->Animation.GetFrameSizeX();
+    288:             Blocks [i]->SizeY = Blocks[i+d]->Animation.GetFrameSizeY();
+    289:             i += 1;
+
+# 2 0x005F162E in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: Cycle() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (66):
+
+     64:     CreateRooms (Rooms);    */
+     65: 
+=>   66:     CreateBlocks (ManyBlocks);
+     67: 
+     68:     /* while (true)
+
+# 3 0x005F12CB in C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe: main() at C:/Users/007/Desktop/программирование/MyGame2/Main.cpp (25):
+
+     23:     GRCreateWindow (1550, 850);
+     24: 
+=>   25:     Cycle ();
+     26: 
+     27:     return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-02 11:14:27 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\007\Desktop\TX\TXLib.h
+Compiled:	Jun  5 2021 08:13:12, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Jun 05 2021 08:21:00
+
+Run file:	C:\Users\007\Desktop\программирование\MyGame2\bin\Debug\MyGame2.exe
+Directory:	C:\Users\007\Desktop\программирование\MyGame2
+
+--------------------------------------------------

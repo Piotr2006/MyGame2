@@ -6,6 +6,7 @@ void LoadAllImages ()
     {
     int Procent = 1;
 
+
     LoadGameImage (&GlobalAllImage.BackGround,    "Images/NewForestBackGround.bmp",    1, 1, TX_WHITE, &Procent, Number_of_Images);
 
     // printf ("1:LoadGlobalAllImage(): File = %s , HDC = %d \n", GlobalAllImage.BackGround.FileName, GlobalAllImage.BackGround.Picture);
@@ -30,7 +31,7 @@ void LoadAllImages ()
 
     LoadGameImage (&GlobalAllImage.Man,           "Images/NewMan.bmp",                 6, 8, RGB (91, 110, 225), &Procent, Number_of_Images);
 
-    LoadGameImage (&GlobalAllImage.Stairs,        "Images/WallStairs.bmp",             1, 1, TX_BLACK, &Procent, Number_of_Images);
+    LoadGameImage (&GlobalAllImage.Stairs,        "Images/NewStairs.bmp",              1, 1, TX_WHITE, &Procent, Number_of_Images);
 
     LoadGameImage (&GlobalAllImage.Fire,          "Images/FireAnimation.bmp",          5, 2, TX_BLACK, &Procent, Number_of_Images);
 
@@ -160,10 +161,24 @@ void LoadAllImages ()
 
     LoadGameImage (&GlobalAllImage.ManWithGuns,   "Images/NewManWithGuns.bmp",         6, 8, RGB (91, 110, 225), &Procent, Number_of_Images);
 
+    LoadGameImage (&GlobalAllImage.ClimbingMan,   "Images/NewClimbMan.bmp",            6, 1, RGB (91, 110, 225), &Procent, Number_of_Images);
+
     LoadGameImage (&GlobalAllImage.BigDirt,       "Images/NewBigDirt.bmp",             1, 1, RGB (91, 110, 225), &Procent, Number_of_Images);
 
+    LoadGameImage (&GlobalAllImage.BlueDoor,      "Images/BlueDoor.bmp",               1, 4, RGB (91, 110, 225), &Procent, Number_of_Images);
+
+    LoadGameImage (&GlobalAllImage.OrangeButton,  "Images/OrangeButton.bmp",           1, 1, TX_WHITE, &Procent, Number_of_Images);
+
+    LoadGameImage (&GlobalAllImage.Fridge,        "Images/Fridge.bmp",                 1, 2, TX_WHITE, &Procent, Number_of_Images);
+
     // Rooms :
-    LoadGameImage (&GlobalAllImage.Kitchen,       "Images/Kitchen.bmp",                1, 1, RGB (91, 110, 225), &Procent, Number_of_Images);
+    LoadGameImage (&GlobalAllImage.Kitchen,       "Images/NewKitchen.bmp",             1, 1, RGB (91, 110, 225), &Procent, Number_of_Images);
+
+    LoadGameImage (&GlobalAllImage.SmallKitchen,  "Images/SmallKitchen.bmp",           1, 1, RGB (91, 110, 225), &Procent, Number_of_Images);
+
+    LoadGameImage (&GlobalAllImage.Bedroom,       "Images/NewBedroom.bmp",             1, 1, RGB (91, 110, 225), &Procent, Number_of_Images);
+
+    LoadGameImage (&GlobalAllImage.SmallBedroom,  "Images/NewSmallBedroom.bmp",        1, 1, RGB (91, 110, 225), &Procent, Number_of_Images);
 
     LoadGameImage (&GlobalAllImage.Room1,         "Images/Room1.bmp",                  1, 1, RGB (91, 110, 225), &Procent, Number_of_Images);
 
@@ -174,6 +189,10 @@ void LoadAllImages ()
     LoadGameImage (&GlobalAllImage.Room4,         "Images/Room4.bmp",                  1, 1, RGB (91, 110, 225), &Procent, Number_of_Images);
 
     LoadGameImage (&GlobalAllImage.Room5,         "Images/Room5.bmp",                  1, 1, RGB (91, 110, 225), &Procent, Number_of_Images);
+
+    LoadGameImage (&GlobalAllImage.EmptyRoom,     "Images/EmptyRoom.bmp",              1, 1, TX_WHITE, &Procent, Number_of_Images);
+
+    LoadGameImage (&GlobalAllImage.InvisibleDirt, "Images/InvisibleDirt.bmp",          1, 1, TX_WHITE, &Procent, Number_of_Images);
     };
 
 void DeleteAllImage ()

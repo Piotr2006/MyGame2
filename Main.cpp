@@ -42,7 +42,7 @@ void Cycle ()
     CamType Camera {{Man_x - Screen_xCenter, Man_y - Screen_yCenter}, {0.3, 0.3}, 0};
 
     ManType Man {{5500*World_Size + double (rand() % 600) * World_Size, Man_y}, Man_Health, {0, 0, &GlobalAllImage.Man},
-                 {0, 0}, {Man_aX, 2},
+                 {0, 0}, {Man_aX, 2}, Man_Energy,
                  0, 0, Man_Temperature,
                  0, 0, 0, "", 0, {ST_Weapon, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
                  0, 0, Man_x, Man_y, 0, 0, {}};

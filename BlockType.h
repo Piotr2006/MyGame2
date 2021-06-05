@@ -135,6 +135,28 @@ struct StairsType : BlockType
 
 //-----------------------------------------------------------------------------
 
+struct DoorType : BlockType
+    {
+    using BlockType :: BlockType;
+
+    virtual bool Detection  (ManType* Man, CamType* Camera) override;
+
+    virtual void Interaction (ManType* Man, CamType* Camera) override;
+    };
+
+//-----------------------------------------------------------------------------
+
+struct RoomType : BlockType
+    {
+    using BlockType :: BlockType;
+
+    virtual bool Detection  (ManType* Man, CamType* Camera) override;
+
+    virtual void Interaction (ManType* Man, CamType* Camera) override;
+    };
+
+//-----------------------------------------------------------------------------
+
 // void BlocksSaving (BlockType* Blocks []);
 
 void DrawLevelBlocks (BlockType* ManyBlocks[], CamType* Camera);

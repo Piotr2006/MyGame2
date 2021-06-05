@@ -25,6 +25,33 @@ int GetNumberOfSymbols (const char str[], const char Symbol)
     return Number;
     };
 
+int NewGetNumberOfStr (const char Allstr[], const char Smallstr [])
+    {
+    int Number = 0;
+
+    int Position = 0;
+
+    while (Allstr [Position] != 0)
+        {
+        // printf ("Position = %d, Allstr [Position] = %c, Smallstr [0] = %c, Smallstr [1] = %c \n", Position, Allstr [Position], Smallstr [0], Smallstr [1]);
+
+        int nMatchingSymbols = 0;
+
+        for (int i = 0; Smallstr [i] != 0 && Allstr [Position + i] != 0; i ++)
+            {
+            if (Allstr [Position + i] == Smallstr [i])
+                nMatchingSymbols += 1;
+            };
+
+        if (Smallstr [nMatchingSymbols] == 0)       // "123"
+            Number += 1;
+
+        Position += 1;
+        };
+
+    return Number;
+    };
+
 int GetNumberOfStr (const char Allstr[], const char Smallstr [2])
     {
     int Number = 0;
@@ -49,8 +76,8 @@ int Myfscanf (FILE* file, const char str [], ...)
 
     va_start (Arg, str);
 
-    int NumberOfArg = GetNumberOfSymbols (str, '%') - 2 * GetNumberOfStr (str, "%%") -
-                                                          GetNumberOfStr (str, "%*");
+    int NumberOfArg = GetNumberOfSymbols (str, '%') - 2 * NewGetNumberOfStr (str, "%%") -
+                                                          NewGetNumberOfStr (str, "%*");
 
                             // Man->Point.x = 10%
     // Myfscanf (readingfile, "Man->Point.x = %d %% ", &Man->Point.x);
@@ -106,6 +133,19 @@ void Text (PointType Point, int Size, int Number, char Name [])
     GRSelectFont ("Comic Sans MS", Size);
     GRTextOut (Point, str);
     };
+
+void TextWithEnd (PointType Point, int Size, int Number, char Text1 [], char Text2 [])
+    {
+    char str [50] = "";
+
+    sprintf (str, "%s %d %s", Text1, Number, Text2);
+
+    GRSetAlign ();
+    // GRSetColor (TX_WHITE, 1);
+    GRSelectFont ("Comic Sans MS", Size);
+    GRTextOut (Point, str);
+    };
+
 
 int ModuleDistance (PointType Point1, PointType Point2, int Distance)
     {
